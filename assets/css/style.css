@@ -14419,7 +14419,8 @@ input:focus {
 /* Fonts */
 @font-face {
   font-family: 'roboto-light';
-  src: url("../fonts/Roboto/Roboto-Light.ttf") format("truetype"); }
+  src: url("../fonts/Roboto/Roboto-Light.ttf") format("truetype");
+}
 
 @font-face {
   font-family: 'roboto-regular';
@@ -14432,6 +14433,11 @@ input:focus {
 @font-face {
   font-family: 'roboto-bold';
   src: url("../fonts/Roboto/Roboto-Bold.ttf") format("truetype"); }
+
+@font-face {
+	font-family: 'titillium-web', sans-serif;
+	src: url("../fonts/TitilliumWeb/TitilliumWeb-Regular.ttf") format("truetype");
+}
 
 .text-twitter {
   color: #1da1f2; }
