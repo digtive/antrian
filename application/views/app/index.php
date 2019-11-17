@@ -33,7 +33,7 @@
 			<!-- ---- HEADER SECTION ---- -->
 			<div id="header-card">
 				<div class="row">
-					<div class="col-8">
+					<div class="col-9">
 						<!-- ---- TAG LINE AND BRAND SECTION -->
 						<div id="tagline-head">
 							<div class="tagline-wrapper">
@@ -47,14 +47,19 @@
 						<!-- ---- END BRAND AND TAG LINE SECTION -->
 
 					</div>
-					<div class="col-4">
-						<div class="d-flex justify-content-end">
-							<div>
-								<h2 class="text-white countdown-time" ></h2>
-								<h3 class="date-indicator" id="date-indicator">26/10/2018</h3>
-							</div>
-							<div>
-								<h1 class="time-indicator text-white" id="time-indicator">12:40</h1>
+					<div class="col-3">
+						<div id="date-time-indicator" >
+							<div id="date-time-wrapper" style="background-color: #007bff2e">
+								<div class="time-indicator d-flex justify-content-center">
+									<h1 style="color:white;line-height: 60px" class="m-0">
+										09:00:00
+									</h1>
+								</div>
+								<div class="date-indicator d-flex justify-content-center">
+									<h4 style="color: white;font-family: 'roboto-light', sans-serif;line-height: 44px" class="m-0">
+										Kamis, 28 Januari 2019
+									</h4>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -75,16 +80,50 @@
 						</div>
 					</div>
 					<div class="col-4">
-						<div class="queue-box">
-							<div class="queue-name">
+						<div id="queue-box-wrapper">
 
+							<div class="queue-box">
+								<div class="queue-name">
+									<h2 style="color: white" class="font-weight-light">Nama</h2>
+									<h2 style="color: white" class="font-weight-light">Layanan 3</h2>
+								</div>
+								<div class="queue-number d-flex justify-content-end">
+									<h1 class="queue-number-content" style="font-family: 'roboto-light';font-weight: bolder">A008</h1>
+								</div>
+								<div class="queue-footer d-flex justify-content-between">
+									<span style="color: white;">Menuju Loket : 3</span>
+									<span style="color: white">Sisa Antrian : 4</span>
+								</div>
 							</div>
-							<div class="queue-number">
 
+							<div class="queue-box">
+								<div class="queue-name">
+									<h2 style="color: white" class="font-weight-light">Nama</h2>
+									<h2 style="color: white" class="font-weight-light">Layanan 3</h2>
+								</div>
+								<div class="queue-number d-flex justify-content-end">
+									<h1 class="queue-number-content" style="font-family: 'roboto-light';font-weight: bolder">A008</h1>
+								</div>
+								<div class="queue-footer d-flex justify-content-between">
+									<span style="color: white;">Menuju Loket : 3</span>
+									<span style="color: white">Sisa Antrian : 4</span>
+								</div>
 							</div>
-							<div class="queue-footer">
 
+							<div class="queue-box">
+								<div class="queue-name">
+									<h2 style="color: white" class="font-weight-light">Nama</h2>
+									<h2 style="color: white" class="font-weight-light">Layanan 3</h2>
+								</div>
+								<div class="queue-number d-flex justify-content-end">
+									<h1 class="queue-number-content" style="font-family: 'roboto-light';font-weight: bolder">A008</h1>
+								</div>
+								<div class="queue-footer d-flex justify-content-between">
+									<span style="color: white;">Menuju Loket : 3</span>
+									<span style="color: white">Sisa Antrian : 4</span>
+								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
