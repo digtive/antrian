@@ -1,4 +1,4 @@
 ###################
-Antrian Application Based On Web And Android With PHP and Java
+Antrian (Queue) Application Based on Web and Android with PHP and Java
 ###################
 Create By digtive
