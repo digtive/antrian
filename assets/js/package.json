@@ -1,0 +1,20 @@
+{
+  "name": "digtive_antrian",
+  "version": "1.0.0",
+  "description": "plugins js untuk pengembangan aplikasi antrian",
+  "main": "alerts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "antrian"
+  ],
+  "author": "bagussjm, azhar36",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "video.js": "^7.6.6"
+  }
+}
