@@ -29,7 +29,7 @@
 	<body>
 	<!-- start container-->
 	<div class="container-scroller">
-		<div class="app-container">
+		<div id="app-container">
 			<!-- ---- HEADER SECTION ---- -->
 			<div id="header-card">
 				<div class="row">
@@ -51,12 +51,12 @@
 						<div id="date-time-indicator" >
 							<div id="date-time-wrapper" style="background-color: #007bff2e">
 								<div class="time-indicator d-flex justify-content-center">
-									<h1 style="color:white;line-height: 60px" class="m-0">
-										09:00:00
+									<h1 style="color:white;line-height: 60px" class="m-0" id="time-content">
+
 									</h1>
 								</div>
 								<div class="date-indicator d-flex justify-content-center">
-									<h4 style="color: white;font-family: 'roboto-light', sans-serif;line-height: 44px" class="m-0">
+									<h4 style="color: white;font-family: 'roboto-light', sans-serif;line-height: 44px" class="m-0" id="date-content">
 										Kamis, 28 Januari 2019
 									</h4>
 								</div>
