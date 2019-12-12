@@ -10,6 +10,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$route['settings/media'] = 'AppController/media';
 	$route['settings/print'] = 'AppController/prints';
 
+	/*-- components --*/
+	$route['settings/header'] = 'ComponentController/header';
+
 	$route['default_controller'] = 'AppController';
 	$route['404_override'] = '';
 	$route['translate_uri_dashes'] = FALSE;

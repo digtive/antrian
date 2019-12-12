@@ -90,6 +90,7 @@
 								$media = '';
 								$cetakan = '';
 								$loket = '';
+								$header = '';
 
 								switch ($activeMenu){
 									case 'umum':
@@ -106,6 +107,8 @@
 										$cetakan = $active; break;
 									case 'loket':
 										$loket = $active;break;
+									case 'header':
+										$header = $active;break;
 								}
 
 							?>
@@ -121,23 +124,16 @@
 									Loket
 								</a>
 							</li>
+<!--							<li>-->
+<!--								<a href="--><?//= base_url('settings/colours') ?><!--" class="--><?php //echo $warna;?><!--">-->
+<!--									<i class="icon-drop "></i>-->
+<!--									Warna-->
+<!--								</a>-->
+<!--							</li>-->
 							<li>
-								<a href="<?= base_url('settings/colours') ?>" class="<?php echo $warna;?>">
-									<i class="icon-drop "></i>
-									Warna
-								</a>
-							</li>
-							<li>
-								<a href="<?= base_url('settings/texts') ?>" class="<?= $teks; ?>">
-									<i class="icon-speech"></i>
-									Teks
-								</a>
-<!--								<span class="badge badge-primary nav-badge">8</span>-->
-							</li>
-							<li>
-								<a href="<?= base_url('settings/audio') ?>" class="<?= $suara; ?>">
-									<i class="icon-volume-2"></i>
-									Suara
+								<a href="<?= base_url('settings/header')?>" class="<?php echo $header;?>">
+									<i class="icon-credit-card "></i>
+									Header
 								</a>
 							</li>
 							<li>
