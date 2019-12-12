@@ -54,6 +54,11 @@
 	<div class="container-fluid" style="padding: 20px 80px!important;box-sizing: border-box ">
 
 		<div class="row">
+<!--			<div class="col-12">-->
+<!--				<div class="alert alert-success setting-alert" role="alert">-->
+<!--					A simple success alert—check it out!-->
+<!--				</div>-->
+<!--			</div>-->
 
 			<div class="col-3">
 
@@ -84,6 +89,7 @@
 								$umum = '';
 								$media = '';
 								$cetakan = '';
+								$loket = '';
 
 								switch ($activeMenu){
 									case 'umum':
@@ -98,6 +104,8 @@
 										$media = $active; break;
 									case 'cetakan':
 										$cetakan = $active; break;
+									case 'loket':
+										$loket = $active;break;
 								}
 
 							?>
@@ -105,6 +113,12 @@
 								<a href="<?= base_url('settings')?>" class="<?php echo $umum;?>">
 									<i class="icon-wrench "></i>
 									Umum
+								</a>
+							</li>
+							<li>
+								<a href="<?= base_url('settings/loket')?>" class="<?php echo $loket;?>">
+									<i class="icon-layers "></i>
+									Loket
 								</a>
 							</li>
 							<li>

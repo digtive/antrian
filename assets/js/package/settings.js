@@ -2,7 +2,7 @@ var settings = new Vue({
 	el : '#dataVue',
 	data : {
 		warna : '',
-		pesan : 'kambing',
+		pesan : '',
 	},
 	methods : {
 		gantiWarna : function () {

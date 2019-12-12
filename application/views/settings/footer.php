@@ -5,9 +5,9 @@
 	</div>
 </div>
 <!-- container-scroller -->
-			<!-- PLUGINS FOR ENTIRE SYSTEMS  -->
-			<script src="<?= base_url() ?>assets/js/plugins/vue.js"></script>
-			<script src="<?= base_url() ?>assets/js/package/settings.js"></script>
+<!-- PLUGINS FOR ENTIRE SYSTEMS  -->
+<script src="<?= base_url() ?>assets/js/plugins/vue.js"></script>
+<script src="<?= base_url() ?>assets/js/package/settings.js"></script>
 
 <!-- plugins:js -->
 <script src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js') ?>"></script>
@@ -79,7 +79,11 @@
             if (btnSetting === 'h'){
                 window.location.href = baseUrl;
             }
-        })
+        });
+
+        let settingAlert = setInterval(function () {
+			$('.setting-alert').fadeOut('slow');
+        },2000);
     })
 </script>
 
