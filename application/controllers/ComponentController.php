@@ -41,4 +41,15 @@ class ComponentController extends GLOBAL_Controller {
 		parent::settingsPages('components/footer',$data);
 	}
 
+	public function loket()
+	{
+		$data['title'] = 'Pengaturan Aplikasi';
+		$data['page_title'] = 'Pengaturan Loket Aplikasi';
+		$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
+		$data['activeMenu'] = 'loket';
+
+
+		parent::settingsPages('components/loket',$data);
+	}
+
 }

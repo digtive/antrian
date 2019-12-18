@@ -123,18 +123,6 @@
 								</a>
 							</li>
 							<li>
-								<a href="<?= base_url('settings/loket')?>" class="<?php echo $loket;?>">
-									<i class="icon-layers "></i>
-									Loket
-								</a>
-							</li>
-<!--							<li>-->
-<!--								<a href="--><?//= base_url('settings/colours') ?><!--" class="--><?php //echo $warna;?><!--">-->
-<!--									<i class="icon-drop "></i>-->
-<!--									Warna-->
-<!--								</a>-->
-<!--							</li>-->
-							<li>
 								<a href="<?= base_url('settings/header')?>" class="<?php echo $header;?>">
 									<i class="icon-credit-card "></i>
 									Header
@@ -144,6 +132,12 @@
 								<a href="<?= base_url('settings/footer')?>" class="<?php echo $footer;?>">
 									<i class="icon-frame "></i>
 									Footer
+								</a>
+							</li>
+							<li>
+								<a href="<?= base_url('settings/loket')?>" class="<?php echo $loket;?>">
+									<i class="icon-layers "></i>
+									Loket
 								</a>
 							</li>
 							<li>

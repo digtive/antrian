@@ -1,5 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+/*-- components --*/
+$route['settings/header'] = 'ComponentController/header';
+$route['settings/footer'] = 'ComponentController/footer';
+$route['settings/loket'] = 'ComponentController/loket';
 
 /*-- app routes --*/
 $route['settings'] = 'AppController/settings';
