@@ -39,6 +39,7 @@
 	<!-- End plugin css for this page -->
 
 	<!-- inject:css -->
+	<link rel="stylesheet" href="<?= base_url('assets/css/fonts.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/app.css') ?>">
 	<!-- endinject -->
@@ -91,6 +92,7 @@
 								$cetakan = '';
 								$loket = '';
 								$header = '';
+								$footer = '';
 
 								switch ($activeMenu){
 									case 'umum':
@@ -109,6 +111,8 @@
 										$loket = $active;break;
 									case 'header':
 										$header = $active;break;
+									case 'footer':
+										$footer = $active;break;
 								}
 
 							?>
@@ -134,6 +138,12 @@
 								<a href="<?= base_url('settings/header')?>" class="<?php echo $header;?>">
 									<i class="icon-credit-card "></i>
 									Header
+								</a>
+							</li>
+							<li>
+								<a href="<?= base_url('settings/footer')?>" class="<?php echo $footer;?>">
+									<i class="icon-frame "></i>
+									Footer
 								</a>
 							</li>
 							<li>

@@ -36,10 +36,10 @@
 		</div>
 
 
-		<div class="row pt-4 border-top">
+		<form action="#" class="row pt-4 border-top" method="post">
 			<div class="col-6">
 				<div class="row mt-2">
-					<div class="col-12"><h4>Warna</h4></div>
+					<div class="col-12" ><h4 style="font-family: titilliumweb-bold">Warna</h4></div>
 					<label for="warna-latar-header" class="col-6 col-form-label font-weight-medium">Warna Latar Header</label>
 					<div class="col-6">
 						<input type='text' class="color-picker" value="#0f1531" name="warna-latar-header" data-transform="#bg-header-simulator" data-change="background-color"/>
@@ -77,18 +77,35 @@
 					<div class="col-12">
 						<h4>Text</h4>
 					</div>
-					<label for="warna-tanggal" class="col-6 col-form-label font-weight-medium">Gaya Huruf Jam</label>
+					<label for="gaya-huruf-waktu" class="col-6 col-form-label font-weight-medium">Gaya Huruf Jam</label>
 					<div class="col-6">
-						<select class="form-control border-primary" id="exampleSelectPrimary">
-							<option value="Roboto">Roboto</option>
-							<option value="Helvetica">Helvetica</option>
-							<option value="Sans Serif">Sans Serif</option>
-							<option value="Fira">Fira</option>
+						<select class="form-control border-primary form-simulator select-simulator" data-transform="#time-content" data-change="font-family" name="gaya-huruf-waktu">
+							<option value="robot-bold">Roboto</option>
+							<option value="girassol-regular">Girassol</option>
+							<option value="titilliumweb-bold">Titillium Web</option>
+							<option value="sans-serif">Sans Serif</option>
+						</select>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<label for="gaya-huruf-tanggal" class="col-6 col-form-label font-weight-medium">Gaya Huruf Tanggal</label>
+					<div class="col-6">
+						<select class="form-control border-primary form-simulator select-simulator" data-transform="#date-content" data-change="font-family" name="gaya-huruf-tanggal">
+							<option value="robot-bold">Roboto</option>
+							<option value="girassol-regular">Girassol</option>
+							<option value="titilliumweb-bold">Titillium Web</option>
+							<option value="sans-serif">Sans Serif</option>
 						</select>
 					</div>
 				</div>
 			</div>
-		</div>
+
+			<div class="col-12 mt-5">
+				<div class="d-flex justify-content-center">
+					<button type="submit" name="simpan" class="btn btn-primary col-12">simpan</button>
+				</div>
+			</div>
+		</form>
 
 	</div>
 </div>

@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	/*-- components --*/
 	$route['settings/header'] = 'ComponentController/header';
+	$route['settings/footer'] = 'ComponentController/footer';
 
 	$route['default_controller'] = 'AppController';
 	$route['404_override'] = '';

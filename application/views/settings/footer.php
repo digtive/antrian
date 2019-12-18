@@ -64,7 +64,6 @@
 <script src="<?= base_url()?>assets/js/jquery-file-upload.js"></script>
 <script src="<?= base_url()?>assets/js/formpickers.js"></script>
 <script src="<?= base_url()?>assets/js/form-repeater.js"></script>
-<script src="<?= base_url()?>assets/js/app/formColor.js"></script>
 
 <!-- End custom js for this page-->
 
@@ -73,7 +72,9 @@
 <script src="<?= base_url('assets/js/plugins/moment.js') ?>"></script>
 <script src="<?= base_url('assets/') ?>js/dashboard.js"></script>
 <script src="<?= base_url('assets/js/app/waktu.js') ?>"></script>
+<script src="<?= base_url()?>assets/js/app/formColor.js"></script>
 <script src="<?= base_url('assets/js/package/timer.js') ?>"></script>
+<script src="<?= base_url('assets/js/package/formSimulator.js') ?>"></script>
 <script src="<?= base_url('assets/js/components/header.js') ?>"></script>
 <!-- End custom js for this page-->
 

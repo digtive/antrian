@@ -132,7 +132,7 @@
 
 			<!-- ---- FOOTER SECTION ---- -->
 			<div id="footer-card" style="background-color:  #0f1531;">
-				<marquee behavior="scroll" direction="left" id="running-text" style="font-size: 20px;color: white;">Selamat Datang Di Dinas Pertanian dan Peternakan</marquee>
+				<marquee behavior="scroll" direction="left" id="running-text" style="font-size: 20px;color: white;font-family: Roboto">Selamat Datang Di Dinas Pertanian dan Peternakan</marquee>
 			</div>
 			<!-- ---- END FOOTER SECTION ---- -->
 
