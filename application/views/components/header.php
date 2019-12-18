@@ -80,10 +80,12 @@
 					<label for="gaya-huruf-waktu" class="col-6 col-form-label font-weight-medium">Gaya Huruf Jam</label>
 					<div class="col-6">
 						<select class="form-control border-primary form-simulator select-simulator" data-transform="#time-content" data-change="font-family" name="gaya-huruf-waktu">
-							<option value="robot-bold">Roboto</option>
+							<option value="Roboto">Roboto</option>
 							<option value="girassol-regular">Girassol</option>
 							<option value="titilliumweb-bold">Titillium Web</option>
 							<option value="sans-serif">Sans Serif</option>
+							<option value="digi-regular">Digital</option>
+							<option value="digi-bold">Digital Bold</option>
 						</select>
 					</div>
 				</div>
@@ -95,6 +97,8 @@
 							<option value="girassol-regular">Girassol</option>
 							<option value="titilliumweb-bold">Titillium Web</option>
 							<option value="sans-serif">Sans Serif</option>
+							<option value="digi-regular">Digital</option>
+							<option value="digi-bold">Digital Bold</option>
 						</select>
 					</div>
 				</div>

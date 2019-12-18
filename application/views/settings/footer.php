@@ -84,12 +84,12 @@
 <script>
     $(document).ready(function () {
         let baseUrl = window.location.origin+'/antrian/';
-        $(document).keypress(function (key) {
-            let btnSetting = key.originalEvent.key;
-            if (btnSetting === 'h'){
-                window.location.href = baseUrl;
-            }
-        });
+        // $(document).keypress(function (key) {
+        //     let btnSetting = key.originalEvent.key;
+        //     if (btnSetting === 'h'){
+        //         window.location.href = baseUrl;
+        //     }
+        // });
 
         let settingAlert = setInterval(function () {
 			$('.setting-alert').fadeOut('slow');

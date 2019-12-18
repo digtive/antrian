@@ -51,7 +51,7 @@
 						<div id="date-time-indicator" >
 							<div id="date-time-wrapper" style="background-color: #007bff2e">
 								<div class="time-indicator d-flex justify-content-center">
-									<h1 style="color:white;line-height: 60px;font-family: roboto-bold" class="m-0" id="time-content">
+									<h1 style="color:white;line-height: 60px;font-family: roboto-bold;font-size: 45px" class="m-0" id="time-content">
 									</h1>
 								</div>
 								<div class="date-indicator d-flex justify-content-center">
@@ -132,7 +132,7 @@
 
 			<!-- ---- FOOTER SECTION ---- -->
 			<div id="footer-card" style="background-color:  #0f1531;">
-				<marquee behavior="scroll" direction="left" id="running-text" style="font-size: 20px;color: white;font-family: Roboto">Selamat Datang Di Dinas Pertanian dan Peternakan</marquee>
+				<marquee behavior="scroll" direction="left" id="running-text" style="font-size: 22px;color: white;font-family: Roboto">Selamat Datang Di Dinas Pertanian dan Peternakan</marquee>
 			</div>
 			<!-- ---- END FOOTER SECTION ---- -->
 
