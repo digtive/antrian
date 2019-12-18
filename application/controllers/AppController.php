@@ -30,6 +30,16 @@
 			parent::settingsPages('app/settings',$data);
 		}
 
+		public function loket()
+		{
+			$data['title'] = 'Pengaturan Loket';
+			$data['page_title'] = 'Pengaturan Loket';
+			$data['settingsTitle'] = 'Pengaturan Loket';
+			$data['activeMenu'] = 'loket';
+
+			parent::settingsPages('app/loket',$data);
+		}
+
 		public function colours()
 		{
 			$data['title'] = 'Pengaturan Aplikasi';
