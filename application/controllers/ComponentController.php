@@ -19,6 +19,16 @@ class ComponentController extends GLOBAL_Controller {
 		parent::authPage('app/index',$data);
 	}
 
+	public function parent()
+	{
+		$data['title'] = 'Pengaturan Aplikasi';
+		$data['page_title'] = 'Pengaturan Aplikasi';
+		$data['settingsTitle'] = 'Pengaturan  Aplikasi';
+		$data['activeMenu'] = 'parent';
+
+		parent::settingsPages('components/parent',$data);
+	}
+
 	public function header()
 	{
 		$data['title'] = 'Pengaturan Aplikasi';

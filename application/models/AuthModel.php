@@ -10,12 +10,18 @@
 		public function get_pengguna($username,$password)
 		{
 			$user = array(
-				'nama_pengguna' => $username,
-				'sandi_pengguna' => $password
+				'username' => $username,
+				'password' => $password
 			);
 			
-			return parent::get_object_of_row('pengguna',$user);
-			
+			return parent::get_object_of_row('auth',$user);
+		}
+
+		public function get_lisensi($idAuth)
+		{
+			parent::_ODB()->join('auth','auth.id_auth = lisensi.id_user');
+			parent::_ODB()->where('lisensi.id_user',$idAuth);
+			return parent::_ODB()->get('lisensi')->row_array();
 		}
 		
 		

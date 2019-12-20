@@ -29,17 +29,17 @@
 						<div class="row w-100">
 							<div class="col-lg-4 mx-auto">
 								<div class="auth-form-dark text-left p-5">
-                                    <?php if (($this->session->flashdata('alert') === 'invalid')): ?>
-                                        <div class="card bg-danger text-center animated shake col-12 pt-3">
-                                            <h4 class="font-weight-light">
-                                                <i class="icon-info"></i>
-                                                periksa kembali nama pengguna dan kata sandi
-                                            </h4>
-                                        </div>
-                                    <?php endif;?>
-									<h2 class="text-center">SIMRP</h2>
-									<h4 class="text-center font-weight-light">sistem informasi manajemen <br>registrasi pernikahan</h4>
-									<form class="pt-5" action="<?= site_url()?>" method="post">
+									<h2 class="text-center">ANTRIAN</h2>
+									<h4 class="text-center font-weight-light">Aplikasi Antrian Pekanbaru </h4>
+									<?php if (($this->session->flashdata('alert') === 'invalid')): ?>
+										<div class="card bg-danger text-center animated shake col-12 pt-3">
+											<h4 class="font-weight-light">
+												<i class="icon-info"></i>
+												periksa kembali nama pengguna dan kata sandi
+											</h4>
+										</div>
+									<?php endif;?>
+									<form class="pt-5" action="<?= site_url('login')?>" method="post">
 										<div class="form-group">
 											<label for="username">Nama Pengguna</label>
 											<input type="text" class="form-control" id="username" placeholder="Nama Pengguna" name="username">
@@ -51,8 +51,8 @@
 											<i class="mdi mdi-eye"></i>
 										</div>
 										<div class="mt-5">
-											<button type="submit" class="btn btn-sm btn-primary btn-block" name="masuk">
-												masuk
+											<button type="submit" class="btn btn-sm btn-primary btn-block" name="login">
+												MASUK
 											</button>
 										</div>
 										<div class="mt-3 text-center">

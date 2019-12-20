@@ -93,4 +93,10 @@ class GLOBAL_Model extends CI_Model
         return $this->db->affected_rows();
     }
 
+    // specific condition
+	public function _ODB()
+	{
+		return $this->db;
+	}
+
 }

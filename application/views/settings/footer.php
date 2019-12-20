@@ -36,7 +36,6 @@
 <script src="<?= base_url()?>assets/node_modules/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <script src="<?= base_url()?>assets/node_modules/clockpicker/dist/jquery-clockpicker.min.js"></script>
 <script src="<?= base_url()?>assets/node_modules/jquery.repeater/jquery.repeater.min.js"></script>
-
 <!-- endinject -->
 
 <!-- Plugin js for this page-->
@@ -75,8 +74,10 @@
 <script src="<?= base_url()?>assets/js/app/formColor.js"></script>
 <script src="<?= base_url('assets/js/package/timer.js') ?>"></script>
 <script src="<?= base_url('assets/js/package/formSimulator.js') ?>"></script>
-<script src="<?= base_url('assets/js/components/header.js') ?>"></script>
 <!-- End custom js for this page-->
+
+<!-- components setting to server [API] -->
+<script type="text/javascript" src="<?= base_url('assets/js/components/header.js')?>"></script>
 
 
 

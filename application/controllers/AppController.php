@@ -16,6 +16,8 @@
 			$data['page_title'] = 'Aplikasi Antrian';
 			$data['waktu'] = date('h:i');
 
+//			parent::cek_array($this->session->userdata());
+
 			parent::authPage('app/index',$data);
 		}
 

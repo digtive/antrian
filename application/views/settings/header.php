@@ -93,6 +93,7 @@
 								$loket = '';
 								$header = '';
 								$footer = '';
+								$parent = '';
 
 								switch ($activeMenu){
 									case 'umum':
@@ -113,6 +114,8 @@
 										$header = $active;break;
 									case 'footer':
 										$footer = $active;break;
+									case 'parent':
+										$parent = $active;break;
 								}
 
 							?>
@@ -120,6 +123,12 @@
 								<a href="<?= base_url('settings')?>" class="<?php echo $umum;?>">
 									<i class="icon-wrench "></i>
 									Umum
+								</a>
+							</li>
+							<li>
+								<a href="<?= base_url('settings/parent')?>" class="<?php echo $parent;?>">
+									<i class="icon-screen-desktop "></i>
+									Background
 								</a>
 							</li>
 							<li>
