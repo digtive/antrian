@@ -25,8 +25,7 @@
 
 				if ($userStatus->num_rows() > 0){
 					$user = $userStatus->row_array();
-					$lisensi = parent::model('auth')->get_lisensi($user['id_auth']);
-					$this->session->set_userdata($lisensi);
+					$this->session->set_userdata($user);
 					redirect(site_url());
 				}else{
 					parent::alert('alert','invalid');

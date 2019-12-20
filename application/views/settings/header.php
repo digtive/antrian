@@ -55,11 +55,11 @@
 	<div class="container-fluid" style="padding: 20px 80px!important;box-sizing: border-box ">
 
 		<div class="row">
-<!--			<div class="col-12">-->
-<!--				<div class="alert alert-success setting-alert" role="alert">-->
-<!--					A simple success alert—check it out!-->
-<!--				</div>-->
-<!--			</div>-->
+			<div class="col-12">
+				<div class="alert  setting-alert" role="alert" id="settings-alert" style="display: none">
+
+				</div>
+			</div>
 
 			<div class="col-3">
 
@@ -119,12 +119,12 @@
 								}
 
 							?>
-							<li>
-								<a href="<?= base_url('settings')?>" class="<?php echo $umum;?>">
-									<i class="icon-wrench "></i>
-									Umum
-								</a>
-							</li>
+<!--							<li>-->
+<!--								<a href="--><?//= base_url('settings')?><!--" class="--><?php //echo $umum;?><!--">-->
+<!--									<i class="icon-wrench "></i>-->
+<!--									Umum-->
+<!--								</a>-->
+<!--							</li>-->
 							<li>
 								<a href="<?= base_url('settings/parent')?>" class="<?php echo $parent;?>">
 									<i class="icon-screen-desktop "></i>

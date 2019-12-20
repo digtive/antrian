@@ -31,13 +31,13 @@
 	<div class="container-scroller">
 		<div id="app-container" style="background-color: #0ba1b5;">
 			<!-- ---- HEADER SECTION ---- -->
-			<div id="header-card" style="background-color: #0f1531;">
+			<div id="header-card" style="background-color: <?= $header['background-header']?>;">
 				<div class="row">
 					<div class="col-9">
 						<!-- ---- TAG LINE AND BRAND SECTION -->
 						<div id="tagline-head">
 							<div class="tagline-wrapper">
-								<div class="parallelogram" style="background: white;">
+								<div class="parallelogram" style="background: <?= $header['background-paralelogram']?>;">
 								</div>
 								<div class="brand-wrapper">
 									<img src="<?= base_url('assets/images/logo-dintanak.png') ?>" alt="" width="100%" height="100%">
@@ -49,13 +49,13 @@
 					</div>
 					<div class="col-3">
 						<div id="date-time-indicator" >
-							<div id="date-time-wrapper" style="background-color: #007bff2e">
+							<div id="date-time-wrapper" style="background-color: <?= $header['background-timer']?>">
 								<div class="time-indicator d-flex justify-content-center">
-									<h1 style="color:white;line-height: 60px;font-family: roboto-bold;font-size: 45px" class="m-0" id="time-content">
+									<h1 style="color:<?= $header['color-timer']?>;line-height: 60px;font-family: <?= $header['font-family-timer']?>;font-size: 45px" class="m-0" id="time-content">
 									</h1>
 								</div>
 								<div class="date-indicator d-flex justify-content-center">
-									<h4 style="color: white;font-family: 'roboto-light', sans-serif;line-height: 44px" class="m-0" id="date-content">
+									<h4 style="color: <?= $header['color-date']?>;font-family: <?= $header['font-family-date']?>, sans-serif;line-height: 44px" class="m-0" id="date-content">
 										Kamis, 28 Januari 2019
 									</h4>
 								</div>

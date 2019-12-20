@@ -4,12 +4,12 @@
 		<h4 class="card-title pb-3 border-bottom mb-3"><?= $settingsTitle;?></h4>
 
 		<h3>Preview</h3>
-		<div class="row mb-3" id="bg-header-simulator" style="background-color: #0f1531;overflow: hidden" >
+		<div class="row mb-3" id="bg-header-simulator" style="background-color: <?=$headerComponent['background-header']?>;overflow: hidden" >
 			<div class="col-8">
 				<!-- ---- TAG LINE AND BRAND SECTION -->
 				<div id="tagline-head">
 					<div class="tagline-wrapper">
-						<div class="parallelogram" style="background: #ffffff;" id="bg-paralelogram-simulator">
+						<div class="parallelogram" style="background: <?=$headerComponent['background-paralelogram']?>;" id="bg-paralelogram-simulator">
 						</div>
 						<div class="brand-wrapper">
 							<img src="<?= base_url('assets/images/logo-dintanak.png') ?>" alt="" width="100%" height="100%">
@@ -20,13 +20,13 @@
 			</div>
 			<div class="col-4">
 				<div id="date-time-indicator" >
-					<div id="date-time-wrapper" style="background-color: #007bff2e" >
+					<div id="date-time-wrapper" style="background-color: <?=$headerComponent['background-timer']?>" >
 						<div class="time-indicator d-flex justify-content-center">
-							<h1 style="color:white;line-height: 60px;font-family: roboto-bold" class="m-0" id="time-content">
+							<h1 style="color:<?=$headerComponent['color-timer']?>;line-height: 60px;font-family: <?=$headerComponent['font-family-timer']?>" class="m-0" id="time-content">
 							</h1>
 						</div>
 						<div class="date-indicator d-flex justify-content-center">
-							<h4 style="color: white;font-family: 'roboto-light', sans-serif;line-height: 44px" class="m-0" id="date-content">
+							<h4 style="color: <?=$headerComponent['color-date']?>;font-family: <?=$headerComponent['font-family-date']?>, sans-serif;line-height: 44px" class="m-0" id="date-content">
 								Kamis, 28 Januari 2019
 							</h4>
 						</div>
@@ -44,31 +44,31 @@
 					</div>
 					<label for="background-header" class="col-6 col-form-label font-weight-medium">Warna Latar Header</label>
 					<div class="col-6">
-						<input type='text' class="color-picker" value="#0f1531" name="background-header" data-transform="#bg-header-simulator" data-change="background-color"/>
+						<input type='text' class="color-picker" value="<?=$headerComponent['background-header']?>" name="background-header" data-transform="#bg-header-simulator" data-change="background-color"/>
 					</div>
 				</div>
 				<div class="row mt-2">
 					<label for="background-paralelogram" class="col-6 col-form-label font-weight-medium">Warna Latar logo</label>
 					<div class="col-6">
-						<input type='text' class="color-picker" value="#ffffff" name="background-paralelogram" data-transform="#bg-paralelogram-simulator" data-change="background-color"/>
+						<input type='text' class="color-picker" value="<?=$headerComponent['background-paralelogram']?>" name="background-paralelogram" data-transform="#bg-paralelogram-simulator" data-change="background-color"/>
 					</div>
 				</div>
 				<div class="row mt-2">
 					<label for="background-timer" class="col-6 col-form-label font-weight-medium">Warna Latar Waktu</label>
 					<div class="col-6">
-						<input type='text' class="color-picker" value="#007bff2e" name="background-timer" data-transform="#date-time-wrapper" data-change="background-color"/>
+						<input type='text' class="color-picker" value="<?=$headerComponent['background-timer']?>" name="background-timer" data-transform="#date-time-wrapper" data-change="background-color"/>
 					</div>
 				</div>
 				<div class="row mt-2">
 					<label for="color-timer" class="col-6 col-form-label font-weight-medium">Warna Jam</label>
 					<div class="col-6">
-						<input type='text' class="color-picker" value="#ffffff" name="color-timer" data-transform="#time-content" data-change="color"/>
+						<input type='text' class="color-picker" value="<?=$headerComponent['color-timer']?>" name="color-timer" data-transform="#time-content" data-change="color"/>
 					</div>
 				</div>
 				<div class="row mt-2">
 					<label for="color-date" class="col-6 col-form-label font-weight-medium">Warna Tanggal</label>
 					<div class="col-6">
-						<input type='text' class="color-picker" value="#ffffff" name="color-date" data-transform="#date-content" data-change="color"/>
+						<input type='text' class="color-picker" value="<?=$headerComponent['color-date']?>" name="color-date" data-transform="#date-content" data-change="color"/>
 					</div>
 				</div>
 			</div>
@@ -82,6 +82,7 @@
 					<label for="font-family-timer" class="col-6 col-form-label font-weight-medium">Gaya Huruf Jam</label>
 					<div class="col-6">
 						<select class="form-control border-primary form-simulator select-simulator" data-transform="#time-content" data-change="font-family" name="font-family-timer">
+							<option value="<?=$headerComponent['font-family-timer']?>" selected><?=$headerComponent['font-family-timer']?></option>
 							<option value="Roboto">Roboto</option>
 							<option value="girassol-regular">Girassol</option>
 							<option value="titilliumweb-bold">Titillium Web</option>
@@ -95,6 +96,7 @@
 					<label for="gaya-huruf-tanggal" class="col-6 col-form-label font-weight-medium">Gaya Huruf Tanggal</label>
 					<div class="col-6">
 						<select class="form-control border-primary form-simulator select-simulator" data-transform="#date-content" data-change="font-family" name="font-family-date">
+							<option value="<?=$headerComponent['font-family-date']?>" selected><?=$headerComponent['font-family-date']?></option>
 							<option value="robot-bold">Roboto</option>
 							<option value="girassol-regular">Girassol</option>
 							<option value="titilliumweb-bold">Titillium Web</option>

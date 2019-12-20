@@ -7,7 +7,7 @@ class ComponentController extends GLOBAL_Controller {
 	{
 		parent::__construct();
 		date_default_timezone_set("Asia/Jakarta");
-
+		$this->load->model('ComponentModel','component');
 	}
 
 	public function index()
@@ -36,6 +36,13 @@ class ComponentController extends GLOBAL_Controller {
 		$data['settingsTitle'] = 'Pengaturan Header Aplikasi';
 		$data['activeMenu'] = 'header';
 
+		$query = array(
+			'app_id' => get_cookie('user_app')
+		);
+
+		$data['component']  = parent::model('component')->get_user_app($query);
+		$data['headerComponent'] = json_decode($data['component']['app_header'],true);
+//		parent::cek_array($data['headerComponent']);
 
 		parent::settingsPages('components/header',$data);
 	}

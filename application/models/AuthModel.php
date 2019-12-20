@@ -17,10 +17,9 @@
 			return parent::get_object_of_row('auth',$user);
 		}
 
-		public function get_lisensi($idAuth)
+		public function get_lisensi()
 		{
 			parent::_ODB()->join('auth','auth.id_auth = lisensi.id_user');
-			parent::_ODB()->where('lisensi.id_user',$idAuth);
 			return parent::_ODB()->get('lisensi')->row_array();
 		}
 		

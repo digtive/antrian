@@ -77,9 +77,7 @@
 <!-- End custom js for this page-->
 
 <!-- components setting to server [API] -->
-<script type="text/javascript" src="<?= base_url('assets/js/components/header.js')?>"></script>
-
-
+<script type="text/javascript" src="<?= base_url('assets/js/components/header.js?v=1.0.0&&load='.time().'')?>"></script>
 
 
 <script>
@@ -92,9 +90,6 @@
         //     }
         // });
 
-        let settingAlert = setInterval(function () {
-			$('.setting-alert').fadeOut('slow');
-        },2000);
     })
 </script>
 
