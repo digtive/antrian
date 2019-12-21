@@ -54,6 +54,11 @@
 	<div class="container-fluid" style="padding: 20px 80px!important;box-sizing: border-box ">
 
 		<div class="row">
+<!--			<div class="col-12">-->
+<!--				<div class="alert alert-success setting-alert" role="alert">-->
+<!--					A simple success alert—check it out!-->
+<!--				</div>-->
+<!--			</div>-->
 
 			<div class="col-3">
 
@@ -84,6 +89,8 @@
 								$umum = '';
 								$media = '';
 								$cetakan = '';
+								$loket = '';
+								$header = '';
 
 								switch ($activeMenu){
 									case 'umum':
@@ -98,6 +105,10 @@
 										$media = $active; break;
 									case 'cetakan':
 										$cetakan = $active; break;
+									case 'loket':
+										$loket = $active;break;
+									case 'header':
+										$header = $active;break;
 								}
 
 							?>
@@ -108,22 +119,21 @@
 								</a>
 							</li>
 							<li>
-								<a href="<?= base_url('settings/colours') ?>" class="<?php echo $warna;?>">
-									<i class="icon-drop "></i>
-									Warna
+								<a href="<?= base_url('settings/loket')?>" class="<?php echo $loket;?>">
+									<i class="icon-layers "></i>
+									Loket
 								</a>
 							</li>
+<!--							<li>-->
+<!--								<a href="--><?//= base_url('settings/colours') ?><!--" class="--><?php //echo $warna;?><!--">-->
+<!--									<i class="icon-drop "></i>-->
+<!--									Warna-->
+<!--								</a>-->
+<!--							</li>-->
 							<li>
-								<a href="<?= base_url('settings/texts') ?>" class="<?= $teks; ?>">
-									<i class="icon-speech"></i>
-									Teks
-								</a>
-<!--								<span class="badge badge-primary nav-badge">8</span>-->
-							</li>
-							<li>
-								<a href="<?= base_url('settings/audio') ?>" class="<?= $suara; ?>">
-									<i class="icon-volume-2"></i>
-									Suara
+								<a href="<?= base_url('settings/header')?>" class="<?php echo $header;?>">
+									<i class="icon-credit-card "></i>
+									Header
 								</a>
 							</li>
 							<li>

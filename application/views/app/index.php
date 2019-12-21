@@ -29,15 +29,15 @@
 	<body>
 	<!-- start container-->
 	<div class="container-scroller">
-		<div id="app-container">
+		<div id="app-container" style="background-color: #0ba1b5;">
 			<!-- ---- HEADER SECTION ---- -->
-			<div id="header-card">
+			<div id="header-card" style="background-color: #0f1531;">
 				<div class="row">
 					<div class="col-9">
 						<!-- ---- TAG LINE AND BRAND SECTION -->
 						<div id="tagline-head">
 							<div class="tagline-wrapper">
-								<div class="parallelogram">
+								<div class="parallelogram" style="background: white;">
 								</div>
 								<div class="brand-wrapper">
 									<img src="<?= base_url('assets/images/logo-dintanak.png') ?>" alt="" width="100%" height="100%">
@@ -51,8 +51,7 @@
 						<div id="date-time-indicator" >
 							<div id="date-time-wrapper" style="background-color: #007bff2e">
 								<div class="time-indicator d-flex justify-content-center">
-									<h1 style="color:white;line-height: 60px" class="m-0" id="time-content">
-
+									<h1 style="color:white;line-height: 60px;font-family: roboto-bold" class="m-0" id="time-content">
 									</h1>
 								</div>
 								<div class="date-indicator d-flex justify-content-center">
@@ -71,7 +70,7 @@
 			<!-- ---- CONTENT SECTION ---- -->
 			<div id="content-card">
 				<div class="row">
-					<div class="col-8">
+					<div class="col-7">
 						<div id="content-wrapper">
 							<video width="100%" height="auto" controls >
 								<source src="<?= base_url('assets/videos/videoplayback.mp4')?>" type="video/mp4">
@@ -79,20 +78,21 @@
 							</video>
 						</div>
 					</div>
-					<div class="col-4">
+					<div class="col-5">
 						<div id="queue-box-wrapper">
 
-							<div class="queue-box">
+							<div class="queue-box" style="background-color: #0f1531;">
 								<div class="queue-name">
-									<h2 style="color: white" class="font-weight-light">Nama</h2>
-									<h2 style="color: white" class="font-weight-light">Layanan 3</h2>
+									<h2 class="font-weight-light" style="color: white;font-size: 28px;font-family: Roboto">
+										Nama
+									</h2>
 								</div>
-								<div class="queue-number d-flex justify-content-end">
-									<h1 class="queue-number-content" style="font-family: 'roboto-light';font-weight: bolder">A008</h1>
+								<div class="queue-number d-flex justify-content-end" style="background-color: #0b51c5;">
+									<h1 class="queue-number-content" style="font-family: 'roboto-light';font-weight: bolder;color: white">A008</h1>
 								</div>
-								<div class="queue-footer d-flex justify-content-between">
-									<span style="color: white;">Menuju Loket : 3</span>
-									<span style="color: white">Sisa Antrian : 4</span>
+								<div class="queue-footer d-flex justify-content-between" style="border-top: 4px #0b51c5 solid;background-color: #0f1531">
+									<span style="color: white;font-family: Roboto">Menuju Loket : 3</span>
+									<span style="color: white;font-family: Roboto">Sisa Antrian : 4</span>
 								</div>
 							</div>
 
@@ -131,8 +131,8 @@
 			<!-- ---- END CONTENT SECTION ---- -->
 
 			<!-- ---- FOOTER SECTION ---- -->
-			<div id="footer-card">
-				<marquee behavior="scroll" direction="left" id="running-text">Selamat Datang Di Dinas Pertanian dan Peternakan</marquee>
+			<div id="footer-card" style="background-color:  #0f1531;">
+				<marquee behavior="scroll" direction="left" id="running-text" style="font-size: 20px;color: white;">Selamat Datang Di Dinas Pertanian dan Peternakan</marquee>
 			</div>
 			<!-- ---- END FOOTER SECTION ---- -->
 

@@ -5,9 +5,9 @@
 	</div>
 </div>
 <!-- container-scroller -->
-			<!-- PLUGINS FOR ENTIRE SYSTEMS  -->
-			<script src="<?= base_url() ?>assets/js/plugins/vue.js"></script>
-			<script src="<?= base_url() ?>assets/js/package/settings.js"></script>
+<!-- PLUGINS FOR ENTIRE SYSTEMS  -->
+<script src="<?= base_url() ?>assets/js/plugins/vue.js"></script>
+<script src="<?= base_url() ?>assets/js/package/settings.js"></script>
 
 <!-- plugins:js -->
 <script src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js') ?>"></script>
@@ -68,6 +68,15 @@
 
 <!-- End custom js for this page-->
 
+<!-- Custom js for this page-->
+<script src="<?= base_url('assets/js/plugins/countdown.js') ?>"></script>
+<script src="<?= base_url('assets/js/plugins/moment.js') ?>"></script>
+<script src="<?= base_url('assets/') ?>js/dashboard.js"></script>
+<script src="<?= base_url('assets/js/app/waktu.js') ?>"></script>
+<script src="<?= base_url('assets/js/package/timer.js') ?>"></script>
+<script src="<?= base_url('assets/js/components/header.js') ?>"></script>
+<!-- End custom js for this page-->
+
 
 
 
@@ -79,7 +88,11 @@
             if (btnSetting === 'h'){
                 window.location.href = baseUrl;
             }
-        })
+        });
+
+        let settingAlert = setInterval(function () {
+			$('.setting-alert').fadeOut('slow');
+        },2000);
     })
 </script>
 
