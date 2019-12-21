@@ -30,4 +30,15 @@ class ComponentController extends GLOBAL_Controller {
 		parent::settingsPages('components/header',$data);
 	}
 
+	public function footer()
+	{
+		$data['title'] = 'Pengaturan Aplikasi';
+		$data['page_title'] = 'Pengaturan Footer Aplikasi';
+		$data['settingsTitle'] = 'Pengaturan Footer Aplikasi';
+		$data['activeMenu'] = 'footer';
+
+
+		parent::settingsPages('components/footer',$data);
+	}
+
 }
