@@ -29,6 +29,13 @@
         public function deleteloket($data){
             return parent::delete_row($this->initTable(),$data);
         }
+        public function getJoinLoket(){
+            $this->db->select('*');
+            $this->db->from($this->initTable());
+            $this->db->join('tbl_layanan', 'tbl_loket.loket_layanan_id = tbl_layanan.layanan_id');
+            $query = $this->db->get();
+            return $query;
+        }
         public function getByLayanan($id){
             $this->db->select('*');
             $this->db->from($this->initTable());
