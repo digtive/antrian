@@ -18,6 +18,7 @@
 		<!-- End plugin css for this page -->
 
 		<!-- inject:css -->
+		<link rel="stylesheet" href="<?= base_url('assets/css/fonts.css') ?>">
 		<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 		<link rel="stylesheet" href="<?= base_url('assets/css/app.css')?>">
 		<!-- endinject -->
@@ -26,7 +27,7 @@
 
 	</head>
 
-	<body>
+	<body id="root">
 	<!-- start container-->
 	<div class="container-scroller">
 		<div id="app-container" style="background-color: #0ba1b5;">
@@ -56,7 +57,7 @@
 								</div>
 								<div class="date-indicator d-flex justify-content-center">
 									<h4 style="color: <?= $header['color-date']?>;font-family: <?= $header['font-family-date']?>, sans-serif;line-height: 44px" class="m-0" id="date-content">
-										Kamis, 28 Januari 2019
+
 									</h4>
 								</div>
 							</div>
@@ -81,18 +82,18 @@
 					<div class="col-5">
 						<div id="queue-box-wrapper">
 
-							<div class="queue-box" style="background-color: #0f1531;">
+							<div class="queue-box" style="background-color: <?= $loket['background-queue-box']; ?>;">
 								<div class="queue-name">
-									<h2 class="font-weight-light" style="color: white;font-size: 28px;font-family: Roboto">
+									<h2 class="font-weight-light" style="color: <?= $loket['color-queue-name']; ?>;font-size: 28px;font-family: <?= $loket['font-family-name']; ?>">
 										Nama
 									</h2>
 								</div>
-								<div class="queue-number d-flex justify-content-end" style="background-color: #0b51c5;">
-									<h1 class="queue-number-content" style="font-family: 'roboto-light';font-weight: bolder;color: white">A008</h1>
+								<div class="queue-number d-flex justify-content-end" style="background-color: <?= $loket['background-queue-number'];?>;">
+									<h1 class="queue-number-content" style="font-family: <?= $loket['font-family-number'];?> ;font-weight: bolder;color: <?= $loket['color-number'];?>">A008</h1>
 								</div>
-								<div class="queue-footer d-flex justify-content-between" style="border-top: 4px #0b51c5 solid;background-color: #0f1531">
-									<span style="color: white;font-family: Roboto">Menuju Loket : 3</span>
-									<span style="color: white;font-family: Roboto">Sisa Antrian : 4</span>
+								<div class="queue-footer d-flex justify-content-between" style="border-top: 4px <?= $loket['border-top-footer-color'];?> solid;background-color: <?= $loket['background-queue-footer'];?>">
+									<span style="color: <?= $loket['color-footer'];?>;font-family: <?= $loket['font-family-footer'];?>">Menuju Loket : 3</span>
+									<span style="color: <?= $loket['color-left-queue'];?>;font-family: <?= $loket['font-family-left-queue'];?>">Sisa Antrian : 4</span>
 								</div>
 							</div>
 
@@ -131,8 +132,8 @@
 			<!-- ---- END CONTENT SECTION ---- -->
 
 			<!-- ---- FOOTER SECTION ---- -->
-			<div id="footer-card" style="background-color:  #0f1531;">
-				<marquee behavior="scroll" direction="left" id="running-text" style="font-size: 22px;color: white;font-family: Roboto">Selamat Datang Di Dinas Pertanian dan Peternakan</marquee>
+			<div id="footer-card" style="background-color:  <?= $footer['background-footer']?>;">
+				<marquee behavior="scroll" direction="left" id="running-text" style="font-size: 22px;color: <?= $footer['color-footer']?>;font-family: <?= $footer['font-family-footer']?>"><?= $footer['footer-text']?></marquee>
 			</div>
 			<!-- ---- END FOOTER SECTION ---- -->
 
@@ -173,7 +174,10 @@
 		<script src="<?= base_url('assets/js/package/timer.js') ?>"></script>
 		<!-- End custom js for this page-->
 
-		<script>
+	<!-- component script-->
+	<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
+
+	<script>
 			$(document).ready(function () {
 
 			    let baseUrl = window.location.origin+'/antrian/';
@@ -182,7 +186,8 @@
 					if (btnSetting === 's'){
 					    window.location.href = baseUrl+'settings';
 					}
-                })
+                });
+
             })
 		</script>
 

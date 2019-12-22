@@ -33,7 +33,7 @@
 			$data['header'] = json_decode($data['component']['app_header'],true);
 			$data['loket'] = json_decode($data['component']['app_service'],true);
 			$data['footer'] = json_decode($data['component']['app_footer'],true);
-//			parent::cek_array($data['header']);
+//			parent::cek_array($data['loket']);
 			parent::authPage('app/index',$data);
 		}
 

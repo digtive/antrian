@@ -54,6 +54,13 @@ class ComponentController extends GLOBAL_Controller {
 		$data['settingsTitle'] = 'Pengaturan Footer Aplikasi';
 		$data['activeMenu'] = 'footer';
 
+		$query = array(
+			'app_id' => get_cookie('user_app')
+		);
+
+		$data['component']  = parent::model('component')->get_user_app($query);
+		$data['footerComponent'] = json_decode($data['component']['app_footer'],true);
+//		parent::cek_array($data['footerComponent']);
 
 		parent::settingsPages('components/footer',$data);
 	}
@@ -65,6 +72,13 @@ class ComponentController extends GLOBAL_Controller {
 		$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
 		$data['activeMenu'] = 'loket';
 
+		$query = array(
+			'app_id' => get_cookie('user_app')
+		);
+
+		$data['component']  = parent::model('component')->get_user_app($query);
+		$data['serviceComponent'] = json_decode($data['component']['app_service'],true);
+//		parent::cek_array($data['serviceComponent']);
 
 		parent::settingsPages('components/loket',$data);
 	}

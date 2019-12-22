@@ -11,6 +11,7 @@
 
 <!-- plugins:js -->
 <script src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js') ?>"></script>
+<script src="<?= base_url('assets/js/plugins/jquery-3.4.1.js') ?>"></script>
 <script src="<?= base_url('assets/node_modules/moment/moment.js')?>"></script>
 <script src="<?= base_url('assets/node_modules/moment/moment-with-locales.js')?>"></script>
 <script src="<?= base_url('assets/node_modules/popper.js/dist/umd/popper.min.js') ?>"></script>
@@ -78,6 +79,9 @@
 
 <!-- components setting to server [API] -->
 <script type="text/javascript" src="<?= base_url('assets/js/components/header.js?v=1.0.0&&load='.time().'')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/components/footer.js?v=1.0.0&&load='.time().'')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/components/service.js?v=1.0.0&&load='.time().'')?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
 
 
 <script>
