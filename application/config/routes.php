@@ -18,72 +18,15 @@ $route['settings/media'] = 'AppController/media';
 $route['settings/print'] = 'AppController/prints';
 $route['settings/header'] = 'ComponentController/header';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $route['api/queue/antrian'] = 'ApiController/antrian';
 $route['api/queue/call'] = 'ApiController/call';
 $route['api/queue/recall'] = 'ApiController/recall';
 $route['api/queue/layanan'] = 'ApiController/layanan';
+
 $route['default_controller'] = 'AppController';
 $route['mainpage'] = 'ResolutionController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-
-
-
 
 $route['recallantrian'] = 'AntrianController/recall';
 $route['callantrian'] = 'AntrianController/call';

@@ -39,9 +39,9 @@
 	<!-- End plugin css for this page -->
 
 	<!-- inject:css -->
-	<link rel="stylesheet" href="<?= base_url('assets/css/fonts.css') ?>">
-	<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
-	<link rel="stylesheet" href="<?= base_url('assets/css/app.css') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/css/fonts.css?v=1.0.0&&load='.time().'') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.0&&load='.time().'') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/css/app.css?v=1.0.0&&load='.time().'') ?>">
 	<!-- endinject -->
 
 	<link rel="shortcut icon" href="<?= base_url('assets/images/icon-antrian.png') ?>"/>
@@ -60,6 +60,14 @@
 
 				</div>
 			</div>
+
+			<?php if ($this->session->flashdata('alert') === 'edit'):?>
+				<div class="col-12">
+					<div class="alert setting-alert alert-success" role="alert" id="settings-alert">
+						berhasil menyimpan data
+					</div>
+				</div>
+			<?php endif;?>
 
 			<div class="col-3">
 

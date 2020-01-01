@@ -15,7 +15,7 @@ $(document).ready(function(){
 			last =getTimeEdit();
 			window.location.reload();
 		}
-	},2000);
+	},1000);
 
 	function getTimeEdit() {
 		return $.ajax({

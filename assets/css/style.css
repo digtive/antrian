@@ -21937,7 +21937,7 @@ div.tagsinput {
 /* === Landing screens === */
 /* Auth */
 .auth.login-full-bg {
-  background: url("../images/auth/login_1.jpg");
+  background: url("../images/auth/bg.jpg");
   background-size: cover; }
 
 .auth .login-half-bg {

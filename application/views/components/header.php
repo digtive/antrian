@@ -11,8 +11,8 @@
 					<div class="tagline-wrapper">
 						<div class="parallelogram" style="background: <?=$headerComponent['background-paralelogram']?>;" id="bg-paralelogram-simulator">
 						</div>
-						<div class="brand-wrapper">
-							<img src="<?= base_url('assets/images/logo-dintanak.png') ?>" alt="" width="100%" height="100%">
+						<div class="brand-wrapper" style='background-image: url("<?= base_url('assets/images/doodle/diamond.png')?>");background-repeat: no-repeat;background-position: right;background-size: inherit;'>
+							<img src="<?= $logo ?>" alt="" width="100%" height="90%">
 						</div>
 					</div>
 				</div>
@@ -26,8 +26,8 @@
 							</h1>
 						</div>
 						<div class="date-indicator d-flex justify-content-center">
-							<h4 style="color: <?=$headerComponent['color-date']?>;font-family: <?=$headerComponent['font-family-date']?>, sans-serif;line-height: 44px" class="m-0" id="date-content">
-								Kamis, 28 Januari 2019
+							<h4 style="color: <?=$headerComponent['color-date']?>;font-family: <?=$headerComponent['font-family-date']?>, sans-serif;line-height: 44px;font-size: 16px" class="m-0" id="date-content" >
+
 							</h4>
 						</div>
 					</div>
@@ -35,7 +35,22 @@
 			</div>
 		</div>
 
+		<form action="<?= base_url('ComponentService/unggahLogo')?>" class="form-row" method="post" enctype="multipart/form-data">
+			<div class="form-group col-12">
+				<h4 class="border-bottom" style="font-family: titilliumweb-bold">
+					Gambar Logo
+				</h4>
+				<input type="file" class="dropify" data-height="126"
+					   name="logo-img" data-default-file="<?=$logo?>"
+					   data-allowed-file-extensions="jpg png jpeg"
+					   data-min-width="835"
+					   data-min-height="122" >
+			</div>
 
+			<button type="submit" class="btn btn-primary col-12" name="unggah">
+				unggah
+			</button>
+		</form>
 		<form action="#" class="row pt-4 border-top" method="post" id="headerComponentData">
 			<div class="col-6">
 				<div class="row mt-2">

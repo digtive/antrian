@@ -5,14 +5,23 @@
         public function __construct()
         {
             parent::__construct();
-
-        }
+			date_default_timezone_set("Asia/Jakarta");
+		}
         public function initTable(){
             return "tbl_antrian";
         }
         public function get_antrian()
 		{
 			return parent::get_object_of_table($this->initTable());
+		}
+		public function get_loket()
+		{
+			$this->db->select('*');
+			$this->db->from('tbl_loket');
+			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_loket.loket_layanan_id');
+			$this->db->limit(4);
+			$query = $this->db->get();
+			return $query;
 		}
 		public function post_antrian($data){
             return parent::insert_data($this->initTable(),$data);
@@ -48,11 +57,24 @@
             $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
             $this->db->join('tbl_loket', 'tbl_loket.loket_id = tbl_antrian.antrian_loket_id');
             $this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
-            $this->db->order_by('antrian_nomor','desc');
+            $this->db->order_by('antrian_nomor','asc');
             $this->db->limit(5);
             $query = $this->db->get();
             return $query;
         }
+        public function getAntrianSelanjutnya($loketId,$date,$antrianNomor){
+			$this->db->select('*');
+			$this->db->from('tbl_antrian');
+			$this->db->where('antrian_loket_id',$loketId);
+			$this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
+			$this->db->where('antrian_nomor', $antrianNomor);
+			$this->db->join('tbl_loket', 'tbl_loket.loket_id = tbl_antrian.antrian_loket_id');
+			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
+			$this->db->order_by('antrian_nomor','asc');
+			$this->db->limit(5);
+			$query = $this->db->get();
+			return $query->row_array();
+		}
         public function getTotalQueue($id,$date){
             $this->db->select('*');
             $this->db->from($this->initTable());
@@ -91,5 +113,4 @@
             $query = $this->db->get();
             return $query;
         }
-
     }

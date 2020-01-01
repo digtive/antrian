@@ -18,9 +18,9 @@
 		<!-- End plugin css for this page -->
 
 		<!-- inject:css -->
-		<link rel="stylesheet" href="<?= base_url('assets/css/fonts.css') ?>">
-		<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
-		<link rel="stylesheet" href="<?= base_url('assets/css/app.css')?>">
+		<link rel="stylesheet" href="<?= base_url('assets/css/fonts.css?v=1.0.0&&load'.time().'') ?>">
+		<link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.0&&load'.time().'')?>">
+		<link rel="stylesheet" href="<?= base_url('assets/css/app.css?v=1.0.0&&load='.time().'')?>">
 		<!-- endinject -->
 
 		<link rel="shortcut icon" href="<?= base_url('assets/images/icon-antrian.png') ?>"/>
@@ -30,7 +30,19 @@
 	<body id="root">
 	<!-- start container-->
 	<div class="container-scroller">
-		<div id="app-container" style="background-color: #0ba1b5;">
+		<?php
+			if ($container['background-image'] === 'true'):
+		?>
+		<div id="app-container"
+			 style='background: url("<?=$container['background-image-src']?>");
+				 background-repeat: no-repeat;
+				 background-size: cover;
+				 background-position: center;'>
+		<?php else:?>
+
+		<div id="app-container" style="background-color: <?= $container['background-color']?>;">
+
+		<?php endif?>
 			<!-- ---- HEADER SECTION ---- -->
 			<div id="header-card" style="background-color: <?= $header['background-header']?>;">
 				<div class="row">
@@ -40,8 +52,8 @@
 							<div class="tagline-wrapper">
 								<div class="parallelogram" style="background: <?= $header['background-paralelogram']?>;">
 								</div>
-								<div class="brand-wrapper">
-									<img src="<?= base_url('assets/images/logo-dintanak.png') ?>" alt="" width="100%" height="100%">
+								<div class="brand-wrapper" style='background-image: url("<?= base_url('assets/images/doodle/diamond.png')?>");background-repeat: no-repeat;background-position: right;background-size: inherit;'>
+									<img src="<?= $logo ?>" alt="" width="100%" height="100%">
 								</div>
 							</div>
 						</div>
@@ -71,59 +83,33 @@
 			<!-- ---- CONTENT SECTION ---- -->
 			<div id="content-card">
 				<div class="row">
-					<div class="col-7">
+					<div class="col-8">
 						<div id="content-wrapper">
 							<video width="100%" height="auto" controls >
 								<source src="<?= base_url('assets/videos/videoplayback.mp4')?>" type="video/mp4">
 								<source src="<?= base_url('assets/videos/videoplayback.mp4')?>" type="video/ogg">
 							</video>
+
 						</div>
 					</div>
-					<div class="col-5">
+					<div class="col-4">
 						<div id="queue-box-wrapper">
-
+							<?php foreach ($dataLoket as $k => $v):?>
 							<div class="queue-box" style="background-color: <?= $loket['background-queue-box']; ?>;">
 								<div class="queue-name">
 									<h2 class="font-weight-light" style="color: <?= $loket['color-queue-name']; ?>;font-size: 28px;font-family: <?= $loket['font-family-name']; ?>">
-										Nama
+										<?= $v['layanan_nama']?> <br>
 									</h2>
 								</div>
 								<div class="queue-number d-flex justify-content-end" style="background-color: <?= $loket['background-queue-number'];?>;">
 									<h1 class="queue-number-content" style="font-family: <?= $loket['font-family-number'];?> ;font-weight: bolder;color: <?= $loket['color-number'];?>">A008</h1>
 								</div>
 								<div class="queue-footer d-flex justify-content-between" style="border-top: 4px <?= $loket['border-top-footer-color'];?> solid;background-color: <?= $loket['background-queue-footer'];?>">
-									<span style="color: <?= $loket['color-footer'];?>;font-family: <?= $loket['font-family-footer'];?>">Menuju Loket : 3</span>
+									<span style="color: <?= $loket['color-footer'];?>;font-family: <?= $loket['font-family-footer'];?>">Menuju Loket : <?= $v['loket_nama']?></span>
 									<span style="color: <?= $loket['color-left-queue'];?>;font-family: <?= $loket['font-family-left-queue'];?>">Sisa Antrian : 4</span>
 								</div>
 							</div>
-
-							<div class="queue-box">
-								<div class="queue-name">
-									<h2 style="color: white" class="font-weight-light">Nama</h2>
-									<h2 style="color: white" class="font-weight-light">Layanan 3</h2>
-								</div>
-								<div class="queue-number d-flex justify-content-end">
-									<h1 class="queue-number-content" style="font-family: 'roboto-light';font-weight: bolder">A008</h1>
-								</div>
-								<div class="queue-footer d-flex justify-content-between">
-									<span style="color: white;">Menuju Loket : 3</span>
-									<span style="color: white">Sisa Antrian : 4</span>
-								</div>
-							</div>
-
-							<div class="queue-box">
-								<div class="queue-name">
-									<h2 style="color: white" class="font-weight-light">Nama</h2>
-									<h2 style="color: white" class="font-weight-light">Layanan 3</h2>
-								</div>
-								<div class="queue-number d-flex justify-content-end">
-									<h1 class="queue-number-content" style="font-family: 'roboto-light';font-weight: bolder">A008</h1>
-								</div>
-								<div class="queue-footer d-flex justify-content-between">
-									<span style="color: white;">Menuju Loket : 3</span>
-									<span style="color: white">Sisa Antrian : 4</span>
-								</div>
-							</div>
+							<?php endforeach; ?>
 
 						</div>
 					</div>
@@ -143,6 +129,9 @@
 
 		<!-- plugins:js -->
 		<script src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js')?>"></script>
+		<!--connection class-->
+		<script src="<?= base_url('assets/js/audio/Connection.js?v=1.0.0&&load='.time()) ?>"></script>
+		<!-- connection class -->
 		<script src="<?= base_url('assets/node_modules/moment/moment.js')?>"></script>
 		<script src="<?= base_url('assets/node_modules/moment/moment-with-locales.js')?>"></script>
 		<script src="<?= base_url('assets/node_modules/popper.js/dist/umd/popper.min.js') ?>"></script>
@@ -167,15 +156,28 @@
 		<!-- endinject -->
 
 		<!-- Custom js for this page-->
-	<script src="<?= base_url('assets/js/plugins/countdown.js') ?>"></script>
-	<script src="<?= base_url('assets/js/plugins/moment.js') ?>"></script>
-	<script src="<?= base_url('assets/') ?>js/dashboard.js"></script>
-	<script src="<?= base_url('assets/js/app/waktu.js') ?>"></script>
-		<script src="<?= base_url('assets/js/package/timer.js') ?>"></script>
+		<script src="<?= base_url('assets/js/plugins/countdown.js') ?>"></script>
+		<script src="<?= base_url('assets/js/plugins/moment.js') ?>"></script>
+		<script src="<?= base_url('assets/') ?>js/dashboard.js?v=1.0.0&&load="<?= time()?>></script>
+		<script src="<?= base_url('assets/js/app/waktu.js?v=1.0.0&&load='.time().'') ?>"></script>
+		<script src="<?= base_url('assets/js/package/timer.js?v=1.0.0&&load='.time().'') ?>"></script>
 		<!-- End custom js for this page-->
 
-	<!-- component script-->
-	<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
+		<!-- howler js untuk suara -->
+		<script src="<?= base_url('assets/node_modules/howler/dist/howler.js?v=1.0.0&&load='.time()) ?>"></script>
+<!--		<script src="--><?//= base_url('assets/node_modules/howler/dist/howler.core.min.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
+<!--		<script src="--><?//= base_url('assets/node_modules/howler/dist/howler.spatial.min.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
+		<!-- howler js untuk suara -->
+
+		<!-- JS inject for playing audio  -->
+		<script src="<?= base_url('assets/js/audio/Services.js?v=1.0.0&&load='.time()) ?>"></script>
+		<script src="<?= base_url('assets/js/audio/AudioHelper.js?v=1.0.0&&load='.time()) ?>"></script>
+		<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
+		<script src="<?= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?>"></script>
+		<!-- end inject -->
+
+		<!-- component script-->
+		<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
 
 	<script>
 			$(document).ready(function () {

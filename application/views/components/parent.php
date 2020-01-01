@@ -3,50 +3,43 @@
 	<div class="card-body" style="overflow: hidden">
 		<h4 class="card-title pb-3 border-bottom mb-3"><?= $settingsTitle;?></h4>
 
-		<h3 style="font-family:  titilliumweb-bold">Preview</h3>
-		<div class="row mb-3" >
-			<div class="col-12">
-				<div class="" id="parent-simulator" style="height: 280px;background-color: #0ba1b5">
-
+		<form action="<?= base_url('ComponentService/unggahLatar')?>" class="form-row" method="post" id="parentImageData" enctype="multipart/form-data">
+			<div class="form-group col-12">
+				<div class="form-radio">
+					<label class="form-check-label">
+						<input type="radio" class="form-check-input" name="background-image" id="left-to-right" value="true" checked>
+						latar gambar
+						<i class="input-helper"></i>
+					</label>
 				</div>
-			</div>
-		</div>
-
-
-		<form action="#" class="row pt-4 border-top">
-			<div class="col-12">
-				<h3 style="font-family: titilliumweb-bold">
-					Pengaturan
-				</h3>
-			</div>
-			<div class="col-6">
-				<div class="form-check form-check-flat">
-					<label class="form-check-label" style="font-family: titilliumweb-bold;font-size: 18px">
-						<input type="checkbox" class="form-check-input" >
-						Latar Gambar
+				<div class="form-radio">
+					<label class="form-check-label">
+						<input type="radio" class="form-check-input" name="background-image" id="right-to-left" value="false">
+						latar warna
 						<i class="input-helper"></i></label>
 				</div>
-				<div class="form-group row ">
-					<label for="background-header" class="col-4 col-form-label font-weight-medium">Warna Latar</label>
-					<div class="col-8">
-						<input type='text' class="color-picker" value="#0ba1b5" name="background-header" data-transform="#parent-simulator" data-change="background-color"/>
-					</div>
-				</div>
-
-				<div class="form-group row mt-2">
-					<label for="warna-latar-loket" class="col-4 col-form-label font-weight-medium">Gambar Latar</label>
-					<div class="col-8">
-						<input type="file" class="dropify" disabled>
-					</div>
-				</div>
-
+			</div>
+			<div class="form-group col-12">
+				<h4 class="border-bottom" style="font-family: titilliumweb-bold">
+					Gambar Latar
+				</h4>
+				<input type="file" class="dropify" data-height="480"
+					   name="background-image-src" data-default-file="<?= $container['background-image-src']?>"
+					   data-allowed-file-extensions="jpg png jpeg"
+					   data-min-width="920"
+					   data-min-height="540">
 			</div>
 
-			<div class="col-12 mt-5">
-				<div class="d-flex justify-content-center">
-					<button type="submit" name="simpan" class="btn btn-primary col-12">simpan</button>
+			<div class="form-group col-12 ">
+				<label for="background-header" class="col-4 col-form-label font-weight-medium">Warna Latar</label>
+				<div class="col-8">
+					<input type='text' class="color-picker" value="<?= $container['background-color']?>" name="background-color" data-transform="#parent-simulator" data-change="background-color"/>
 				</div>
 			</div>
+
+			<button type="submit" class="btn btn-primary col-12" name="unggah">
+				unggah
+			</button>
 		</form>
 
 	</div>

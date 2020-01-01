@@ -71,8 +71,8 @@
 <script src="<?= base_url('assets/js/plugins/countdown.js') ?>"></script>
 <script src="<?= base_url('assets/js/plugins/moment.js') ?>"></script>
 <script src="<?= base_url('assets/') ?>js/dashboard.js"></script>
-<script src="<?= base_url('assets/js/app/waktu.js') ?>"></script>
-<script src="<?= base_url()?>assets/js/app/formColor.js"></script>
+<script src="<?= base_url('assets/js/app/waktu.js?v=1.0.0&&load='.time().'') ?>"></script>
+<script src="<?= base_url()?>assets/js/app/formColor.js?v=1.0.0&&load="></script>
 <script src="<?= base_url('assets/js/package/timer.js') ?>"></script>
 <script src="<?= base_url('assets/js/package/formSimulator.js') ?>"></script>
 <!-- End custom js for this page-->
@@ -85,6 +85,11 @@
 
 <script>
     $(document).ready(function () {
+
+
+        setInterval(function () {
+            $('#settings-alert').fadeOut('slow');
+        },3000);
         let baseUrl = window.location.origin+'/antrian/';
         // $(document).keypress(function (key) {
         //     let btnSetting = key.originalEvent.key;
@@ -92,6 +97,7 @@
         //         window.location.href = baseUrl;
         //     }
         // });
+
 
     })
 </script>

@@ -26,6 +26,14 @@ class ComponentController extends GLOBAL_Controller {
 		$data['settingsTitle'] = 'Pengaturan  Aplikasi';
 		$data['activeMenu'] = 'parent';
 
+		$query = array(
+			'app_id' => get_cookie('user_app')
+		);
+
+		$data['component']  = parent::model('component')->get_user_app($query);
+		$data['container'] = json_decode($data['component']['app_container'],true);
+//		parent::cek_array($data['container']);
+
 		parent::settingsPages('components/parent',$data);
 	}
 
@@ -42,7 +50,8 @@ class ComponentController extends GLOBAL_Controller {
 
 		$data['component']  = parent::model('component')->get_user_app($query);
 		$data['headerComponent'] = json_decode($data['component']['app_header'],true);
-//		parent::cek_array($data['headerComponent']);
+		$data['logo'] = json_decode($data['component']['app_logo'],true);
+//		parent::cek_array($data['logo']);
 
 		parent::settingsPages('components/header',$data);
 	}

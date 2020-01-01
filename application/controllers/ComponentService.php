@@ -154,4 +154,63 @@ class ComponentService extends GLOBAL_Controller {
 			));
 		}
 	}
+
+	public function unggahLatar()
+	{
+		if (isset($_POST['unggah'])){
+			$config['upload_path'] = './assets/images/background/';
+			$config['allowed_types'] = 'png|jpeg|jpg';
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			$this->upload->do_upload('background-image-src');
+			$gambarLatar = $this->upload->data('file_name');
+
+			$dataContainer = array(
+				'background-color' => parent::post('background-color'),
+				'background-image' => parent::post('background-image'),
+				'background-image-src' => base_url('assets/images/background/').$gambarLatar
+			);
+
+			$dataEdit = array(
+				'app_container' => json_encode($dataContainer),
+				'app_date_edited' => date('Y-m-d H:i:s')
+			);
+
+			parent::model('component')->edit_component($this->userAppID,$dataEdit);
+
+			parent::alert('alert','edit');
+			redirect('settings/parent');
+
+		}else{
+			show_404();
+		}
+	}
+
+	public function unggahLogo()
+	{
+		if (isset($_POST['unggah'])){
+			$config['upload_path'] = './assets/images/logo/';
+			$config['allowed_types'] = 'png|jpeg|jpg';
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			$this->upload->do_upload('logo-img');
+			$logo = $this->upload->data('file_name');
+
+			$dataEdit = array(
+				'app_logo' => json_encode(base_url('assets/images/logo/').$logo),
+				'app_date_edited' => date('Y-m-d H:i:s')
+			);
+
+			parent::model('component')->edit_component($this->userAppID,$dataEdit);
+
+			parent::alert('alert','edit');
+			redirect('settings/header');
+
+		}else{
+			show_404();
+		}
+	}
+
 }

@@ -80,7 +80,7 @@
                     <div id="queue-box-wrapper">
 
 
-                                <div class = "content">
+                                <div class="content">
 
                                 </div>
 

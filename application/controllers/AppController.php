@@ -8,6 +8,7 @@
 			parent::__construct();
 			$this->load->model('AuthModel','auth');
 			$this->load->model('ComponentModel','component');
+			$this->load->model('AntrianModel','antrian');
 			date_default_timezone_set("Asia/Jakarta");
 		}
 		
@@ -27,13 +28,15 @@
 				'app_id' => get_cookie('user_app')
 			);
 
+			$data['dataLoket'] = parent::model('antrian')->get_loket()->result_array();
 
 			$data['component']  = parent::model('component')->get_user_app($query);
 			$data['container'] = json_decode($data['component']['app_container'],true);
 			$data['header'] = json_decode($data['component']['app_header'],true);
 			$data['loket'] = json_decode($data['component']['app_service'],true);
 			$data['footer'] = json_decode($data['component']['app_footer'],true);
-//			parent::cek_array($data['loket']);
+			$data['logo'] = json_decode($data['component']['app_logo'],true);
+//			parent::cek_array($data['container']);
 			parent::authPage('app/index',$data);
 		}
 
@@ -107,4 +110,6 @@
 
 			parent::settingsPages('app/prints',$data);
 		}
+
+
 	}
