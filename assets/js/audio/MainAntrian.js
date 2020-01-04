@@ -1,32 +1,39 @@
 class MainAntrian extends Services{
+	queueData = [];
 
 	call(url){
-		let antrian = super.getData(url);
-		let antrianId = antrian.data.antrian_id;
-		let loketNomor = antrian.data.loket_nomor;
-		let antrianNomor = antrian.data.antrian_nomor;
-		let loketId = antrian.data.antrian_loket_id;
-		let callCounter = this.getCookies('callCounter');
-		let doCounter = parseInt(callCounter)+1;
-		this.setCookies('callCounter',doCounter,1);
-		this.setCookies('currentQueue',loketNomor,2);
-		this.setCookies('antrianAktif-'+loketNomor,antrianNomor,2);
-		this.setCookies('loketAktif-'+loketNomor,loketNomor,2);
-		if (this.setActiveNextQueue(antrianId,antrianNomor,loketId)){
-			console.log('success');
-		}else{
-			console.log('tidak ada antrian selanjutnya');
-		}
-
+		this.queueData = [];
+		this.queueData = super.getData(url);
 	}
 
-	setActiveNextQueue(antrianId,antrianNomor,loketId){
-		let data = {
-			'antrian_id' : antrianId,
-			'antrian_nomor' : antrianNomor,
-			'loket_id' : loketId
-		};
-		let editStatus = super.postData('Services/activateNextQueue',data);
-		return editStatus.status === '200';
+	recall(url){
+		super.getData(url);
+	}
+
+	/*
+	* void
+	* arg1 = loket panggilan sebelumnya (String [Cookies]), arg2 = loket yang sedang di panggil (String [Cookies])
+	* description: refresh queue component
+	* */
+	refresh(queueBefore,swapQueue){
+		if (queueBefore !== swapQueue){
+			$("#loket-"+queueBefore+"").swap({
+				target: "loket-"+swapQueue,
+				opacity: "0.5",
+				speed: 500,
+			});
+		}
+	}
+
+	/*
+	* return counter value;
+	*
+	* */
+	getCounter(){
+		return this.counter;
+	}
+
+	getActiveLoket(){
+		return this.loketAktif;
 	}
 }

@@ -26,6 +26,7 @@ $(document).ready(function(){
 			method : 'post',
 			success : function (response) {
 				if (response.status === 'success'){
+					$('html,body').animate({ scrollTop: 0 }, 'slow');
 					settingsAlert(true,'alert-success','berhasil menyimpan data');
 					setInterval(function () {
 						window.location.reload();

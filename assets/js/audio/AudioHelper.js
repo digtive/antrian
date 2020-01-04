@@ -1,24 +1,21 @@
 class AudioHelper extends Connection{
 
+	audios = [];
+	nomorAntrian;
+	loketAktif;
+
 	/*
 	* void
-	* arg1 = nomor antrian (string), arg2 = nomor loket (string)
-	* membunyikan audio yang berisi nomor antrian
+	* arg1 = loket antrian yang terakhir kali di panggil (string [Cookies])
+	* description : membunyikan audio yang berisi nomor antrian
 	* */
 	chainPlay(activeQueue){
-		let nomorAntrian = super.getCookies('antrianAktif-'+activeQueue);
-		let loketAktif = super.getCookies('loketAktif-'+activeQueue);
+		this.nomorAntrian = super.getCookies('antrian-'+activeQueue);
+		this.loketAktif = super.getCookies('loketAktif');
 
-		let baseUrl = this.baseUrl();
 		// initialisation:
 		let pCount = 0;
-		let playlistUrls = [
-			baseUrl+'assets/audios/in.wav',
-			baseUrl+'assets/audios/nomor-urut.mp3',
-			baseUrl+'assets/audios/'+nomorAntrian+'.mp3',
-			baseUrl+'assets/audios/loket.mp3',
-			baseUrl+'assets/audios/'+loketAktif+'.mp3',
-		],
+		let playlistUrls = this.numberSpeak(this.nomorAntrian),
 
 		// audio list
 		howlerBank = [],
@@ -43,6 +40,31 @@ class AudioHelper extends Connection{
 
 		// initiate the whole :
 		howlerBank[0].play();
+	}
+	
+	numberSpeak(number){
+		this.audios = [];
+		let nomor = parseInt(number),
+			audiosUrl = this.baseUrl()+'assets/audios/';
+
+		this.audios[0] = this.baseUrl()+'assets/audios/in.wav';
+		this.audios[1] = this.baseUrl()+'assets/audios/nomor-urut.mp3';
+
+		if (parseInt(nomor) === 10) {
+			this.audios.splice(2, 0, audiosUrl + 'sepuluh.mp3');
+			this.audios.splice(3,0,audiosUrl+'loket.mp3');
+			this.audios.splice(4,0,audiosUrl+this.loketAktif+'.mp3');
+		} else if (parseInt(nomor) === 11) {
+			this.audios.splice(2, 0, audiosUrl + 'sebelas.mp3');
+			this.audios.splice(3,0,audiosUrl+'loket.mp3');
+			this.audios.splice(4,0,audiosUrl+this.loketAktif+'.mp3');
+		} else {
+			this.audios.splice(2, 0, audiosUrl + nomor.toString() + '.mp3');
+			this.audios.splice(3,0,audiosUrl+'loket.mp3');
+			this.audios.splice(4,0,audiosUrl+this.loketAktif+'.mp3');
+		}
+
+		return this.audios;
 	}
 
 }

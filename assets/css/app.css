@@ -281,3 +281,68 @@
 	.simple-card-body{
 		padding: 12px!important;
 	}
+
+
+	.hexagon-shape {
+		width: 100%;
+		height: auto;
+		background: white;
+		color: red;
+		position: relative;
+		z-index: 100;
+		padding: 4px 4px;
+		box-sizing: border-box;
+	}
+	.hexagon-shape:before {
+		content: "";
+		position: absolute;
+		top: -25px;
+		left: 0;
+		width: 0;
+		height: 0;
+		border-left: 50px solid transparent;
+		border-right: 50px solid transparent;
+		border-bottom: 25px solid white;
+	}
+	.hexagon-shape:after {
+		content: "";
+		position: absolute;
+		bottom: -18px;
+		right: 0px;
+		z-index: 100;
+		width: 0;
+		height: 0;
+		border-left: 40px solid transparent;
+		border-right: 40px solid transparent;
+		border-top: 50px solid white;
+	}
+
+	.octagon {
+		width: 100%;
+		height: auto;
+		background: red;
+		position: relative;
+	}
+	.octagon:before {
+		content: "";
+		width: 100px;
+		height: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-bottom: 29px solid red;
+		border-left: 29px solid #eee;
+		border-right: 29px solid #eee;
+	}
+	.octagon:after {
+		content: "";
+		width: 100px;
+		height: 0;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		border-top: 29px solid red;
+		border-left: 29px solid #eee;
+		border-right: 29px solid #eee;
+	}
+

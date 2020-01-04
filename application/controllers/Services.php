@@ -37,64 +37,125 @@
 		
 		public function call($loket)
 		{
+			//antrian aktif
 			$dataAntrian = $this->currentQueue($loket);
 			$barisAntrianAktif = $dataAntrian->row_array();
-			$antrianSelanjutnya = $this->leftQueue($loket);
-			$dataAntrianSelanjutnya = $antrianSelanjutnya->result_array();
+			// antrian status menunggu
+			$dataSisaAntrian = $this->leftQueue($loket);
+			$dataAntrianSelanjutnya = $dataSisaAntrian->result_array();
 
+			// menentukan jumlah sisa antrian
 			if (!empty($dataAntrianSelanjutnya)){
-				$sisaAntrian = $antrianSelanjutnya->num_rows();
+				$sisaAntrian = $dataSisaAntrian->num_rows();
 			}else{
 				$sisaAntrian = 0;
 			}
 
 			if ($barisAntrianAktif !== null){
-				echo json_encode(array(
-					'data' => $barisAntrianAktif,
-					'sisa_antrian' => $sisaAntrian,
-					'status' => '200',
-					'message' => 'menampilkan antrian aktif'
-				));
+				$current = $barisAntrianAktif;
+				$antrianSelanjutnya = $current['antrian_nomor']+1;
+				$nextQueue  = parent::model('service')->get_next_queue($antrianSelanjutnya,$loket);
+
+				$this->setCookieData($current['antrian_nomor'],$loket,2);
+
+
+				if ($nextQueue !== null){
+					if ($this->activateNextQueue($current['antrian_id'],$current['antrian_nomor'],$loket)){
+						echo json_encode(array(
+							'data' => $barisAntrianAktif,
+							'sisa_antrian' => $sisaAntrian,
+							'status' => '200',
+							'message' => 'menampilkan antrian aktif'
+						));
+					}else{
+						echo json_encode(array(
+							'data' => $barisAntrianAktif,
+							'sisa_antrian' => $sisaAntrian,
+							'status' => '500',
+							'message' => 'masalah mengubah status antrian berikutnya'
+						));
+					}
+				}else{
+					echo json_encode(array(
+						'data' => $barisAntrianAktif,
+						'sisa_antrian' => $sisaAntrian,
+						'status' => '500',
+						'message' => 'antrian telah selesai'
+					));
+				}
+
 			}else{
 				echo json_encode(array(
 					'data' => array(),
 					'sisa_antrian' => $sisaAntrian,
 					'status' => '500',
-					'message' => 'tidak atau belum ada antrian aktif'
+					'message' => 'tidak atau belum ada antrian aktif hari ini'
 				));
 			}
 		}
 
-		public function activateNextQueue()
+		public function recall()
 		{
-			$antrianId = parent::post('antrian_id');
-			$antrianNomor = parent::post('antrian_nomor');
-			$loketId = parent::post('loket_id');
-
-			$dataEditCurrent = array('antrian_status'=>'selesai');
-			$editCurrentQueue = parent::model('service')->edit_antrian($antrianId,$dataEditCurrent);
-			$antrianSelanjutnya = (int)$antrianNomor+1;
-
-			if ($editCurrentQueue > 0){
-				$editNextQueue = parent::model('service')->edit_antrian_by_number($antrianSelanjutnya,$loketId);
-
-				if ($editNextQueue > 0){
-					echo json_encode(array(
-						'status' => '200',
-						'message' => 'berhasil mengubah status antrian selanjutnya'
-					));
+			if (isset($_COOKIE['counter'])){
+				$dataCounter = (int)$_COOKIE['counter'];
+				$counter = $dataCounter+1;
+				if ($counter >10){
+					setcookie('counter','1',time()+(86400*1),'/');
 				}else{
-					echo json_encode(array(
-						'status' => '500',
-						'message' => 'kesalahan mengubah data status antrian berikutnya',
-					));
+					setcookie('counter',$counter,time()+(86400*1),'/');
 				}
-			}else{
+
 				echo json_encode(array(
-					'status' => '500',
-					'message' => 'kesalahan mengubah data status antrian aktif',
+					'status' => '200',
+					'message' => 'recall antrian'
 				));
 			}
+		}
+
+		public function activateNextQueue($antrianId,$antrianNomor,$loketId)
+		{
+			$antrianSelanjutnya = (int)$antrianNomor+1;
+			$nextQueue  = parent::model('service')->get_next_queue($antrianSelanjutnya,$loketId);
+			$dataEditCurrent = array('antrian_status'=>'selesai');
+			$editCurrentQueue = parent::model('service')->edit_antrian($antrianId,$dataEditCurrent);
+
+			if ($nextQueue!== null){
+
+				if ($editCurrentQueue > 0){
+					$editNextQueue = parent::model('service')->edit_antrian_by_number($antrianSelanjutnya,$loketId);
+
+					return $editNextQueue > 0 ? true : false;
+				}else{
+					return false;
+				}
+
+			}else{
+				return $editCurrentQueue > 0 ? true : false;
+			}
+
+		}
+
+		/*
+		 * set cookie for play audios and current queue indicator
+		 * */
+		public function setCookieData($nomorAntrian,$loketAktif,$day)
+		{
+			$day = time()+(86400*$day);
+			if (!isset($_COOKIE['counter'])){
+				setcookie('counter','1',$day,'/');
+			}else{
+				$currentCounter = get_cookie('counter');
+				$counter = (int)$currentCounter;
+				$counterValue = $counter+1;
+				if ($counter > 10){
+					setcookie('counter','1',$day,'/');
+				}else{
+					setcookie('counter',$counterValue,$day,'/');
+				}
+			}
+
+			setcookie('loketAktif',$loketAktif,$day,'/');
+			setcookie('antrian-'.$loketAktif,$nomorAntrian,$day,'/');
 		}
 
 

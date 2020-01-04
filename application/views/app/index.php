@@ -89,15 +89,17 @@
 								<source src="<?= base_url('assets/videos/videoplayback.mp4')?>" type="video/mp4">
 								<source src="<?= base_url('assets/videos/videoplayback.mp4')?>" type="video/ogg">
 							</video>
-
 						</div>
 					</div>
-					<div class="col-4">
+					<div class="col-4" style="height: 530px;overflow: hidden">
+						<div id="queue-active-header" class="hexagon-shape d-flex justify-content-start">
+							<h3>SEDANG DI PANGGIL</h3>
+						</div>
 						<div id="queue-box-wrapper">
 							<?php foreach ($dataLoket as $k => $v):?>
-							<div class="queue-box" style="background-color: <?= $loket['background-queue-box']; ?>;">
+							<div class="queue-box" style="background-color: <?= $loket['background-queue-box']; ?>;" id="loket-<?= $v['loket_id']?>">
 								<div class="queue-name">
-									<h2 class="font-weight-light" style="color: <?= $loket['color-queue-name']; ?>;font-size: 28px;font-family: <?= $loket['font-family-name']; ?>">
+									<h2 class="font-weight-light" style="color: <?= $loket['color-queue-name']; ?>;font-size: 25px;font-family: <?= $loket['font-family-name']; ?>">
 										<?= $v['layanan_nama']?> <br>
 									</h2>
 								</div>
@@ -133,7 +135,7 @@
 		<script src="<?= base_url('assets/js/audio/Connection.js?v=1.0.0&&load='.time()) ?>"></script>
 		<!-- connection class -->
 		<script src="<?= base_url('assets/node_modules/moment/moment.js')?>"></script>
-		<script src="<?= base_url('assets/node_modules/moment/moment-with-locales.js')?>"></script>
+<!--		<script src="--><?//= base_url('assets/node_modules/moment/moment-with-locales.js')?><!--"></script>-->
 		<script src="<?= base_url('assets/node_modules/popper.js/dist/umd/popper.min.js') ?>"></script>
 		<script src="<?= base_url('assets/node_modules/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 		<script src="<?= base_url('assets/node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js')?>"></script>
@@ -169,12 +171,23 @@
 <!--		<script src="--><?//= base_url('assets/node_modules/howler/dist/howler.spatial.min.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
 		<!-- howler js untuk suara -->
 
+		<!-- swap queue component-->
+		<script src="<?= base_url('assets/js/components/swapsies.js?v=1.0.0&&load='.time())?>"></script>
+		<script src="<?= base_url('assets/js/components/componentSwap.js?v=1.0.0&&load='.time())?>"></script>
+		<!-- swap queue component-->
+
+
 		<!-- JS inject for playing audio  -->
 		<script src="<?= base_url('assets/js/audio/Services.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/audio/AudioHelper.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?>"></script>
 		<!-- end inject -->
+
+		<!-- swap queue component-->
+		<script src="<?= base_url('assets/js/components/swapsies.js?v=1.0.0&&load='.time())?>"></script>
+		<script src="<?= base_url('assets/js/components/componentSwap.js?v=1.0.0&&load='.time())?>"></script>
+		<!-- swap queue component-->
 
 		<!-- component script-->
 		<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
