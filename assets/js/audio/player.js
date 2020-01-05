@@ -10,8 +10,7 @@ $(document).ready(function(){
 	setInterval(function () {
 		let call = antrian.getCallData();
 		if (callData.panggilan_updated !== call.panggilan_updated){
-			console.log('loket - '+call.panggilan_loket+' antrian : '+call.panggilan_loket);
-			audio.chainPlay(call.panggilan_nomor,call.panggilan_loket);
+			audio.chainPlay(call.panggilan_antrian,call.panggilan_loket);
 
 			callData = call;
 		}

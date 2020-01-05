@@ -50,6 +50,7 @@ class AudioHelper extends Connection{
 
 		this.audios[0] = this.baseUrl()+'assets/audios/in.wav';
 		this.audios[1] = this.baseUrl()+'assets/audios/nomor-urut.mp3';
+		this.audios.splice(2,0,audiosUrl+nomor.toString()+'.mp3');
 		this.audios.splice(3,0,audiosUrl+'loket.mp3');
 
 		return this.audios;
