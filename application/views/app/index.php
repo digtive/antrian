@@ -18,8 +18,8 @@
 		<!-- End plugin css for this page -->
 
 		<!-- inject:css -->
-		<link rel="stylesheet" href="<?= base_url('assets/css/fonts.css?v=1.0.0&&load'.time().'') ?>">
-		<link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.0&&load'.time().'')?>">
+		<link rel="stylesheet" href="<?= base_url('assets/css/fonts.css?v=1.0.0&&load='.time().'') ?>">
+		<link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.0&&load='.time().'')?>">
 		<link rel="stylesheet" href="<?= base_url('assets/css/app.css?v=1.0.0&&load='.time().'')?>">
 		<!-- endinject -->
 

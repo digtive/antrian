@@ -4,6 +4,7 @@
 
 	class Services extends GLOBAL_Controller
 	{
+
 		
 		public function __construct()
 		{
@@ -14,125 +15,42 @@
 			$this->load->model('LayananModel','layanan');
 			$this->load->model('ServiceModel','service');
 		}
-
-		public function antrianLoket($loketID)
-		{
-			$antrianLoket = parent::model('service')->get_antrian_by_loket($loketID);
-			$data = $antrianLoket->result_array();
-
-			if ($this->input->is_ajax_request()) {
-				if (!empty($data)){
-					echo json_encode(array(
-						'message' => 'menampilkan data antrian per loket',
-						'data' => $data
-					));
-				}else{
-					echo json_encode(array(
-						'message' => 'antrian pada loket tersebut belum tersedia',
-						'data' => array()
-					));
-				}
-			}
-		}
 		
 		public function call($loket)
 		{
 			//antrian aktif
-			$dataAntrian = $this->currentQueue($loket);
-			$barisAntrianAktif = $dataAntrian->row_array();
+			$dataAntrianAaktif = $this->currentQueue($loket);
+			$antrianAktif = array();
+			$antrianAktif;
 			// antrian status menunggu
 			$dataSisaAntrian = $this->leftQueue($loket);
-			$dataAntrianSelanjutnya = $dataSisaAntrian->result_array();
+			$antrianMenunggu = $dataSisaAntrian->result_array();
+			// antrian selanjutnya yang akan di aktifkan setiap perform
 
-			// menentukan jumlah sisa antrian
-			if (!empty($dataAntrianSelanjutnya)){
-				$sisaAntrian = $dataSisaAntrian->num_rows();
+			if ($dataAntrianAaktif->row_array() !==null){
+				$antrianAktif = $dataAntrianAaktif->row_array();
 			}else{
-				$sisaAntrian = 0;
-			}
-
-			if ($barisAntrianAktif !== null){
-				$current = $barisAntrianAktif;
-				$antrianSelanjutnya = $current['antrian_nomor']+1;
-				$nextQueue  = parent::model('service')->get_next_queue($antrianSelanjutnya,$loket);
-
-				$this->setCookieData($current['antrian_nomor'],$loket,2);
-
-
-				if ($nextQueue !== null){
-					if ($this->activateNextQueue($current['antrian_id'],$current['antrian_nomor'],$loket)){
-						echo json_encode(array(
-							'data' => $barisAntrianAktif,
-							'sisa_antrian' => $sisaAntrian,
-							'status' => '200',
-							'message' => 'menampilkan antrian aktif'
-						));
-					}else{
-						echo json_encode(array(
-							'data' => $barisAntrianAktif,
-							'sisa_antrian' => $sisaAntrian,
-							'status' => '500',
-							'message' => 'masalah mengubah status antrian berikutnya'
-						));
+				if (!empty($antrianMenunggu)){
+					if ($this->activateFirstRow($antrianMenunggu[0]['antrian_id']) > 0){
+						$antrianAktif = $this->currentQueue($loket)->row_array();
 					}
 				}else{
+					$antrianAktif = null;
 					echo json_encode(array(
-						'data' => $barisAntrianAktif,
-						'sisa_antrian' => $sisaAntrian,
 						'status' => '500',
-						'message' => 'antrian telah selesai'
+						'message' => 'tidak ada antrian pada loket atau antrian telah selesai'
 					));
 				}
+			}
 
+			if ($antrianAktif !== null){
+				$this->updateCall(1,$antrianAktif,$loket);
 			}else{
 				echo json_encode(array(
-					'data' => array(),
-					'sisa_antrian' => $sisaAntrian,
 					'status' => '500',
-					'message' => 'tidak atau belum ada antrian aktif hari ini'
+					'message' => 'tidak ada antrian pada loket atau antrian telah selesai'
 				));
 			}
-		}
-
-		public function recall()
-		{
-			if (isset($_COOKIE['counter'])){
-				$dataCounter = (int)$_COOKIE['counter'];
-				$counter = $dataCounter+1;
-				if ($counter >10){
-					setcookie('counter','1',time()+(86400*1),'/');
-				}else{
-					setcookie('counter',$counter,time()+(86400*1),'/');
-				}
-
-				echo json_encode(array(
-					'status' => '200',
-					'message' => 'recall antrian'
-				));
-			}
-		}
-
-		public function activateNextQueue($antrianId,$antrianNomor,$loketId)
-		{
-			$antrianSelanjutnya = (int)$antrianNomor+1;
-			$nextQueue  = parent::model('service')->get_next_queue($antrianSelanjutnya,$loketId);
-			$dataEditCurrent = array('antrian_status'=>'selesai');
-			$editCurrentQueue = parent::model('service')->edit_antrian($antrianId,$dataEditCurrent);
-
-			if ($nextQueue!== null){
-
-				if ($editCurrentQueue > 0){
-					$editNextQueue = parent::model('service')->edit_antrian_by_number($antrianSelanjutnya,$loketId);
-
-					return $editNextQueue > 0 ? true : false;
-				}else{
-					return false;
-				}
-
-			}else{
-				return $editCurrentQueue > 0 ? true : false;
-			}
-
 		}
 
 		/*
@@ -177,5 +95,73 @@
 			$leftQueue = parent::model('service')->get_left_queue($loketId);
 
 			return $leftQueue;
+		}
+
+		public function activateFirstRow($firstRow)
+		{
+			$dataEdit = array('antrian_status' => 'aktif');
+			return parent::model('service')->edit_antrian($firstRow,$dataEdit);
+		}
+
+		public function activateNextQueue($antrianId,$antrianNomor,$loketId)
+		{
+			$nextQueue = $this->getNextQueue($antrianNomor,$loketId);
+
+			if ($nextQueue !== null){
+				$dataEditCurrent = array('antrian_status'=>'selesai');
+				$editCurrentQueue = parent::model('service')->edit_antrian($antrianId,$dataEditCurrent);
+				if($editCurrentQueue > 0){
+					return parent::model('service')->edit_antrian_by_number($antrianNomor,$loketId);
+				}
+			}else{
+				return 0;
+			}
+
+			return 0;
+		}
+
+		public function updateCall($panggilanId,$antrianAktif,$loketId)
+		{
+			$dataPanggilan = array(
+				'panggilan_antrian' => $antrianAktif['antrian_nomor'],
+				'panggilan_loket' => $antrianAktif['antrian_loket_id'],
+				'panggilan_updated' => date('Y-m-d H:i:s')
+			);
+			$updatePanggilan = parent::model('service')->update_panggilan($panggilanId,$dataPanggilan);
+			if ($updatePanggilan > 0){
+				$antrianSelanjutnya = $antrianAktif['antrian_nomor']+1;
+				$this->activateNextQueue($antrianAktif['antrian_id'],$antrianSelanjutnya,$loketId);
+				echo json_encode(array(
+					'status' => '200',
+					'data' => $antrianAktif,
+					'nextQueue' => $antrianSelanjutnya,
+					'message' => 'masalah saat mengubah data panggilan'
+				));
+			}else{
+				echo json_encode(array(
+					'status' => '500',
+					'message' => 'masalah saat mengubah data panggilan'
+				));
+			}
+		}
+
+		// return row array
+		public function getNextQueue($antrianNomor,$loketId)
+		{
+			$nextData = parent::model('service')->get_next_queue($antrianNomor, $loketId);
+			return $nextData;
+		}
+
+		// return Panggilan Service API
+		public function getCall()
+		{
+			$id = 1;
+			$dataCall = parent::model('service')->get_call_by_id($id);
+
+			echo json_encode(array(
+				'status' => '200',
+				'data' => $dataCall,
+				'message' => 'menampilkan data panggilan'
+			));
 		}
 	}

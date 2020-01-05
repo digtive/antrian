@@ -75,6 +75,12 @@
 			return $query->row_array();
 		}
 
+		public function get_call_by_id($id)
+		{
+			$query = array('panggilan_id',$id);
+			$call = parent::get_object_of_row('tbl_panggilan',$query);
+			return $call->row_array();
+		}
 
 		/*
 		 * dinamis edit data kolom antrian berdasarkan id
@@ -103,5 +109,10 @@
 			parent::_ODB()->where('antrian_nomor',$antrianSelanjutnya);
 			parent::_ODB()->update('tbl_antrian',$data);
 			return parent::_ODB()->affected_rows();
+		}
+
+		public function update_panggilan($panggilanId,$dataPanggilan)
+		{
+			return parent::update_table_with_status('tbl_panggilan','panggilan_id',$panggilanId,$dataPanggilan);
 		}
     }

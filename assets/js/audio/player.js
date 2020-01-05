@@ -4,38 +4,19 @@ $(document).ready(function(){
 	let audio = new AudioHelper();
 	let antrian = new MainAntrian();
 
-	let callCounter;
-	let loketAktif;
-
-	if (connection.getCookies('counter') === ''){
-		callCounter = connection.setCookies('counter','1',1);
-	}else{
-		callCounter = connection.getCookies('counter');
-	}
-	if (connection.getCookies('loketAktif') === ''){
-		loketAktif = connection.setCookies('loketAktif','1',1);
-	}else{
-		loketAktif = connection.getCookies('loketAktif');
-	}
+	let callData = antrian.getCallData();
+	// let callUpdated = callData.data.panggilan_updated;
 
 	setInterval(function () {
-		if (connection.getCookies('counter') !== callCounter){
+		let call = antrian.getCallData();
+		if (callData.panggilan_updated !== call.panggilan_updated){
+			console.log('loket - '+call.panggilan_loket+' antrian : '+call.panggilan_loket);
+			audio.chainPlay(call.panggilan_nomor,call.panggilan_loket);
 
-			swapComponent(loketAktif,connection.getCookies('loketAktif'));
-			callCounter = connection.getCookies('counter');
-
-			audio.chainPlay(connection.getCookies('loketAktif'));
+			callData = call;
 		}
-
 	},500);
 
-
-	function swapComponent(loketBefore,loketSwap){
-		if (loketBefore !== loketSwap){
-			antrian.refresh(loketBefore,loketSwap);
-			loketAktif = loketSwap;
-		}
-	}
 	/*
 	* event
 	* */

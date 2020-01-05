@@ -9,9 +9,9 @@ class AudioHelper extends Connection{
 	* arg1 = loket antrian yang terakhir kali di panggil (string [Cookies])
 	* description : membunyikan audio yang berisi nomor antrian
 	* */
-	chainPlay(activeQueue){
-		this.nomorAntrian = super.getCookies('antrian-'+activeQueue);
-		this.loketAktif = super.getCookies('loketAktif');
+	chainPlay(activeQueue,activeLocket){
+
+		this.nomorAntrian = activeQueue;
 
 		// initialisation:
 		let pCount = 0;
@@ -20,6 +20,7 @@ class AudioHelper extends Connection{
 		// audio list
 		howlerBank = [],
 		loop = false;
+		console.log(playlistUrls);
 
 		// playing i+1 audio (= chaining audio files)
 		let onEnd = function(e) {
@@ -44,25 +45,12 @@ class AudioHelper extends Connection{
 	
 	numberSpeak(number){
 		this.audios = [];
-		let nomor = parseInt(number),
+		let nomor = number,
 			audiosUrl = this.baseUrl()+'assets/audios/';
 
 		this.audios[0] = this.baseUrl()+'assets/audios/in.wav';
 		this.audios[1] = this.baseUrl()+'assets/audios/nomor-urut.mp3';
-
-		if (parseInt(nomor) === 10) {
-			this.audios.splice(2, 0, audiosUrl + 'sepuluh.mp3');
-			this.audios.splice(3,0,audiosUrl+'loket.mp3');
-			this.audios.splice(4,0,audiosUrl+this.loketAktif+'.mp3');
-		} else if (parseInt(nomor) === 11) {
-			this.audios.splice(2, 0, audiosUrl + 'sebelas.mp3');
-			this.audios.splice(3,0,audiosUrl+'loket.mp3');
-			this.audios.splice(4,0,audiosUrl+this.loketAktif+'.mp3');
-		} else {
-			this.audios.splice(2, 0, audiosUrl + nomor.toString() + '.mp3');
-			this.audios.splice(3,0,audiosUrl+'loket.mp3');
-			this.audios.splice(4,0,audiosUrl+this.loketAktif+'.mp3');
-		}
+		this.audios.splice(3,0,audiosUrl+'loket.mp3');
 
 		return this.audios;
 	}

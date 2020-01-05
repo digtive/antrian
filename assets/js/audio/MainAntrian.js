@@ -1,5 +1,8 @@
 class MainAntrian extends Services{
-	queueData = [];
+	currentQueu = [];
+	nextQueue = [];
+	callData = [];
+
 
 	call(url){
 		this.queueData = [];
@@ -10,6 +13,12 @@ class MainAntrian extends Services{
 		super.getData(url);
 	}
 
+
+	getCallData()
+	{
+		this.callData = super.getData('Services/getCall');
+		return this.callData.data;
+	}
 	/*
 	* void
 	* arg1 = loket panggilan sebelumnya (String [Cookies]), arg2 = loket yang sedang di panggil (String [Cookies])
