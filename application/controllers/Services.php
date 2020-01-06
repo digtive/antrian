@@ -53,6 +53,16 @@
 			}
 		}
 
+		public function recall()
+		{
+			$dataPanggilan = array(
+				'panggilan_updated' => date('Y-m-d H:i:s')
+			);
+			$updatePanggilan = parent::model('service')->update_panggilan(1,$dataPanggilan);
+
+			return $this->getCall();
+		}
+
 		/*
 		 * set cookie for play audios and current queue indicator
 		 * */
@@ -124,18 +134,26 @@
 		{
 			$dataPanggilan = array(
 				'panggilan_antrian' => $antrianAktif['antrian_nomor'],
-				'panggilan_loket' => $antrianAktif['antrian_loket_id'],
+				'panggilan_loket' => $antrianAktif['loket_nomor'],
 				'panggilan_updated' => date('Y-m-d H:i:s')
 			);
 			$updatePanggilan = parent::model('service')->update_panggilan($panggilanId,$dataPanggilan);
 			if ($updatePanggilan > 0){
 				$antrianSelanjutnya = $antrianAktif['antrian_nomor']+1;
+
+				$dataAntrianSelanjutnya = $this->getNextQueue($antrianSelanjutnya,$loketId);
+
+				if ($dataAntrianSelanjutnya !== null){
+					$nextQueue = $dataAntrianSelanjutnya;
+				}else{
+					$nextQueue = array();
+				}
 				$this->activateNextQueue($antrianAktif['antrian_id'],$antrianSelanjutnya,$loketId);
 				echo json_encode(array(
 					'status' => '200',
 					'data' => $antrianAktif,
-					'nextQueue' => $antrianSelanjutnya,
-					'message' => 'masalah saat mengubah data panggilan'
+					'nextQueue' => $nextQueue,
+					'message' => 'berhasil mengubah data panggilan'
 				));
 			}else{
 				echo json_encode(array(

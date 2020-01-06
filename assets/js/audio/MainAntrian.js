@@ -9,8 +9,8 @@ class MainAntrian extends Services{
 		this.queueData = super.getData(url);
 	}
 
-	recall(url){
-		super.getData(url);
+	recall(){
+		super.getData('Services/recall');
 	}
 
 
@@ -24,7 +24,7 @@ class MainAntrian extends Services{
 	* arg1 = loket panggilan sebelumnya (String [Cookies]), arg2 = loket yang sedang di panggil (String [Cookies])
 	* description: refresh queue component
 	* */
-	refresh(queueBefore,swapQueue){
+	swapComponent(queueBefore,swapQueue){
 		if (queueBefore !== swapQueue){
 			$("#loket-"+queueBefore+"").swap({
 				target: "loket-"+swapQueue,

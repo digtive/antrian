@@ -12,15 +12,15 @@ class AudioHelper extends Connection{
 	chainPlay(activeQueue,activeLocket){
 
 		this.nomorAntrian = activeQueue;
+		this.loketAktif = activeLocket;
 
 		// initialisation:
 		let pCount = 0;
-		let playlistUrls = this.numberSpeak(this.nomorAntrian),
+		let playlistUrls = this.numberSpeak(this.nomorAntrian,this.loketAktif),
 
 		// audio list
 		howlerBank = [],
 		loop = false;
-		console.log(playlistUrls);
 
 		// playing i+1 audio (= chaining audio files)
 		let onEnd = function(e) {
@@ -43,7 +43,7 @@ class AudioHelper extends Connection{
 		howlerBank[0].play();
 	}
 	
-	numberSpeak(number){
+	numberSpeak(number,locket){
 		this.audios = [];
 		let nomor = number,
 			audiosUrl = this.baseUrl()+'assets/audios/';
@@ -52,6 +52,7 @@ class AudioHelper extends Connection{
 		this.audios[1] = this.baseUrl()+'assets/audios/nomor-urut.mp3';
 		this.audios.splice(2,0,audiosUrl+nomor.toString()+'.mp3');
 		this.audios.splice(3,0,audiosUrl+'loket.mp3');
+		this.audios.splice(4,0,audiosUrl+locket.toString()+'.mp3');
 
 		return this.audios;
 	}

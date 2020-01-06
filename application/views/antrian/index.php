@@ -105,7 +105,6 @@
 <!-- plugins:js -->
 <script src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js') ?>"></script>
 <script src="<?= base_url('assets/node_modules/moment/moment.js') ?>"></script>
-<script src="<?= base_url('assets/node_modules/moment/moment-with-locales.js') ?>"></script>
 <script src="<?= base_url('assets/node_modules/popper.js/dist/umd/popper.min.js') ?>"></script>
 <script src="<?= base_url('assets/node_modules/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script src="<?= base_url('assets/node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js') ?>"></script>

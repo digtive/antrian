@@ -3,43 +3,93 @@ $(document).ready(function(){
 	let connection = new Connection();
 	let audio = new AudioHelper();
 	let antrian = new MainAntrian();
+	
+	const BASE_URL = connection.baseUrl();
 
 	let callData = antrian.getCallData();
-	// let callUpdated = callData.data.panggilan_updated;
+	let loketAktif;
+	if (callData.panggilan_loket !== null){
+		loketAktif = callData.panggilan_loket;
+	}else{
+		loketAktif = '1';
+	}
 
 	setInterval(function () {
 		let call = antrian.getCallData();
 		if (callData.panggilan_updated !== call.panggilan_updated){
-			audio.chainPlay(call.panggilan_antrian,call.panggilan_loket);
+			let currentQueue = call.panggilan_antrian;
+			let currentLocket = call.panggilan_loket;
+			play('in', 1);
+			play('urut', 0);
+			play(currentQueue,0);
+			play('loket',0);
+			play(currentLocket,0);
 
+			//component swap
+
+			antrian.swapComponent(loketAktif,currentLocket);
+			loketAktif = currentLocket;
+
+			// audio.chainPlay(call.panggilan_antrian,call.panggilan_loket);
 			callData = call;
 		}
 	},500);
 
-	/*
-	* event
-	* */
-	$(document).keypress(function (key) {
-		let btnSetting = key.originalEvent.key;
-		if (btnSetting === '1'){
-			antrian.call('Services/call/1');
-		}
-		if (btnSetting === '2'){
-			antrian.call('Services/call/2');
-		}
-		if (btnSetting === '3'){
-			antrian.call('Services/call/3');
-		}
-		if (btnSetting === '4'){
-			antrian.call('Services/call/4');
-		}
 
-		if (btnSetting === 'r'){
-			antrian.recall('Services/recall');
+	const audioMap = {
+		'in': BASE_URL+'assets/audios/in.wav',
+		'1': BASE_URL+'assets/audios/1.MP3',
+		'2': BASE_URL+'assets/audios/2.MP3',
+		'3': BASE_URL+'assets/audios/3.MP3',
+		'4': BASE_URL+'assets/audios/4.MP3',
+		'5': BASE_URL+'assets/audios/5.MP3',
+		'6': BASE_URL+'assets/audios/6.MP3',
+		'7': BASE_URL+'assets/audios/7.MP3',
+		'8': BASE_URL+'assets/audios/8.MP3',
+		'9': BASE_URL+'assets/audios/9.MP3',
+		'out': BASE_URL+'assets/audios/out.wav',
+		'urut': BASE_URL+'assets/audios/nomor-urut.MP3',
+		'belas': BASE_URL+'assets/audios/belas.MP3',
+		'konter': BASE_URL+'assets/audios/konter.MP3',
+		'puluh': BASE_URL+'assets/audios/puluh.MP3',
+		'ratus': BASE_URL+'assets/audios/ratus.MP3',
+		'ribu': BASE_URL+'assets/audios/ribu.MP3',
+		'11': BASE_URL+'assets/audios/sebelas.MP3',
+		'10': BASE_URL+'assets/audios/sepuluh.MP3',
+		'100': BASE_URL+'assets/audios/seratus.MP3',
+		'loket': BASE_URL+'assets/audios/loket.MP3',
+	};
+
+	const main = new LocketAudio();
+
+	function play(num,duration) {
+		main.playAudio(num,duration);
+	}
+
+	function LocketAudio() {
+		this.queue = [];
+		this.playAudio = function(num,duration) {
+			let self = this;
+			self.queue.push(num);
+			if (self.queue.length === 1) {
+				self._call(duration);
+			}
+		};
+
+		this._call = function(duration) {
+			let self = this;
+			if (self.queue.length) {
+				setTimeout(() => {
+					var audio = new Audio(audioMap[self.queue[0]]);
+					audio.play();
+					self.queue.shift();
+					audio.onended = function() {
+						self._call();
+					};
+				}, duration);
+			}
 		}
-
-	});
-
+	}
 
 
 });
