@@ -102,6 +102,17 @@
 			$data['settingsTitle'] = 'Pengaturan Media';
 			$data['activeMenu'] = 'media';
 
+			$query = array(
+				'app_id' => get_cookie('user_app')
+			);
+
+			$data['media']  = parent::model('component')->get_user_media($query['app_id']);
+			$mediaGambar = json_decode($data['media']['media_gambar'],true);
+			$data['dataGambar'] = $mediaGambar['data-gambar'];
+			$data['titleGambar'] = $mediaGambar['title-gambar'];
+			$data['durasi'] = $mediaGambar['durasi-slide'];
+
+//			parent::cek_type($data['durasi']);
 			parent::settingsPages('app/media',$data);
 		}
 

@@ -1,3 +1,7 @@
+	img{
+		max-width: 100%;
+		max-height: 100%;
+	}
 
     /*--- nav style ---*/
     .side-nav{
@@ -207,12 +211,17 @@
         width: 100%;
         max-width: 100%;
         max-height: 100%;
+		overflow: hidden;
         height: 530px;
 		background-color: black;
 		padding: 4px;
 		box-sizing: border-box;
 		box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
     }
+	#content-wrapper img{
+		width: 100%;
+		height: 100%;
+	}
     .row-queue{
         width: 100%;
         max-width: 100%;

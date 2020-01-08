@@ -4,7 +4,7 @@ $(document).ready(function(){
 	let audio = new AudioHelper();
 	let antrian = new MainAntrian();
 	
-	const BASE_URL = connection.baseUrl();
+	const BASE_URL = connection.BASE_URL;
 
 	let callData = antrian.getCallData();
 	let loketAktif;

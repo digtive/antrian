@@ -5,19 +5,37 @@
 
 		<form action="<?= base_url('ComponentService/unggahLatar')?>" class="form-row" method="post" id="parentImageData" enctype="multipart/form-data">
 			<div class="form-group col-12">
-				<div class="form-radio">
-					<label class="form-check-label">
-						<input type="radio" class="form-check-input" name="background-image" id="left-to-right" value="true" checked>
-						latar gambar
-						<i class="input-helper"></i>
-					</label>
-				</div>
-				<div class="form-radio">
-					<label class="form-check-label">
-						<input type="radio" class="form-check-input" name="background-image" id="right-to-left" value="false">
-						latar warna
-						<i class="input-helper"></i></label>
-				</div>
+				<?php
+					if ($container['background-image'] === 'true'):
+				?>
+						<div class="form-radio">
+							<label class="form-check-label">
+								<input type="radio" class="form-check-input" name="background-image" id="left-to-right" value="true" checked>
+								latar gambar
+								<i class="input-helper"></i>
+							</label>
+						</div>
+						<div class="form-radio">
+							<label class="form-check-label">
+								<input type="radio" class="form-check-input" name="background-image" id="right-to-left" value="false">
+								latar warna
+								<i class="input-helper"></i></label>
+						</div>
+				<?php else:?>
+						<div class="form-radio">
+							<label class="form-check-label">
+								<input type="radio" class="form-check-input" name="background-image" id="left-to-right" value="true" >
+								latar gambar
+								<i class="input-helper"></i>
+							</label>
+						</div>
+						<div class="form-radio">
+							<label class="form-check-label">
+								<input type="radio" class="form-check-input" name="background-image" id="right-to-left" value="false" checked>
+								latar warna
+								<i class="input-helper"></i></label>
+						</div>
+				<?php endif;?>
 			</div>
 			<div class="form-group col-12">
 				<h4 class="border-bottom" style="font-family: titilliumweb-bold">

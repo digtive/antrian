@@ -158,26 +158,54 @@ class ComponentService extends GLOBAL_Controller {
 	public function unggahLatar()
 	{
 		if (isset($_POST['unggah'])){
-			$config['upload_path'] = './assets/images/background/';
-			$config['allowed_types'] = 'png|jpeg|jpg';
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
-
-			$this->upload->do_upload('background-image-src');
-			$gambarLatar = $this->upload->data('file_name');
-
-			$dataContainer = array(
-				'background-color' => parent::post('background-color'),
-				'background-image' => parent::post('background-image'),
-				'background-image-src' => base_url('assets/images/background/').$gambarLatar
+			$backgroundImages = parent::post('background-image');
+			$query = array(
+				'app_id' => get_cookie('user_app')
 			);
 
-			$dataEdit = array(
-				'app_container' => json_encode($dataContainer),
-				'app_date_edited' => date('Y-m-d H:i:s')
-			);
+			$data['component']  = parent::model('component')->get_user_app($query);
+			$decodeComponent = json_decode($data['component']['app_container'],true);
+			$warnaLama = $decodeComponent['background-color'];
+			$gambarLama = $decodeComponent['background-image-src'];
 
-			parent::model('component')->edit_component($this->userAppID,$dataEdit);
+
+
+			if ($backgroundImages === 'true'){
+				$config['upload_path'] = './assets/images/background/';
+				$config['allowed_types'] = 'png|jpeg|jpg';
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+
+				$this->upload->do_upload('background-image-src');
+				$gambarLatar = $this->upload->data('file_name');
+
+				$dataContainer = array(
+					'background-color' => $warnaLama,
+					'background-image' => parent::post('background-image'),
+					'background-image-src' => base_url('assets/images/background/').$gambarLatar
+				);
+
+				$dataEdit = array(
+					'app_container' => json_encode($dataContainer),
+					'app_date_edited' => date('Y-m-d H:i:s')
+				);
+
+				parent::model('component')->edit_component($this->userAppID,$dataEdit);
+			}else{
+				$dataContainer = array(
+					'background-color' => parent::post('background-color'),
+					'background-image' => parent::post('background-image'),
+					'background-image-src' => $gambarLama
+				);
+
+				$dataEdit = array(
+					'app_container' => json_encode($dataContainer),
+					'app_date_edited' => date('Y-m-d H:i:s')
+				);
+
+				parent::model('component')->edit_component($this->userAppID,$dataEdit);
+			}
+
 
 			parent::alert('alert','edit');
 			redirect('settings/parent');
@@ -208,6 +236,46 @@ class ComponentService extends GLOBAL_Controller {
 			parent::alert('alert','edit');
 			redirect('settings/header');
 
+		}else{
+			show_404();
+		}
+	}
+
+	public function setGambar()
+	{
+		if (isset($_POST['simpan'])){
+			$userMedia = parent::model('component')->get_user_media($this->userAppID);
+			$mediaGambar = json_decode($userMedia['media_gambar'],true);
+			$dataGambar = $mediaGambar['data-gambar'];
+			$titleGambar = $mediaGambar['title-gambar'];
+
+			$config['upload_path'] = './assets/images/slides/';
+			$config['allowed_types'] = 'png|jpeg|jpg';
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			$this->upload->do_upload('upload-gambar');
+			$titel = $this->upload->data('file_name');
+
+			array_push($dataGambar,base_url('assets/images/slides/').$titel);
+			array_push($titleGambar,$titel);
+
+			$dataEncode = array(
+				'durasi-slide' => parent::post('durasi-gambar'),
+				'data-gambar' => $dataGambar,
+				'title-gambar' =>$titleGambar
+			);
+
+
+			$dataEdit = array(
+				'media_gambar' => json_encode($dataEncode),
+				'media_date_edited' => date('Y-m-d H:i:s')
+			);
+
+			parent::model('component')->edit_media($this->userAppID,$dataEdit);
+
+			parent::alert('alert','edit');
+			redirect('settings/media');
 		}else{
 			show_404();
 		}

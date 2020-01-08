@@ -44,7 +44,8 @@
 					   name="logo-img" data-default-file="<?=$logo?>"
 					   data-allowed-file-extensions="jpg png jpeg"
 					   data-min-width="835"
-					   data-min-height="122" >
+					   data-min-height="122"
+						data-max-height="130">
 			</div>
 
 			<button type="submit" class="btn btn-primary col-12" name="unggah">

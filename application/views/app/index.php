@@ -15,6 +15,7 @@
 		<!-- plugin css for this page -->
 		<link rel="stylesheet" href="<?= base_url('assets/node_modules/font-awesome/css/font-awesome.min.css')?>"/>
 		<link rel="stylesheet" href="<?= base_url('assets/node_modules/jquery-bar-rating/dist/themes/fontawesome-stars.css')?>">
+		<link rel="stylesheet" href="<?= base_url('assets/js/node_modules/bare-bones-slider/css/jquery.bbslider.css')?>">
 		<!-- End plugin css for this page -->
 
 		<!-- inject:css -->
@@ -85,10 +86,15 @@
 				<div class="row">
 					<div class="col-8">
 						<div id="content-wrapper">
-							<video width="100%" height="100%" controls >
-								<source src="<?= base_url('assets/videos/videoplayback.mp4')?>" type="video/mp4">
-								<source src="<?= base_url('assets/videos/videoplayback.mp4')?>" type="video/ogg">
-							</video>
+							<div class="slider" style="height: 100%!important;">
+								<div><img src="<?= base_url('assets/images/slides/slides-1.jpeg')?>" alt="first image" /></div>
+								<div><img src="<?= base_url('assets/images/slides/slides-2.jpeg')?>" alt="first image" /></div>
+								<div><img src="<?= base_url('assets/images/slides/slides-3.jpeg')?>" alt="first image" /></div>
+							</div>
+<!--							<video width="100%" height="100%" controls >-->
+<!--								<source src="--><?//= base_url('assets/videos/videoplayback.mp4')?><!--" type="video/mp4">-->
+<!--								<source src="--><?//= base_url('assets/videos/videoplayback.mp4')?><!--" type="video/ogg">-->
+<!--							</video>-->
 						</div>
 					</div>
 					<div class="col-4" style="height: 530px;overflow: hidden">
@@ -189,6 +195,10 @@
 		<script src="<?= base_url('assets/js/components/componentSwap.js?v=1.0.0&&load='.time())?>"></script>
 		<!-- swap queue component-->
 
+		<!-- JS inject for media -->
+		<script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?>"></script>
+		<script src="<?= base_url('assets/js/media/Slider.js')?>"></script>
+		<!-- JS inject for media -->
 		<!-- component script-->
 		<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
 
@@ -203,6 +213,11 @@
 					}
                 });
 
+                $('.slider').bbslider({
+                    auto:  true,
+                    timer: 3000,
+                    loop:  true
+                });
             })
 		</script>
 

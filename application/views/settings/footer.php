@@ -51,7 +51,6 @@
 <script src="<?= base_url('assets/') ?>js/off-canvas.js"></script>
 <script src="<?= base_url('assets/') ?>js/hoverable-collapse.js"></script>
 <script src="<?= base_url('assets/') ?>js/misc.js"></script>
-<script src="<?= base_url('assets/') ?>js/settings.js"></script>
 <script src="<?= base_url('assets/') ?>js/todolist.js"></script>
 <!-- endinject -->
 
@@ -67,14 +66,14 @@
 
 <!-- End custom js for this page-->
 
-<!-- Custom js for this page-->
-<script src="<?= base_url('assets/js/plugins/countdown.js') ?>"></script>
-<script src="<?= base_url('assets/js/plugins/moment.js') ?>"></script>
-<script src="<?= base_url('assets/') ?>js/dashboard.js"></script>
+<!-- Specific Custom js for this page-->
+<script src="<?= base_url('assets/js/plugins/countdown.js?v=1.0.0&&load='.time()) ?>"></script>
+<script src="<?= base_url('assets/js/plugins/moment.js?v=1.0.0&&load='.time()) ?>"></script>
+<script src="<?= base_url('assets/') ?>js/dashboard.js?v=1.0.0&&load="<?= time()?>></script>
 <script src="<?= base_url('assets/js/app/waktu.js?v=1.0.0&&load='.time().'') ?>"></script>
-<script src="<?= base_url()?>assets/js/app/formColor.js?v=1.0.0&&load="></script>
-<script src="<?= base_url('assets/js/package/timer.js') ?>"></script>
-<script src="<?= base_url('assets/js/package/formSimulator.js') ?>"></script>
+<script src="<?= base_url()?>assets/js/app/formColor.js?v=1.0.0&&load="<?=time() ?>></script>
+<script src="<?= base_url('assets/js/package/timer.js?v=1.0.0&&load='.time()) ?>"></script>
+<script src="<?= base_url('assets/js/package/formSimulator.js?v=1.0.0&&load='.time()) ?>"></script>
 <!-- End custom js for this page-->
 
 <!-- components setting to server [API] -->
@@ -89,15 +88,7 @@
 
         setInterval(function () {
             $('#settings-alert').fadeOut('slow');
-        },3000);
-        let baseUrl = window.location.origin+'/antrian/';
-        // $(document).keypress(function (key) {
-        //     let btnSetting = key.originalEvent.key;
-        //     if (btnSetting === 'h'){
-        //         window.location.href = baseUrl;
-        //     }
-        // });
-
+        },2000);
 
     })
 </script>
