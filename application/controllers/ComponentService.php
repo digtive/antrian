@@ -266,11 +266,22 @@ class ComponentService extends GLOBAL_Controller {
 				'title-gambar' =>$titleGambar
 			);
 
+			$gambarOption = parent::post('gambar-option');
 
-			$dataEdit = array(
-				'media_gambar' => json_encode($dataEncode),
-				'media_date_edited' => date('Y-m-d H:i:s')
-			);
+			if ($gambarOption!== ''){
+				$dataEdit = array(
+					'media_gambar' => json_encode($dataEncode),
+					'media_aktif' => 'gambar',
+					'media_date_edited' => date('Y-m-d H:i:s'),
+				);
+			}else{
+				$dataEdit = array(
+					'media_gambar' => json_encode($dataEncode),
+					'media_aktif' => 'video',
+					'media_date_edited' => date('Y-m-d H:i:s')
+				);
+			}
+//			parent::cek_array($dataEdit);
 
 			parent::model('component')->edit_media($this->userAppID,$dataEdit);
 
@@ -279,6 +290,34 @@ class ComponentService extends GLOBAL_Controller {
 		}else{
 			show_404();
 		}
+	}
+
+	public function deleteGambar($index)
+	{
+		$userMedia = parent::model('component')->get_user_media($this->userAppID);
+		$mediaGambar = json_decode($userMedia['media_gambar'],true);
+		$durasi = $mediaGambar['durasi-slide'];
+		$titleGambar = $mediaGambar['title-gambar'];
+		$dataGambar = $mediaGambar['data-gambar'];
+		array_splice($dataGambar,$index,1);
+		array_splice($titleGambar,$index,1);
+
+		$dataEncode = array(
+			'durasi-slide' => $durasi,
+			'data-gambar' => $dataGambar,
+			'title-gambar' =>$titleGambar
+		);
+
+		$dataEdit = array(
+			'media_gambar' => json_encode($dataEncode),
+			'media_aktif' => 'gambar',
+			'media_date_edited' => date('Y-m-d H:i:s'),
+		);
+
+		parent::model('component')->edit_media($this->userAppID,$dataEdit);
+
+		parent::alert('alert','edit');
+		redirect('settings/media');
 	}
 
 }

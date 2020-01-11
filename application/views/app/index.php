@@ -87,9 +87,11 @@
 					<div class="col-8">
 						<div id="content-wrapper">
 							<div class="slider" style="height: 100%!important;">
-								<div><img src="<?= base_url('assets/images/slides/slides-1.jpeg')?>" alt="first image" /></div>
-								<div><img src="<?= base_url('assets/images/slides/slides-2.jpeg')?>" alt="first image" /></div>
-								<div><img src="<?= base_url('assets/images/slides/slides-3.jpeg')?>" alt="first image" /></div>
+								<?php for ($i = 0; $i < count($dataGambar); $i++):?>
+								<div>
+									<img src="<?= $dataGambar[$i]?>" alt=""/>
+								</div>
+								<?php endfor; ?>
 							</div>
 <!--							<video width="100%" height="100%" controls >-->
 <!--								<source src="--><?//= base_url('assets/videos/videoplayback.mp4')?><!--" type="video/mp4">-->
@@ -199,12 +201,13 @@
 		<script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?>"></script>
 		<script src="<?= base_url('assets/js/media/Slider.js')?>"></script>
 		<!-- JS inject for media -->
+
 		<!-- component script-->
 		<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
 
 	<script>
 			$(document).ready(function () {
-
+				let durasi = <?= (int)$durasi?>;
 			    let baseUrl = window.location.origin+'/antrian/';
 				$(document).keypress(function (key) {
 					let btnSetting = key.originalEvent.key;
@@ -215,7 +218,7 @@
 
                 $('.slider').bbslider({
                     auto:  true,
-                    timer: 3000,
+                    timer: (durasi*1000),
                     loop:  true
                 });
             })

@@ -81,8 +81,14 @@
 <script type="text/javascript" src="<?= base_url('assets/js/components/footer.js?v=1.0.0&&load='.time().'')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/components/service.js?v=1.0.0&&load='.time().'')?>"></script>
 
+<!-- JS inject for media -->
+<script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?>"></script>
+<script src="<?= base_url('assets/js/media/MediaSettings.js')?>"></script>
+<!-- JS inject for media -->
 
-<script>
+
+
+			<script>
     $(document).ready(function () {
 
 

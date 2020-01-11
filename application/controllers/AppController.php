@@ -40,7 +40,12 @@
 			$data['loket'] = json_decode($data['component']['app_service'],true);
 			$data['footer'] = json_decode($data['component']['app_footer'],true);
 			$data['logo'] = json_decode($data['component']['app_logo'],true);
-//			parent::cek_array($data['container']);
+
+			$data['media']  = parent::model('component')->get_user_media($query['app_id']);
+			$mediaGambar = json_decode($data['media']['media_gambar'],true);
+			$data['dataGambar'] = $mediaGambar['data-gambar'];
+			$data['titleGambar'] = $mediaGambar['title-gambar'];
+			$data['durasi'] = $mediaGambar['durasi-slide'];
 			parent::authPage('app/index',$data);
 		}
 
@@ -108,11 +113,12 @@
 
 			$data['media']  = parent::model('component')->get_user_media($query['app_id']);
 			$mediaGambar = json_decode($data['media']['media_gambar'],true);
+			$data['mediaAktif'] = $data['media']['media_aktif'];
 			$data['dataGambar'] = $mediaGambar['data-gambar'];
 			$data['titleGambar'] = $mediaGambar['title-gambar'];
 			$data['durasi'] = $mediaGambar['durasi-slide'];
 
-//			parent::cek_type($data['durasi']);
+//			parent::cek_type($data['media']['media_aktif']);
 			parent::settingsPages('app/media',$data);
 		}
 
