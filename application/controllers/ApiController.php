@@ -45,11 +45,10 @@ class ApiController extends CI_Controller
     public function antrian()
     {
         $response = null;
-        $id = $this->input->post('layanan_id');
+        $id = $this->input->post('loket_id');
         $date = date('Y-m-d');
 
-        $data = $this->AntrianModel->getByLayanan($id, $date);
-
+        $data = $this->LoketModel->getByLayanan($id, $date);
 //        $data = $this->AntrianModel->getByLayanan($id, $date);
             $sekarang = $this->AntrianModel->getCurrentNumber($id, $date);
             if ($data->num_rows() <= 0) {
@@ -57,12 +56,29 @@ class ApiController extends CI_Controller
                 $response['status'] = "400";
                 $response['message'] = "Antrian Belum Ada";
             } else {
-                $response['status'] = 200;
-                $response['message'] = "Berhasil Memuat Data";
-                $response['data'] = $data->result_array();
-                $response['sekarang'] = $sekarang->row_array();
-                $response['total'] = $this->AntrianModel->getTotalQueue($id, $date)->num_rows();
-                $response['sisa'] = $this->AntrianModel->getRestQueue($id, $date)->num_rows();
+                if(!empty($sekarang->row_array())){
+                    $response['status'] = 200;
+                    $response['message'] = "Berhasil Memuat Data";
+                    $response['data'] = $data->result_array();
+                    $response['sekarang'] = $sekarang->row_array();
+                    $response['total'] = $this->AntrianModel->getTotalQueue($id, $date)->num_rows();
+                    $response['sisa'] = $this->AntrianModel->getRestQueue($id, $date)->num_rows();
+                }
+                else{
+                    $antrian = array("antrian_id"=>"1",
+                                    "antrian_nomor"=>"1",
+                                    "antrian_layanan_id"=>"1",
+                                    "loket_layanan_id"=>$id,
+                                    "antrian_date_created"=>"2020-01-13 21:13:29",
+                                    "antrian_status"=>"aktif");
+                    $response['status'] = 200;
+                    $response['message'] = "Berhasil Memuat Data";
+                    $response['data'] = $data->result_array();
+                    $response['sekarang'] = $antrian;
+                    $response['total'] = $this->AntrianModel->getTotalQueue($id, $date)->num_rows();
+                    $response['sisa'] = $this->AntrianModel->getRestQueue($id, $date)->num_rows();
+                }
+
                 //$this->addQueue($id,1);
             }
 
