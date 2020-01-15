@@ -37,3 +37,34 @@ $route['totalloket'] = 'AntrianController/countLocket';
 $route['currentdata'] = 'AntrianController/antrian';
 $route['tombol'] = 'AntrianController/index';
 $route['total_antrian/(:any)']= 'AntrianController/getCount/$1';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

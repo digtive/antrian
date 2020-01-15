@@ -10,6 +10,7 @@ class ComponentService extends GLOBAL_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 		$this->userAppID = get_cookie('user_app');
 		$this->load->model('ComponentModel','component');
+		$this->load->model('LoketModel','loket');
 	}
 
 	/*
@@ -319,5 +320,26 @@ class ComponentService extends GLOBAL_Controller {
 		parent::alert('alert','edit');
 		redirect('settings/media');
 	}
+	public function addLocket(){
+		if (isset($_POST['submit'])){
+		$nama = parent::post('locket_name');
+		$nomor = parent::post('locket_number');
+		$layanan = parent::post('locket_services');	
+		$data = array(
+			"loket_nama"=>$nama,
+			"loket_nomor"=>$nomor,
+			"loket_layanan_id"=>$layanan
+		);
+		parent::model('loket')->post_loket($data);
+		redirect('settings/loket');
+		}
 
+	}
+	public function deleteLocket($index){
+		$data = array(
+			"loket_id"=>$index
+		);
+		parent::model('loket')->deleteloket($data);
+		redirect('settings/loket');
+	}
 }

@@ -8,6 +8,8 @@ class ComponentController extends GLOBAL_Controller {
 		parent::__construct();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->model('ComponentModel','component');
+		$this->load->model('LoketModel','loket');
+		$this->load->model('LayananModel','layanan');
 	}
 
 	public function index()
@@ -87,9 +89,11 @@ class ComponentController extends GLOBAL_Controller {
 
 		$data['component']  = parent::model('component')->get_user_app($query);
 		$data['serviceComponent'] = json_decode($data['component']['app_service'],true);
+		$data['loket'] = parent::model('loket')->getJoinLoket();
+		$data['layanan'] = parent::model('layanan')->get_layanan();
 //		parent::cek_array($data['serviceComponent']);
 
 		parent::settingsPages('components/loket',$data);
 	}
-
+	
 }

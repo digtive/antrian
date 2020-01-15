@@ -127,12 +127,12 @@
 								}
 
 							?>
-<!--							<li>-->
-<!--								<a href="--><?//= base_url('settings')?><!--" class="--><?php //echo $umum;?><!--">-->
-<!--									<i class="icon-wrench "></i>-->
-<!--									Umum-->
-<!--								</a>-->
-<!--							</li>-->
+							<li>
+								<a href="<?= base_url('settings')?>" class="<?php echo $umum;?>">
+									<i class="icon-wrench "></i>
+									Umum
+								</a>
+							</li>
 							<li>
 								<a href="<?= base_url('settings/parent')?>" class="<?php echo $parent;?>">
 									<i class="icon-screen-desktop "></i>
