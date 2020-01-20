@@ -11,6 +11,7 @@ class ComponentService extends GLOBAL_Controller {
 		$this->userAppID = get_cookie('user_app');
 		$this->load->model('ComponentModel','component');
 		$this->load->model('LoketModel','loket');
+		$this->load->model('LayananModel','layanan');
 	}
 
 	/*
@@ -341,5 +342,34 @@ class ComponentService extends GLOBAL_Controller {
 		);
 		parent::model('loket')->deleteloket($data);
 		redirect('settings/loket');
+	}
+	public function editloket($index){
+		if (isset($_POST['submit'])){
+		$nama = parent::post('locket_name');
+		$nomor = parent::post('locket_number');
+		$layanan = parent::post('locket_services');	
+		$data = array(
+			"loket_nama"=>$nama,
+			"loket_nomor"=>$nomor,
+			"loket_layanan_id"=>$layanan
+		);
+		parent::model('loket')->editloket($index,$data);
+		redirect('settings/loket');
+		}
+		else{
+		$data['title'] = 'Pengaturan Aplikasi';
+		$data['page_title'] = 'Pengaturan Loket Aplikasi';
+		$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
+		$data['activeMenu'] = 'loket';
+		$query = array(
+			'app_id' => get_cookie('user_app')
+		);
+		$data['currentData'] = parent::model('loket')->getOne(array("loket_id"=>$index));
+		$data['component']  = parent::model('component')->get_user_app($query);
+		$data['serviceComponent'] = json_decode($data['component']['app_service'],true);
+		$data['loket'] = parent::model('loket')->getJoinLoket();
+		$data['layanan'] = parent::model('layanan')->get_layanan();
+		parent::settingsPages('components/loket_edit',$data);
+		}
 	}
 }
