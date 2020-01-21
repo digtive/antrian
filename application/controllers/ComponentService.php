@@ -369,7 +369,24 @@ class ComponentService extends GLOBAL_Controller {
 
 		$dataEdit = array(
 			'media_gambar' => json_encode($dataEncode),
-			'media_aktif' => 'gambar',
+			'media_date_edited' => date('Y-m-d H:i:s'),
+		);
+
+		parent::model('component')->edit_media($this->userAppID,$dataEdit);
+
+		parent::alert('alert','edit');
+		redirect('settings/media');
+	}
+
+	public function deleteVideo($index)
+	{
+		$userMedia = parent::model('component')->get_user_media($this->userAppID);
+		$mediavideo = json_decode($userMedia['media_video'],true);
+
+		array_splice($mediavideo,$index,1);
+
+		$dataEdit = array(
+			'media_video' => json_encode($mediavideo),
 			'media_date_edited' => date('Y-m-d H:i:s'),
 		);
 

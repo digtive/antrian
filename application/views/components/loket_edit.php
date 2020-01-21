@@ -27,18 +27,15 @@
 					<div class="col-sm-10 mb-3">
 						<select name="locket_services" class="form-control border-primary form-simulator select-simulator" data-transform="#time-content" data-change="font-family" name="font-family-timer">
 							<?php
-								foreach($layanan->result() as $s){
-								if($currentData['loket_layanan_id'] == $s->layanan_id){
-									?>
-								<option selected value="<?= $s->layanan_id?>"><?= $s->layanan_nama?></option>	
-									<?php } ?>
-							else{
-								?>
+								foreach($layanan->result() as $s):
+									if($currentData['loket_layanan_id'] == $s->layanan_id):
+							?>
+								<option selected value="<?= $s->layanan_id?>"><?= $s->layanan_nama?></option>
+							<?php else:?>
 								<option value="<?= $s->layanan_id?>"><?= $s->layanan_nama?></option>	
-								<?php								
-							}
 							<?php
-								}
+									endif;
+								endforeach;
 							?>
 						</select>
 					</div>
