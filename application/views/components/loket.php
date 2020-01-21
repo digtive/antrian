@@ -154,7 +154,7 @@
 					</form>
 				</div>
 				<div class="tab-pane fade" id="pills-daftar-loket" role="tabpanel" aria-labelledby="pills-profile-tab">
-					<button href="#" type="button" data-toggle="modal" data-target="#exampleModal" name="tambah" class="btn btn-primary col-3 float-left" id="serviceSubmitBtn"><i class="icon-plus"></i>Tambah Loket</button>
+					<button href="#" type="button" data-toggle="modal" data-target="#exampleModal" name="tambah" class="btn btn-primary col-3 float-left mb-1" id="serviceSubmitBtn"><i class="icon-plus"></i>Tambah Loket</button>
 					
 					<div class = "table-responsive-sm">
 						<table class = "table">
@@ -178,6 +178,7 @@
 										<td><?= $l->loket_nomor?></td>
 										<td><?= $l->layanan_nama?></td>
 										<td>
+											<a href="<?= base_url("ComponentService/editLoket/".$l->loket_id)?>"class="btn btn-warning"><i class="fa fa-pencil"></i></a>
 											<a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" href="<?= base_url("ComponentService/deleteLocket/".$l->loket_id)?>"class="btn btn-danger"><i class="fa fa-trash"></i></a>
 										</td>
 									</tr>
