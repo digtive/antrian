@@ -293,6 +293,63 @@ class ComponentService extends GLOBAL_Controller {
 		}
 	}
 
+	public function setVideo()
+	{
+		if (isset($_POST['unggahVideo'])){
+			$userMedia = parent::model('component')->get_user_media($this->userAppID);
+			$mediaVideo = json_decode($userMedia['media_video'],true);
+
+
+			$config['upload_path'] = './assets/videos/';
+			$config['allowed_types'] = 'webm|avi|mp4|mpeg';
+			$config['max_size'] = 400000;
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			if ($this->upload->do_upload('unggah-video')){
+
+				$title = $this->upload->data('file_name');
+				$ext = $this->upload->data('file_ext');
+
+				$data = array(
+					'sources' => array(
+						array(
+							'src' => base_url('assets/videos/'.$title),
+							'type' => 'video/'.str_replace('.','',$ext)
+						)
+					),
+					'title' => $title
+				);
+
+				array_push($mediaVideo,$data);
+				$videoOption = parent::post('video-option');
+
+				if ($videoOption!== ''){
+					$dataEdit = array(
+						'media_video' => json_encode($mediaVideo),
+						'media_aktif' => 'video',
+						'media_date_edited' => date('Y-m-d H:i:s'),
+					);
+				}else{
+					$dataEdit = array(
+						'media_video' => json_encode($mediaVideo),
+						'media_aktif' => 'gambar',
+						'media_date_edited' => date('Y-m-d H:i:s')
+					);
+				}
+
+				parent::model('component')->edit_media($this->userAppID,$dataEdit);
+
+				parent::alert('alert','edit');
+				redirect('settings/media');
+
+			}
+
+		}else{
+			show_404();
+		}
+	}
+
 	public function deleteGambar($index)
 	{
 		$userMedia = parent::model('component')->get_user_media($this->userAppID);
@@ -320,6 +377,7 @@ class ComponentService extends GLOBAL_Controller {
 		parent::alert('alert','edit');
 		redirect('settings/media');
 	}
+
 	public function addLocket(){
 		if (isset($_POST['submit'])){
 		$nama = parent::post('locket_name');

@@ -87,30 +87,18 @@
 				<div class="row">
 					<div class="col-8">
 						<div id="content-wrapper">
-<!--							<div class="slider" style="height: 100%!important;">-->
-<!--								--><?php //for ($i = 0; $i < count($dataGambar); $i++):?>
-<!--								<div>-->
-<!--									<img src="--><?//= $dataGambar[$i]?><!--" alt=""/>-->
-<!--								</div>-->
-<!--								--><?php //endfor; ?>
-<!--							</div>-->
-							<video width="100%" height="100%" controls
-								   id="my-player"
-								   class="video-js"
-								   controls
-								   preload="auto"
-								   poster="//vjs.zencdn.net/v/oceans.png"
-								   data-setup='{}'>
-								<source src="<?= base_url('assets/videos/videoplayback.mp4')?>" type="video/mp4">
-								<source src="<?= base_url('assets/videos/videoplayback.mp4')?>" type="video/ogg">
-								<p class="vjs-no-js">
-									To view this video please enable JavaScript, and consider upgrading to a
-									web browser that
-									<a href="https://videojs.com/html5-video-support/" target="_blank">
-										supports HTML5 video
-									</a>
-								</p>
-							</video>
+							<div class="slider" style="height: 100%!important;">
+								<?php for ($i = 0; $i < count($dataGambar); $i++):?>
+								<div>
+									<img src="<?= $dataGambar[$i]?>" alt=""/>
+								</div>
+								<?php endfor; ?>
+							</div>
+<!--							<video width="100%" height="100%"-->
+<!--								   id="my-player"-->
+<!--								   class="video-js" controls-->
+<!--								   preload="auto" autoplay >-->
+<!--							</video>-->
 						</div>
 					</div>
 					<div class="col-4" style="height: 530px;overflow: hidden">
@@ -225,7 +213,8 @@
 	<script>
 			$(document).ready(function () {
 				let durasi = <?= (int)$durasi?>;
-			    let baseUrl = window.location.origin+'/antrian/';
+				const getUrl = window.location;
+                let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+'/';
 				$(document).keypress(function (key) {
 					let btnSetting = key.originalEvent.key;
 					if (btnSetting === 's'){

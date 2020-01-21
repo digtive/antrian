@@ -45,7 +45,7 @@
 					   data-allowed-file-extensions="jpg png jpeg"
 					   data-min-width="835"
 					   data-min-height="122"
-						data-max-height="130">
+						data-max-height="130" required>
 			</div>
 
 			<button type="submit" class="btn btn-primary col-12" name="unggah">

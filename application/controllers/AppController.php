@@ -113,12 +113,13 @@
 
 			$data['media']  = parent::model('component')->get_user_media($query['app_id']);
 			$mediaGambar = json_decode($data['media']['media_gambar'],true);
+			$data['videos'] = json_decode($data['media']['media_video'],true);
 			$data['mediaAktif'] = $data['media']['media_aktif'];
 			$data['dataGambar'] = $mediaGambar['data-gambar'];
 			$data['titleGambar'] = $mediaGambar['title-gambar'];
 			$data['durasi'] = $mediaGambar['durasi-slide'];
 
-//			parent::cek_type($data['media']['media_aktif']);
+//			parent::cek_array($data['videos']);
 			parent::settingsPages('app/media',$data);
 		}
 

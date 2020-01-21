@@ -97,21 +97,28 @@
 												<div class="form-group col-11">
 													<h5  style="font-family: titilliumweb-bold">Unggah Video</h5>
 													<input type="file" class="dropify"
-														   name="upload-video"
+														   name="unggah-video" data-max-file-size="400M"
 														   data-allowed-file-extensions="mp4 avi webm mpeg" id="upload-gambar" required>
 												</div>
 											</div>
 										</div>
 										<div class="col-7">
 											<h5 style="font-family: titilliumweb-bold" class="mb-2">Daftar Putar Video</h5>
-											<ul class="list-group list-group-flush" style="height: 300px;overflow: auto">
-												<a href="#" target="_blank" title="lihat gambar">
-													<li class="list-group-item" style="padding: 4px !important;">hitam biru.mp4</li>
-												</a>
-											</ul>
+											<div class="list-wrapper media-gambar-list" style="height: 300px;overflow: auto">
+												<ul class="d-flex flex-column-reverse todo-list">
+													<?php for ($i =0; $i < count($videos); $i++): ?>
+														<li  style="padding: 4px !important;">
+															<a href="<?= $videos[$i]['sources'][0]['src']?>" target="_blank" title="lihat video">
+																<?= $videos[$i]['title']?>
+															</a>
+															<a href="<?= base_url('ComponentService/deleteVideo/'.$i)?>" class="delete mdi mdi-close-circle-outline" ></a>
+														</li>
+													<?php endfor;?>
+												</ul>
+											</div>
 										</div>
 
-										<button type="submit" class="btn btn-primary col-12 mt-2" name="simpan" id="video-submit-btn" style="display: none">
+										<button type="submit" class="btn btn-primary col-12 mt-2" name="unggahVideo" id="video-submit-btn" style="display: none">
 											simpan
 										</button>
 

@@ -9,9 +9,10 @@ $(document).ready(function(){
 			src: videoPath+'videoplayback.mp4',
 			type: 'video/mp4'
 		}],
-	}, {
+	},
+	{
 		sources: [{
-			src: videoPath+'les.mp4',
+			src: videoPath+'didi.mp4',
 			type: 'video/mp4'
 		}],
 	},
@@ -19,4 +20,5 @@ $(document).ready(function(){
 
 // Play through the playlist automatically.
 	player.playlist.autoadvance(0);
+	player.playlist.repeat(true);
 });

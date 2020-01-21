@@ -45,13 +45,13 @@
 					   name="background-image-src" data-default-file="<?= $container['background-image-src']?>"
 					   data-allowed-file-extensions="jpg png jpeg"
 					   data-min-width="920"
-					   data-min-height="540">
+					   data-min-height="540" required>
 			</div>
 
 			<div class="form-group col-12 ">
 				<label for="background-header" class="col-4 col-form-label font-weight-medium">Warna Latar</label>
 				<div class="col-8">
-					<input type='text' class="color-picker" value="<?= $container['background-color']?>" name="background-color" data-transform="#parent-simulator" data-change="background-color"/>
+					<input type='text' class="color-picker" value="<?= $container['background-color']?>" name="background-color" data-transform="#parent-simulator" data-change="background-color" required/>
 				</div>
 			</div>
 

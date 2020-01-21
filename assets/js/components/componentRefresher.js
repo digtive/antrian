@@ -1,6 +1,7 @@
 $(document).ready(function(){
-	let baseUrl = window.location.origin+'/antrian/'; // development
-	// let baseUrl = window.location.origin; // production
+	const getUrl = window.location;
+	let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+'/';
+
 	let last = getTimeEdit();
 
 
@@ -11,7 +12,7 @@ $(document).ready(function(){
 	setInterval(function () {
 		if (getTimeEdit() === last){
 			last = getTimeEdit();
-		}else{
+		}else{a
 			last =getTimeEdit();
 			window.location.reload();
 		}
