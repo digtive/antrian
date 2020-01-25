@@ -182,4 +182,65 @@
 				'message' => 'menampilkan data panggilan'
 			));
 		}
+
+		// menambah antrian per loket
+		public function takeQueue($locketId){
+			$currentData = parent::model('service')->get_queue_by_locket($locketId);
+			$dataLoket = parent::model('loket')->getOne(array('loket_id' => $locketId));
+			if ($currentData->num_rows() > 0){
+				$locketQueue = $currentData->result_array();
+				$total  = count($locketQueue);
+				$lastQueue = $locketQueue[$total-1];
+
+				$dataQueue = array(
+					'antrian_nomor' => ($lastQueue['antrian_nomor']+1),
+					'antrian_layanan_id' => $lastQueue['loket_layanan_id'],
+					'antrian_loket_id' => $lastQueue['loket_id'],
+					'antrian_status' => 'menunggu'
+				);
+
+				$insertQueue = parent::model('antrian')->post_antrian($dataQueue);
+
+				if ($insertQueue > 0){
+					echo json_encode(array(
+						'status' => '200',
+						'message' => 'berhasil mengambil antrian, silahkan menunggu',
+						'antrian_nomor' => $dataQueue['antrian_nomor']
+					));
+				}else{
+					echo json_encode(array(
+						'status' => '500',
+						'message' => 'kesalahan operasi mengambil antrian',
+						'antrian_nomor' => 0
+					));
+				}
+			}else{
+
+				if ($dataLoket!==null){
+
+					$dataQueue = array(
+						'antrian_nomor' => 1,
+						'antrian_layanan_id' => $dataLoket['loket_layanan_id'],
+						'antrian_loket_id' => $dataLoket['loket_id'],
+						'antrian_status' => 'menunggu'
+					);
+
+					$insertQueue = parent::model('antrian')->post_antrian($dataQueue);
+
+					if ($insertQueue > 0){
+						echo json_encode(array(
+							'status' => '200',
+							'message' => 'berhasil mengambil antrian, silahkan menunggu',
+							'antrian_nomor' => $dataQueue['antrian_nomor']
+						));
+					}else{
+						echo json_encode(array(
+							'status' => '500',
+							'message' => 'kesalahan operasi mengambil antrian',
+							'antrian_nomor' => 0
+						));
+					}
+				}
+			}
+		}
 	}

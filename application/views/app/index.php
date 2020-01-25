@@ -87,6 +87,9 @@
 				<div class="row">
 					<div class="col-8">
 						<div id="content-wrapper">
+							<?php
+								if ($media['media_aktif'] ==='gambar'):
+							?>
 							<div class="slider" style="height: 100%!important;">
 								<?php for ($i = 0; $i < count($dataGambar); $i++):?>
 								<div>
@@ -94,11 +97,13 @@
 								</div>
 								<?php endfor; ?>
 							</div>
-<!--							<video width="100%" height="100%"-->
-<!--								   id="my-player"-->
-<!--								   class="video-js" controls-->
-<!--								   preload="auto" autoplay >-->
-<!--							</video>-->
+							<?php else:?>
+							<video width="100%" height="100%"
+								   id="my-player"
+								   class="video-js" controls
+								   preload="auto" autoplay >
+							</video>
+							<?php endif;?>
 						</div>
 					</div>
 					<div class="col-4" style="height: 530px;overflow: hidden">
@@ -201,10 +206,16 @@
 
 		<!-- JS inject for media -->
 		<script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?>"></script>
-		<script src="<?= base_url('assets/js/media/Slider.js')?>"></script>
 		<script src="<?= base_url('assets/js/node_modules/video.js/dist/video.min.js')?>"></script>
 		<script src="<?= base_url('assets/js/node_modules/videojs-playlist/dist/videojs-playlist.min.js')?>"></script>
+
+		<?php
+			if ($media['media_aktif'] === 'gambar'):
+		?>
+		<script src="<?= base_url('assets/js/media/Slider.js')?>"></script>
+		<?php else:?>
 		<script src="<?= base_url('assets/js/media/VideoPlayer.js?v=1.0.0&load='.time())?>"></script>
+		<?php endif;?>
 		<!-- JS inject for media -->
 
 		<!-- component script-->

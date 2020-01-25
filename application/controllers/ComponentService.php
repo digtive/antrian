@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ComponentService extends GLOBAL_Controller {
+class ComponentService extends GLOBAL_Controller
+{
 	private $userAppID;
 
 	public function __construct()
@@ -9,9 +10,9 @@ class ComponentService extends GLOBAL_Controller {
 		parent::__construct();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->userAppID = get_cookie('user_app');
-		$this->load->model('ComponentModel','component');
-		$this->load->model('LoketModel','loket');
-		$this->load->model('LayananModel','layanan');
+		$this->load->model('ComponentModel', 'component');
+		$this->load->model('LoketModel', 'loket');
+		$this->load->model('LayananModel', 'layanan');
 	}
 
 	/*
@@ -24,13 +25,13 @@ class ComponentService extends GLOBAL_Controller {
 		);
 		$userApp = parent::model('component')->get_user_app($query);
 
-		if ($userApp !== null){
+		if ($userApp !== null) {
 			echo json_encode(array(
 				'data' => $userApp,
 				'message' => 'menampilkan data aplikasi pengguna',
 				'status' => 'success'
 			));
-		}else{
+		} else {
 			echo json_encode(array(
 				'data' => null,
 				'message' => 'tidak ada data untuk ditampilkan',
@@ -44,7 +45,7 @@ class ComponentService extends GLOBAL_Controller {
 	 * */
 	public function editHeader()
 	{
-		if (isset($_POST['background-header'])){
+		if (isset($_POST['background-header'])) {
 			$clientInput = array(
 				"logo-position" => parent::post('logo-position'),
 				"background-header" => parent::post('background-header'),
@@ -64,7 +65,7 @@ class ComponentService extends GLOBAL_Controller {
 				'app_date_edited' => date('Y-m-d H:i:s')
 			);
 
-			parent::model('component')->edit_component($this->userAppID,$dataEdit);
+			parent::model('component')->edit_component($this->userAppID, $dataEdit);
 
 			echo json_encode(array(
 				'data' => null,
@@ -72,7 +73,7 @@ class ComponentService extends GLOBAL_Controller {
 				'status' => 'success'
 			));
 
-		}else{
+		} else {
 			echo json_encode(array(
 				'data' => null,
 				'message' => 'permintaan ditolak',
@@ -83,7 +84,7 @@ class ComponentService extends GLOBAL_Controller {
 
 	public function editFooter()
 	{
-		if (isset($_POST['background-footer'])){
+		if (isset($_POST['background-footer'])) {
 			$clientInput = array(
 				"background-footer" => parent::post('background-footer'),
 				"color-footer" => parent::post('color-footer'),
@@ -98,7 +99,7 @@ class ComponentService extends GLOBAL_Controller {
 				'app_date_edited' => date('Y-m-d H:i:s')
 			);
 
-			parent::model('component')->edit_component($this->userAppID,$dataEdit);
+			parent::model('component')->edit_component($this->userAppID, $dataEdit);
 
 			echo json_encode(array(
 				'data' => null,
@@ -106,7 +107,7 @@ class ComponentService extends GLOBAL_Controller {
 				'status' => 'success'
 			));
 
-		}else{
+		} else {
 			echo json_encode(array(
 				'data' => null,
 				'message' => 'permintaan ditolak',
@@ -117,7 +118,7 @@ class ComponentService extends GLOBAL_Controller {
 
 	public function editService()
 	{
-		if (isset($_POST['background-queue-box'])){
+		if (isset($_POST['background-queue-box'])) {
 			$clientInput = array(
 				'background-queue-box' => parent::post('background-queue-box'),
 				'background-queue-number' => parent::post('background-queue-number'),
@@ -140,7 +141,7 @@ class ComponentService extends GLOBAL_Controller {
 				'app_date_edited' => date('Y-m-d H:i:s')
 			);
 
-			parent::model('component')->edit_component($this->userAppID,$dataEdit);
+			parent::model('component')->edit_component($this->userAppID, $dataEdit);
 
 			echo json_encode(array(
 				'data' => null,
@@ -148,7 +149,7 @@ class ComponentService extends GLOBAL_Controller {
 				'status' => 'success'
 			));
 
-		}else{
+		} else {
 			echo json_encode(array(
 				'data' => null,
 				'message' => 'permintaan ditolak',
@@ -159,20 +160,19 @@ class ComponentService extends GLOBAL_Controller {
 
 	public function unggahLatar()
 	{
-		if (isset($_POST['unggah'])){
+		if (isset($_POST['unggah'])) {
 			$backgroundImages = parent::post('background-image');
 			$query = array(
 				'app_id' => get_cookie('user_app')
 			);
 
-			$data['component']  = parent::model('component')->get_user_app($query);
-			$decodeComponent = json_decode($data['component']['app_container'],true);
+			$data['component'] = parent::model('component')->get_user_app($query);
+			$decodeComponent = json_decode($data['component']['app_container'], true);
 			$warnaLama = $decodeComponent['background-color'];
 			$gambarLama = $decodeComponent['background-image-src'];
 
 
-
-			if ($backgroundImages === 'true'){
+			if ($backgroundImages === 'true') {
 				$config['upload_path'] = './assets/images/background/';
 				$config['allowed_types'] = 'png|jpeg|jpg';
 				$this->load->library('upload', $config);
@@ -184,7 +184,7 @@ class ComponentService extends GLOBAL_Controller {
 				$dataContainer = array(
 					'background-color' => $warnaLama,
 					'background-image' => parent::post('background-image'),
-					'background-image-src' => base_url('assets/images/background/').$gambarLatar
+					'background-image-src' => base_url('assets/images/background/') . $gambarLatar
 				);
 
 				$dataEdit = array(
@@ -192,8 +192,8 @@ class ComponentService extends GLOBAL_Controller {
 					'app_date_edited' => date('Y-m-d H:i:s')
 				);
 
-				parent::model('component')->edit_component($this->userAppID,$dataEdit);
-			}else{
+				parent::model('component')->edit_component($this->userAppID, $dataEdit);
+			} else {
 				$dataContainer = array(
 					'background-color' => parent::post('background-color'),
 					'background-image' => parent::post('background-image'),
@@ -205,21 +205,21 @@ class ComponentService extends GLOBAL_Controller {
 					'app_date_edited' => date('Y-m-d H:i:s')
 				);
 
-				parent::model('component')->edit_component($this->userAppID,$dataEdit);
+				parent::model('component')->edit_component($this->userAppID, $dataEdit);
 			}
 
 
-			parent::alert('alert','edit');
+			parent::alert('alert', 'edit');
 			redirect('settings/parent');
 
-		}else{
+		} else {
 			show_404();
 		}
 	}
 
 	public function unggahLogo()
 	{
-		if (isset($_POST['unggah'])){
+		if (isset($_POST['unggah'])) {
 			$config['upload_path'] = './assets/images/logo/';
 			$config['allowed_types'] = 'png|jpeg|jpg';
 			$this->load->library('upload', $config);
@@ -229,25 +229,25 @@ class ComponentService extends GLOBAL_Controller {
 			$logo = $this->upload->data('file_name');
 
 			$dataEdit = array(
-				'app_logo' => json_encode(base_url('assets/images/logo/').$logo),
+				'app_logo' => json_encode(base_url('assets/images/logo/') . $logo),
 				'app_date_edited' => date('Y-m-d H:i:s')
 			);
 
-			parent::model('component')->edit_component($this->userAppID,$dataEdit);
+			parent::model('component')->edit_component($this->userAppID, $dataEdit);
 
-			parent::alert('alert','edit');
+			parent::alert('alert', 'edit');
 			redirect('settings/header');
 
-		}else{
+		} else {
 			show_404();
 		}
 	}
 
 	public function setGambar()
 	{
-		if (isset($_POST['simpan'])){
+		if (isset($_POST['simpan'])) {
 			$userMedia = parent::model('component')->get_user_media($this->userAppID);
-			$mediaGambar = json_decode($userMedia['media_gambar'],true);
+			$mediaGambar = json_decode($userMedia['media_gambar'], true);
 			$dataGambar = $mediaGambar['data-gambar'];
 			$titleGambar = $mediaGambar['title-gambar'];
 
@@ -259,24 +259,24 @@ class ComponentService extends GLOBAL_Controller {
 			$this->upload->do_upload('upload-gambar');
 			$titel = $this->upload->data('file_name');
 
-			array_push($dataGambar,base_url('assets/images/slides/').$titel);
-			array_push($titleGambar,$titel);
+			array_push($dataGambar, base_url('assets/images/slides/') . $titel);
+			array_push($titleGambar, $titel);
 
 			$dataEncode = array(
 				'durasi-slide' => parent::post('durasi-gambar'),
 				'data-gambar' => $dataGambar,
-				'title-gambar' =>$titleGambar
+				'title-gambar' => $titleGambar
 			);
 
 			$gambarOption = parent::post('gambar-option');
 
-			if ($gambarOption!== ''){
+			if ($gambarOption !== '') {
 				$dataEdit = array(
 					'media_gambar' => json_encode($dataEncode),
 					'media_aktif' => 'gambar',
 					'media_date_edited' => date('Y-m-d H:i:s'),
 				);
-			}else{
+			} else {
 				$dataEdit = array(
 					'media_gambar' => json_encode($dataEncode),
 					'media_aktif' => 'video',
@@ -285,20 +285,20 @@ class ComponentService extends GLOBAL_Controller {
 			}
 //			parent::cek_array($dataEdit);
 
-			parent::model('component')->edit_media($this->userAppID,$dataEdit);
+			parent::model('component')->edit_media($this->userAppID, $dataEdit);
 
-			parent::alert('alert','edit');
+			parent::alert('alert', 'edit');
 			redirect('settings/media');
-		}else{
+		} else {
 			show_404();
 		}
 	}
 
 	public function setVideo()
 	{
-		if (isset($_POST['unggahVideo'])){
+		if (isset($_POST['unggahVideo'])) {
 			$userMedia = parent::model('component')->get_user_media($this->userAppID);
-			$mediaVideo = json_decode($userMedia['media_video'],true);
+			$mediaVideo = json_decode($userMedia['media_video'], true);
 
 
 			$config['upload_path'] = './assets/videos/';
@@ -307,7 +307,7 @@ class ComponentService extends GLOBAL_Controller {
 			$this->load->library('upload', $config);
 			$this->upload->initialize($config);
 
-			if ($this->upload->do_upload('unggah-video')){
+			if ($this->upload->do_upload('unggah-video')) {
 
 				$title = $this->upload->data('file_name');
 				$ext = $this->upload->data('file_ext');
@@ -315,23 +315,23 @@ class ComponentService extends GLOBAL_Controller {
 				$data = array(
 					'sources' => array(
 						array(
-							'src' => base_url('assets/videos/'.$title),
-							'type' => 'video/'.str_replace('.','',$ext)
+							'src' => base_url('assets/videos/' . $title),
+							'type' => 'video/' . str_replace('.', '', $ext)
 						)
 					),
 					'title' => $title
 				);
 
-				array_push($mediaVideo,$data);
+				array_push($mediaVideo, $data);
 				$videoOption = parent::post('video-option');
 
-				if ($videoOption!== ''){
+				if ($videoOption !== '') {
 					$dataEdit = array(
 						'media_video' => json_encode($mediaVideo),
 						'media_aktif' => 'video',
 						'media_date_edited' => date('Y-m-d H:i:s'),
 					);
-				}else{
+				} else {
 					$dataEdit = array(
 						'media_video' => json_encode($mediaVideo),
 						'media_aktif' => 'gambar',
@@ -339,14 +339,14 @@ class ComponentService extends GLOBAL_Controller {
 					);
 				}
 
-				parent::model('component')->edit_media($this->userAppID,$dataEdit);
+				parent::model('component')->edit_media($this->userAppID, $dataEdit);
 
-				parent::alert('alert','edit');
+				parent::alert('alert', 'edit');
 				redirect('settings/media');
 
 			}
 
-		}else{
+		} else {
 			show_404();
 		}
 	}
@@ -354,17 +354,17 @@ class ComponentService extends GLOBAL_Controller {
 	public function deleteGambar($index)
 	{
 		$userMedia = parent::model('component')->get_user_media($this->userAppID);
-		$mediaGambar = json_decode($userMedia['media_gambar'],true);
+		$mediaGambar = json_decode($userMedia['media_gambar'], true);
 		$durasi = $mediaGambar['durasi-slide'];
 		$titleGambar = $mediaGambar['title-gambar'];
 		$dataGambar = $mediaGambar['data-gambar'];
-		array_splice($dataGambar,$index,1);
-		array_splice($titleGambar,$index,1);
+		array_splice($dataGambar, $index, 1);
+		array_splice($titleGambar, $index, 1);
 
 		$dataEncode = array(
 			'durasi-slide' => $durasi,
 			'data-gambar' => $dataGambar,
-			'title-gambar' =>$titleGambar
+			'title-gambar' => $titleGambar
 		);
 
 		$dataEdit = array(
@@ -372,79 +372,83 @@ class ComponentService extends GLOBAL_Controller {
 			'media_date_edited' => date('Y-m-d H:i:s'),
 		);
 
-		parent::model('component')->edit_media($this->userAppID,$dataEdit);
+		parent::model('component')->edit_media($this->userAppID, $dataEdit);
 
-		parent::alert('alert','edit');
+		parent::alert('alert', 'edit');
 		redirect('settings/media');
 	}
 
 	public function deleteVideo($index)
 	{
 		$userMedia = parent::model('component')->get_user_media($this->userAppID);
-		$mediavideo = json_decode($userMedia['media_video'],true);
+		$mediavideo = json_decode($userMedia['media_video'], true);
 
-		array_splice($mediavideo,$index,1);
+		array_splice($mediavideo, $index, 1);
 
 		$dataEdit = array(
 			'media_video' => json_encode($mediavideo),
 			'media_date_edited' => date('Y-m-d H:i:s'),
 		);
 
-		parent::model('component')->edit_media($this->userAppID,$dataEdit);
+		parent::model('component')->edit_media($this->userAppID, $dataEdit);
 
-		parent::alert('alert','edit');
+		parent::alert('alert', 'edit');
 		redirect('settings/media');
 	}
 
-	public function addLocket(){
-		if (isset($_POST['submit'])){
-		$nama = parent::post('locket_name');
-		$nomor = parent::post('locket_number');
-		$layanan = parent::post('locket_services');	
-		$data = array(
-			"loket_nama"=>$nama,
-			"loket_nomor"=>$nomor,
-			"loket_layanan_id"=>$layanan
-		);
-		parent::model('loket')->post_loket($data);
-		redirect('settings/loket');
+	public function addLocket()
+	{
+		if (isset($_POST['submit'])) {
+			$nama = parent::post('locket_name');
+			$nomor = parent::post('locket_number');
+			$layanan = parent::post('locket_services');
+			$data = array(
+				"loket_nama" => $nama,
+				"loket_nomor" => $nomor,
+				"loket_layanan_id" => $layanan
+			);
+			parent::model('loket')->post_loket($data);
+			redirect('settings/loket');
 		}
 
 	}
-	public function deleteLocket($index){
+
+	public function deleteLocket($index)
+	{
 		$data = array(
-			"loket_id"=>$index
+			"loket_id" => $index
 		);
 		parent::model('loket')->deleteloket($data);
 		redirect('settings/loket');
 	}
-	public function editloket($index){
-		if (isset($_POST['submit'])){
-		$nama = parent::post('locket_name');
-		$nomor = parent::post('locket_number');
-		$layanan = parent::post('locket_services');	
-		$data = array(
-			"loket_nama"=>$nama,
-			"loket_nomor"=>$nomor,
-			"loket_layanan_id"=>$layanan
-		);
-		parent::model('loket')->editloket($index,$data);
-		redirect('settings/loket');
-		}
-		else{
-		$data['title'] = 'Pengaturan Aplikasi';
-		$data['page_title'] = 'Pengaturan Loket Aplikasi';
-		$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
-		$data['activeMenu'] = 'loket';
-		$query = array(
-			'app_id' => get_cookie('user_app')
-		);
-		$data['currentData'] = parent::model('loket')->getOne(array("loket_id"=>$index));
-		$data['component']  = parent::model('component')->get_user_app($query);
-		$data['serviceComponent'] = json_decode($data['component']['app_service'],true);
-		$data['loket'] = parent::model('loket')->getJoinLoket();
-		$data['layanan'] = parent::model('layanan')->get_layanan();
-		parent::settingsPages('components/loket_edit',$data);
+
+	public function editloket($index)
+	{
+		if (isset($_POST['submit'])) {
+			$nama = parent::post('locket_name');
+			$nomor = parent::post('locket_number');
+			$layanan = parent::post('locket_services');
+			$data = array(
+				"loket_nama" => $nama,
+				"loket_nomor" => $nomor,
+				"loket_layanan_id" => $layanan
+			);
+			parent::model('loket')->editloket($index, $data);
+			redirect('settings/loket');
+		} else {
+			$data['title'] = 'Pengaturan Aplikasi';
+			$data['page_title'] = 'Pengaturan Loket Aplikasi';
+			$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
+			$data['activeMenu'] = 'loket';
+			$query = array(
+				'app_id' => get_cookie('user_app')
+			);
+			$data['currentData'] = parent::model('loket')->getOne(array("loket_id" => $index));
+			$data['component'] = parent::model('component')->get_user_app($query);
+			$data['serviceComponent'] = json_decode($data['component']['app_service'], true);
+			$data['loket'] = parent::model('loket')->getJoinLoket();
+			$data['layanan'] = parent::model('layanan')->get_layanan();
+			parent::settingsPages('components/loket_edit', $data);
 		}
 	}
 }

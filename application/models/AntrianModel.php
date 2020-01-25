@@ -24,7 +24,7 @@
 			return $query;
 		}
 		public function post_antrian($data){
-            return parent::insert_data($this->initTable(),$data);
+            return parent::insert_with_status($this->initTable(),$data);
         }
         public function getOne($param){
             return parent::get_array_of_row($this->initTable(),$param);

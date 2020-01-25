@@ -9,6 +9,10 @@ $route['settings/footer'] = 'ComponentController/footer';
 $route['settings/loket'] = 'ComponentController/loket';
 $route['settings/parent'] = 'ComponentController/parent';
 
+/*-- second monitor --*/
+$route['layanan'] = 'LayananController';
+$route['layanan/daftar'] = 'LayananController/lists';
+
 /*-- app routes --*/
 $route['settings'] = 'AppController/settings';
 $route['settings/colours'] = 'AppController/colours';

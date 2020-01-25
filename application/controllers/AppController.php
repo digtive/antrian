@@ -11,6 +11,10 @@
 			$this->load->model('AntrianModel','antrian');
 			date_default_timezone_set("Asia/Jakarta");
 
+			if ($_COOKIE['user_app']  === ''){
+				setcookie('user_app','1',time()+(86400*30),'/');
+			}
+
 			if (!isset($_COOKIE['user_app'])){
 				setcookie('user_app','1',time()+(86400*30),'/');
 			}
