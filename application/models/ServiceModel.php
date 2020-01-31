@@ -25,6 +25,20 @@
 			return $query;
 		}
 
+		// mengambil semua antrian selesai
+		public function get_complete_queue($locketId){
+			$this->db->select('*');
+			$this->db->from('tbl_antrian');
+			$this->db->where('tbl_antrian.antrian_loket_id', $locketId);
+			$this->db->where('antrian_status', 'selesai');
+			$this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', date('Y-m-d'));
+			$this->db->join('tbl_loket', 'tbl_loket.loket_id = tbl_antrian.antrian_loket_id');
+			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
+			$this->db->order_by('antrian_nomor', 'desc');
+			$query = $this->db->get();
+			return $query;
+		}
+
 		/*
 		 * mencari antrian yang sedang aktif pada loket tertentu
 		 * */
@@ -90,9 +104,16 @@
 
 		public function get_call_by_id($id)
 		{
-			$query = array('panggilan_id',$id);
-			$call = parent::get_object_of_row('tbl_panggilan',$query);
-			return $call->row_array();
+			$this->db->select('*');
+			$this->db->from('tbl_panggilan');
+			$this->db->where('tbl_panggilan.panggilan_id', $id);
+			$this->db->join('tbl_loket', 'tbl_loket.loket_id = tbl_panggilan.panggilan_loket');
+			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_loket.loket_id');
+			$query = $this->db->get();
+			return $query->row_array();
+//			$query = array('panggilan_id',$id);
+//			$call = parent::get_object_of_row('tbl_panggilan',$query);
+//			return $call->row_array();
 		}
 
 		/*

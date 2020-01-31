@@ -184,7 +184,6 @@
 	<script src="<?= base_url('assets/js/audio/Services.js?v=1.0.0&&load='.time()) ?>"></script>
 	<script src="<?= base_url('assets/js/audio/AudioHelper.js?v=1.0.0&&load='.time()) ?>"></script>
 	<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
-	<script src="<?= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?>"></script>
 	<!-- end inject -->
 
 	<!-- swap queue component-->
@@ -198,9 +197,6 @@
 	<script src="<?= base_url('assets/js/node_modules/video.js/dist/video.min.js')?>"></script>
 	<script src="<?= base_url('assets/js/node_modules/videojs-playlist/dist/videojs-playlist.min.js')?>"></script>
 	<!-- JS inject for media -->
-
-	<!-- component script-->
-	<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
 
 	<script>
 

@@ -3,20 +3,19 @@ $(document).ready(function(){
 	let connection = new Connection();
 	let audio = new AudioHelper();
 	let antrian = new MainAntrian();
-	
+	let serviceComponent = new ServiceComponent();
+
 	const BASE_URL = connection.BASE_URL;
 
 	let callData = antrian.getCallData();
-	let loketAktif;
-	if (callData.panggilan_loket !== null){
-		loketAktif = callData.panggilan_loket;
-	}else{
-		loketAktif = '1';
-	}
+	serviceComponent.serviceList();
+	serviceComponent.serviceComponent(callData);
 
 	setInterval(function () {
 		let call = antrian.getCallData();
 		if (callData.panggilan_updated !== call.panggilan_updated){
+			serviceComponent.serviceComponent(call);
+			serviceComponent.serviceList();
 			let currentQueue = call.panggilan_antrian;
 			let currentLocket = call.panggilan_loket;
 			play('in', 1);
@@ -25,15 +24,10 @@ $(document).ready(function(){
 			play('loket',0);
 			play(currentLocket,0);
 
-			//component swap
-
-			antrian.swapComponent(loketAktif,currentLocket);
-			loketAktif = currentLocket;
-
 			// audio.chainPlay(call.panggilan_antrian,call.panggilan_loket);
 			callData = call;
 		}
-	},500);
+	},1000);
 
 
 	const audioMap = {

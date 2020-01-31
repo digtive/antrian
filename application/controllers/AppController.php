@@ -36,6 +36,8 @@
 				'app_id' => get_cookie('user_app')
 			);
 
+
+
 			$data['dataLoket'] = parent::model('antrian')->get_loket()->result_array();
 
 			$data['component']  = parent::model('component')->get_user_app($query);

@@ -10,6 +10,18 @@
         public function initTable(){
             return "tbl_antrian";
         }
+        public function get_join_antrian()
+		{
+			$this->db->select('*');
+			$this->db->from($this->initTable());
+			$this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', date());
+			$this->db->join('tbl_loket', 'tbl_loket.loket_id = tbl_antrian.antrian_loket_id');
+			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
+			$this->db->order_by('antrian_nomor','desc');
+			$this->db->limit(5);
+			$query = $this->db->get();
+			return $query;
+		}
         public function get_antrian()
 		{
 			return parent::get_object_of_table($this->initTable());

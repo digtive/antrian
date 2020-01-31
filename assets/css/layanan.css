@@ -1,24 +1,43 @@
-	#layananan-container{
-		width: 100%;
-		height: 768px;
-		max-height: 768px;
-		padding: 8px 12px;
-		box-sizing: border-box;
-		overflow: hidden;
-	}
+#layananan-container {
+	width: 100%;
+	height: 768px;
+	max-height: 768px;
+	padding: 8px 12px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
 
-	#layanan-header{
-		width: 100%;
-		height: 150px;
-		max-height: 160px;
-	}
+#layanan-header {
+	width: 100%;
+	height: 150px;
+	max-height: 160px;
+}
 
-	#layanan-body{
-		width: 100%;
-	}
+#layanan-body {
+	width: 100%;
+}
 
-	#layanan-footer{
-		width: 100%;
-		padding: 32px 40px;
-	}
+#layanan-footer {
+	width: 100%;
+	padding: 32px 40px;
+}
+#queue-box-wrapper{
+	max-height: 310px;
+	height: 305px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
 
+.card-service {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: initial;
+	min-height: 140px;
+	height: 140px;
+	overflow: hidden;
+	clip-path: polygon(86% 0, 100% 22%, 100% 92%, 97% 100%, 7% 100%, 0 87%, 0 0);
+}
+.active-queue-number{
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+}

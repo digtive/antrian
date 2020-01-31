@@ -10,6 +10,8 @@
 		<link rel="stylesheet" href="<?= base_url('assets/node_modules/simple-line-icons/css/simple-line-icons.css')?>">
 		<link rel="stylesheet" href="<?= base_url('assets/node_modules/flag-icon-css/css/flag-icon.min.css')?>">
 		<link rel="stylesheet" href="<?= base_url('assets/node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css')?>">
+		<link rel="stylesheet" href="<?= base_url('assets/css/animate.css')?>">
+		<link rel="stylesheet" href="<?= base_url('assets/js/node_modules/bxslider/jquery.bxslider.css')?>">
 		<!-- endinject -->
 
 		<!-- plugin css for this page -->
@@ -23,9 +25,26 @@
 		<link rel="stylesheet" href="<?= base_url('assets/css/fonts.css?v=1.0.0&&load='.time().'') ?>">
 		<link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.0&&load='.time().'')?>">
 		<link rel="stylesheet" href="<?= base_url('assets/css/app.css?v=1.0.0&&load='.time().'')?>">
+		<link rel="stylesheet" href="<?= base_url('assets/css/layanan.css?v=1.0.0&&load='.time().'')?>">
 		<!-- endinject -->
 
 		<link rel="shortcut icon" href="<?= base_url('assets/images/icon-antrian.png') ?>"/>
+
+		<style>
+			::-webkit-scrollbar {
+				width: 2px;
+			}
+
+			::-webkit-scrollbar-track {
+				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+				border-radius: 10px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				border-radius: 10px;
+				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+			}
+		</style>
 
 	</head>
 
@@ -86,17 +105,22 @@
 			<div id="content-card">
 				<div class="row">
 					<div class="col-8">
+
 						<div id="content-wrapper">
 							<?php
 								if ($media['media_aktif'] ==='gambar'):
 							?>
-							<div class="slider" style="height: 100%!important;">
-								<?php for ($i = 0; $i < count($dataGambar); $i++):?>
-								<div>
-									<img src="<?= $dataGambar[$i]?>" alt=""/>
-								</div>
-								<?php endfor; ?>
-							</div>
+
+								<ul class="horizontal-bxslider">
+									<?php for ($i = 0; $i < count($dataGambar); $i++):?>
+										<li>
+											<img src="<?= $dataGambar[$i]?>" alt="" height="510px"/>
+										</li>
+									<?php endfor; ?>
+								</ul>
+<!--							<div class="slider" style="height: 100%!important;">-->
+<!--								-->
+<!--							</div>-->
 							<?php else:?>
 							<video width="100%" height="100%"
 								   id="my-player"
@@ -106,30 +130,27 @@
 							<?php endif;?>
 						</div>
 					</div>
-					<div class="col-4" style="height: 530px;overflow: hidden">
-						<div id="queue-active-header" class="hexagon-shape d-flex justify-content-start">
-							<h3>SEDANG DI PANGGIL</h3>
-						</div>
-						<div id="queue-box-wrapper">
-							<?php foreach ($dataLoket as $k => $v):?>
-							<div class="queue-box" style="background-color: <?= $loket['background-queue-box']; ?>;" id="loket-<?= $v['loket_id']?>">
-								<div class="queue-name">
-									<h2 class="font-weight-light" style="color: <?= $loket['color-queue-name']; ?>;font-size: 25px;font-family: <?= $loket['font-family-name']; ?>">
-										<?= $v['layanan_nama']?> <br>
-									</h2>
-								</div>
-								<div class="queue-number d-flex justify-content-end" style="background-color: <?= $loket['background-queue-number'];?>;">
-									<h1 class="queue-number-content" style="font-family: <?= $loket['font-family-number'];?> ;font-weight: bolder;color: <?= $loket['color-number'];?>">A008</h1>
-								</div>
-								<div class="queue-footer d-flex justify-content-between" style="border-top: 4px <?= $loket['border-top-footer-color'];?> solid;background-color: <?= $loket['background-queue-footer'];?>">
-									<span style="color: <?= $loket['color-footer'];?>;font-family: <?= $loket['font-family-footer'];?>">Menuju Loket : <?= $v['loket_nama']?></span>
-									<span style="color: <?= $loket['color-left-queue'];?>;font-family: <?= $loket['font-family-left-queue'];?>">Sisa Antrian : 4</span>
-								</div>
-							</div>
-							<?php endforeach; ?>
+					<!-- service list -->
+					<div class="col-4" style="height: 536px;overflow: hidden">
+						<div id="queue-box-wrapper" class="grid-margin">
 
 						</div>
+
+						<div class="card card-shadow grid-margin" style='clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 5% 50%, 0% 0%);
+							background-color: white;'>
+							<div style='background-image: url("<?= base_url()?>assets/images/background/batik.png");background-size: cover'>
+								<div class="card-body p-2">
+									<h3 style="font-family: titilliumweb-bold;color: #4a8dc5" class="text-center m-0">Daftar Layanan</h3>
+								</div>
+							</div>
+						</div>
+						<div class="service-list" style="max-height: 320px;height: 305px;overflow: hidden">
+							<ul class="bxslider" id="service-list">
+
+							</ul>
+						</div>
 					</div>
+					<!-- service list -->
 				</div>
 			</div>
 			<!-- ---- END CONTENT SECTION ---- -->
@@ -196,8 +217,10 @@
 		<script src="<?= base_url('assets/js/audio/Services.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/audio/AudioHelper.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
+		<!-- generate component from js fro active qeueu component -->
+		<script src="<?= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?>"></script>
-		<!-- end inject -->
+		<!-- end inject for playing audio-->
 
 		<!-- swap queue component-->
 		<script src="<?= base_url('assets/js/components/swapsies.js?v=1.0.0&&load='.time())?>"></script>
@@ -216,6 +239,9 @@
 		<?php else:?>
 		<script src="<?= base_url('assets/js/media/VideoPlayer.js?v=1.0.0&load='.time())?>"></script>
 		<?php endif;?>
+		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/vendor/jquery.easing.1.3.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/vendor/jquery.fitvids.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/jquery.bxslider.js')?>"></script>
 		<!-- JS inject for media -->
 
 		<!-- component script-->
@@ -223,6 +249,7 @@
 
 	<script>
 			$(document).ready(function () {
+			    $('.service-info.active').fadeIn('slow');
 				let durasi = <?= (int)$durasi?>;
 				const getUrl = window.location;
                 let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+'/';
@@ -230,7 +257,26 @@
 					let btnSetting = key.originalEvent.key;
 					if (btnSetting === 's'){
 					    window.location.href = baseUrl+'settings/parent';
+					}else if (btnSetting === 'l'){
+					    window.location.href = baseUrl+'layanan';
 					}
+                });
+
+                $('.bxslider').bxSlider({
+                    auto: true,
+					mode: 'vertical',
+					controls : false,
+					pager : false,
+					speed: 1000,
+					pause: 3000
+                });
+
+                $('.horizontal-bxslider').bxSlider({
+                    auto: true,
+                    mode: 'horizontal',
+                    controls : false,
+					speed: 2000,
+					pause: 5000
                 });
 
                 $('.slider').bbslider({

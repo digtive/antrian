@@ -16,6 +16,7 @@ $(document).ready(function(){
 					'<h5>Silahkan Cetak Karcis dan Menunggu</h5>'
 				,
 				type: 'success',
+				allowOutsideClick: false,
 				showCloseButton: false,
 				showCancelButton: false,
 				confirmButtonText:

@@ -65,6 +65,15 @@
 			<div class="row">
 				<?php foreach ($dataLoket as $k => $v):
 					$antrianLoket = $service->get_queue_by_locket($v['loket_id']);
+					$mengantri = 0;
+					$selesai = 0;
+					foreach ($antrianLoket->result_array() as $item => $value) {
+						if ($value['antrian_status'] !== 'selesai'){
+							$mengantri++;
+						}else{
+							$selesai++;
+						}
+					}
 					$jumlahAntrian = $antrianLoket->num_rows();
 				?>
 
@@ -82,7 +91,8 @@
 								</div>
 								<div class="card-footer p-2">
 									<div class="d-flex justify-content-between">
-											<p class="m-0 text-white" style="font-family: titilliumweb-bold">Menuju Loket : <?= $v['loket_nama']?></p> <span class="badge badge-light text-dark"><?= $jumlahAntrian ?> antrian</span>
+											<p class="m-0 text-white" style="font-family: titilliumweb-bold">Menuju Loket : <?= $v['loket_nama']?></p>
+											<span class="badge badge-light text-dark"><?= $mengantri ?> mengantri, <?= $selesai ?> selesai</span>
 									</div>
 								</div>
 							</div>
@@ -173,7 +183,6 @@
 	<script src="<?= base_url('assets/js/audio/Services.js?v=1.0.0&&load='.time()) ?>"></script>
 	<script src="<?= base_url('assets/js/audio/AudioHelper.js?v=1.0.0&&load='.time()) ?>"></script>
 	<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
-	<script src="<?= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?>"></script>
 	<!-- end inject -->
 
 	<!-- swap queue component-->
@@ -191,13 +200,6 @@
 	<!-- JS Inject for service / take queue-->
 	<script src="<?= base_url('assets/js/layanan/MainLayanan.js')?>"></script>
 	<!-- JS Inject for service / take queue-->
-
-	<!-- component script-->
-	<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
-
-	<script>
-
-	</script>
 
 </body>
 
