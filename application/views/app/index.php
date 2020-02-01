@@ -144,11 +144,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="service-list" style="max-height: 320px;height: 305px;overflow: hidden">
-							<ul class="bxslider" id="service-list">
-
-							</ul>
-						</div>
+<!--						<div class="service-list" style="max-height: 320px;height: 305px;overflow: hidden">-->
+<!--							<ul class="bxslider" id="service-list">-->
+<!---->
+<!--							</ul>-->
+<!--						</div>-->
 					</div>
 					<!-- service list -->
 				</div>
