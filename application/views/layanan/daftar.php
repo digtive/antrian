@@ -198,7 +198,7 @@
 	<!-- JS inject for media -->
 
 	<!-- JS Inject for service / take queue-->
-	<script src="<?= base_url('assets/js/layanan/MainLayanan.js')?>"></script>
+	<script src="<?= base_url('assets/js/layanan/MainLayanan.js?v=1.0.0&&load='.time())?>"></script>
 	<!-- JS Inject for service / take queue-->
 
 </body>

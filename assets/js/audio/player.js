@@ -15,7 +15,6 @@ $(document).ready(function(){
 		let call = antrian.getCallData();
 		if (callData.panggilan_updated !== call.panggilan_updated){
 			serviceComponent.serviceComponent(call);
-			serviceComponent.serviceList();
 			let currentQueue = call.panggilan_antrian;
 			let currentLocket = call.panggilan_loket;
 			play('in', 1);
