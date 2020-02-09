@@ -23,7 +23,7 @@ $route['settings/print'] = 'AppController/prints';
 $route['settings/header'] = 'ComponentController/header';
 
 $route['api/queue/antrian'] = 'ApiController/antrian';
-$route['api/queue/call'] = 'ApiController/call';
+$route['api/queue/loket'] = 'ApiController/loket';
 $route['api/queue/recall'] = 'ApiController/recall';
 $route['api/queue/layanan'] = 'ApiController/layanan';
 
