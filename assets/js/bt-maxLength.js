@@ -1,5 +1,9 @@
 (function($) {
   'use strict';
+	$('.bt-max-length').maxlength({
+		warningClass: "badge mt-1 badge-success",
+		limitReachedClass: "badge mt-1 badge-danger"
+	});
   $('#defaultconfig').maxlength({
     warningClass: "badge mt-1 badge-success",
     limitReachedClass: "badge mt-1 badge-danger"

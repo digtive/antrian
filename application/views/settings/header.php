@@ -52,7 +52,7 @@
 <body>
 <!-- start container-->
 <div class="container-scroller" style="padding-top: 40px">
-	<div class="container-fluid" style="padding: 20px 80px!important;box-sizing: border-box ">
+	<div class="container-fluid"  id="main-container">
 
 		<div class="row">
 			<div class="col-12">
@@ -102,6 +102,7 @@
 								$header = '';
 								$footer = '';
 								$parent = '';
+								$tombol = '';
 
 								switch ($activeMenu){
 									case 'umum':
@@ -124,6 +125,8 @@
 										$footer = $active;break;
 									case 'parent':
 										$parent = $active;break;
+									case 'tombol':
+										$tombol = $active;break;
 								}
 
 							?>
@@ -155,6 +158,12 @@
 								<a href="<?= base_url('settings/loket')?>" class="<?php echo $loket;?>">
 									<i class="icon-layers "></i>
 									Loket
+								</a>
+							</li>
+							<li>
+								<a href="<?= base_url('settings/tombol')?>" class="<?php echo $tombol;?>">
+									<i class="icon-drawer"></i>
+									Tombol
 								</a>
 							</li>
 							<li>

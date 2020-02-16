@@ -451,4 +451,31 @@ class ComponentService extends GLOBAL_Controller
 			parent::settingsPages('components/loket_edit', $data);
 		}
 	}
+
+	public function editTombol()
+	{
+		if (isset($_POST['simpan'])){
+			$loket = parent::model('loket')->getJoinLoket()->result_array();
+			$dataTombol = array(
+				parent::post('settings') => parent::post('settings-url'),
+				parent::post('utama') => parent::post('utama-url'),
+				parent::post('layanan') => parent::post('layanan-url'),
+				parent::post('recall') => parent::post('recall-url'),
+			);
+
+			foreach ($loket as $key => $value){
+				$dataTombol[parent::post('loket-'.$value['loket_id'])] = parent::post('loket-'.$value['loket_id'].'-url');
+			}
+
+			$dataEdit = array(
+				'app_id' => $this->userAppID,
+				'setting_tombol' => json_encode($dataTombol),
+			);
+
+			parent::model('layanan')->edit_setting_tombol(1,$dataEdit);
+
+			parent::alert('alert','edit');
+			redirect('settings/tombol');
+		}
+	}
 }

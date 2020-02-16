@@ -246,6 +246,7 @@
 
 		<!-- component script-->
 		<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?>"></script>
 
 	<script>
 			$(document).ready(function () {

@@ -93,6 +93,24 @@ class ComponentController extends GLOBAL_Controller {
 //		parent::cek_array($data['serviceComponent']);
 		parent::settingsPages('components/loket',$data);
 	}
+	public function tombol()
+	{
+		$data['title'] = 'Pengaturan Aplikasi';
+		$data['page_title'] = 'Pengaturan Tombol Aplikasi';
+		$data['settingsTitle'] = 'Pengaturan Tombol Aplikasi';
+		$data['activeMenu'] = 'tombol';
+
+		$query = array(
+			'app_id' => get_cookie('user_app')
+		);
+		$data['component']  = parent::model('component')->get_user_app($query);
+		$data['serviceComponent'] = json_decode($data['component']['app_service'],true);
+		$data['loket'] = parent::model('loket')->getJoinLoket();
+		$data['layanan'] = parent::model('layanan')->get_layanan();
+		$data['dataLoket'] = $data['loket']->result_array();
+//		parent::cek_array($data['loket']->result_array());
+		parent::settingsPages('components/tombol',$data);
+	}
 	public function editLoket(){
 		$data['title'] = 'Pengaturan Aplikasi';
 		$data['page_title'] = 'Pengaturan Loket Aplikasi';

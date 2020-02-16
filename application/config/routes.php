@@ -21,6 +21,7 @@ $route['settings/audio'] = 'AppController/audio';
 $route['settings/media'] = 'AppController/media';
 $route['settings/print'] = 'AppController/prints';
 $route['settings/header'] = 'ComponentController/header';
+$route['settings/tombol'] = 'ComponentController/tombol';
 
 $route['api/queue/antrian'] = 'ApiController/antrian';
 $route['api/queue/loket'] = 'ApiController/loket';

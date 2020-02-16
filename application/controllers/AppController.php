@@ -22,6 +22,14 @@
 		
 		public function index()
 		{
+
+			if ($_COOKIE['user_app']  === ''){
+				setcookie('user_app','1',time()+(86400*30),'/');
+			}
+
+			if (!isset($_COOKIE['user_app'])){
+				setcookie('user_app','1',time()+(86400*30),'/');
+			}
 			$data['title'] = 'Aplikasi Antrian';
 			$data['page_title'] = 'Aplikasi Antrian';
 

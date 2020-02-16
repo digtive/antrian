@@ -36,5 +36,8 @@
             $query = $this->db->get();
             return $query;
         }
+        public function edit_setting_tombol($id,$dataEdit){
+        	return parent::update_table('tbl_setting','setting_id',$id,$dataEdit);
+		}
 
     }

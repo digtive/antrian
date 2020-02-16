@@ -63,7 +63,10 @@
 <script src="<?= base_url()?>assets/js/jquery-file-upload.js"></script>
 <script src="<?= base_url()?>assets/js/formpickers.js"></script>
 <script src="<?= base_url()?>assets/js/form-repeater.js"></script>
-
+<script src="<?= base_url()?>assets/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="<?= base_url()?>assets/node_modules/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script src="<?= base_url()?>assets/js/form-validation.js"></script>
+<script src="<?= base_url()?>assets/js/bt-maxLength.js"></script>
 <!-- End custom js for this page-->
 
 <!-- Specific Custom js for this page-->
@@ -84,6 +87,7 @@
 <!-- JS inject for media -->
 <script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?>"></script>
 <script src="<?= base_url('assets/js/media/MediaSettings.js')?>"></script>
+<script src="<?= base_url('assets/js/media/customKeyboard.js')?>"></script>
 <!-- JS inject for media -->
 
 
