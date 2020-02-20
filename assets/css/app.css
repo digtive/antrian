@@ -1,12 +1,12 @@
 
-	@media only screen and (max-width: 1024px) {
+	@media only screen and (max-width: 1020px) {
 		#main-container{
-			padding: 20px 14px!important;
+			padding: 20px 24px!important;
 			box-sizing: border-box
 		}
 	}
 
-	@media only screen and (min-width: 1024px) {
+	@media only screen and (min-width: 1300px) {
 		#main-container{
 			padding: 20px 80px!important;
 			box-sizing: border-box

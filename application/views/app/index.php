@@ -74,7 +74,7 @@
 								<div class="parallelogram" style="background: <?= $header['background-paralelogram']?>;">
 								</div>
 								<div class="brand-wrapper" style='background-image: url("<?= base_url('assets/images/doodle/diamond.png')?>");background-repeat: no-repeat;background-position: right;background-size: inherit;'>
-									<img src="<?= $logo ?>" alt="" width="100%" height="100%">
+									<img src="<?= base_url().$logo ?>" alt="" width="100%" height="100%">
 								</div>
 							</div>
 						</div>
@@ -114,7 +114,7 @@
 								<ul class="horizontal-bxslider">
 									<?php for ($i = 0; $i < count($dataGambar); $i++):?>
 										<li>
-											<img src="<?= $dataGambar[$i]?>" alt="" height="510px"/>
+											<img src="<?= base_url().$dataGambar[$i]?>" alt="" height="510px"/>
 										</li>
 									<?php endfor; ?>
 								</ul>
@@ -130,24 +130,60 @@
 							<?php endif;?>
 						</div>
 					</div>
+
 					<!-- service list -->
 					<div class="col-4" style="height: 536px;overflow: hidden">
 						<div id="queue-box-wrapper" class="grid-margin">
-
-						</div>
-
-						<div class="card card-shadow grid-margin" style='clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 5% 50%, 0% 0%);
+							<div class="card card-shadow grid-margin" style='clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 5% 50%, 0% 0%);
 							background-color: white;'>
-							<div style='background-image: url("<?= base_url()?>assets/images/background/batik.png");background-size: cover'>
-								<div class="card-body p-2">
-									<h3 style="font-family: titilliumweb-bold;color: #4a8dc5" class="text-center m-0">Daftar Layanan</h3>
+								<div style='background-image: url("<?= base_url()?>assets/images/background/batik.png");background-size: cover'>
+									<div class="card-body p-2">
+										<h3 style="font-family: titilliumweb-bold;color: #4a8dc5" class="text-center m-0">Daftar Layanan</h3>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="service-list" style="max-height: 320px;height: 305px;overflow: hidden">
-							<ul class="bxslider" id="service-list">
 
-							</ul>
+							<div class="card card-shadow grid-margin bg-white card-service" style="background-image: url('<?= base_url()?>assets/images/background/servicecard-bg.png')" id="active-service">
+								<div class="card-body p-2">
+									<div class="row" style="height: 90px;max-height: 90px">
+										<div class="col-7 ">
+											<h3 style="color: #1d70b7;font-family: titilliumweb-bold" class="ml-1">Nama Layanan</h3>
+										</div>
+										<div class="col-5">
+											<h1 style="font-size: 45px;color: white;font-family: titilliumweb-bold" class="mt-3 ml-3 animated infinite flash active-queue-number">A-004</h1>
+										</div>
+									</div>
+									<div class="row" style="padding: 4px 8px;height: auto">
+										<div class="col-12 d-flex justify-content-end">
+											<span class="badge badge-light text-dark service-info active" style="font-family: titilliumweb-bold">
+												<h5 class="m-0" id="service-info">Menuju Loket : loket 1</h5>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<?php foreach ($dataLoket as $key => $v):?>
+								<div class="card card-shadow grid-margin bg-white card-service" style="background-image: url('<?= base_url()?>assets/images/background/servicecard-bg.png')" id="loket-1">
+									<div class="card-body p-2">
+										<div class="row" style="height: 90px;max-height: 90px">
+											<div class="col-7 ">
+												<h3 style="color: #1d70b7;font-family: titilliumweb-bold" class="ml-1"><?= $v['layanan_nama']?></h3>
+											</div>
+											<div class="col-5">
+												<h1 style="font-size: 45px;color: white;font-family: titilliumweb-bold" class="mt-3 ml-3 ">A-004</h1>
+											</div>
+										</div>
+										<div class="row" style="padding: 4px 8px;height: auto">
+											<div class="col-12 d-flex justify-content-end">
+											<span class="badge badge-light text-dark service-info active" style="font-family: titilliumweb-bold">
+												<h5 class="m-0" id="service-info">Menuju Loket : <?= $v['loket_id'] ?></h5>
+											</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							<?php endforeach;?>
 						</div>
 					</div>
 					<!-- service list -->
@@ -218,7 +254,7 @@
 		<script src="<?= base_url('assets/js/audio/AudioHelper.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
 		<!-- generate component from js fro active qeueu component -->
-		<script src="<?= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?>"></script>
+<!--		<script src="--><?//= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
 		<script src="<?= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?>"></script>
 		<!-- end inject for playing audio-->
 

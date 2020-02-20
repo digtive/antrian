@@ -457,14 +457,34 @@ class ComponentService extends GLOBAL_Controller
 		if (isset($_POST['simpan'])){
 			$loket = parent::model('loket')->getJoinLoket()->result_array();
 			$dataTombol = array(
-				parent::post('settings') => parent::post('settings-url'),
-				parent::post('utama') => parent::post('utama-url'),
-				parent::post('layanan') => parent::post('layanan-url'),
-				parent::post('recall') => parent::post('recall-url'),
+				'settings' => array(
+					'key' => parent::post('settings'),
+					'url' => parent::post('settings-url'),
+					'type' => 'redirect'
+				),
+				'utama' => array(
+					'key' => parent::post('utama'),
+					'url' => parent::post('utama-url'),
+					'type' => 'redirect'
+				),
+				 'layanan' => array(
+				 	'key' => parent::post('layanan'),
+				    'url' => parent::post('layanan-url'),
+				    'type' => 'redirect'
+				 ),
+				 'recall' => array(
+				 	'key' => parent::post('recall'),
+				    'url' => parent::post('recall-url'),
+				    'type' => 'service'
+				 )
 			);
 
 			foreach ($loket as $key => $value){
-				$dataTombol[parent::post('loket-'.$value['loket_id'])] = parent::post('loket-'.$value['loket_id'].'-url');
+				$dataTombol['loket-'.$value['loket_id']] = array(
+					'key' => parent::post('loket-'.$value['loket_id']),
+					'url' => parent::post('loket-'.$value['loket_id'].'-url'),
+					'type' => 'service'
+				);
 			}
 
 			$dataEdit = array(

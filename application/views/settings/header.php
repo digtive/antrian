@@ -131,12 +131,6 @@
 
 							?>
 							<li>
-								<a href="<?= base_url('settings')?>" class="<?php echo $umum;?>">
-									<i class="icon-wrench "></i>
-									Umum
-								</a>
-							</li>
-							<li>
 								<a href="<?= base_url('settings/parent')?>" class="<?php echo $parent;?>">
 									<i class="icon-screen-desktop "></i>
 									Background
@@ -176,6 +170,12 @@
 								<a href="<?= base_url('settings/print') ?>" class="<?= $cetakan; ?>">
 									<i class="icon-printer"></i>
 									Cetakan
+								</a>
+							</li>
+							<li>
+								<a href="<?= base_url('layanan/logout') ?>" >
+									<i class="icon-power"></i>
+									Keluar
 								</a>
 							</li>
 

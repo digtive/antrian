@@ -17,6 +17,11 @@
 			return parent::get_array_of_row($this->table, $query);
 		}
 
+		public function get_keyboard_setting($query)
+		{
+			return parent::get_array_of_row('tbl_setting',$query);
+		}
+
 		//user media
 		public function get_user_media($appId)
 		{

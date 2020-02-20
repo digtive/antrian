@@ -14,6 +14,7 @@
 			$this->load->model('LoketModel', 'loket');
 			$this->load->model('LayananModel','layanan');
 			$this->load->model('ServiceModel','service');
+			$this->load->model('ComponentModel','component');
 		}
 
 		public function queue()
@@ -78,6 +79,7 @@
 					));
 					parent::model('service')->edit_antrian($activeQueue['antrian_id'],array('antrian_status' => 'selesai'));
 					$dataPanggilan = array(
+						'panggilan_jenis' => 'call',
 						'panggilan_antrian' => $activeQueue['antrian_nomor'],
 						'panggilan_loket' => $activeQueue['loket_nomor'],
 						'panggilan_updated' => date('Y-m-d H:i:s')
@@ -89,6 +91,7 @@
 
 					parent::model('service')->edit_antrian($activeQueue['antrian_id'],array('antrian_status' => 'selesai'));
 					$dataPanggilan = array(
+						'panggilan_jenis' => 'call',
 						'panggilan_antrian' => $activeQueue['antrian_nomor'],
 						'panggilan_loket' => $activeQueue['loket_nomor'],
 						'panggilan_updated' => date('Y-m-d H:i:s')
@@ -136,6 +139,76 @@
 			$updatePanggilan = parent::model('service')->update_panggilan(1,$dataPanggilan);
 
 			return $this->getCall();
+		}
+
+		public function recallTo($locketId)
+		{
+			$queue = parent::model('service')->get_queue_by_locket($locketId);
+			if ($queue->num_rows() > 0){
+				$activeQueue = $this->currentQueue($locketId)->row_array();
+				if ($activeQueue!== null){
+					$antrianSelesai = parent::model('service')->get_complete_queue($locketId);
+					$recall = $antrianSelesai->row_array();
+					if ($antrianSelesai->num_rows() > 0){
+						$dataPanggilan = array(
+							'panggilan_jenis' => 'recall',
+							'recall_antrian' => $recall['antrian_nomor'],
+							'recall_loket' => $recall['loket_nomor'],
+							'panggilan_updated' => date('Y-m-d H:i:s')
+						);
+						$update = parent::model('service')->update_panggilan(1,$dataPanggilan);
+
+						echo json_encode(array(
+							'status' => '200',
+							'antrian' => str_pad($recall['antrian_nomor'], 3, '0', STR_PAD_LEFT),
+							'data' => $recall,
+							'update' => $update,
+							'message' => 'menampilkan nomor recall yang terakhir kali dipanggil sebelum aktif '.$locketId
+						));
+					}else{
+						$dataPanggilan = array(
+							'panggilan_jenis' => 'recall',
+							'recall_antrian' => $activeQueue['antrian_nomor'],
+							'recall_loket' => $activeQueue['loket_nomor'],
+							'panggilan_updated' => date('Y-m-d H:i:s')
+						);
+						$update = parent::model('service')->update_panggilan(1,$dataPanggilan);
+						echo json_encode(array(
+							'status' => '200',
+							'antrian' => str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
+							'data' => $activeQueue,
+							'update' => $update,
+							'message' => 'menampilkan recall untuk antrian pertama kali untuk loket '.$locketId
+						));
+					}
+				}else{
+					$antrianSelesai = parent::model('service')->get_complete_queue($locketId);
+					$recall = $antrianSelesai->row_array();
+					$dataPanggilan = array(
+						'panggilan_jenis' => 'recall',
+						'recall_antrian' => $recall['antrian_nomor'],
+						'recall_loket' => $recall['loket_nomor'],
+						'panggilan_updated' => date('Y-m-d H:i:s')
+					);
+					$update = parent::model('service')->update_panggilan(1,$dataPanggilan);
+					echo json_encode(array(
+						'status' => '200',
+						'antrian' => str_pad($recall['antrian_nomor'], 3, '0', STR_PAD_LEFT),
+						'data' => $recall,
+						'update' => $update,
+						'message' => 'menampilkan nomor recall untuk loket '.$locketId
+					));
+				}
+			}else{
+				echo json_encode(array(
+					'status' => '200',
+					'antrian' => str_pad(0, 3, '0', STR_PAD_LEFT),
+					'data' => array(),
+					'update' => 0,
+					'message' => 'belum ada antrian pada loket '.$locketId
+				));
+			}
+
 		}
 
 
@@ -345,4 +418,33 @@
 				}
 			}
 		}
+
+		public function execKeyboard($key){
+			$query = array(
+				'app_id' => get_cookie('user_app')
+			);
+			$data['keyboard']  = parent::model('component')->get_keyboard_setting($query);
+			$keylist = json_decode($data['keyboard']['setting_tombol'],true);
+			$shortCut = array();
+
+			foreach ($keylist as $item => $v) {
+				if ($keylist[$item]['key']===$key){
+						$shortCut['type'] = $keylist[$item]['type'];
+						$shortCut['key'] = $keylist[$item]['key'];
+						$shortCut['url'] = $keylist[$item]['url'];
+						$shortCut['status'] = '200';
+						$shortCut['message'] = 'berhasil menemukan shortcut';
+				}
+			}
+
+			if (!empty($shortCut) && $shortCut !== null){
+				echo json_encode($shortCut);
+			}else{
+				echo json_encode(array(
+					'status' => '404',
+					'message' => 'tidak dapat menemukan shortcut'
+				));
+			}
+		}
+
 	}

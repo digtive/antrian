@@ -43,7 +43,7 @@
 						<div class="card-footer bg-white border-0 p-0">
 							<div class="row">
 								<div class="col-12 d-flex justify-content-center">
-									<h3 style="font-family: inherit;color: inherit" id="text-footer">Silahkan Menunggu Nomor Anda Dipanggil</h3>
+									<h3 style="font-family: inherit;color: inherit" id="text-footer" class="text-center">Silahkan Menunggu Nomor Anda Dipanggil</h3>
 								</div>
 							</div>
 						</div>

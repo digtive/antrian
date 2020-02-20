@@ -23,93 +23,110 @@ class ComponentController extends GLOBAL_Controller {
 
 	public function parent()
 	{
-		$data['title'] = 'Pengaturan Aplikasi';
-		$data['page_title'] = 'Pengaturan Aplikasi';
-		$data['settingsTitle'] = 'Pengaturan  Aplikasi';
-		$data['activeMenu'] = 'parent';
+		if ($this->session->userdata('username') === null){
+			redirect('layanan/registrasi');
+		}else{
+			$data['title'] = 'Pengaturan Aplikasi';
+			$data['page_title'] = 'Pengaturan Aplikasi';
+			$data['settingsTitle'] = 'Pengaturan  Aplikasi';
+			$data['activeMenu'] = 'parent';
 
-		$query = array(
-			'app_id' => get_cookie('user_app')
-		);
+			$query = array(
+				'app_id' => get_cookie('user_app')
+			);
 
-		$data['component']  = parent::model('component')->get_user_app($query);
-		$data['container'] = json_decode($data['component']['app_container'],true);
+			$data['component']  = parent::model('component')->get_user_app($query);
+			$data['container'] = json_decode($data['component']['app_container'],true);
 //		parent::cek_array($data['container']);
 
-		parent::settingsPages('components/parent',$data);
+			parent::settingsPages('components/parent',$data);
+		}
 	}
 
 	public function header()
 	{
-		$data['title'] = 'Pengaturan Aplikasi';
-		$data['page_title'] = 'Pengaturan Header Aplikasi';
-		$data['settingsTitle'] = 'Pengaturan Header Aplikasi';
-		$data['activeMenu'] = 'header';
+		if ($this->session->userdata('username') === null){
+			redirect('layanan/registrasi');
+		}else{
+			$data['title'] = 'Pengaturan Aplikasi';
+			$data['page_title'] = 'Pengaturan Header Aplikasi';
+			$data['settingsTitle'] = 'Pengaturan Header Aplikasi';
+			$data['activeMenu'] = 'header';
 
-		$query = array(
-			'app_id' => get_cookie('user_app')
-		);
+			$query = array(
+				'app_id' => get_cookie('user_app')
+			);
 
-		$data['component']  = parent::model('component')->get_user_app($query);
-		$data['headerComponent'] = json_decode($data['component']['app_header'],true);
-		$data['logo'] = json_decode($data['component']['app_logo'],true);
-//		parent::cek_array($data['logo']);
+			$data['component']  = parent::model('component')->get_user_app($query);
+			$data['headerComponent'] = json_decode($data['component']['app_header'],true);
+			$data['logo'] = json_decode($data['component']['app_logo'],true);
 
-		parent::settingsPages('components/header',$data);
+			parent::settingsPages('components/header',$data);
+		}
 	}
 
 	public function footer()
 	{
-		$data['title'] = 'Pengaturan Aplikasi';
-		$data['page_title'] = 'Pengaturan Footer Aplikasi';
-		$data['settingsTitle'] = 'Pengaturan Footer Aplikasi';
-		$data['activeMenu'] = 'footer';
+		if ($this->session->userdata('username') === null){
+			redirect('layanan/registrasi');
+		}else{
+			$data['title'] = 'Pengaturan Aplikasi';
+			$data['page_title'] = 'Pengaturan Footer Aplikasi';
+			$data['settingsTitle'] = 'Pengaturan Footer Aplikasi';
+			$data['activeMenu'] = 'footer';
 
-		$query = array(
-			'app_id' => get_cookie('user_app')
-		);
+			$query = array(
+				'app_id' => get_cookie('user_app')
+			);
 
-		$data['component']  = parent::model('component')->get_user_app($query);
-		$data['footerComponent'] = json_decode($data['component']['app_footer'],true);
+			$data['component']  = parent::model('component')->get_user_app($query);
+			$data['footerComponent'] = json_decode($data['component']['app_footer'],true);
 //		parent::cek_array($data['footerComponent']);
 
-		parent::settingsPages('components/footer',$data);
+			parent::settingsPages('components/footer',$data);
+		}
 	}
 
 	public function loket()
 	{
-		$data['title'] = 'Pengaturan Aplikasi';
-		$data['page_title'] = 'Pengaturan Loket Aplikasi';
-		$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
-		$data['activeMenu'] = 'loket';
+		if ($this->session->userdata('username') === null){
+			redirect('layanan/registrasi');
+		}else{
+			$data['title'] = 'Pengaturan Aplikasi';
+			$data['page_title'] = 'Pengaturan Loket Aplikasi';
+			$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
+			$data['activeMenu'] = 'loket';
 
-		$query = array(
-			'app_id' => get_cookie('user_app')
-		);
-		$data['component']  = parent::model('component')->get_user_app($query);
-		$data['serviceComponent'] = json_decode($data['component']['app_service'],true);
-		$data['loket'] = parent::model('loket')->getJoinLoket();
-		$data['layanan'] = parent::model('layanan')->get_layanan();
+			$query = array(
+				'app_id' => get_cookie('user_app')
+			);
+			$data['component']  = parent::model('component')->get_user_app($query);
+			$data['serviceComponent'] = json_decode($data['component']['app_service'],true);
+			$data['loket'] = parent::model('loket')->getJoinLoket();
+			$data['layanan'] = parent::model('layanan')->get_layanan();
 //		parent::cek_array($data['serviceComponent']);
-		parent::settingsPages('components/loket',$data);
+			parent::settingsPages('components/loket',$data);
+		}
 	}
 	public function tombol()
 	{
-		$data['title'] = 'Pengaturan Aplikasi';
-		$data['page_title'] = 'Pengaturan Tombol Aplikasi';
-		$data['settingsTitle'] = 'Pengaturan Tombol Aplikasi';
-		$data['activeMenu'] = 'tombol';
+		if ($this->session->userdata('username') === null){
+			redirect('layanan/registrasi');
+		}else{
+			$data['title'] = 'Pengaturan Aplikasi';
+			$data['page_title'] = 'Pengaturan Tombol Aplikasi';
+			$data['settingsTitle'] = 'Pengaturan Tombol Aplikasi';
+			$data['activeMenu'] = 'tombol';
 
-		$query = array(
-			'app_id' => get_cookie('user_app')
-		);
-		$data['component']  = parent::model('component')->get_user_app($query);
-		$data['serviceComponent'] = json_decode($data['component']['app_service'],true);
-		$data['loket'] = parent::model('loket')->getJoinLoket();
-		$data['layanan'] = parent::model('layanan')->get_layanan();
-		$data['dataLoket'] = $data['loket']->result_array();
-//		parent::cek_array($data['loket']->result_array());
-		parent::settingsPages('components/tombol',$data);
+			$query = array(
+				'app_id' => get_cookie('user_app')
+			);
+			$data['keyboard']  = parent::model('component')->get_keyboard_setting($query);
+			$data['dataLoket'] = parent::model('loket')->getJoinLoket()->result_array();
+			$data['keyList'] = json_decode($data['keyboard']['setting_tombol'],true);
+
+			parent::settingsPages('components/tombol',$data);
+		}
 	}
 	public function editLoket(){
 		$data['title'] = 'Pengaturan Aplikasi';

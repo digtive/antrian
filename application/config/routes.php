@@ -11,7 +11,9 @@ $route['settings/parent'] = 'ComponentController/parent';
 
 /*-- second monitor --*/
 $route['layanan'] = 'LayananController';
+$route['layanan/registrasi'] = 'LayananController/registrasi';
 $route['layanan/daftar'] = 'LayananController/lists';
+$route['layanan/logout'] = 'LayananController/logout';
 
 /*-- app routes --*/
 $route['settings'] = 'AppController/settings';

@@ -61,7 +61,7 @@
 				<div class="row">
 
 					<div class="col-6 grid-margin animated bounceIn">
-						<a href="#">
+						<a href="<?= base_url('layanan/registrasi')?>">
 							<div class="card bg-behance card-shadow" style='background-image: url("<?= base_url()?>assets/images/background/batik.png");
 								background-size: cover;background-repeat: no-repeat;background-position: initial;'>
 								<div class="card-body">
@@ -196,6 +196,7 @@
 	<script src="<?= base_url('assets/js/media/Slider.js')?>"></script>
 	<script src="<?= base_url('assets/js/node_modules/video.js/dist/video.min.js')?>"></script>
 	<script src="<?= base_url('assets/js/node_modules/videojs-playlist/dist/videojs-playlist.min.js')?>"></script>
+	<script type="text/javascript" src="<?= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?>"></script>
 	<!-- JS inject for media -->
 
 	<script>

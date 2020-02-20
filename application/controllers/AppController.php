@@ -22,7 +22,7 @@
 		
 		public function index()
 		{
-
+//			parent::cek_type($this->get_client_ip());
 			if ($_COOKIE['user_app']  === ''){
 				setcookie('user_app','1',time()+(86400*30),'/');
 			}
@@ -65,13 +65,17 @@
 
 		public function settings()
 		{
-			$data['title'] = 'Pengaturan Aplikasi';
-			$data['page_title'] = 'Pengaturan Aplikasi';
-			$data['settingsTitle'] = 'Pengaturan Umum';
-			$data['activeMenu'] = 'umum';
+			if ($this->session->userdata('username') === null){
+				redirect('layanan/registrasi');
+			}else{
+				$data['title'] = 'Pengaturan Aplikasi';
+				$data['page_title'] = 'Pengaturan Aplikasi';
+				$data['settingsTitle'] = 'Pengaturan Umum';
+				$data['activeMenu'] = 'umum';
 
 
-			parent::settingsPages('app/settings',$data);
+				parent::settingsPages('app/settings',$data);
+			}
 		}
 
 		public function loket()

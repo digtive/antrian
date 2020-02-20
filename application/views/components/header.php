@@ -43,8 +43,8 @@
 				<input type="file" class="dropify" data-height="126"
 					   name="logo-img" data-default-file="<?=$logo?>"
 					   data-allowed-file-extensions="jpg png jpeg"
-					   data-min-width="835"
-					   data-min-height="122"
+					   data-min-width="600"
+					   data-min-height="120"
 						data-max-height="130" required>
 			</div>
 

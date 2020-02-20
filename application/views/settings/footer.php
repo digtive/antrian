@@ -79,7 +79,16 @@
 <script src="<?= base_url('assets/js/package/formSimulator.js?v=1.0.0&&load='.time()) ?>"></script>
 <!-- End custom js for this page-->
 
-<!-- components setting to server [API] -->
+<!-- JS inject for playing audio  -->
+<!--connection class-->
+<script src="<?= base_url('assets/js/audio/Connection.js?v=1.0.0&&load='.time()) ?>"></script>
+<!-- connection class -->
+<script src="<?= base_url('assets/js/audio/Services.js?v=1.0.0&&load='.time()) ?>"></script>
+<script src="<?= base_url('assets/js/audio/AudioHelper.js?v=1.0.0&&load='.time()) ?>"></script>
+<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
+<!-- generate component from js fro active qeueu component -->
+
+			<!-- components setting to server [API] -->
 <script type="text/javascript" src="<?= base_url('assets/js/components/header.js?v=1.0.0&&load='.time().'')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/components/footer.js?v=1.0.0&&load='.time().'')?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/components/service.js?v=1.0.0&&load='.time().'')?>"></script>
@@ -88,6 +97,7 @@
 <script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?>"></script>
 <script src="<?= base_url('assets/js/media/MediaSettings.js')?>"></script>
 <script src="<?= base_url('assets/js/media/customKeyboard.js')?>"></script>
+<!--<script type="text/javascript" src="--><?//= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 <!-- JS inject for media -->
 
 

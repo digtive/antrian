@@ -92,7 +92,7 @@
 								<div class="card-footer p-2">
 									<div class="d-flex justify-content-between">
 											<p class="m-0 text-white" style="font-family: titilliumweb-bold">Menuju Loket : <?= $v['loket_nama']?></p>
-											<span class="badge badge-light text-dark"><?= $mengantri ?> mengantri, <?= $selesai ?> selesai</span>
+											<span class="badge badge-light text-dark"><?= $mengantri ?> mengantri</span>
 									</div>
 								</div>
 							</div>
@@ -199,6 +199,7 @@
 
 	<!-- JS Inject for service / take queue-->
 	<script src="<?= base_url('assets/js/layanan/MainLayanan.js?v=1.0.0&&load='.time())?>"></script>
+	<script type="text/javascript" src="<?= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?>"></script>
 	<!-- JS Inject for service / take queue-->
 
 </body>
