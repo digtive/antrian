@@ -471,11 +471,6 @@ class ComponentService extends GLOBAL_Controller
 				 	'key' => parent::post('layanan'),
 				    'url' => parent::post('layanan-url'),
 				    'type' => 'redirect'
-				 ),
-				 'recall' => array(
-				 	'key' => parent::post('recall'),
-				    'url' => parent::post('recall-url'),
-				    'type' => 'service'
 				 )
 			);
 
@@ -486,6 +481,15 @@ class ComponentService extends GLOBAL_Controller
 					'type' => 'service'
 				);
 			}
+
+			foreach ($loket as $key => $value) {
+				$dataTombol['recall-loket-'.$value['loket_id']] = array(
+					'key' => parent::post('recall-loket-'.$value['loket_id']),
+					'url' => parent::post('recall-loket-'.$value['loket_id'].'-url'),
+					'type' => 'service'
+				);
+			}
+
 
 			$dataEdit = array(
 				'app_id' => $this->userAppID,
