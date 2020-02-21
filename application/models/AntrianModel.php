@@ -35,7 +35,6 @@
 			$this->db->select('*');
 			$this->db->from('tbl_loket');
 			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_loket.loket_layanan_id');
-			$this->db->limit(4);
 			$query = $this->db->get();
 			return $query;
 		}

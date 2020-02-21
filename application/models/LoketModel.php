@@ -21,7 +21,7 @@
             return parent::get_array_of_row($this->initTable(),$param);
         }
         public function editloket($id,$data){
-            return parent::update_table($this->initTable(),"loket_id",$id,$data);
+            return parent::update_table_with_status($this->initTable(),"loket_id",$id,$data);
         }
         public function editby_pengguna($id,$data){
             return parent::update_table($this->initTable(),"loket_id",$id,$data);

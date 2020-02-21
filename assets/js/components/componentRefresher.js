@@ -12,7 +12,7 @@ $(document).ready(function(){
 	setInterval(function () {
 		if (getTimeEdit() === last){
 			last = getTimeEdit();
-		}else{a
+		}else{
 			last =getTimeEdit();
 			window.location.reload();
 		}

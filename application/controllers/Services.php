@@ -69,8 +69,11 @@
 		{
 			$activeQueue = $this->currentQueue($locketId)->row_array();
 			if ($activeQueue!==null){
+				// jika antrian aktif ada di loket
+				// antrian dengan nomor selanjutnya
 				$nextQueue = $this->getNextQueue($activeQueue['antrian_nomor']+1,$locketId);
 				if ($nextQueue !== null){
+					// jika antrian selanjutnya tidak kosong
 					echo json_encode(array(
 						'status' => '200',
 						'antrian' => str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
@@ -88,7 +91,7 @@
 
 					parent::model('service')->edit_antrian($nextQueue['antrian_id'],array('antrian_status' => 'aktif'));
 				}else{
-
+					// jika antrian selanjutnya tidak ada
 					parent::model('service')->edit_antrian($activeQueue['antrian_id'],array('antrian_status' => 'selesai'));
 					$dataPanggilan = array(
 						'panggilan_jenis' => 'call',
@@ -96,6 +99,7 @@
 						'panggilan_loket' => $activeQueue['loket_nomor'],
 						'panggilan_updated' => date('Y-m-d H:i:s')
 					);
+					// update tabel panggilan realtime
 					parent::model('service')->update_panggilan(1,$dataPanggilan);
 					echo json_encode(array(
 						'status' => '200',
@@ -105,9 +109,9 @@
 					));
 
 				}
-
+				$this->updateLocketTimeCalled($locketId);
 			}else{
-
+				// jika antrian aktif kosong
 				$waitQueue = $this->leftQueue($locketId)->row_array();
 				if ($waitQueue !== null){
 					$completeQueue = parent::model('service')->get_complete_queue($locketId);
@@ -447,4 +451,23 @@
 			}
 		}
 
+		public function updateLocketTimeCalled($id)
+		{
+			$data = array(
+				'loket_waktu_panggilan' =>  date('Y-m-d H:i:s')
+			);
+			return parent::model('loket')->editloket($id,$data);
+		}
+
+		public function loket($locketId){
+			$param = array(
+				'loket_id' => $locketId
+			);
+			$loket = parent::model('loket')->getOne($param);
+			echo json_encode(array(
+				'status' => '200',
+				'data' => $loket,
+				'message' => 'menampilkan loket per id'
+			));
+		}
 	}

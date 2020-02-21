@@ -2,6 +2,10 @@ $(document).ready(function(){
 	
 	let connection = new Connection();
 	let antrian = new MainAntrian();
+	let layanan = new ServiceComponent();
+
+	// layanan.serviceComponent();
+
 
 	const BASE_URL = connection.BASE_URL;
 
@@ -15,6 +19,7 @@ $(document).ready(function(){
 			if (call.panggilan_jenis === 'call'){
 				queue = call.panggilan_antrian;
 				locket = call.panggilan_loket;
+				layanan.refresh(locket);
 			}else{
 				queue = call.recall_antrian;
 				locket = call.recall_loket;
@@ -27,7 +32,7 @@ $(document).ready(function(){
 
 			callData = call;
 		}
-	},1500);
+	},1000);
 
 
 	const audioMap = {

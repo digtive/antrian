@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="<?= base_url('assets/node_modules/flag-icon-css/css/flag-icon.min.css')?>">
 		<link rel="stylesheet" href="<?= base_url('assets/node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css')?>">
 		<link rel="stylesheet" href="<?= base_url('assets/css/animate.css')?>">
-		<link rel="stylesheet" href="<?= base_url('assets/js/node_modules/bxslider/jquery.bxslider.css')?>">
+		<link rel="stylesheet" href="<?= base_url('assets/js/node_modules/bxslider/dist/jquery.bxslider.css')?>">
 		<!-- endinject -->
 
 		<!-- plugin css for this page -->
@@ -133,45 +133,25 @@
 
 					<!-- service list -->
 					<div class="col-4" style="height: 536px;overflow: hidden">
-						<div id="queue-box-wrapper" class="grid-margin">
-							<div class="card card-shadow grid-margin" style='clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 5% 50%, 0% 0%);
+						<div class="card card-shadow grid-margin" style='clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 5% 50%, 0% 0%);
 							background-color: white;'>
-								<div style='background-image: url("<?= base_url()?>assets/images/background/batik.png");background-size: cover'>
-									<div class="card-body p-2">
-										<h3 style="font-family: titilliumweb-bold;color: #4a8dc5" class="text-center m-0">Daftar Layanan</h3>
-									</div>
-								</div>
-							</div>
-
-							<div class="card card-shadow grid-margin bg-white card-service" style="background-image: url('<?= base_url()?>assets/images/background/servicecard-bg.png')" id="active-service">
+							<div style='background-image: url("<?= base_url()?>assets/images/background/batik.png");background-size: cover'>
 								<div class="card-body p-2">
-									<div class="row" style="height: 90px;max-height: 90px">
-										<div class="col-7 ">
-											<h3 style="color: #1d70b7;font-family: titilliumweb-bold" class="ml-1">Nama Layanan</h3>
-										</div>
-										<div class="col-5">
-											<h1 style="font-size: 45px;color: white;font-family: titilliumweb-bold" class="mt-3 ml-3 animated infinite flash active-queue-number">A-004</h1>
-										</div>
-									</div>
-									<div class="row" style="padding: 4px 8px;height: auto">
-										<div class="col-12 d-flex justify-content-end">
-											<span class="badge badge-light text-dark service-info active" style="font-family: titilliumweb-bold">
-												<h5 class="m-0" id="service-info">Menuju Loket : loket 1</h5>
-											</span>
-										</div>
-									</div>
+									<h3 style="font-family: titilliumweb-bold;color: #4a8dc5" class="text-center m-0">Daftar Layanan</h3>
 								</div>
 							</div>
-
+						</div>
+						<div id="queue-box-wrapper" class="grid-margin ">
 							<?php foreach ($dataLoket as $key => $v):?>
-								<div class="card card-shadow grid-margin bg-white card-service" style="background-image: url('<?= base_url()?>assets/images/background/servicecard-bg.png')" id="loket-1">
+								<div class="card card-shadow grid-margin bg-white card-service mix"
+									 style="background-image: url('<?= base_url()?>assets/images/background/servicecard-bg.png')" data-panggilan="" data-loket="<?= $v['loket_id']?>" id="loket-<?= $v['loket_id']?>">
 									<div class="card-body p-2">
 										<div class="row" style="height: 90px;max-height: 90px">
 											<div class="col-7 ">
 												<h3 style="color: #1d70b7;font-family: titilliumweb-bold" class="ml-1"><?= $v['layanan_nama']?></h3>
 											</div>
 											<div class="col-5">
-												<h1 style="font-size: 45px;color: white;font-family: titilliumweb-bold" class="mt-3 ml-3 ">A-004</h1>
+												<h1 style="font-size: 45px;color: white;font-family: titilliumweb-bold" class="mt-3 ml-3 active-queue animated infinite active-queue-number">A-000</h1>
 											</div>
 										</div>
 										<div class="row" style="padding: 4px 8px;height: auto">
@@ -233,97 +213,48 @@
 		<script src="<?= base_url('assets/js/plugins/countdown.js') ?>"></script>
 		<script src="<?= base_url('assets/js/plugins/moment.js') ?>"></script>
 		<script src="<?= base_url('assets/') ?>js/dashboard.js?v=1.0.0&&load="<?= time()?>></script>
-		<script src="<?= base_url('assets/js/app/waktu.js?v=1.0.0&&load='.time().'') ?>"></script>
 		<script src="<?= base_url('assets/js/package/timer.js?v=1.0.0&&load='.time().'') ?>"></script>
 		<!-- End custom js for this page-->
 
-		<!-- howler js untuk suara -->
+		<!-- js plugin for audio -->
 		<script src="<?= base_url('assets/node_modules/howler/dist/howler.js?v=1.0.0&&load='.time()) ?>"></script>
-<!--		<script src="--><?//= base_url('assets/node_modules/howler/dist/howler.core.min.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
-<!--		<script src="--><?//= base_url('assets/node_modules/howler/dist/howler.spatial.min.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
-		<!-- howler js untuk suara -->
+		<!-- js plugin for audio -->
 
-		<!-- swap queue component-->
+		<!-- JS plugins for swap queue component-->
+		<script src="<?= base_url('assets/js/node_modules/mixitup/dist/mixitup.min.js')?>"></script>
 		<script src="<?= base_url('assets/js/components/swapsies.js?v=1.0.0&&load='.time())?>"></script>
-		<script src="<?= base_url('assets/js/components/componentSwap.js?v=1.0.0&&load='.time())?>"></script>
-		<!-- swap queue component-->
-
+		<!-- JS plugins for swap queue component-->
 
 		<!-- JS inject for playing audio  -->
 		<script src="<?= base_url('assets/js/audio/Services.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/audio/AudioHelper.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
-		<!-- generate component from js fro active qeueu component -->
-<!--		<script src="--><?//= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
+		<!-- generate component from js for activate queue component -->
+		<script src="<?= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?>"></script>
 		<!-- end inject for playing audio-->
-
-		<!-- swap queue component-->
-		<script src="<?= base_url('assets/js/components/swapsies.js?v=1.0.0&&load='.time())?>"></script>
-		<script src="<?= base_url('assets/js/components/componentSwap.js?v=1.0.0&&load='.time())?>"></script>
-		<!-- swap queue component-->
 
 		<!-- JS inject for media -->
 		<script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?>"></script>
 		<script src="<?= base_url('assets/js/node_modules/video.js/dist/video.min.js')?>"></script>
 		<script src="<?= base_url('assets/js/node_modules/videojs-playlist/dist/videojs-playlist.min.js')?>"></script>
-
-		<?php
-			if ($media['media_aktif'] === 'gambar'):
-		?>
-		<script src="<?= base_url('assets/js/media/Slider.js')?>"></script>
-		<?php else:?>
-		<script src="<?= base_url('assets/js/media/VideoPlayer.js?v=1.0.0&load='.time())?>"></script>
-		<?php endif;?>
-		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/vendor/jquery.easing.1.3.js')?>"></script>
-		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/vendor/jquery.fitvids.js')?>"></script>
-		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/jquery.bxslider.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/dist/vendor/jquery.easing.1.3.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/dist/vendor/jquery.fitvids.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/dist/jquery.bxslider.js')?>"></script>
 		<!-- JS inject for media -->
 
-		<!-- component script-->
-		<script type="text/javascript" src="<?= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?>"></script>
-		<script type="text/javascript" src="<?= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?>"></script>
+		<!-- custom JS for entire app-->
+			<?php
+				if ($media['media_aktif'] === 'gambar'):
+			?>
+			<script src="<?= base_url('assets/js/media/Slider.js?v=1.0.0&load='.time())?>"></script>
+			<?php else:?>
+			<script src="<?= base_url('assets/js/media/VideoPlayer.js?v=1.0.0&load='.time())?>"></script>
+			<?php endif;?>
 
-	<script>
-			$(document).ready(function () {
-			    $('.service-info.active').fadeIn('slow');
-				let durasi = <?= (int)$durasi?>;
-				const getUrl = window.location;
-                let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+'/';
-				$(document).keypress(function (key) {
-					let btnSetting = key.originalEvent.key;
-					if (btnSetting === 's'){
-					    window.location.href = baseUrl+'settings/parent';
-					}else if (btnSetting === 'l'){
-					    window.location.href = baseUrl+'layanan';
-					}
-                });
-
-                $('.bxslider').bxSlider({
-                    auto: true,
-					mode: 'vertical',
-					controls : false,
-					pager : false,
-					speed: 1000,
-					pause: 3000
-                });
-
-                $('.horizontal-bxslider').bxSlider({
-                    auto: true,
-                    mode: 'horizontal',
-                    controls : false,
-					speed: 2000,
-					pause: 5000
-                });
-
-                $('.slider').bbslider({
-                    auto:  true,
-                    timer: (durasi*1000),
-                    loop:  true
-                });
-            })
-		</script>
-
+	<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
+			<script type="text/javascript" src="<?= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?>"></script>
+		<!-- custom JS for entire app -->
 	</body>
 
 </html>

@@ -73,7 +73,6 @@
 <script src="<?= base_url('assets/js/plugins/countdown.js?v=1.0.0&&load='.time()) ?>"></script>
 <script src="<?= base_url('assets/js/plugins/moment.js?v=1.0.0&&load='.time()) ?>"></script>
 <script src="<?= base_url('assets/') ?>js/dashboard.js?v=1.0.0&&load="<?= time()?>></script>
-<script src="<?= base_url('assets/js/app/waktu.js?v=1.0.0&&load='.time().'') ?>"></script>
 <script src="<?= base_url()?>assets/js/app/formColor.js?v=1.0.0&&load="<?=time() ?>></script>
 <script src="<?= base_url('assets/js/package/timer.js?v=1.0.0&&load='.time()) ?>"></script>
 <script src="<?= base_url('assets/js/package/formSimulator.js?v=1.0.0&&load='.time()) ?>"></script>
