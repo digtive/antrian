@@ -4,7 +4,7 @@ $(document).ready(function(){
 	let antrian = new MainAntrian();
 	let layanan = new ServiceComponent();
 
-	// layanan.serviceComponent();
+	layanan.serviceComponent();
 
 
 	const BASE_URL = connection.BASE_URL;

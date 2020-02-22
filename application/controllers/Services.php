@@ -381,10 +381,11 @@
 				$insertQueue = parent::model('antrian')->post_antrian($dataQueue);
 
 				if ($insertQueue > 0){
+					$queueNumber = str_pad($dataQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT);
 					echo json_encode(array(
 						'status' => '200',
 						'message' => 'berhasil mengambil antrian, silahkan menunggu',
-						'antrian_nomor' => $dataQueue['antrian_nomor']
+						'antrian_nomor' => 'L'.$locketId.'-'.$queueNumber
 					));
 				}else{
 					echo json_encode(array(
@@ -407,10 +408,11 @@
 					$insertQueue = parent::model('antrian')->post_antrian($dataQueue);
 
 					if ($insertQueue > 0){
+						$queueNumber = str_pad($dataQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT);
 						echo json_encode(array(
 							'status' => '200',
 							'message' => 'berhasil mengambil antrian, silahkan menunggu',
-							'antrian_nomor' => $dataQueue['antrian_nomor']
+							'antrian_nomor' => 'L'.$locketId.'-'.$queueNumber
 						));
 					}else{
 						echo json_encode(array(

@@ -174,7 +174,6 @@
 
 	<!-- swap queue component-->
 	<script src="<?= base_url('assets/js/components/swapsies.js?v=1.0.0&&load='.time())?>"></script>
-	<script src="<?= base_url('assets/js/components/componentSwap.js?v=1.0.0&&load='.time())?>"></script>
 	<!-- swap queue component-->
 
 
@@ -186,7 +185,6 @@
 
 	<!-- swap queue component-->
 	<script src="<?= base_url('assets/js/components/swapsies.js?v=1.0.0&&load='.time())?>"></script>
-	<script src="<?= base_url('assets/js/components/componentSwap.js?v=1.0.0&&load='.time())?>"></script>
 	<!-- swap queue component-->
 
 	<!-- JS inject for media -->

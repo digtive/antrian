@@ -13,17 +13,24 @@ class ServiceComponent extends Services{
 		let mixer = mixitup(container, {
 			behavior: {
 				liveSort: true
+			},
+			load: {
+				sort: 'panggilan:desc'
 			}
 		});
 		$('.card-service.mix').each(function () {
 			let locketId = $(this).data('loket');
-			let loket = service.getData('Services/loket/'+locketId);
-			$(this).attr('data-panggilan',loket.data.loket_waktu_panggilan);
+			let locket = service.getData('Services/loket/'+locketId);
+			$(this).attr('data-panggilan',locket.data.loket_waktu_panggilan);
+			let activeQueue = service.getActiveQueue(locketId);
+			let activeQueueContent = $('#loket-'+locketId+' .active-queue-number');
+			console.log(activeQueue);
+			activeQueueContent.html(activeQueue);
 		});
 
 		setTimeout(function () {
 			mixer.sort('panggilan:desc');
-		},300);
+		},100);
 	}
 
 	getActiveQueue(locketId){
