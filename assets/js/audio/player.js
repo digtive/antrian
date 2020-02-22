@@ -24,12 +24,7 @@ $(document).ready(function(){
 				queue = call.recall_antrian;
 				locket = call.recall_loket;
 			}
-			play('in', 1);
-			play('urut', 0);
-			play(queue,0);
-			play('loket',0);
-			play(locket,0);
-
+			speak(queue,locket);
 			callData = call;
 		}
 	},1000);
@@ -88,6 +83,87 @@ $(document).ready(function(){
 				}, duration);
 			}
 		}
+	}
+	
+	function speak(queueNumber,locketId) {
+		var nomor = queueNumber;
+		var splitnomor = nomor.split("");
+
+		play('in', 1);
+		play('urut', 0);
+
+		if (splitnomor.length <= 1) {
+			play(""+ splitnomor[0], 0); //Satuan
+		}
+		//
+		else if (splitnomor.length === 2) {
+			// if (splitnomor[0] === 1 && splitnomor[1] === 0) {
+			//     play('10', 0); //sepuluh
+			// }
+			// else {
+			if (nomor < 20) {
+				if (nomor == '10'){
+					play('10',0);
+				}
+				else if (nomor == '11'){
+					play('11',0)
+				}
+				else{
+					play(splitnomor[1],0);
+					play('belas', 0);//belas
+				}
+
+			}
+			else {
+				play(splitnomor[0],0);
+				play('puluh', 0);//puluh
+				if (splitnomor[1]!='0'){
+					play(splitnomor[1]);
+				}
+				// }
+			}
+		}
+
+		else if (splitnomor.length === 3) {
+			if (splitnomor[0] == '1'){
+				play('100',0);
+			}
+			else {
+				play(splitnomor[0],0);
+				play('ratus',0);
+			}
+			if (splitnomor[1] == '0'){
+				if (splitnomor[2] != '0'){
+					play(splitnomor[2],0);
+				}
+			}else{
+				var puluhan = ""+splitnomor[1]+""+splitnomor[2];
+				if (puluhan < 20) {
+					if (puluhan == '10'){
+						play('10',0);
+					}
+					else if (puluhan == '11'){
+						play('11',0)
+					}
+					else{
+						play(splitnomor[2],0);
+						play('belas', 0);//belas
+					}
+				}
+				else {
+					play(splitnomor[1],0);
+					play('puluh', 0);//puluh
+					if (splitnomor[2]!='0'){
+						play(splitnomor[2]);
+					}
+					// }
+				}
+			}
+		}
+
+		play('loket',0);
+		play(locketId,0);
+
 	}
 
 

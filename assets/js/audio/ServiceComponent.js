@@ -24,7 +24,6 @@ class ServiceComponent extends Services{
 			$(this).attr('data-panggilan',locket.data.loket_waktu_panggilan);
 			let activeQueue = service.getActiveQueue(locketId);
 			let activeQueueContent = $('#loket-'+locketId+' .active-queue-number');
-			console.log(activeQueue);
 			activeQueueContent.html(activeQueue);
 		});
 
