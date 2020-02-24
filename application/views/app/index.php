@@ -55,7 +55,7 @@
 			if ($container['background-image'] === 'true'):
 		?>
 		<div id="app-container"
-			 style='background: url("<?=$container['background-image-src']?>");
+			 style='background: url("<?=base_url().$container['background-image-src']?>");
 				 background-repeat: no-repeat;
 				 background-size: cover;
 				 background-position: center;'>

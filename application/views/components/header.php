@@ -41,11 +41,11 @@
 					Gambar Logo
 				</h4>
 				<input type="file" class="dropify" data-height="126"
-					   name="logo-img" data-default-file="<?=$logo?>"
+					   name="logo-img" data-default-file="<?= base_url().$logo?>"
 					   data-allowed-file-extensions="jpg png jpeg"
 					   data-min-width="600"
 					   data-min-height="120"
-						data-max-height="130" required>
+					   required>
 			</div>
 
 			<button type="submit" class="btn btn-primary col-12" name="unggah">

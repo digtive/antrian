@@ -42,7 +42,7 @@
 					Gambar Latar
 				</h4>
 				<input type="file" class="dropify" data-height="480"
-					   name="background-image-src" data-default-file="<?= $container['background-image-src']?>"
+					   name="background-image-src" data-default-file="<?= base_url().$container['background-image-src']?>"
 					   data-allowed-file-extensions="jpg png jpeg"
 					   data-min-width="920"
 					   data-min-height="540" >

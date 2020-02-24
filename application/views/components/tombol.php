@@ -11,7 +11,7 @@
 					<label for="background-paralelogram" class="col-4 col-form-label font-weight-medium">Setting</label>
 					<div class="col-4">
 						<input type="text" name="settings"  maxlength="1" class="form-control bt-max-length"  placeholder="key" style="font-size: 18px!important;text-transform: uppercase" value="<?= $keyList['settings']['key'] ?>">
-						<input type="text" name="settings-url" value="<?= base_url('settings/parent')?>" hidden>
+						<input type="text" name="settings-url" value="<?= 'settings/parent'?>" hidden>
 					</div>
 				</div>
 
@@ -19,7 +19,7 @@
 					<label for="background-paralelogram" class="col-4 col-form-label font-weight-medium">Tampilan Utama</label>
 					<div class="col-4">
 						<input type="text" name="utama" maxlength="1" class="form-control bt-max-length" placeholder="key" data-url="/" style="font-size: 18px!important;text-transform: uppercase " value="<?= $keyList['utama']['key'] ?>">
-						<input type="text" name="utama-url" value="<?= base_url('') ?>" hidden>
+						<input type="text" name="utama-url" value="<?= '/' ?>" hidden>
 					</div>
 				</div>
 
@@ -27,7 +27,7 @@
 					<label for="background-paralelogram" class="col-4 col-form-label font-weight-medium">Layanan</label>
 					<div class="col-4">
 						<input type="text" name="layanan" maxlength="1" data-url="layanan" class="form-control bt-max-length" placeholder="key" style="font-size: 18px!important;text-transform: uppercase" value="<?= $keyList['layanan']['key'] ?>">
-						<input type="text" name="layanan-url" value="<?= base_url('layanan')?>" hidden>
+						<input type="text" name="layanan-url" value="<?= 'layanan'?>" hidden>
 					</div>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 					<label for="background-paralelogram" class="col-7 col-form-label font-weight-medium"><?= 'Loket Nomor '.$val['loket_id']?></label>
 					<div class="col-4">
 						<input type="text" name="loket-<?= $val['loket_id'] ?>" maxlength="1" class="form-control bt-max-length" placeholder="key" style="font-size: 18px!important;text-transform: uppercase" value="<?= $keyList['loket-'.$val['loket_id']]['key'] ?>">
-						<input type="text" name="loket-<?= $val['loket_id']?>-url" value="<?= base_url('Services/callTo/'.$val['loket_id'])?>" hidden>
+						<input type="text" name="loket-<?= $val['loket_id']?>-url" value="<?= 'Services/callTo/'.$val['loket_id']?>" hidden>
 					</div>
 				</div>
 				<?php
@@ -64,7 +64,7 @@
 						<label for="background-paralelogram" class="col-7 col-form-label font-weight-medium"><?= 'Loket Nomor '.$val['loket_id']?></label>
 						<div class="col-4">
 							<input type="text" name="recall-loket-<?= $val['loket_id'] ?>" maxlength="1" class="form-control bt-max-length" placeholder="key" style="font-size: 18px!important;text-transform: uppercase" value="<?= $keyList['recall-loket-'.$val['loket_id']]['key'] ?>">
-							<input type="text" name="recall-loket-<?= $val['loket_id']?>-url" value="<?= base_url('Services/recallTo/'.$val['loket_id'])?>" hidden>
+							<input type="text" name="recall-loket-<?= $val['loket_id']?>-url" value="<?= 'Services/recallTo/'.$val['loket_id']?>" hidden>
 						</div>
 					</div>
 					<?php

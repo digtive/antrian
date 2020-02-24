@@ -437,7 +437,7 @@
 				if ($keylist[$item]['key']===$key){
 						$shortCut['type'] = $keylist[$item]['type'];
 						$shortCut['key'] = $keylist[$item]['key'];
-						$shortCut['url'] = $keylist[$item]['url'];
+						$shortCut['url'] = base_url().$keylist[$item]['url'];
 						$shortCut['status'] = '200';
 						$shortCut['message'] = 'berhasil menemukan shortcut';
 				}

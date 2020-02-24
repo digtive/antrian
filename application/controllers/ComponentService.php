@@ -184,7 +184,7 @@ class ComponentService extends GLOBAL_Controller
 				$dataContainer = array(
 					'background-color' => $warnaLama,
 					'background-image' => parent::post('background-image'),
-					'background-image-src' => base_url('assets/images/background/') . $gambarLatar
+					'background-image-src' =>  'assets/images/background/'.$gambarLatar
 				);
 
 				$dataEdit = array(
@@ -229,7 +229,7 @@ class ComponentService extends GLOBAL_Controller
 			$logo = $this->upload->data('file_name');
 
 			$dataEdit = array(
-				'app_logo' => json_encode(base_url('assets/images/logo/') . $logo),
+				'app_logo' => json_encode('assets/images/logo/'.$logo),
 				'app_date_edited' => date('Y-m-d H:i:s')
 			);
 
@@ -259,7 +259,7 @@ class ComponentService extends GLOBAL_Controller
 			$this->upload->do_upload('upload-gambar');
 			$titel = $this->upload->data('file_name');
 
-			array_push($dataGambar, base_url('assets/images/slides/') . $titel);
+			array_push($dataGambar, 'assets/images/slides/' . $titel);
 			array_push($titleGambar, $titel);
 
 			$dataEncode = array(
@@ -315,7 +315,7 @@ class ComponentService extends GLOBAL_Controller
 				$data = array(
 					'sources' => array(
 						array(
-							'src' => base_url('assets/videos/' . $title),
+							'src' => 'assets/videos/' . $title,
 							'type' => 'video/' . str_replace('.', '', $ext)
 						)
 					),
