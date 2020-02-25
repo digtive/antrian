@@ -452,6 +452,54 @@ class ComponentService extends GLOBAL_Controller
 		}
 	}
 
+	public function addService()
+	{
+		if (isset($_POST)){
+
+			$dataLayanan = array(
+				'layanan_nama' => parent::post('service_name'),
+				'layanan_awalan' => parent::post('service_prefix')
+			);
+
+			$insertStatus = parent::model('layanan')->post_layanan($dataLayanan);
+
+			parent::alert('alert','edit');
+			redirect('settings/loket');
+		}else{
+			show_404();
+		}
+	}
+
+	public function editLayanan($serviceId)
+	{
+		if (isset($_POST['submit'])) {
+
+			$data = array(
+				"layanan_nama" => parent::post('service_name'),
+				"layanan_awalan" => parent::post('service_prefix')
+			);
+			parent::model('layanan')->editLayanan($serviceId, $data);
+			redirect('settings/loket');
+		} else {
+			$data['title'] = 'Pengaturan Aplikasi';
+			$data['page_title'] = 'Pengaturan Loket Aplikasi';
+			$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
+			$data['activeMenu'] = 'loket';
+			$data['currentData'] = parent::model('layanan')->getOne(array("layanan_id" => $serviceId));
+//			parent::cek_array($data['currentData']);
+			parent::settingsPages('components/layanan_edit',$data);
+		}
+	}
+
+	public function deleteLayanan($index)
+	{
+		$data = array(
+			"layanan_id" => $index
+		);
+		parent::model('layanan')->deletelayanan($data);
+		redirect('settings/loket');
+	}
+
 	public function editTombol()
 	{
 		if (isset($_POST['simpan'])){

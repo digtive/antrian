@@ -36,6 +36,14 @@
             $query = $this->db->get();
             return $query;
         }
+		public function getJoinLoketById($locketId){
+			$this->db->select('*');
+			$this->db->from($this->initTable());
+			$this->db->join('tbl_layanan', 'tbl_loket.loket_layanan_id = tbl_layanan.layanan_id');
+			$this->db->where('loket_id',$locketId);
+			$query = $this->db->get();
+			return $query;
+		}
         public function getByLayanan($id){
             $this->db->select('*');
             $this->db->from($this->initTable());

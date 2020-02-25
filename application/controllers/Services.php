@@ -241,7 +241,7 @@
 				echo json_encode(array(
 					'status' => '200',
 					'message' => 'antrian yang baru saja di panggil',
-					'antrian' => 'L'.$locketId.'-'.$format
+					'antrian' => ucwords($complete['layanan_awalan']).'-'.$format
 				));
 			}else{
 				echo json_encode(array(
@@ -385,7 +385,7 @@
 					echo json_encode(array(
 						'status' => '200',
 						'message' => 'berhasil mengambil antrian, silahkan menunggu',
-						'antrian_nomor' => 'L'.$locketId.'-'.$queueNumber
+						'antrian_nomor' => ucwords($lastQueue['layanan_awalan']).'-'.$queueNumber
 					));
 				}else{
 					echo json_encode(array(
@@ -409,10 +409,11 @@
 
 					if ($insertQueue > 0){
 						$queueNumber = str_pad($dataQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT);
+						$freshLocket = parent::model('loket')->getJoinLoketById($locketId)->row_array();
 						echo json_encode(array(
 							'status' => '200',
 							'message' => 'berhasil mengambil antrian, silahkan menunggu',
-							'antrian_nomor' => 'L'.$locketId.'-'.$queueNumber
+							'antrian_nomor' => ucwords($freshLocket['layanan_awalan']).'-'.$queueNumber
 						));
 					}else{
 						echo json_encode(array(

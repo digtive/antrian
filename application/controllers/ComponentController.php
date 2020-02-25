@@ -104,7 +104,8 @@ class ComponentController extends GLOBAL_Controller {
 			$data['serviceComponent'] = json_decode($data['component']['app_service'],true);
 			$data['loket'] = parent::model('loket')->getJoinLoket();
 			$data['layanan'] = parent::model('layanan')->get_layanan();
-//		parent::cek_array($data['serviceComponent']);
+			$data['nextLocket'] = $data['loket']->num_rows()+1;
+//			parent::cek_array($data['nextLocket']);
 			parent::settingsPages('components/loket',$data);
 		}
 	}
