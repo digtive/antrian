@@ -102,6 +102,7 @@
         public function getCurrentNumber($id,$date){
             $this->db->select('*');
             $this->db->from($this->initTable());
+			$this->db->join('tbl_layanan', 'tbl_antrian.antrian_loket_id = tbl_layanan.layanan_id');
             $this->db->where('antrian_loket_id',$id);
             $this->db->where('antrian_status','aktif');
             $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
@@ -125,6 +126,17 @@
             $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
             $this->db->where('antrian_status','menunggu');
             $this->db->limit(1);
+            $query = $this->db->get();
+            return $query;
+        }
+			public function getLastNumber($id,$date){
+            $this->db->select('*');
+            $this->db->from($this->initTable());
+			$this->db->order_by('antrian_id','DESC');
+			$this->db->join('tbl_layanan', 'tbl_antrian.antrian_loket_id = tbl_layanan.layanan_id');
+            $this->db->where('antrian_loket_id',$id);
+            $this->db->where('antrian_status','selesai');
+            $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
             $query = $this->db->get();
             return $query;
         }
