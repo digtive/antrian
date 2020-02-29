@@ -241,7 +241,7 @@
 				echo json_encode(array(
 					'status' => '200',
 					'message' => 'antrian yang baru saja di panggil',
-					'antrian' => ucwords($complete['layanan_awalan']).'-'.$format
+					'antrian' => ucwords($complete['layanan_awalan']).$complete['loket_nomor'].'-'.$format
 				));
 			}else{
 				echo json_encode(array(
@@ -387,7 +387,7 @@
 					echo json_encode(array(
 						'status' => '200',
 						'message' => 'berhasil mengambil antrian, silahkan menunggu',
-						'antrian_nomor' => ucwords($lastQueue['layanan_awalan']).'-'.$queueNumber,
+						'antrian_nomor' => ucwords($lastQueue['layanan_awalan']). $loketJoin['loket_nomor'].'-'.$queueNumber,
 						'locket_number' => $loketJoin['loket_nomor'],
 						'service_name' => $loketJoin['layanan_nama']
 					));
@@ -417,7 +417,7 @@
 						echo json_encode(array(
 							'status' => '200',
 							'message' => 'berhasil mengambil antrian, silahkan menunggu',
-							'antrian_nomor' => ucwords($freshLocket['layanan_awalan']).'-'.$queueNumber,
+							'antrian_nomor' => ucwords($freshLocket['layanan_awalan']). $loketJoin['loket_nomor'].'-'.$queueNumber,
 							'locket_number' => $loketJoin['loket_nomor'],
 							'service_name' => $loketJoin['layanan_nama']
 						));

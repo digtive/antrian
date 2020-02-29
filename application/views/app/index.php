@@ -151,7 +151,7 @@
 												<h3 style="color: #1d70b7;font-family: titilliumweb-bold" class="ml-1"><?= $v['layanan_nama']?></h3>
 											</div>
 											<div class="col-5">
-												<h1 style="font-size: 45px;color: white;font-family: titilliumweb-bold" class="mt-3 ml-3 active-queue animated infinite active-queue-number">A-000</h1>
+												<h1 style="font-size: 42px;color: white;font-family: titilliumweb-bold" class="mt-3 ml-3 active-queue animated infinite active-queue-number">A-000</h1>
 											</div>
 										</div>
 										<div class="row" style="padding: 4px 8px;height: auto">

@@ -104,7 +104,7 @@
 									</div>
 									<div class="card-footer p-2">
 										<div class="d-flex justify-content-between">
-											<p class="m-0 text-white" style="font-family: titilliumweb-bold">Menuju Loket : <?= $v['loket_nama']?></p>
+											<p class="m-0 text-white" style="font-family: titilliumweb-bold">Menuju Loket <?= $v['loket_nomor']?></p>
 											<span class="badge badge-light text-dark"><?= $mengantri ?> mengantri</span>
 										</div>
 									</div>
