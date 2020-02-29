@@ -345,6 +345,8 @@
 		public function takeQueue($locketId){
 			$currentData = parent::model('service')->get_queue_by_locket($locketId);
 			$dataLoket = parent::model('loket')->getOne(array('loket_id' => $locketId));
+			$loketJoin = parent::model('loket')->getJoinLoketById($locketId)->row_array();
+//			parent::cek_array($loketJoin);
 			if ($currentData->num_rows() > 0){
 				$waitQueue = $this->leftQueue($locketId);
 				$activeQueue = $this->currentQueue($locketId);
@@ -385,7 +387,9 @@
 					echo json_encode(array(
 						'status' => '200',
 						'message' => 'berhasil mengambil antrian, silahkan menunggu',
-						'antrian_nomor' => ucwords($lastQueue['layanan_awalan']).'-'.$queueNumber
+						'antrian_nomor' => ucwords($lastQueue['layanan_awalan']).'-'.$queueNumber,
+						'locket_number' => $loketJoin['loket_nomor'],
+						'service_name' => $loketJoin['layanan_nama']
 					));
 				}else{
 					echo json_encode(array(
@@ -413,7 +417,9 @@
 						echo json_encode(array(
 							'status' => '200',
 							'message' => 'berhasil mengambil antrian, silahkan menunggu',
-							'antrian_nomor' => ucwords($freshLocket['layanan_awalan']).'-'.$queueNumber
+							'antrian_nomor' => ucwords($freshLocket['layanan_awalan']).'-'.$queueNumber,
+							'locket_number' => $loketJoin['loket_nomor'],
+							'service_name' => $loketJoin['layanan_nama']
 						));
 					}else{
 						echo json_encode(array(

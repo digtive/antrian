@@ -9,6 +9,9 @@ $(document).ready(function(){
 		let url = $(this).data('url');
 		let response = services.getData('Services/'+url);
 		if (response.status === '200'){
+			$('#ticket-number-print').html(response.antrian_nomor);
+			$('#locket-number-print').html(response.locket_number);
+			$('#service-name-print').html(response.service_name);
 			swal({
 				title: 'BERHASIL MENGAMBIL ANTRIAN',
 				html: '<h4>Nomor Antrian Anda </h4><br>' +
@@ -26,6 +29,10 @@ $(document).ready(function(){
 	});
 
 	$(document).on('click','#cetak-karcis', function () {
-		window.location.reload();
+		$('#ticket-preview').printThis({
+			debug: false,               // show the iframe for debugging
+			importCSS: true,            // import parent page css
+		});
+		// window.location.reload();
 	})
 });

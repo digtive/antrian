@@ -14,6 +14,7 @@
 			$this->load->model('LoketModel', 'loket');
 			$this->load->model('AntrianModel','antrian');
 			$this->load->model('ServiceModel','service');
+			$this->load->model('LayananModel','layanan');
 		}
 
 		public function index()
@@ -60,6 +61,8 @@
 
 			$data['dataLoket'] = parent::model('antrian')->get_loket()->result_array();
 			$data['service'] = parent::model('service');
+			$data['dataLayanan'] = parent::model('layanan')->get_layanan()->result_array();
+			$data['loket'] = parent::model('loket');
 
 			parent::authPage('layanan/daftar',$data);
 		}
