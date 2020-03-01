@@ -26,6 +26,12 @@
 			$query = $this->db->get();
 			return $query;
 		}
+		public function get_join_where($query)
+		{
+			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
+			$this->db->order_by('antrian_nomor','asc');
+			return $this->db->get_where('tbl_antrian',$query);
+		}
         public function get_antrian()
 		{
 			return parent::get_object_of_table($this->initTable());

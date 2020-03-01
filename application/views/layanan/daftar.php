@@ -69,50 +69,32 @@
 
 				<?php
 					foreach ($dataLayanan as $k => $v):
-						$locketByService = $loket->getByLayanan($v['layanan_id'])->result_array();
 				?>
-					<?php if (!empty($locketByService)):?>
+					<div class="col-6 grid-margin animated bounceIn ">
 						<div class="col-12">
 							<h2 class="text-primary" style="font-family: titilliumweb-bold"><?= ucwords($v['layanan_awalan'])?> - <?= $v['layanan_nama']?></h2>
 						</div>
-					<?php endif;?>
-						<?php foreach ($locketByService as $k => $v):
-						$antrianLoket = $service->get_queue_by_locket($v['loket_id']);
-						$mengantri = 0;
-						$selesai = 0;
-						foreach ($antrianLoket->result_array() as $item => $value) {
-							if ($value['antrian_status'] !== 'selesai'){
-								$mengantri++;
-							}else{
-								$selesai++;
-							}
-						}
-						$jumlahAntrian = $antrianLoket->num_rows();
-						?>
-
-						<div class="col-4 grid-margin animated bounceIn ">
-							<a href="#" class="take-queue" data-url="takeQueue/<?= $v['loket_id']?>">
+							<a href="#" class="take-queue" data-url="takeQueue/<?= $v['layanan_id']?>">
 								<div class="card bg-behance card-shadow" style='background-image: url("<?= base_url()?>assets/images/background/batik.png");
 									background-size: cover;background-repeat: no-repeat;background-position: initial;'>
 									<div class="card-body pt-3 pb-0 px-3" style="height: 74px;min-height: 74px">
-										<div class="d-flex flex-row align-items-top">
-											<i class="fa fa-ticket text-white icon-md"></i>
-											<div class="ml-3">
-												<h4 class="text-facebook text-white" style="font-family: titilliumweb-bold"><?= substr($v['layanan_nama'],0,40)?> .</h4>
+										<div class="row">
+											<h1 class="col-2"><i class="fa fa-ticket text-white icon-md"></i></h1>
+											<div class="col-10">
+												<h2 class="text-facebook text-white" style="font-family: titilliumweb-bold"><?= substr($v['layanan_nama'],0,40)?> .</h2>
 											</div>
 										</div>
 									</div>
 									<div class="card-footer p-2">
 										<div class="d-flex justify-content-between">
-											<p class="m-0 text-white" style="font-family: titilliumweb-bold">Menuju Loket <?= $v['loket_nomor']?></p>
-											<span class="badge badge-light text-dark"><?= $mengantri ?> mengantri</span>
+											<span class="badge badge-light text-dark">23 sisa antrian</span>
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
-					<?php endforeach;?>
-				<?php
+
+					<?php
 					endforeach;
 				?>
 
@@ -166,11 +148,11 @@
 						</div>
 
 						<div class="col-12 d-flex justify-content-center my-2">
-							<h1 style="font-family: inherit;text-transform: uppercase;font-size: 56px;color: inherit" id="ticket-number-print">A-009</h1>
+							<h1 style="font-family: titilliumweb-bold;text-transform: uppercase;font-size: 56px;color: inherit" id="ticket-number-print">A-009</h1>
 						</div>
 
 						<div class="col-12 d-flex justify-content-center">
-							<h4 style="font-family: inherit;color: inherit">menuju loket <span id="locket-number-print"></span></h4>
+							<h4 style="font-family: inherit;color: inherit">sisa antrian : <span id="left-queue-print"></span></h4>
 						</div>
 					</div>
 				</div>

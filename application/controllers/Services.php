@@ -342,54 +342,64 @@
 		}
 
 		// menambah antrian per loket
-		public function takeQueue($locketId){
-			$currentData = parent::model('service')->get_queue_by_locket($locketId);
-			$dataLoket = parent::model('loket')->getOne(array('loket_id' => $locketId));
-			$loketJoin = parent::model('loket')->getJoinLoketById($locketId)->row_array();
-//			parent::cek_array($loketJoin);
-			if ($currentData->num_rows() > 0){
-				$waitQueue = $this->leftQueue($locketId);
-				$activeQueue = $this->currentQueue($locketId);
-				$locketQueue = $currentData->result_array();
-				$total  = count($locketQueue);
-				$lastQueue = $locketQueue[$total-1];
+		public function takeQueue($serviceId){
+			$currentData = parent::model('service')->get_queue_by_service($serviceId);
 
+			if ($currentData->num_rows() > 0){
+				$waitQueue = parent::model('antrian')->get_join_where(array(
+					'antrian_status' => 'menunggu',
+					'antrian_layanan_id' => $serviceId
+				));
+				$activeQueue = parent::model('antrian')->get_join_where(array(
+					'antrian_status' => 'aktif',
+					'antrian_layanan_id' => $serviceId
+				));
+				$serviceQueue = $currentData->result_array();
+				$total  = count($serviceQueue);
+				$lastQueue = $serviceQueue[$total-1];
+
+				// memeriksa antrian selanjutnya/menunggu
 				if ($waitQueue->num_rows() <= 0) {
+					// jika antrian selanjutnya tidak kosong
+						//memeriksa apakah antrian aktif ada ?
 					if ($activeQueue->num_rows() > 0) {
+						// jika antrian aktif sudah ada
 						$dataQueue = array(
 							'antrian_nomor' => ($lastQueue['antrian_nomor'] + 1),
-							'antrian_layanan_id' => $lastQueue['loket_layanan_id'],
-							'antrian_loket_id' => $lastQueue['loket_id'],
+							'antrian_layanan_id' => $lastQueue['layanan_id'],
 							'antrian_status' => 'menunggu'
 						);
 					} else {
+						// jika antrian aktif tidak ada
 						$dataQueue = array(
 							'antrian_nomor' => ($lastQueue['antrian_nomor'] + 1),
-							'antrian_layanan_id' => $lastQueue['loket_layanan_id'],
-							'antrian_loket_id' => $lastQueue['loket_id'],
+							'antrian_layanan_id' => $lastQueue['layanan_id'],
 							'antrian_status' => 'aktif'
 						);
 					}
 				} else {
+					// jika antrian selanjutnya kosong jadikan antrian yang baru masuk berstatus menunggu
 					$dataQueue = array(
 						'antrian_nomor' => ($lastQueue['antrian_nomor'] + 1),
-						'antrian_layanan_id' => $lastQueue['loket_layanan_id'],
-						'antrian_loket_id' => $lastQueue['loket_id'],
+						'antrian_layanan_id' => $lastQueue['layanan_id'],
 						'antrian_status' => 'menunggu'
 					);
 				}
-
 
 				$insertQueue = parent::model('antrian')->post_antrian($dataQueue);
 
 				if ($insertQueue > 0){
 					$queueNumber = str_pad($dataQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT);
+					$freshWaitQueue = parent::model('antrian')->get_join_where(array(
+						'antrian_layanan_id' => $serviceId,
+						'antrian_status' => 'menunggu'
+					));
 					echo json_encode(array(
 						'status' => '200',
 						'message' => 'berhasil mengambil antrian, silahkan menunggu',
-						'antrian_nomor' => ucwords($lastQueue['layanan_awalan']). $loketJoin['loket_nomor'].'-'.$queueNumber,
-						'locket_number' => $loketJoin['loket_nomor'],
-						'service_name' => $loketJoin['layanan_nama']
+						'antrian_nomor' => ucwords($lastQueue['layanan_awalan']).'-'.$queueNumber,
+						'service_name' => $lastQueue['layanan_nama'],
+						'left_queue' => $freshWaitQueue->num_rows()
 					));
 				}else{
 					echo json_encode(array(
@@ -399,36 +409,37 @@
 					));
 				}
 			}else{
+				// jika antrian berdasarkan layanan pada DB kosong
+				$dataQueue = array(
+					'antrian_nomor' => 1,
+					'antrian_layanan_id' => $serviceId,
+					'antrian_status' => 'aktif'
+				);
 
-				if ($dataLoket!==null){
-
-					$dataQueue = array(
-						'antrian_nomor' => 1,
-						'antrian_layanan_id' => $dataLoket['loket_layanan_id'],
-						'antrian_loket_id' => $dataLoket['loket_id'],
-						'antrian_status' => 'aktif'
-					);
-
-					$insertQueue = parent::model('antrian')->post_antrian($dataQueue);
-
-					if ($insertQueue > 0){
-						$queueNumber = str_pad($dataQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT);
-						$freshLocket = parent::model('loket')->getJoinLoketById($locketId)->row_array();
-						echo json_encode(array(
-							'status' => '200',
-							'message' => 'berhasil mengambil antrian, silahkan menunggu',
-							'antrian_nomor' => ucwords($freshLocket['layanan_awalan']). $loketJoin['loket_nomor'].'-'.$queueNumber,
-							'locket_number' => $loketJoin['loket_nomor'],
-							'service_name' => $loketJoin['layanan_nama']
-						));
-					}else{
-						echo json_encode(array(
-							'status' => '500',
-							'message' => 'kesalahan operasi mengambil antrian',
-							'antrian_nomor' => 0
-						));
-					}
+				$insertQueue = parent::model('antrian')->post_antrian($dataQueue);
+				// jika berhasil insert antrian aktif pertama
+				if ($insertQueue > 0){
+					$queueNumber = str_pad($dataQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT);
+					$freshLocket = parent::model('layanan')->getOne(array('layanan_id' => $serviceId));
+					$freshWaitQueue = parent::model('antrian')->get_join_where(array(
+						'antrian_layanan_id' => $serviceId,
+						'antrian_status' => 'menunggu'
+					));
+					echo json_encode(array(
+						'status' => '200',
+						'message' => 'berhasil mengambil antrian, silahkan menunggu',
+						'antrian_nomor' => ucwords($freshLocket['layanan_awalan']).'-'.$queueNumber,
+						'service_name' => $freshLocket['layanan_nama'],
+						'left_queue' => $freshWaitQueue->num_rows()
+					));
+				}else{
+					echo json_encode(array(
+						'status' => '500',
+						'message' => 'kesalahan operasi mengambil antrian',
+						'antrian_nomor' => 0
+					));
 				}
+
 			}
 		}
 

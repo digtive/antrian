@@ -69,6 +69,18 @@
 			return $query;
 		}
 
+		public function get_queue_by_service($serviceId)
+		{
+			$this->db->select('*');
+			$this->db->from('tbl_antrian');
+			$this->db->where('tbl_antrian.antrian_layanan_id', $serviceId);
+			$this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', date('Y-m-d'));
+			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
+			$this->db->order_by('antrian_nomor', 'asc');
+			$query = $this->db->get();
+			return $query;
+		}
+
 		/*
 		 * get data antrian by loket ID
 		 * */

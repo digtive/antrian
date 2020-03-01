@@ -94,39 +94,6 @@
 						</a>
 					</div>
 
-					<div class="col-6 grid-margin animated bounceIn">
-						<a href="#">
-							<div class="card bg-behance card-shadow" style='background-image: url("<?= base_url()?>assets/images/background/batik.png");
-								background-size: cover;background-repeat: no-repeat;background-position: initial;'>
-								<div class="card-body">
-									<div class="d-flex flex-row align-items-top">
-										<i class="icon-grid text-white icon-md"></i>
-										<div class="ml-3">
-											<h2 class="text-facebook text-white" style="font-family: titilliumweb-bold">LAYANAN</h2>
-											<p class="mt-2  card-text text-white" style="font-family: titilliumweb-bold">Daftar layanan yang tersedia</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</a>
-					</div>
-
-					<div class="col-6 grid-margin animated bounceIn">
-						<a href="#">
-							<div class="card bg-behance card-shadow" style='background-image: url("<?= base_url()?>assets/images/background/batik.png");
-								background-size: cover;background-repeat: no-repeat;background-position: initial;'>
-								<div class="card-body">
-									<div class="d-flex flex-row align-items-top">
-										<i class="icon-grid text-white icon-md"></i>
-										<div class="ml-3">
-											<h2 class="text-facebook text-white" style="font-family: titilliumweb-bold">LAYANAN</h2>
-											<p class="mt-2  card-text text-white" style="font-family: titilliumweb-bold">Daftar layanan yang tersedia</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</a>
-					</div>
 				</div>
 			</div>
 		</div>

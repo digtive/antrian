@@ -10,8 +10,8 @@ $(document).ready(function(){
 		let response = services.getData('Services/'+url);
 		if (response.status === '200'){
 			$('#ticket-number-print').html(response.antrian_nomor);
-			$('#locket-number-print').html(response.locket_number);
 			$('#service-name-print').html(response.service_name);
+			$('#left-queue-print').html(response.left_queue);
 			swal({
 				title: 'BERHASIL MENGAMBIL ANTRIAN',
 				html: '<h4>Nomor Antrian Anda </h4><br>' +
