@@ -69,6 +69,10 @@
 
 				<?php
 					foreach ($dataLayanan as $k => $v):
+						$leftQueue = $antrian->get_join_where(array(
+							'antrian_layanan_id' => $v['layanan_id'],
+							'antrian_status' => 'menunggu'
+						))->num_rows();
 				?>
 					<div class="col-6 grid-margin animated bounceIn ">
 						<div class="col-12">
@@ -87,7 +91,7 @@
 									</div>
 									<div class="card-footer p-2">
 										<div class="d-flex justify-content-between">
-											<span class="badge badge-light text-dark">23 sisa antrian</span>
+											<span class="badge badge-light text-dark"><?= $leftQueue?> sisa antrian</span>
 										</div>
 									</div>
 								</div>

@@ -63,6 +63,8 @@
 			$data['service'] = parent::model('service');
 			$data['dataLayanan'] = parent::model('layanan')->get_layanan()->result_array();
 			$data['loket'] = parent::model('loket');
+			$data['layanan'] = parent::model('layanan');
+			$data['antrian'] = parent::model('antrian');
 
 			parent::authPage('layanan/daftar',$data);
 		}
