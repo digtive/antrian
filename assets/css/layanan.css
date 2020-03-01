@@ -26,11 +26,11 @@
 .card-service {
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: initial;
-	min-height: 140px;
-	height: 140px;
+	background-position: center;
+	min-height: 115px;
+	height: 115px;
 	overflow: hidden;
-	clip-path: polygon(86% 0, 100% 22%, 100% 92%, 97% 100%, 7% 100%, 0 87%, 0 0);
+	clip-path: polygon(90% 0, 100% 35%, 100% 92%, 97% 100%, 7% 100%, 0 87%, 0 0);
 }
 .active-queue-number{
 	animation-duration: 7s;

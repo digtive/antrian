@@ -133,32 +133,22 @@
 
 					<!-- service list -->
 					<div class="col-4" style="height: 536px;overflow: hidden">
-						<div class="card card-shadow grid-margin" style='clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 5% 50%, 0% 0%);
-							background-color: white;'>
-							<div style='background-image: url("<?= base_url()?>assets/images/background/batik.png");background-size: cover'>
-								<div class="card-body p-2">
-									<h3 style="font-family: titilliumweb-bold;color: #4a8dc5" class="text-center m-0">Daftar Layanan</h3>
-								</div>
-							</div>
-						</div>
 						<div id="queue-box-wrapper" class="grid-margin ">
 							<?php foreach ($dataLoket as $key => $v):?>
 								<div class="card card-shadow grid-margin bg-white card-service mix"
-									 style="background-image: url('<?= base_url()?>assets/images/background/servicecard-bg.png')" data-panggilan="" data-loket="<?= $v['loket_id']?>" id="loket-<?= $v['loket_id']?>">
+									 style="background-image: url('<?= base_url()?>assets/images/background/servicecard-bg-4.png	')" data-panggilan="" data-loket="<?= $v['loket_id']?>" id="loket-<?= $v['loket_id']?>">
 									<div class="card-body p-2">
-										<div class="row" style="height: 90px;max-height: 90px">
+										<div class="row" style="height: 70px;max-height: 80px">
 											<div class="col-7 ">
 												<h3 style="color: #1d70b7;font-family: titilliumweb-bold" class="ml-1"><?= $v['layanan_nama']?></h3>
 											</div>
 											<div class="col-5">
-												<h1 style="font-size: 42px;color: white;font-family: titilliumweb-bold" class="mt-3 ml-3 active-queue animated infinite active-queue-number">A-000</h1>
+												<h1 style="font-size: 42px;color: white;font-family: titilliumweb-bold" class="mt-2 ml-3 active-queue animated infinite active-queue-number">A-000</h1>
 											</div>
 										</div>
 										<div class="row" style="padding: 4px 8px;height: auto">
 											<div class="col-12 d-flex justify-content-end">
-											<span class="badge badge-light text-dark service-info active" style="font-family: titilliumweb-bold">
-												<h5 class="m-0" id="service-info">Menuju Loket : <?= $v['loket_id'] ?></h5>
-											</span>
+												<h5 class="m-0 text-white bg-facebook p-1" id="service-info" style="font-family: titilliumweb-bold;font-weight: lighter">Petugas : Sultan</h5>
 											</div>
 										</div>
 									</div>
@@ -253,7 +243,7 @@
 			<?php endif;?>
 
 	<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
-			<script type="text/javascript" src="<?= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?>"></script>
+<!--			<script type="text/javascript" src="--><?//= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 		<!-- custom JS for entire app -->
 	</body>
 
