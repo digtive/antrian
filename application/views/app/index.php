@@ -143,7 +143,7 @@
 												<h3 style="color: #1d70b7;font-family: titilliumweb-bold" class="ml-1"><?= $v['layanan_nama']?></h3>
 											</div>
 											<div class="col-5">
-												<h1 style="font-size: 42px;color: white;font-family: titilliumweb-bold" class="mt-2 ml-3 active-queue animated infinite active-queue-number">A-000</h1>
+												<h1 style="font-size: 42px;color: white;font-family: titilliumweb-bold" class="mt-2 ml-4 active-queue animated infinite active-queue-number">A-000</h1>
 											</div>
 										</div>
 										<div class="row" style="padding: 4px 8px;height: auto">
@@ -221,7 +221,7 @@
 		<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
 		<!-- generate component from js for activate queue component -->
 		<script src="<?= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?>"></script>
-		<script src="<?= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?>"></script>
+<!--		<script src="--><?//= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
 		<!-- end inject for playing audio-->
 
 		<!-- JS inject for media -->

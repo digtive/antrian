@@ -27,43 +27,6 @@
 				'message'=> 'menampilkan data seluruh loket yang tersedia'
 			));
 		}
-		
-		public function call($loket)
-		{
-			//antrian aktif
-			$dataAntrianAaktif = $this->currentQueue($loket);
-			$antrianAktif = array();
-			$antrianAktif;
-			// antrian status menunggu
-			$dataSisaAntrian = $this->leftQueue($loket);
-			$antrianMenunggu = $dataSisaAntrian->result_array();
-			// antrian selanjutnya yang akan di aktifkan setiap perform
-
-			if ($dataAntrianAaktif->row_array() !==null){
-				$antrianAktif = $dataAntrianAaktif->row_array();
-			}else{
-				if (!empty($antrianMenunggu)){
-					if ($this->activateFirstRow($antrianMenunggu[0]['antrian_id']) > 0){
-						$antrianAktif = $this->currentQueue($loket)->row_array();
-					}
-				}else{
-					$antrianAktif = null;
-					echo json_encode(array(
-						'status' => '500',
-						'message' => 'tidak ada antrian pada loket atau antrian telah selesai'
-					));
-				}
-			}
-
-			if ($antrianAktif !== null){
-				$this->updateCall(1,$antrianAktif,$loket);
-			}else{
-				echo json_encode(array(
-					'status' => '500',
-					'message' => 'tidak ada antrian pada loket atau antrian telah selesai'
-				));
-			}
-		}
 
 		public function callTo($locketId)
 		{
@@ -133,16 +96,6 @@
 
 			}
 
-		}
-
-		public function recall()
-		{
-			$dataPanggilan = array(
-				'panggilan_updated' => date('Y-m-d H:i:s')
-			);
-			$updatePanggilan = parent::model('service')->update_panggilan(1,$dataPanggilan);
-
-			return $this->getCall();
 		}
 
 		public function recallTo($locketId)
