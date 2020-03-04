@@ -74,4 +74,27 @@
 			$this->session->sess_destroy();
 			redirect('layanan');
 		}
+
+		public function loketApi($id = null)
+		{
+			if ($id!== null){
+				$locket = parent::model('loket')->getJoinLocketWhere(array(
+					'loket_id' =>  $id
+				))->row_array();
+			}elseif (isset($_GET)){
+				$query  = array();
+				foreach ($_GET as $key => $v){
+					$query[$key] = $v;
+				}
+				$locket = parent::model('loket')->getJoinLocketWhere($query)->result_array();
+			}else{
+				$locket = parent::model('loket')->get_loket()->result_array();
+			}
+
+			echo json_encode(array(
+				'status' => '200',
+				'message' => 'menampilkan hasil request',
+				'data' => $locket
+			));
+		}
 	}

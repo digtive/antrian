@@ -10,6 +10,7 @@ class ComponentController extends GLOBAL_Controller {
 		$this->load->model('ComponentModel','component');
 		$this->load->model('LoketModel','loket');
 		$this->load->model('LayananModel','layanan');
+		$this->load->model('ServiceModel','service');
 	}
 
 	public function index()
@@ -105,7 +106,8 @@ class ComponentController extends GLOBAL_Controller {
 			$data['loket'] = parent::model('loket')->getJoinLoket();
 			$data['layanan'] = parent::model('layanan')->get_layanan();
 			$data['nextLocket'] = $data['loket']->num_rows()+1;
-//			parent::cek_array($data['nextLocket']);
+			$data['suara'] = parent::model('service')->get_suara();
+//			parent::cek_array($data['layanan']);
 			parent::settingsPages('components/loket',$data);
 		}
 	}

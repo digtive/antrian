@@ -26,6 +26,8 @@
 							<tr>
 								<th>No</th>
 								<th>Nama Loket</th>
+								<th>Nama Alias</th>
+								<th>Petugas</th>
 								<th>Nomor Loket</th>
 								<th>Layanan</th>
 								<th>Aksi</th>
@@ -39,6 +41,8 @@
 								<tr>
 									<td><?= $no++ ?></td>
 									<td><?= $l->loket_nama ?></td>
+									<td><?= $l->loket_alias ?></td>
+									<td><?= $l->loket_petugas ?></td>
 									<td><?= $l->loket_nomor ?></td>
 									<td><?= $l->layanan_nama ?></td>
 									<td>
@@ -115,10 +119,41 @@
 			<form class="pt-4" action="<?= base_url("ComponentService/addLocket") ?>" method="post">
 				<div class="modal-body">
 						<div class="form-group row">
+							<label for="locket_services"
+								   class="col-3 col-form-label font-weight-medium">Layanan</label>
+							<div class="col-9">
+								<select name="locket_services"
+										class="form-control border-primary " id="locket_services" required>
+									<option disabled selected>PILIH LAYANAN</option>
+									<?php
+										foreach ($layanan->result() as $s) {
+											?>
+											<option value="<?= $s->layanan_id ?>"><?= $s->layanan_nama ?></option>
+											<?php
+										}
+									?>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
 							<label for="locket_name" class="col-3 col-form-label font-weight-medium">Nama Loket</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="locket_name" name="locket_name"
-									   placeholder="loket <?= $nextLocket?>">
+									   placeholder="nama loket" required>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="locket_alias" class="col-3 col-form-label font-weight-medium">Nama Alias</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="locket_name" name="locket_alias"
+									   placeholder="nama alias" required>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="locket_officer" class="col-3 col-form-label font-weight-medium">Petugas</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="locket_officer" name="locket_officer"
+									   placeholder="petugas" required>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -127,24 +162,7 @@
 							</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="locket_number" placeholder="Nomor Loket"
-									   name="locket_number" value="<?=$nextLocket ?>" readonly>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="font-family-timer"
-								   class="col-3 col-form-label font-weight-medium">Layanan</label>
-							<div class="col-9">
-								<select name="locket_services"
-										class="form-control border-primary form-simulator select-simulator"
-										data-transform="#time-content" data-change="font-family" name="font-family-timer">
-									<?php
-									foreach ($layanan->result() as $s) {
-										?>
-										<option value="<?= $s->layanan_id ?>"><?= $s->layanan_nama ?></option>
-										<?php
-									}
-									?>
-								</select>
+									   name="locket_number" value="" readonly>
 							</div>
 						</div>
 
@@ -174,16 +192,36 @@
 				<div class="modal-body">
 					<div class="form-group row">
 						<label for="service_name" class="col-3 col-form-label font-weight-medium">Nama Layanan</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" id="service_name" name="service_name"
-								   placeholder="Nama Layanan" required>
+						<div class="col-9">
+							<select name="service_name" class="form-control border-primary">
+								<option disabled selected>PILIH NAMA YANG TERSEDIA</option>
+								<?php
+									foreach ($suara as $k => $v) {
+										if (strlen($v['suara_nama']) > 1):
+								?>
+									<option value="<?= $v['suara_nama'] ?>"><?= $v['suara_nama'] ?></option>
+								<?php
+										endif;
+									}
+								?>
+							</select>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="service_prefix" class="col-3 col-form-label font-weight-medium">Awalan Layanan</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control " maxlength="1" id="service_prefix" placeholder="awalan layanan (contoh A atau 1)"
-								   name="service_prefix" style="text-transform: uppercase" required>
+						<div class="col-9">
+							<select name="service_prefix" class="form-control border-primary">
+								<option disabled selected>PILIH AWALAN</option>
+								<?php
+									foreach ($suara as $k => $v) {
+										if (strlen($v['suara_nama']) <= 1):
+											?>
+											<option value="<?= $v['suara_nama'] ?>"><?= $v['suara_nama'] ?></option>
+										<?php
+										endif;
+									}
+								?>
+							</select>
 						</div>
 					</div>
 				</div>

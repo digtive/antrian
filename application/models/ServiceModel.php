@@ -26,7 +26,8 @@
 		}
 
 		// mengambil semua antrian selesai
-		public function get_complete_queue($locketId){
+		public function get_complete_queue($locketId)
+		{
 			$this->db->select('*');
 			$this->db->from('tbl_antrian');
 			$this->db->where('tbl_antrian.antrian_loket_id', $locketId);
@@ -131,34 +132,45 @@
 		/*
 		 * dinamis edit data kolom antrian berdasarkan id
 		 * */
-		public function edit_antrian($antrianId,$dataEdit){
-			return parent::update_table_with_status('tbl_antrian','antrian_id',$antrianId,$dataEdit);
+		public function edit_antrian($antrianId, $dataEdit)
+		{
+			return parent::update_table_with_status('tbl_antrian', 'antrian_id', $antrianId, $dataEdit);
 		}
 
 		/*
 		 * dinamis edit antrian berdasarkan query
 		 * */
-		public function query_edit_antrian($key,$value,$data)
+		public function query_edit_antrian($key, $value, $data)
 		{
-			return parent::update_table_with_status('tbl_antrian',$key,$value,$data);
+			return parent::update_table_with_status('tbl_antrian', $key, $value, $data);
 		}
 
 		/*
 		 * edit spesific
 		 * */
-		public function edit_antrian_by_number($antrianSelanjutnya,$loketId)
+		public function edit_antrian_by_number($antrianSelanjutnya, $loketId)
 		{
 			$data = array(
 				'antrian_status' => 'aktif'
 			);
-			parent::_ODB()->where('antrian_loket_id',$loketId);
-			parent::_ODB()->where('antrian_nomor',$antrianSelanjutnya);
-			parent::_ODB()->update('tbl_antrian',$data);
+			parent::_ODB()->where('antrian_loket_id', $loketId);
+			parent::_ODB()->where('antrian_nomor', $antrianSelanjutnya);
+			parent::_ODB()->update('tbl_antrian', $data);
 			return parent::_ODB()->affected_rows();
 		}
 
-		public function update_panggilan($panggilanId,$dataPanggilan)
+		public function update_panggilan($panggilanId, $dataPanggilan)
 		{
-			return parent::update_table_with_status('tbl_panggilan','panggilan_id',$panggilanId,$dataPanggilan);
+			return parent::update_table_with_status('tbl_panggilan', 'panggilan_id', $panggilanId, $dataPanggilan);
+		}
+
+		public function get_suara()
+		{
+			return parent::get_array_of_table('tbl_suara');
+		}
+
+		public function get_suara_where($query)
+		{
+			return $this->db->get_where('tbl_suara',$query);
 		}
     }

@@ -13,6 +13,7 @@ class ComponentService extends GLOBAL_Controller
 		$this->load->model('ComponentModel', 'component');
 		$this->load->model('LoketModel', 'loket');
 		$this->load->model('LayananModel', 'layanan');
+		$this->load->model('ServiceModel', 'service');
 	}
 
 	/*
@@ -404,6 +405,8 @@ class ComponentService extends GLOBAL_Controller
 			$layanan = parent::post('locket_services');
 			$data = array(
 				"loket_nama" => $nama,
+				"loket_alias" => parent::post('locket_alias'),
+				"loket_petugas" => parent::post('locket_officer'),
 				"loket_nomor" => $nomor,
 				"loket_layanan_id" => $layanan
 			);
@@ -430,6 +433,8 @@ class ComponentService extends GLOBAL_Controller
 			$layanan = parent::post('locket_services');
 			$data = array(
 				"loket_nama" => $nama,
+				"loket_alias" => parent::post('locket_alias'),
+				"loket_petugas" => parent::post('locket_officer'),
 				"loket_nomor" => $nomor,
 				"loket_layanan_id" => $layanan
 			);
@@ -455,10 +460,18 @@ class ComponentService extends GLOBAL_Controller
 	public function addService()
 	{
 		if (isset($_POST)){
+			$suaraNama = parent::model('service')->get_suara_where(array(
+				'suara_nama' => parent::post('service_name')
+			))->row_array();
+			$suaraAwalan = parent::model('service')->get_suara_where(array(
+				'suara_nama' => parent::post('service_prefix')
+			))->row_array();
 
 			$dataLayanan = array(
 				'layanan_nama' => parent::post('service_name'),
-				'layanan_awalan' => parent::post('service_prefix')
+				'layanan_awalan' => parent::post('service_prefix'),
+				'layanan_suara_nama' => $suaraNama['suara_file'],
+				'layanan_suara_awalan' => $suaraAwalan['suara_file']
 			);
 
 			$insertStatus = parent::model('layanan')->post_layanan($dataLayanan);
@@ -473,11 +486,19 @@ class ComponentService extends GLOBAL_Controller
 	public function editLayanan($serviceId)
 	{
 		if (isset($_POST['submit'])) {
-
+			$suaraNama = parent::model('service')->get_suara_where(array(
+				'suara_nama' => parent::post('service_name')
+			))->row_array();
+			$suaraAwalan = parent::model('service')->get_suara_where(array(
+				'suara_nama' => parent::post('service_prefix')
+			))->row_array();
 			$data = array(
 				"layanan_nama" => parent::post('service_name'),
-				"layanan_awalan" => parent::post('service_prefix')
+				"layanan_awalan" => parent::post('service_prefix'),
+				"layanan_suara_nama" => $suaraNama['suara_file'],
+				"layanan_suara_awalan" => $suaraAwalan['suara_file']
 			);
+			parent::cek_array($data);
 			parent::model('layanan')->editLayanan($serviceId, $data);
 			redirect('settings/loket');
 		} else {
@@ -486,6 +507,8 @@ class ComponentService extends GLOBAL_Controller
 			$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
 			$data['activeMenu'] = 'loket';
 			$data['currentData'] = parent::model('layanan')->getOne(array("layanan_id" => $serviceId));
+			$data['suara'] = parent::model('service')->get_suara();
+
 //			parent::cek_array($data['currentData']);
 			parent::settingsPages('components/layanan_edit',$data);
 		}

@@ -15,29 +15,56 @@
 						  action="<?= base_url("ComponentService/editLayanan/" . $currentData['layanan_id']) ?>"
 						  method="post">
 						<div class="form-group row">
-							<label for="locket_name" class="col-3 col-form-label font-weight-medium">
-								Nama Layanan
-							</label>
-							<div class="col-9 mb-3">
-								<input type="text" value="<?= $currentData['layanan_nama'] ?>" class="form-control"
-									   id="locket_name" name="service_name" placeholder="Nama Layanan" required>
+							<label for="service_name" class="col-3 col-form-label font-weight-medium">Nama Layanan</label>
+							<div class="col-9">
+								<select name="service_name" class="form-control border-primary">
+									<?php
+										foreach ($suara as $k => $v) {
+											if (strlen($v['suara_nama']) > 1):
+									?>
+												<?php if ($v['suara_nama'] === $currentData['layanan_nama']):?>
+													<option value="<?= $v['suara_nama'] ?>" selected><?= $v['suara_nama'] ?></option>
+												<?php else:?>
+													<option value="<?= $v['suara_nama'] ?>"><?= $v['suara_nama'] ?></option>
+												<?php endif;?>
+									<?php
+											endif;
+										}
+									?>
+								</select>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="locket_number" class="col-3 col-form-label font-weight-medium">Awalan
-								Layanan</label>
-							<div class="col-9 mb-3">
-								<input value="<?= $currentData['layanan_awalan'] ?>" type="text" class="form-control bt-max-lenght" maxlength="1"
-									   id="locket_number" placeholder="awalan layanan (contoh A atau 1)" name="service_prefix" style="text-transform: uppercase" required>
+							<label for="service_prefix" class="col-3 col-form-label font-weight-medium">Awalan Layanan</label>
+							<div class="col-9">
+								<select name="service_prefix" class="form-control border-primary">
+									<?php
+										foreach ($suara as $k => $v) {
+											if (strlen($v['suara_nama']) <= 1):
+									?>
+												<?php if ($v['suara_nama'] === $currentData['layanan_awalan']):?>
+													<option value="<?= $v['suara_nama'] ?>" selected><?= $v['suara_nama'] ?></option>
+												<?php else:?>
+													<option value="<?= $v['suara_nama'] ?>"><?= $v['suara_nama'] ?></option>
+												<?php endif;?>
+									<?php
+											endif;
+										}
+									?>
+								</select>
 							</div>
 						</div>
 
-						<div class="form-group row">
-							<div class="col-6">
-								<a href="<?= base_url('settings/loket')?>"   class="btn btn-secondary col-12" >BATALKAN</a>
-							</div>
-							<div class="col-6">
-								<button type="submit" name="submit" class="btn btn-primary col-12">SIMPAN</button>
+						<div class="form-group row d-flex justify-content-end pt-4">
+							<div class="col-9">
+								<div class="row">
+									<div class="col-6">
+										<a href="<?= base_url('settings/loket')?>"   class="btn btn-secondary col-12" >BATALKAN</a>
+									</div>
+									<div class="col-6">
+										<button type="submit" name="submit" class="btn btn-primary col-12">SIMPAN</button>
+									</div>
+								</div>
 							</div>
 						</div>
 

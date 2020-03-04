@@ -52,4 +52,9 @@
             $query = $this->db->get();
             return $query;
         }
+        public function getJoinLocketWhere($query)
+		{
+			$this->db->join('tbl_layanan', 'tbl_loket.loket_layanan_id = tbl_layanan.layanan_id');
+			return $this->db->get_where('tbl_loket',$query);
+		}
     }
