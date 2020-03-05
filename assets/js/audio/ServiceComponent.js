@@ -42,8 +42,9 @@ class ServiceComponent extends Services{
 		this.serviceComponent();
 		let activeQueue = this.getActiveQueue(locketId);
 		let activeQueueContent = $('#loket-'+locketId+' .active-queue-number');
+		let activeQueueContainer = $('#loket-'+locketId+'');
 		activeQueueContent.html(activeQueue);
 		$('.active-queue-number').removeClass('flash');
-		activeQueueContent.addClass('flash');
+		activeQueueContainer.addClass('flash');
 	}
 }

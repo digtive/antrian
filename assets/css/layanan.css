@@ -33,6 +33,6 @@
 	clip-path: polygon(90% 0, 100% 35%, 100% 92%, 97% 100%, 7% 100%, 0 87%, 0 0);
 }
 .active-queue-number{
-	animation-duration: 7s;
+	animation-duration: 9s;
 	animation-iteration-count: infinite;
 }

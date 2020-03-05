@@ -408,7 +408,8 @@ class ComponentService extends GLOBAL_Controller
 				"loket_alias" => parent::post('locket_alias'),
 				"loket_petugas" => parent::post('locket_officer'),
 				"loket_nomor" => $nomor,
-				"loket_layanan_id" => $layanan
+				"loket_layanan_id" => $layanan,
+				"loket_waktu_panggilan" => date('Y-m-d H:i:s')
 			);
 			parent::model('loket')->post_loket($data);
 			redirect('settings/loket');

@@ -40,7 +40,7 @@
 					<div class="col-sm-10 mb-3">
 						<input type="text" value="<?= $currentData['loket_alias']?>" class="form-control" id="locket_alias" name="locket_alias" placeholder="Nama Alias">
 					</div>
- 
+
 					<label for="locket_officer" class="col-sm-2 col-form-label font-weight-medium">Nama Alias</label>
 					<div class="col-sm-10 mb-3">
 						<input type="text" value="<?= $currentData['loket_petugas']?>" class="form-control" id="locket_officer" name="locket_officer" placeholder="Petugas">

@@ -28,8 +28,10 @@
 		}
 		public function get_join_where($query)
 		{
+			$query['date_format(antrian_date_created,"%Y-%m-%d")'] =date('Y-m-d');
+			$this->db->select('*');
 			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
-			$this->db->order_by('antrian_nomor','asc');
+			$this->db->order_by('antrian_nomor', 'desc');
 			return $this->db->get_where('tbl_antrian',$query);
 		}
         public function get_antrian()

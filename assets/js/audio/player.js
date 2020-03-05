@@ -3,34 +3,13 @@ $(document).ready(function(){
 	let connection = new Connection();
 	let antrian = new MainAntrian();
 	let layanan = new ServiceComponent();
-
-	layanan.serviceComponent();
-
-
 	const BASE_URL = connection.BASE_URL;
+	layanan.serviceComponent();
 
 	let callData = antrian.getCallData();
 
-	setInterval(function () {
-		let call = antrian.getCallData();
-		if (callData.panggilan_updated !== call.panggilan_updated){
-			let queue;
-			let locket;
-			if (call.panggilan_jenis === 'call'){
-				queue = call.panggilan_antrian;
-				locket = call.panggilan_loket;
-				layanan.refresh(locket);
-			}else{
-				queue = call.recall_antrian;
-				locket = call.recall_loket;
-			}
-			speak(queue,locket);
-			callData = call;
-		}
-	},1000);
 
-
-	const audioMap = {
+	let audioMap = {
 		'in': BASE_URL+'assets/audios/in.wav',
 		'1': BASE_URL+'assets/audios/1.MP3',
 		'2': BASE_URL+'assets/audios/2.MP3',
@@ -53,6 +32,29 @@ $(document).ready(function(){
 		'100': BASE_URL+'assets/audios/seratus.MP3',
 		'loket': BASE_URL+'assets/audios/loket.MP3',
 	};
+
+	// realtime check data on call table
+	setInterval(function () {
+		let call = antrian.getCallData();
+		if (callData.panggilan_updated !== call.panggilan_updated){
+			let queue;
+			let locket;
+			let locketNumber;
+			if (call.panggilan_jenis === 'call'){
+				audioMap.prefix = BASE_URL+call.layanan_suara_awalan;
+				queue = call.panggilan_antrian;
+				locket = call.panggilan_loket;
+				locketNumber = call.loket_nomor;
+				layanan.refresh(locket);
+			}else{
+				audioMap.prefix = BASE_URL+call.recall_path;
+				queue = call.recall_antrian;
+				locketNumber = call.recall_loket;
+			}
+			speak(queue,locketNumber);
+			callData = call;
+		}
+	},1000);
 
 	const main = new LocketAudio();
 
@@ -84,13 +86,14 @@ $(document).ready(function(){
 			}
 		}
 	}
-	
+
 	function speak(queueNumber,locketId) {
 		var nomor = queueNumber;
 		var splitnomor = nomor.split("");
 
 		play('in', 1);
 		play('urut', 0);
+		play('prefix', 0);
 
 		if (splitnomor.length <= 1) {
 			play(""+ splitnomor[0], 0); //Satuan

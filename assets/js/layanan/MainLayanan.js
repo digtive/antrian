@@ -29,10 +29,10 @@ $(document).ready(function(){
 	});
 
 	$(document).on('click','#cetak-karcis', function () {
-		$('#ticket-preview').printThis({
-			debug: false,               // show the iframe for debugging
-			importCSS: true,            // import parent page css
-		});
-		// window.location.reload();
+		// $('#ticket-preview').printThis({
+		// 	debug: false,               // show the iframe for debugging
+		// 	importCSS: true,            // import parent page css
+		// });
+		window.location.reload();
 	})
 });

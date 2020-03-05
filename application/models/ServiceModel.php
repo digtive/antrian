@@ -121,12 +121,9 @@
 			$this->db->from('tbl_panggilan');
 			$this->db->where('tbl_panggilan.panggilan_id', $id);
 			$this->db->join('tbl_loket', 'tbl_loket.loket_id = tbl_panggilan.panggilan_loket');
-			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_loket.loket_id');
+			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_loket.loket_layanan_id');
 			$query = $this->db->get();
 			return $query->row_array();
-//			$query = array('panggilan_id',$id);
-//			$call = parent::get_object_of_row('tbl_panggilan',$query);
-//			return $call->row_array();
 		}
 
 		/*

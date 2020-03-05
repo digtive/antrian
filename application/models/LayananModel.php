@@ -40,4 +40,7 @@
         	return parent::update_table('tbl_setting','setting_id',$id,$dataEdit);
 		}
 
+		public function get_layanan_where($query){
+        	return $this->db->get_where('tbl_layanan',$query);
+		}
     }
