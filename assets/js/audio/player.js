@@ -22,6 +22,7 @@ $(document).ready(function(){
 		'9': BASE_URL+'assets/audios/9.MP3',
 		'out': BASE_URL+'assets/audios/out.wav',
 		'urut': BASE_URL+'assets/audios/nomor-urut.MP3',
+		'antrian': BASE_URL+'assets/audios/static/nomor-antrian.MP3',
 		'belas': BASE_URL+'assets/audios/belas.MP3',
 		'konter': BASE_URL+'assets/audios/konter.MP3',
 		'puluh': BASE_URL+'assets/audios/puluh.MP3',
@@ -92,7 +93,7 @@ $(document).ready(function(){
 		var splitnomor = nomor.split("");
 
 		play('in', 1);
-		play('urut', 0);
+		play('antrian', 0);
 		play('prefix', 0);
 
 		if (splitnomor.length <= 1) {

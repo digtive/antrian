@@ -125,76 +125,52 @@
 			}
 		}
 
-		public function callTo($locketId)
+		public function recall($locketId)
 		{
-			$activeQueue = $this->currentQueue($locketId)->row_array();
-			if ($activeQueue!==null){
-				// jika antrian aktif ada di loket
-				// antrian dengan nomor selanjutnya
-				$nextQueue = $this->getNextQueue($activeQueue['antrian_nomor']+1,$locketId);
-				if ($nextQueue !== null){
-					// jika antrian selanjutnya tidak kosong
+			$locketData = parent::model('loket')->getOne(array(
+				'loket_id' => $locketId
+			));
+			$serviceId = $locketData['loket_layanan_id'];
+			$completeQueueObj = parent::model('antrian')
+				->get_join_where(array(
+					'tbl_antrian.antrian_layanan_id'=>$serviceId,
+					'tbl_antrian.antrian_loket_id' => $locketId,
+					'antrian_status' => 'selesai'
+				));
+
+			if ($completeQueueObj->num_rows() > 0)
+			{
+				$completeQueue = $completeQueueObj->row_array();
+				$dataPanggilan = array(
+					'panggilan_jenis' => 'recall',
+					'recall_antrian' => $completeQueue['antrian_nomor'],
+					'recall_loket' => $locketData['loket_nomor'],
+					'recall_prefix' => $completeQueue['layanan_awalan'],
+					'recall_path' => $completeQueue['layanan_suara_awalan'],
+					'panggilan_updated' => date('Y-m-d H:i:s')
+				);
+				$update = parent::model('service')->update_panggilan(1,$dataPanggilan);
+
+				if ($update>0){
 					echo json_encode(array(
 						'status' => '200',
-						'antrian' => str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-						'data' => $activeQueue,
-						'message' => 'mengaktifkan antrian selanjutnya'
+						'antrian' => ucwords($completeQueue['layanan_awalan']).'-'.str_pad($completeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
+						'data' => $completeQueue,
+						'update' => $update,
+						'message' => 'menampilkan nomor recall yang terakhir kali dipanggil di loket '.$locketData['loket_nama']
 					));
-					parent::model('service')->edit_antrian($activeQueue['antrian_id'],array('antrian_status' => 'selesai'));
-					$dataPanggilan = array(
-						'panggilan_jenis' => 'call',
-						'panggilan_antrian' => $activeQueue['antrian_nomor'],
-						'panggilan_loket' => $activeQueue['loket_nomor'],
-						'panggilan_updated' => date('Y-m-d H:i:s')
-					);
-					parent::model('service')->update_panggilan(1,$dataPanggilan);
-
-					parent::model('service')->edit_antrian($nextQueue['antrian_id'],array('antrian_status' => 'aktif'));
-				}else{
-					// jika antrian selanjutnya tidak ada
-					parent::model('service')->edit_antrian($activeQueue['antrian_id'],array('antrian_status' => 'selesai'));
-					$dataPanggilan = array(
-						'panggilan_jenis' => 'call',
-						'panggilan_antrian' => $activeQueue['antrian_nomor'],
-						'panggilan_loket' => $activeQueue['loket_nomor'],
-						'panggilan_updated' => date('Y-m-d H:i:s')
-					);
-					// update tabel panggilan realtime
-					parent::model('service')->update_panggilan(1,$dataPanggilan);
-					echo json_encode(array(
-						'status' => '200',
-						'antrian' => str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-						'data' => $activeQueue,
-						'message' => 'tidak ada antrian selanjutnya'
-					));
-
 				}
-				$this->updateLocketTimeCalled($locketId);
+
 			}else{
-				// jika antrian aktif kosong
-				$waitQueue = $this->leftQueue($locketId)->row_array();
-				if ($waitQueue !== null){
-					$completeQueue = parent::model('service')->get_complete_queue($locketId);
-					$lastCompleteQueue = $completeQueue->row_array();
-					$nextQueue = $this->getNextQueue($lastCompleteQueue['antrian_nomor']+1,$locketId);
-					parent::model('service')->edit_antrian($nextQueue['antrian_id'],array('antrian_status' => 'aktif'));
-					echo json_encode(array(
-						'status' => '200',
-						'antrian' => str_pad($nextQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-						'data' => $nextQueue,
-						'message' => 'mengubah antrian yang baru ditambah'
-					));
-				}else{
-					echo json_encode(array(
-						'status' => '404',
-						'message'=>'belum ada antrian pada loket tersebut'
-					));
-				}
-
+				echo json_encode(array(
+					'status' => '200',
+					'antrian' => str_pad(0, 3, '0', STR_PAD_LEFT),
+					'data' => array(),
+					'update' => 0,
+					'message' => 'belum ada antrian pada loket '.$locketData['loket_nama']
+				));
 			}
-
 		}
-
 		public function recallTo($locketId)
 		{
 			$queue = parent::model('service')->get_queue_by_locket($locketId);
