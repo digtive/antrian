@@ -55,7 +55,9 @@
 				}
 
 				$update = parent::model('service')->edit_antrian($activeQueue['antrian_id'],array(
-					'antrian_status' => 'selesai'
+					'antrian_status' => 'selesai',
+					'antrian_loket_id' => $locketId,
+					'antrian_nomor_aktif' => ucwords($activeQueue['layanan_awalan']).'-'.str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT)
 				));
 
 				if ($update > 0){
@@ -287,6 +289,7 @@
 			$serviceId = $locketData['loket_layanan_id'];
 			$completeQueue = parent::model('antrian')->get_join_where(array(
 				'antrian_layanan_id' => $serviceId,
+				'antrian_loket_id' => $locketId,
 				'antrian_status' => 'selesai'
 			));
 
