@@ -15,6 +15,9 @@ $route['layanan/registrasi'] = 'LayananController/registrasi';
 $route['layanan/daftar'] = 'LayananController/lists';
 $route['layanan/logout'] = 'LayananController/logout';
 
+/*-- devices per locket --*/
+$route['devices'] = 'DevicesController';
+
 /*-- app routes --*/
 $route['settings'] = 'AppController/settings';
 $route['settings/colours'] = 'AppController/colours';
