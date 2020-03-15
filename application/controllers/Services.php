@@ -204,12 +204,25 @@
 					'antrian_nomor_alihan' => parent::post('text')
 				);
 
-				$insertQueue = parent::model('antrian')->post_antrian($dataSwitch);
-				if ($insertQueue > 0){
+				$switchDataValidation = parent::model('antrian')->get_join_where(array(
+					'antrian_layanan_id' => $serviceId,
+					'antrian_nomor_alihan' =>parent::post('text')
+				))->row_array();
+
+
+				if ($switchDataValidation !== null){
 					echo json_encode(array(
-						'status' => '200',
-						'message' => 'berhasil mengalihkan antrian ke layanan lain'
+						'status' => '500',
+						'message' => 'antrian tersebut telah di alihkan ke layanan yang dituju'
 					));
+				}else{
+					$insertQueue = parent::model('antrian')->post_antrian($dataSwitch);
+					if ($insertQueue > 0){
+						echo json_encode(array(
+							'status' => '200',
+							'message' => 'berhasil mengalihkan antrian ke layanan lain'
+						));
+					}
 				}
 			}
 		}

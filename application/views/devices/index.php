@@ -34,6 +34,9 @@
 	<body style="background-color: #f6f8fa;height: 768px;max-height: 768px;overflow: hidden">
 		<div class="container" style="padding-top: 80px">
 			<div class="row">
+				<div class="col-12" id="alertContainer">
+
+				</div>
 				<div class="col-8">
 					<div class="card  bg-dribbble " style="height: 600px;min-height: 600px">
 						<div class="card-body text-center py-5" >
