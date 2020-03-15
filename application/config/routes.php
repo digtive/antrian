@@ -17,6 +17,7 @@ $route['layanan/logout'] = 'LayananController/logout';
 
 /*-- devices per locket --*/
 $route['devices'] = 'DevicesController';
+$route['devices/registration'] = 'DevicesController/registration';
 
 /*-- app routes --*/
 $route['settings'] = 'AppController/settings';

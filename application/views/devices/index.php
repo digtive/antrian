@@ -37,11 +37,11 @@
 				<div class="col-8">
 					<div class="card  bg-dribbble " style="height: 600px;min-height: 600px">
 						<div class="card-body text-center py-5" >
-							<h1 style="font-size: 50px;" class="text-white">POLI GIGI UMUM</h1>
+							<h1 style="font-size: 50px;" class="text-white"><?= $layananSelected['layanan_nama']?></h1>
 							<h1 style="font-size: 170px;font-family: titilliumweb-bold;margin-top: 80px;margin-bottom: 80px"
-								class="text-white animated bounceIn">A-003
+								class="text-white animated bounceIn" id="activeQueueNumber"><?= $callData['activeQueue']?>
 							</h1>
-							<h1 style="font-size: 30px;" class="text-white">Sisa Antrian : 5</h1>
+							<h1 style="font-size: 30px;" class="text-white">Sisa Antrian : <span id="leftQueueNumber"><?= $callData['leftQueue']?></span></h1>
 						</div>
 					</div>
 				</div>
@@ -53,14 +53,14 @@
 										data-toggle="modal" data-target="#redirectModal" data-backdrop="static" data-keyboard="false">
 								<h1><i class="icon-action-redo"></i> ALIHKAN</h1>
 							</button>
-							<button class="btn col-12 btn-info px-4 grid-margin" type="button" style="min-height: 130px;height: 130px">
-								<h1><i class="icon-earphones-alt"></i> PG - 1</h1>
+							<button class="btn col-12 btn-info px-4 grid-margin" type="button" style="min-height: 130px;height: 130px" id="alternatifBtn" data-locket="<?= $alternatif['loket_id']?>">
+								<h1><i class="icon-earphones-alt"></i> <?= $alternatif['loket_alias']?></h1>
 								<span style="font-family: titilliumweb-regular">Alternatif</span>
 							</button>
-							<button class="btn col-12 btn-success px-4 grid-margin" type="button" style="min-height: 130px;height: 130px">
+							<button class="btn col-12 btn-success px-4 grid-margin" type="button" style="min-height: 130px;height: 130px" id="recallBtn" data-locket="<?= $session['loket']?>">
 								<h1><i class="icon-loop"></i> RECALL</h1>
 							</button>
-							<button class="btn col-12 btn-primary px-4 grid-margin" type="button" style="min-height: 180px;height: 180px">
+							<button class="btn col-12 btn-primary px-4 grid-margin" type="button" style="min-height: 180px;height: 180px" id="callBtn" data-locket="<?= $session['loket']?>">
 								<h1><i class="icon-microphone"></i> CALL</h1>
 							</button>
 						</div>
@@ -68,6 +68,12 @@
 				</div>
 			</div>
 		</div>
+
+		<form action="#" id="callData">
+			<input type="text" value="<?= $callData['activeQueueData']['antrian_nomor']?>" name="nomor" hidden>
+			<input type="text" value="<?= $callData['activeQueueData']['antrian_layanan_id']?>" name="layanan" hidden>
+			<input type="text" value="<?= $callData['activeQueueData']['antrian_nomor_aktif']?>" name="text" hidden>
+		</form>
 
 		<!-- Modal -->
 		<div class="modal fade" id="redirectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -79,12 +85,17 @@
 								<h3 class="font-weight-medium">Alihkan ke Layanan</h3>
 							</div>
 							<div class="col-12">
-								<button class="col-12 btn btn-dark text-left grid-margin" >
-									<i class=" icon-screen-desktop"></i> POLI GIGI UMUM
+								<?php
+									foreach ($layanan as $k => $v):
+										if ($v['layanan_id'] !== $session['layanan']):
+								?>
+								<button class="col-12 btn btn-dark text-left grid-margin switchBtn" data-service="<?= $v['layanan_id']?>">
+										<i class=" icon-screen-desktop"></i> <?= $v['layanan_nama']?>
 								</button>
-								<button class="col-12 btn btn-dark text-left grid-margin" >
-									<i class=" icon-screen-desktop"></i> POLI GIGI UMUM
-								</button>
+								<?php
+										endif;
+									endforeach;
+								?>
 							</div>
 							<div class="col-12 my-2">
 								<button class="col-12 btn btn-secondary" data-dismiss="modal">
@@ -139,6 +150,10 @@
 		<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load=' . time()) ?>"></script>
 		<!-- end inject -->
 
+		<!-- JS for this page-->
+		<script src="<?= base_url('assets/js/device/CallInfo.js?v=1.0.0&&load=' . time()) ?>"></script>
+		<script src="<?= base_url('assets/js/device/SwitchControll.js?v=1.0.0&&load=' . time()) ?>"></script>
+		<!-- JS for this page-->
 	</body>
 
 </html>

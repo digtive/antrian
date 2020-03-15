@@ -32,70 +32,52 @@
 </head>
 
 <body style="background-color: #f6f8fa;height: 768px;max-height: 768px;overflow: hidden">
-<div class="container" style="padding-top: 80px">
+<div class="container" style="padding: 80px 280px">
 	<div class="row">
-		<div class="col-8">
-			<div class="card  bg-dribbble " style="height: 600px;min-height: 600px">
-				<div class="card-body text-center py-5" >
-					<h1 style="font-size: 50px;" class="text-white">POLI GIGI UMUM</h1>
-					<h1 style="font-size: 170px;font-family: titilliumweb-bold;margin-top: 80px;margin-bottom: 80px"
-						class="text-white animated bounceIn">A-003
-					</h1>
-					<h1 style="font-size: 30px;" class="text-white">Sisa Antrian : 5</h1>
+		<div class="col-12">
+			<form action="<?= base_url('devices/registration')?>" method="post" autocomplete="off">
+				<div class="form-group row">
+					<div class="col-12 mb-5 text-center">
+						<h2 style="font-family: titilliumweb-regular">LOKET DAN LAYANAN</h2>
+					</div>
+					<div class="col-12">
+						<select class="form-control" name="layanan" id="layanan" style="font-size: 24px;height: auto">
+							<option disabled selected>PILIH LAYANAN</option>
+							<?php
+							foreach ($layanan as $k => $v):
+								?>
+								<option value="<?= $v['layanan_id']?>"><?=  ucwords($v['layanan_awalan']).' - '.$v['layanan_nama'] ?></option>
+							<?php endforeach;?>
+						</select>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="col-4">
-			<div class="row">
-				<div class="col-12">
-					<button class="btn col-12 btn-outline-secondary px-4 grid-margin"
-							type="button" style="min-height: 100px;height: 100px"
-							data-toggle="modal" data-target="#redirectModal" data-backdrop="static" data-keyboard="false">
-						<h1><i class="icon-action-redo"></i> ALIHKAN</h1>
-					</button>
-					<button class="btn col-12 btn-info px-4 grid-margin" type="button" style="min-height: 130px;height: 130px">
-						<h1><i class="icon-earphones-alt"></i> PG - 1</h1>
-						<span style="font-family: titilliumweb-regular">Alternatif</span>
-					</button>
-					<button class="btn col-12 btn-success px-4 grid-margin" type="button" style="min-height: 130px;height: 130px">
-						<h1><i class="icon-loop"></i> RECALL</h1>
-					</button>
-					<button class="btn col-12 btn-primary px-4 grid-margin" type="button" style="min-height: 180px;height: 180px">
-						<h1><i class="icon-microphone"></i> CALL</h1>
-					</button>
+				<div class="form-group row mt-5">
+					<div class="col-12">
+						<select class="form-control" name="loket" id="loket-select" style="font-size: 24px;height: auto">
+							<option disabled selected>PILIH LOKET</option>
+						</select>
+					</div>
 				</div>
-			</div>
+				<div class="form-group row mt-5">
+					<div class="col-12">
+						<select class="form-control" name="alternatif" id="alternatif-loket-select" style="font-size: 24px;height: auto">
+							<option disabled selected>PILIH LOKET ALTERNATIF</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row mt-5">
+					<div class="col-12">
+						<button type="submit" class="btn btn-lg btn-primary col-12" name="masuk">
+							MASUK
+						</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="redirectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-body p-4">
-				<div class="row">
-					<div class="col-12 mb-2">
-						<h3 class="font-weight-medium">Alihkan ke Layanan</h3>
-					</div>
-					<div class="col-12">
-						<button class="col-12 btn btn-dark text-left grid-margin" >
-							<i class=" icon-screen-desktop"></i> POLI GIGI UMUM
-						</button>
-						<button class="col-12 btn btn-dark text-left grid-margin" >
-							<i class=" icon-screen-desktop"></i> POLI GIGI UMUM
-						</button>
-					</div>
-					<div class="col-12 my-2">
-						<button class="col-12 btn btn-secondary" data-dismiss="modal">
-							BATALKAN
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
 <!-- plugins:js -->
 <script src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js') ?>"></script>
@@ -138,6 +120,10 @@
 <script src="<?= base_url('assets/js/audio/AudioHelper.js?v=1.0.0&&load=' . time()) ?>"></script>
 <script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load=' . time()) ?>"></script>
 <!-- end inject -->
+
+<!-- JS for device page -->
+<script src="<?= base_url('assets/js/device/ChainSelect.js?v=1.0.0&load='.time())?>" type="text/javascript"></script>
+<!-- end JS for device page -->
 
 </body>
 
