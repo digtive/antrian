@@ -32,6 +32,7 @@ $(document).ready(function(){
 		'10': BASE_URL+'assets/audios/sepuluh.MP3',
 		'100': BASE_URL+'assets/audios/seratus.MP3',
 		'loket': BASE_URL+'assets/audios/loket.MP3',
+		'menuju' : BASE_URL+'assets/audios/static/silahkan-menuju.MP3'
 	};
 
 	// realtime check data on call table
@@ -41,18 +42,32 @@ $(document).ready(function(){
 			let queue;
 			let locket;
 			let locketNumber;
+			let isSwitch = false;
 			if (call.panggilan_jenis === 'call'){
+				isSwitch = false;
+
 				audioMap.prefix = BASE_URL+call.layanan_suara_awalan;
 				queue = call.panggilan_antrian;
 				locket = call.panggilan_loket;
 				locketNumber = call.loket_nomor;
 				layanan.refresh(locket);
+			}else if (call.panggilan_jenis === 'switch'){
+				isSwitch = true;
+
+				audioMap.prefix = BASE_URL+call.switchcall_prefix;
+				audioMap.service = BASE_URL+call.layanan_suara_nama;
+				queue = call.panggilan_antrian;
+				locket = call.panggilan_loket;
+				locketNumber = call.loket_nomor;
+				layanan.refresh(locket);
 			}else{
+				isSwitch = false;
+
 				audioMap.prefix = BASE_URL+call.recall_path;
 				queue = call.recall_antrian;
 				locketNumber = call.recall_loket;
 			}
-			speak(queue,locketNumber);
+			speak(queue,locketNumber,isSwitch);
 			callData = call;
 		}
 	},1000);
@@ -88,7 +103,7 @@ $(document).ready(function(){
 		}
 	}
 
-	function speak(queueNumber,locketId) {
+	function speak(queueNumber,locketId,isSwitch) {
 		var nomor = queueNumber;
 		var splitnomor = nomor.split("");
 
@@ -165,6 +180,10 @@ $(document).ready(function(){
 			}
 		}
 
+		if (isSwitch===true){
+			play('menuju',0);
+			play('service',0);
+		}
 		play('loket',0);
 		play(locketId,0);
 

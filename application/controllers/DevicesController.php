@@ -106,12 +106,17 @@
 				'antrian_status' => 'selesai'
 			));
 
-			if ($completeQueue->num_rows() > 0){
-				$complete = $completeQueue->row_array();
-				$format = str_pad($complete['antrian_nomor'], 3, '0', STR_PAD_LEFT);
+			$switchedQueue  = parent::model('antrian')
+				->get_switched_queue(array(
+					'antrian_layanan_id' => $serviceId,
+					'antrian_status' => 'selesai'
+				),'antrian_date_created','desc');
+
+			if ($switchedQueue->num_rows() > 0){
+				$complete = $switchedQueue->row_array();
 
 				return array(
-					'text' => ucwords($complete['layanan_awalan']).'-'.$format,
+					'text' => $complete['antrian_nomor_aktif'],
 					'data' => $complete
 				);
 			}else{

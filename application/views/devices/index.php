@@ -74,6 +74,8 @@
 
 		<form action="#" id="callData">
 			<input type="text" value="<?= $callData['activeQueueData']['antrian_nomor']?>" name="nomor" hidden>
+			<input type="text" value="<?= $layananSelected['layanan_suara_awalan']?>" name="suara_awalan" hidden>
+			<input type="text" value="<?= $layananSelected['layanan_suara_nama']?>" name="suara" hidden>
 			<input type="text" value="<?= $callData['activeQueueData']['antrian_layanan_id']?>" name="layanan" hidden>
 			<input type="text" value="<?= $callData['activeQueueData']['antrian_nomor_aktif']?>" name="text" hidden>
 		</form>

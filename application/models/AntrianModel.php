@@ -34,6 +34,14 @@
 			$this->db->order_by('antrian_nomor', 'desc');
 			return $this->db->get_where('tbl_antrian',$query);
 		}
+		public function get_switched_queue($query,$orderParam,$sort = 'asc')
+		{
+			$query['date_format(antrian_date_created,"%Y-%m-%d")'] =date('Y-m-d');
+			$this->db->select('*');
+			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
+			$this->db->order_by($orderParam, $sort);
+			return $this->db->get_where('tbl_antrian',$query);
+		}
         public function get_antrian()
 		{
 			return parent::get_object_of_table($this->initTable());
