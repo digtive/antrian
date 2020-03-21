@@ -60,6 +60,14 @@ $(document).ready(function(){
 				locket = call.panggilan_loket;
 				locketNumber = call.loket_nomor;
 				layanan.refresh(locket);
+			}else if (call.panggilan_jenis === 'switchRecall'){
+				isSwitch = true;
+				console.log(call.panggilan_jenis);
+
+				audioMap.prefix = BASE_URL+call.switchcall_prefix;
+				audioMap.service = BASE_URL+call.layanan_suara_nama;
+				queue = call.recall_antrian;
+				locketNumber = call.recall_loket;
 			}else{
 				isSwitch = false;
 

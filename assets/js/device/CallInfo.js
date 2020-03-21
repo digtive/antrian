@@ -14,6 +14,7 @@
 				if (response.data.length !== 0){
 					$('input[name="nomor"]').val(response.data.antrian_nomor);
 					$('input[name="text"]').val(response.data.layanan_awalan+'-'+response.antrian);
+					recallBtn.data('type',response.data.antrian_jenis_panggilan);
 				}
 
 				$.get(con.BASE_URL+'Services/leftQueue/'+locket,function (data) {
@@ -31,6 +32,8 @@
 
 		$(document).on('click','#recallBtn',function () {
 			let locket = recallBtn.data('locket');
+			let callType = recallBtn.data('type');
+
 
 			// perform recall API
 			$.get(con.BASE_URL+'Services/recall/'+locket,function (response) {

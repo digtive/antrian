@@ -60,7 +60,7 @@
 								<h1><i class="icon-earphones-alt"></i> <?= $alternatif['loket_alias']?></h1>
 								<span style="font-family: titilliumweb-regular">Alternatif</span>
 							</button>
-							<button class="btn col-12 btn-success px-4 grid-margin" type="button" style="min-height: 130px;height: 130px" id="recallBtn" data-locket="<?= $session['loket']?>">
+							<button class="btn col-12 btn-success px-4 grid-margin" type="button" style="min-height: 130px;height: 130px" id="recallBtn" data-locket="<?= $session['loket']?>" data-type="<?= $callData['activeQueueData']['antrian_jenis_panggilan']?>">
 								<h1><i class="icon-loop"></i> RECALL</h1>
 							</button>
 							<button class="btn col-12 btn-primary px-4 grid-margin" type="button" style="min-height: 180px;height: 180px" id="callBtn" data-locket="<?= $session['loket']?>">

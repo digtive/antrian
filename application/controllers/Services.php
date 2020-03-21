@@ -168,24 +168,43 @@
 				'loket_id' => $locketId
 			));
 			$serviceId = $locketData['loket_layanan_id'];
-			$completeQueueObj = parent::model('antrian')
-				->get_join_where(array(
+//			$completeQueueObj = parent::model('antrian')
+//				->get_join_where(array(
+//					'tbl_antrian.antrian_layanan_id'=>$serviceId,
+//					'tbl_antrian.antrian_loket_id' => $locketId,
+//					'antrian_status' => 'selesai'
+//				));
+
+			$completeQueueObj  = parent::model('antrian')
+				->get_switched_queue(array(
 					'tbl_antrian.antrian_layanan_id'=>$serviceId,
 					'tbl_antrian.antrian_loket_id' => $locketId,
 					'antrian_status' => 'selesai'
-				));
+				),'antrian_date_created','desc');
 
 			if ($completeQueueObj->num_rows() > 0)
 			{
 				$completeQueue = $completeQueueObj->row_array();
-				$dataPanggilan = array(
-					'panggilan_jenis' => 'recall',
-					'recall_antrian' => $completeQueue['antrian_nomor'],
-					'recall_loket' => $locketData['loket_nomor'],
-					'recall_prefix' => $completeQueue['layanan_awalan'],
-					'recall_path' => $completeQueue['layanan_suara_awalan'],
-					'panggilan_updated' => date('Y-m-d H:i:s')
-				);
+				if ($completeQueue['antrian_jenis_panggilan'] === 'alihan'){
+					$dataPanggilan = array(
+						'panggilan_jenis' => 'switchRecall',
+						'recall_antrian' => $completeQueue['antrian_nomor'],
+						'recall_loket' => $locketData['loket_nomor'],
+						'switchcall_prefix' => $completeQueue['antrian_suara_alihan_prefix'],
+						'switchcall_path' => $completeQueue['layanan_suara_nama'],
+						'panggilan_updated' => date('Y-m-d H:i:s')
+					);
+				}else{
+					$dataPanggilan = array(
+						'panggilan_jenis' => 'recall',
+						'recall_antrian' => $completeQueue['antrian_nomor'],
+						'recall_loket' => $locketData['loket_nomor'],
+						'recall_prefix' => $completeQueue['layanan_awalan'],
+						'recall_path' => $completeQueue['layanan_suara_awalan'],
+						'panggilan_updated' => date('Y-m-d H:i:s')
+					);
+				}
+
 				$update = parent::model('service')->update_panggilan(1,$dataPanggilan);
 
 				if ($update>0){
