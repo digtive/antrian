@@ -2,7 +2,7 @@
 	
 	class AntrianModel extends  GLOBAL_Model {
 
-        public function __construct()
+       public function __construct()
         {
             parent::__construct();
 			date_default_timezone_set("Asia/Jakarta");
@@ -69,91 +69,24 @@
         public function deleteantrian($data){
             return parent::delete_row($this->initTable(),$data);
         }
-        public function getByLayanan($id,$date){
-            $this->db->select('*');
-            $this->db->from($this->initTable());
-            $this->db->where('antrian_layanan_id',$id);
-            $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
-            $this->db->join('tbl_loket', 'tbl_loket.loket_id = tbl_antrian.antrian_loket_id');
-            $this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
-            $this->db->order_by('antrian_nomor','desc');
-            $this->db->limit(5);
-            $query = $this->db->get();
-            return $query;
-        }
-        public function getByLoket($id,$date){
-            $this->db->select('*');
-            $this->db->from($this->initTable());
-            $this->db->where('antrian_loket_id',$id);
-            $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
-            $this->db->join('tbl_loket', 'tbl_loket.loket_id = tbl_antrian.antrian_loket_id');
-            $this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
-            $this->db->order_by('antrian_nomor','asc');
-            $this->db->limit(5);
-            $query = $this->db->get();
-            return $query;
-        }
-        public function getAntrianSelanjutnya($loketId,$date,$antrianNomor){
+		public function getActive($layanan){
 			$this->db->select('*');
 			$this->db->from('tbl_antrian');
-			$this->db->where('antrian_loket_id',$loketId);
-			$this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
-			$this->db->where('antrian_nomor', $antrianNomor);
-			$this->db->join('tbl_loket', 'tbl_loket.loket_id = tbl_antrian.antrian_loket_id');
-			$this->db->join('tbl_layanan', 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id');
-			$this->db->order_by('antrian_nomor','asc');
-			$this->db->limit(5);
+			$this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', date('Y-m-d'));
+			$this->db->where('antrian_layanan_id',$layanan);
+			$this->db->where('antrian_status','aktif');
+			$this->db->order_by('antrian_id','desc');
 			$query = $this->db->get();
-			return $query->row_array();
+			return $query;
 		}
-        public function getTotalQueue($id,$date){
-            $this->db->select('*');
-            $this->db->from($this->initTable());
-            $this->db->where('antrian_layanan_id',$id);
-            $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
-            $this->db->order_by('antrian_nomor','desc');
-            $query = $this->db->get();
-            return $query;
-        }
-        public function getCurrentNumber($id,$date){
-            $this->db->select('*');
-            $this->db->from($this->initTable());
-			$this->db->join('tbl_layanan', 'tbl_antrian.antrian_loket_id = tbl_layanan.layanan_id');
-            $this->db->where('antrian_loket_id',$id);
-            $this->db->where('antrian_status','aktif');
-            $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
-            $query = $this->db->get();
-            return $query;
-        }
-
-        public function getRestQueue($id,$date){
-            $this->db->select('*');
-            $this->db->from($this->initTable());
-            $this->db->where('antrian_loket_id',$id);
-            $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
-            $this->db->where('antrian_status','menunggu');
-            $query = $this->db->get();
-            return $query;
-        }
-        public function getFirstWait($id,$date){
-            $this->db->select('*');
-            $this->db->from($this->initTable());
-            $this->db->where('antrian_loket_id',$id);
-            $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
-            $this->db->where('antrian_status','menunggu');
-            $this->db->limit(1);
-            $query = $this->db->get();
-            return $query;
-        }
-			public function getLastNumber($id,$date){
-            $this->db->select('*');
-            $this->db->from($this->initTable());
-			$this->db->order_by('antrian_id','DESC');
-			$this->db->join('tbl_layanan', 'tbl_antrian.antrian_loket_id = tbl_layanan.layanan_id');
-            $this->db->where('antrian_loket_id',$id);
-            $this->db->where('antrian_status','selesai');
-            $this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', $date);
-            $query = $this->db->get();
-            return $query;
-        }
+		public function getWaiting($layanan){
+			$this->db->select('*');
+			$this->db->from('tbl_antrian');
+			$this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', date('Y-m-d'));
+			$this->db->where('antrian_layanan_id',$layanan);
+			$this->db->where('antrian_status','menunggu');
+			$this->db->order_by('antrian_id','desc');
+			$query = $this->db->get();
+			return $query;
+		}
     }
