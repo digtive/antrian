@@ -58,7 +58,6 @@
 		public function lists(){
 			$data['title'] = 'Daftar Loket/Layanan';
 			$data['page_title'] = 'Aplikasi Antrian';
-
 			$data['dataLoket'] = parent::model('antrian')->get_loket()->result_array();
 			$data['service'] = parent::model('service');
 			$data['dataLayanan'] = parent::model('layanan')->get_layanan()->result_array();

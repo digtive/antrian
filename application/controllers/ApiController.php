@@ -41,52 +41,43 @@ class ApiController extends CI_Controller
         $response['data'] = $data->result_array();
         echo json_encode($response);
     }
-
-    public function antrian()
-    {
-        $response = null;
-        $id = $this->input->post('loket_id');
-		$date = date('Y-m-d');
-        $data = $this->LoketModel->getByLayanan($id);
-//        $data = $this->AntrianModel->getByLayanan($id, $date);
-            $sekarang = $this->AntrianModel->getCurrentNumber($id, $date);
-		
-            if ($data->num_rows() <= 0) {
-                //$this->addQueue($id,$data->num_rows());
-                $response['status'] = "400";
-				
-                $response['message'] = "Antrian Belum Ada";
-            } else {
-                if(!empty($sekarang->row_array())){
-$last = $this->AntrianModel->getLastNumber($id,$date);                
-				$response['status'] = 200;
-                    $response['message'] = "Berhasil Memuat Data";
-                    $response['data'] = $data->result_array();
-                    $response['sekarang'] = $last->row_array();
-                    $response['total'] = $this->AntrianModel->getTotalQueue($id, $date)->num_rows();
-                    $response['sisa'] = $this->AntrianModel->getRestQueue($id, $date)->num_rows();
-                }
-                else{
-					$last = $this->AntrianModel->getLastNumber($id,$date);
-                    $response['status'] = 200;
-                    $response['message'] = "Berhasil Memuat Data";
-                    $response['data'] = $data->result_array();
-                    $response['sekarang'] = $last->row_array();
-                    $response['total'] = $this->AntrianModel->getTotalQueue($id, $date)->num_rows();
-                    $response['sisa'] = $this->AntrianModel->getRestQueue($id, $date)->num_rows();
-                }
-
-            }
-        echo json_encode($response);
-    }
-	public function loket()
-    {
-        $response = null;
-        $data = $this->LoketModel->getJoinLoket();
-        $response['status'] = 200;
+	public function loket(){
+		$response = null;
+		$layanan = $this->input->post('layanan_id');
+		$data = $this->LoketModel->get_by_layanan($layanan);
+		$response['status'] = 200;
         $response['message'] = "Berhasil Memuat Data";
         $response['data'] = $data->result_array();
         echo json_encode($response);
-    }
-
+	}
+	public function getAntrian(){
+		$response = null;
+		$layanan = $this->input->post('layanan_id');
+		$data = $this->AntrianModel->getActive($layanan);
+		$waiting = $this->AntrianModel->getWaiting($layanan);
+		$response['status'] = 200;
+		$response['message'] = 'Berhasil Memuat Data';
+		if($data->num_rows()>0){
+		$response['data_active'] = $data->row_array();			
+		}
+		else{
+			$data = array("antrian_id"=> "0",
+        "antrian_nomor"=> "0",
+        "antrian_layanan_id"=> "9",
+        "antrian_loket_id"=> null,
+        "antrian_nomor_aktif"=> null,
+        "antrian_jenis_panggilan"=> "0",
+        "antrian_nomor_alihan"=> null,
+        "antrian_suara_alihan_prefix"=>null,
+        "antrian_suara_alihan"=> null,
+        "antrian_date_created"=> "0",
+        "antrian_status"=> "habis");
+			$response['data_active'] =$data; 
+		}
+		$response['data_waiting'] = $waiting->num_rows();
+		echo json_encode($response);
+	}
+	public function alihan(){
+		
+	}
 }

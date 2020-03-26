@@ -29,10 +29,9 @@ $route['settings/print'] = 'AppController/prints';
 $route['settings/header'] = 'ComponentController/header';
 $route['settings/tombol'] = 'ComponentController/tombol';
 
-$route['api/queue/antrian'] = 'ApiController/antrian';
-$route['api/queue/loket'] = 'ApiController/loket';
-$route['api/queue/recall'] = 'ApiController/recall';
 $route['api/queue/layanan'] = 'ApiController/layanan';
+$route['api/queue/loket'] = 'ApiController/loket';
+$route['api/queue/getantrian'] = 'ApiController/getAntrian';
 
 $route['default_controller'] = 'AppController';
 $route['mainpage'] = 'ResolutionController';
