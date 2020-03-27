@@ -183,7 +183,11 @@
 		</div>
 		<!-- component hasil cetak -->
 
-
+		<form action="<?= base_url('Services/receiptPrint')?>" id="printSubmit" method="post">
+			<input type="text" name="queue_number" hidden>
+			<input type="text" name="service_name" hidden>
+			<input type="text" name="left_queue" hidden>
+		</form>
 
 	</div>
 

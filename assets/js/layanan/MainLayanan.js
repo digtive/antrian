@@ -10,6 +10,7 @@ $(document).ready(function(){
 		let response = services.getData('Services/'+url);
 		if (response.status === '200'){
 			receiptsPrint(response);
+			// receiptsPrint(response);
 			// $('#ticket-number-print').html(response.antrian_nomor);
 			// $('#service-name-print').html(response.service_name);
 			// $('#left-queue-print').html(response.left_queue);
@@ -30,22 +31,11 @@ $(document).ready(function(){
 	});
 
 	function receiptsPrint(response){
-		console.log(response);
+		$('input[name="queue_number"]').val(response.antrian_nomor);
+		$('input[name="service_name"]').val(response.service_name);
+		$('input[name="left_queue"]').val(response.left_queue);
 
-		let printer = new Recta('2706425049','1811');
-
-		printer.open().then(function () {
-			printer.align('center')
-				.text('Hello World !!')
-				.bold(true)
-				.text('This is bold text')
-				.bold(false)
-				.underline(true)
-				.text('This is underline text')
-				.underline(false)
-				.cut()
-				.print()
-		})
+		$('#printSubmit').submit();
 	}
 
 	$(document).on('click','#cetak-karcis', function () {

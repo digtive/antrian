@@ -1,10 +1,14 @@
 <?php
 
+	require __DIR__ . '/../../vendor/autoload.php';
+	use Mike42\Escpos\Printer;
+	use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+	use Mike42\Escpos\EscposImage;
+
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
 	class Services extends GLOBAL_Controller
 	{
-
 		
 		public function __construct()
 		{
@@ -667,6 +671,36 @@
 				));
 			}
 		}
+
+		public function receiptPrint()
+		{
+			if (isset($_POST)){
+				$queueNumber = parent::post('queue_number');
+				$serviceName = parent::post('service_name');
+				$leftQueue = parent::post('left_queue');
+
+				$connector = new FilePrintConnector("php://stdout");
+				$printer = new Printer($connector);
+
+				/* Initialize */
+				$printer -> initialize();
+
+				/* Line feeds */
+				$printer -> text($serviceName);
+				$printer -> feed(7);
+				$printer -> text($queueNumber);
+				$printer -> feedReverse(3);
+				$printer -> text("Sisa Antrian : ".$leftQueue);
+				$printer -> feed();
+				$printer -> cut();
+
+				redirect('layanan/daftar');
+			}
+		}
+
+		/*
+		 * APIs
+		 * */
 
 		public function loket($locketId){
 			$param = array(
