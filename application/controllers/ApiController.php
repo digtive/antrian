@@ -53,15 +53,17 @@ class ApiController extends CI_Controller
 	public function getAntrian(){
 		$response = null;
 		$layanan = $this->input->post('layanan_id');
+		$loket = $this->input->post('loket_id');
 		$data = $this->AntrianModel->getActive($layanan);
 		$waiting = $this->AntrianModel->getWaiting($layanan);
+		$last = $this->AntrianModel->getLastCall($loket);
 		$response['status'] = 200;
 		$response['message'] = 'Berhasil Memuat Data';
 		if($data->num_rows()>0){
 		$response['data_active'] = $data->row_array();			
 		}
 		else{
-			$data = array("antrian_id"=> "0",
+			$dataa = array("antrian_id"=> "0",
         "antrian_nomor"=> "0",
         "antrian_layanan_id"=> "9",
         "antrian_loket_id"=> null,
@@ -72,9 +74,26 @@ class ApiController extends CI_Controller
         "antrian_suara_alihan"=> null,
         "antrian_date_created"=> "0",
         "antrian_status"=> "habis");
-			$response['data_active'] =$data; 
+			$response['data_active'] =$dataa; 
 		}
-		$response['data_waiting'] = $waiting->num_rows();
+		if($last->num_rows()>0){
+				$response['data_last_call'] = $last->row_array();
+		}
+		else{
+			$dataa = array("antrian_id"=> "0",
+        "antrian_nomor"=> "0",
+        "antrian_layanan_id"=> "9",
+        "antrian_loket_id"=> null,
+        "antrian_nomor_aktif"=> null,
+        "antrian_jenis_panggilan"=> "0",
+        "antrian_nomor_alihan"=> null,
+        "antrian_suara_alihan_prefix"=>null,
+        "antrian_suara_alihan"=> null,
+        "antrian_date_created"=> "0",
+        "antrian_status"=> "habis");
+			$response['data_last_call'] =$dataa; 			
+		}
+		$response['data_waiting'] = $waiting->num_rows()+$data->num_rows();
 		echo json_encode($response);
 	}
 	public function alihan(){

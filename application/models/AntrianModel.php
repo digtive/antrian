@@ -75,6 +75,7 @@
 			$this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', date('Y-m-d'));
 			$this->db->where('antrian_layanan_id',$layanan);
 			$this->db->where('antrian_status','aktif');
+			$this->db->limit(1);
 			$this->db->order_by('antrian_id','desc');
 			$query = $this->db->get();
 			return $query;
@@ -85,6 +86,17 @@
 			$this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', date('Y-m-d'));
 			$this->db->where('antrian_layanan_id',$layanan);
 			$this->db->where('antrian_status','menunggu');
+			$this->db->order_by('antrian_id','desc');
+			$query = $this->db->get();
+			return $query;
+		}
+		public function getLastCall($loket){
+			$this->db->select('*');
+			$this->db->from('tbl_antrian');
+			$this->db->where('date_format(antrian_date_created,"%Y-%m-%d")', date('Y-m-d'));
+			$this->db->where('antrian_loket_id',$loket);
+			$this->db->where('antrian_status','selesai');
+			$this->db->limit(1);
 			$this->db->order_by('antrian_id','desc');
 			$query = $this->db->get();
 			return $query;
