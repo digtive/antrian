@@ -28,7 +28,7 @@ class GLOBAL_Controller extends CI_Controller
         return $this->$model;
     }
 
-    public function _clienMAC()
+    public function _clientMAC()
 	{
 		$_IP_SERVER = $_SERVER['SERVER_ADDR'];
 		$_IP_ADDRESS = $_SERVER['REMOTE_ADDR'];
