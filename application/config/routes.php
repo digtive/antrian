@@ -15,6 +15,9 @@ $route['layanan/registrasi'] = 'LayananController/registrasi';
 $route['layanan/daftar'] = 'LayananController/lists';
 $route['layanan/logout'] = 'LayananController/logout';
 
+/*-- Extend Screen --*/
+$route['extend'] = 'ExtendScreen';
+
 /*-- devices per locket --*/
 $route['devices'] = 'DevicesController';
 $route['devices/registration'] = 'DevicesController/registration';
