@@ -6,7 +6,7 @@
 </div>
 <!-- container-scroller -->
 <!-- PLUGINS FOR ENTIRE SYSTEMS  -->
-<script src="<?= base_url() ?>assets/js/plugins/vue.js"></script>
+<!--<script src="--><?//= base_url() ?><!--assets/js/plugins/vue.js"></script>-->
 <script src="<?= base_url() ?>assets/js/package/settings.js"></script>
 
 <!-- plugins:js -->
@@ -101,6 +101,7 @@
 <script src="<?= base_url('assets/js/media/MediaSettings.js') ?>"></script>
 <script src="<?= base_url('assets/js/media/customKeyboard.js') ?>"></script>
 <script src="<?= base_url('assets/js/layanan/LocketNumber.js') ?>"></script>
+<script src="<?= base_url('assets/js/components/AppLicense.js')?>"></script>
 <!--<script type="text/javascript" src="--><? //= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 <!-- JS inject for media -->
 

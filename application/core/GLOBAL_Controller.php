@@ -10,6 +10,8 @@ class GLOBAL_Controller extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('AuthModel','auth');
+
         if ($this->session->has_userdata('sess_id')) {
             $this->userID = $this->session->userdata('sess_id');
             $this->userName = $this->session->userdata('sess_user');
@@ -52,6 +54,15 @@ class GLOBAL_Controller extends CI_Controller
 			$_HASIL = substr($_PECAH_STRING[1], 0, 17);
 		}
 		return $_HASIL;
+	}
+
+	public function UserMAC()
+	{
+		$userByMac = $this->auth->get_lisensi_where(array(
+			'mac_pengguna' => $this->_clientMAC()
+		));
+
+		return $userByMac;
 	}
 
     /*

@@ -13,7 +13,8 @@
 	"require": {
 		"php": ">=5.3.7",
 		"ext-json": "*",
-		"mike42/escpos-php": "^3.0"
+		"mike42/escpos-php": "^3.0",
+		"ext-mcrypt": "*"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

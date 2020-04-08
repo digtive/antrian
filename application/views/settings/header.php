@@ -103,6 +103,7 @@
 								$footer = '';
 								$parent = '';
 								$tombol = '';
+								$users = '';
 
 								switch ($activeMenu){
 									case 'umum':
@@ -127,9 +128,19 @@
 										$parent = $active;break;
 									case 'tombol':
 										$tombol = $active;break;
+									case 'users':
+										$users = $active;break;
 								}
 
 							?>
+							<?php if ($this->session->userdata('level') === 'superAdmin'):?>
+							<li>
+								<a href="<?= base_url('settings/users')?>" class="<?php echo $users;?>">
+									<i class="icon-user "></i>
+									Pengguna
+								</a>
+							</li>
+							<?php endif;?>
 							<li>
 								<a href="<?= base_url('settings/parent')?>" class="<?php echo $parent;?>">
 									<i class="icon-screen-desktop "></i>

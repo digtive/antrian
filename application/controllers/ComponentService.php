@@ -574,4 +574,70 @@ class ComponentService extends GLOBAL_Controller
 			redirect('settings/tombol');
 		}
 	}
+
+	public function addUser()
+	{
+		if (isset($_POST)){
+			$loginData = array(
+				'username' => parent::post('username'),
+				'password' => md5(parent::post('password')),
+				'level' => 'admin',
+				'mac' => parent::post('mac')
+			);
+
+			$licenseData = array(
+				'nama_pengguna' => parent::post('app_username'),
+				'mac_pengguna' => parent::post('mac'),
+				'tanggal_aktivasi' => parent::post('activate_at'),
+				'durasi_aktivasi' => parent::post('activation_duration'),
+				'tanggal_tempo' => parent::post('expire_at')
+			);
+
+			$addUser = parent::model('auth')->add_user($loginData);
+			if ($addUser > 0){
+				$addLicense = parent::model('auth')->add_license($licenseData);
+
+				if ($addLicense > 0){
+					parent::alert('alert','edit');
+					redirect('settings/users');
+				}
+			}
+		}else{
+			show_404();
+		}
+	}
+
+	public function editUser()
+	{
+		if (isset($_POST)){
+			$loginData = array(
+				'username' => parent::post('username'),
+				'password' => md5(parent::post('password')),
+			);
+
+			$licenseData = array(
+				'nama_pengguna' => parent::post('app_username'),
+				'mac_pengguna' => parent::post('mac'),
+				'tanggal_aktivasi' => parent::post('activate_at'),
+				'durasi_aktivasi' => parent::post('activation_duration'),
+				'tanggal_tempo' => parent::post('expire_at')
+			);
+			$mac =parent::model('auth')->get_pengguna_where(array(
+				'mac' => parent::_clientMAC()
+			))->row_array();
+			$licenseMac = parent::UserMAC()->row_array();
+			$editUser = parent::model('auth')->edit_user($mac['id_auth'],$loginData);
+			if ($editUser > 0){
+				$editLicense = parent::model('auth')->edit_license($licenseMac['id_lisensi'],$licenseData);
+				if ($editLicense > 0){
+					parent::alert('alert','edit');
+					redirect('settings/users');
+				}
+			}else{
+				redirect('settings/users');
+			}
+		}else{
+			show_404();
+		}
+	}
 }

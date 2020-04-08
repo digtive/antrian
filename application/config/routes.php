@@ -8,6 +8,7 @@ $route['settings/header'] = 'ComponentController/header';
 $route['settings/footer'] = 'ComponentController/footer';
 $route['settings/loket'] = 'ComponentController/loket';
 $route['settings/parent'] = 'ComponentController/parent';
+$route['settings/users'] = 'ComponentController/users';
 
 /*-- second monitor --*/
 $route['layanan'] = 'LayananController';

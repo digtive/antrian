@@ -131,6 +131,33 @@ class ComponentController extends GLOBAL_Controller {
 			parent::settingsPages('components/tombol',$data);
 		}
 	}
+	public function users()
+	{
+		if ($this->session->userdata('username') === null){
+			redirect('layanan/registrasi');
+		}else{
+			$data['title'] = 'Pengaturan Aplikasi';
+			$data['page_title'] = 'Pengaturan Pengguna Aplikasi';
+			$data['settingsTitle'] = 'Pengaturan Pengguna Aplikasi';
+			$data['activeMenu'] = 'users';
+			$data['macUser'] = parent::UserMAC()->row_array();
+			$data['licensedUser'] = parent::model('auth')->get_pengguna_where(array(
+				'mac' => parent::_clientMAC()
+			))->row_array();
+//			parent::cek_array($data['licensedUser']);
+
+			$query = array(
+				'app_id' => get_cookie('user_app')
+			);
+			$data['keyboard']  = parent::model('component')->get_keyboard_setting($query);
+			$data['dataLoket'] = parent::model('loket')->getJoinLoket()->result_array();
+			$data['keyList'] = json_decode($data['keyboard']['setting_tombol'],true);
+			$data['mac'] = parent::_clientMAC();
+
+			parent::settingsPages('components/users',$data);
+		}
+	}
+
 	public function editLoket(){
 		$data['title'] = 'Pengaturan Aplikasi';
 		$data['page_title'] = 'Pengaturan Loket Aplikasi';
@@ -145,5 +172,6 @@ class ComponentController extends GLOBAL_Controller {
 		$data['layanan'] = parent::model('layanan')->get_layanan();
 		parent::settingsPages('components/loket_edit',$data);
 	}
+
 	
 }

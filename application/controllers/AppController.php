@@ -10,19 +10,10 @@
 			$this->load->model('ComponentModel','component');
 			$this->load->model('AntrianModel','antrian');
 			date_default_timezone_set("Asia/Jakarta");
-
-			if ($_COOKIE['user_app']  === ''){
-				setcookie('user_app','1',time()+(86400*30),'/');
-			}
-
-			if (!isset($_COOKIE['user_app'])){
-				setcookie('user_app','1',time()+(86400*30),'/');
-			}
 		}
 		
 		public function index()
 		{
-//			parent::cek_type($this->get_client_ip());
 			if ($_COOKIE['user_app']  === ''){
 				setcookie('user_app','1',time()+(86400*30),'/');
 			}
@@ -32,13 +23,6 @@
 			}
 			$data['title'] = 'Aplikasi Antrian';
 			$data['page_title'] = 'Aplikasi Antrian';
-
-			$lisensi = parent::model('auth')->get_lisensi();
-
-			if (get_cookie('user_app') === null){
-				$expire = 86400*30*$lisensi['kadaluarsa'];
-				set_cookie('user_app', $lisensi['id_app'],$expire);
-			}
 
 			$query = array(
 				'app_id' => get_cookie('user_app')
