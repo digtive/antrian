@@ -24,7 +24,7 @@
 	<!-- inject:css -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/fonts.css?v=1.0.0&&load='.time().'') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.0&&load='.time().'')?>">
-	<link rel="stylesheet" href="<?= base_url('assets/css/app.css?v=1.0.0&&load='.time().'')?>">
+	<link rel="stylesheet" href="<?= base_url('assets/css/app-extend.css?v=1.0.0&&load='.time().'')?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/layanan.css?v=1.0.0&&load='.time().'')?>">
 	<!-- endinject -->
 
@@ -65,7 +65,7 @@
 
 			<?php endif?>
 			<!-- ---- HEADER SECTION ---- -->
-			<div id="header-card" style="background-color: <?= $header['background-header']?>;">
+			<div id="header-card" >
 				<div class="row">
 					<div class="col-9">
 						<!-- ---- TAG LINE AND BRAND SECTION -->
@@ -73,7 +73,7 @@
 							<div class="tagline-wrapper">
 								<div class="parallelogram" style="background: <?= $header['background-paralelogram']?>;">
 								</div>
-								<div class="brand-wrapper" style='background-image: url("<?= base_url('assets/images/doodle/diamond.png')?>");background-repeat: no-repeat;background-position: right;background-size: inherit;'>
+								<div class="brand-wrapper" >
 									<img src="<?= base_url().$logo ?>" alt="" width="100%" height="100%">
 								</div>
 							</div>
@@ -104,7 +104,7 @@
 			<!-- ---- CONTENT SECTION ---- -->
 			<div id="content-card">
 				<div class="row">
-					<div class="col-8">
+					<div class="col-7">
 
 						<div id="content-wrapper">
 							<?php
@@ -114,7 +114,7 @@
 								<ul class="horizontal-bxslider">
 									<?php for ($i = 0; $i < count($dataGambar); $i++):?>
 										<li>
-											<img src="<?= base_url().$dataGambar[$i]?>" alt="" height="510px"/>
+											<img src="<?= base_url().$dataGambar[$i]?>" alt="" height="388px"/>
 										</li>
 									<?php endfor; ?>
 								</ul>
@@ -132,7 +132,7 @@
 					</div>
 
 					<!-- service list -->
-					<div class="col-4" style="height: 536px;overflow: hidden">
+					<div class="col-5" style="height: 400px;overflow: hidden">
 						<div id="queue-box-wrapper" class="grid-margin ">
 							<?php foreach ($dataLoket as $key => $v):?>
 								<div class="card card-shadow grid-margin bg-white card-service mix animated infinite active-queue-number"
@@ -220,7 +220,7 @@
 	<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
 	<!-- generate component from js for activate queue component -->
 	<script src="<?= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?>"></script>
-	<script src="<?= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?>"></script>
+<!--	<script src="--><?//= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
 	<!-- end inject for playing audio-->
 
 	<!-- JS inject for media -->

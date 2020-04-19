@@ -174,6 +174,7 @@
 		<!-- plugins:js -->
 		<script src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js')?>"></script>
 		<!--connection class-->
+		<script src="<?= base_url('assets/js/app/offline.min.js')?>" type="text/javascript"></script>
 		<script src="<?= base_url('assets/js/audio/Connection.js?v=1.0.0&&load='.time()) ?>"></script>
 		<!-- connection class -->
 		<script src="<?= base_url('assets/node_modules/moment/moment.js')?>"></script>

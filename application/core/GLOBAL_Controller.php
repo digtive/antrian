@@ -17,6 +17,7 @@ class GLOBAL_Controller extends CI_Controller
             $this->userName = $this->session->userdata('sess_user');
             $this->userLevel = $this->session->userdata('sess_level');
         }
+        $this->licenseCheck();
     }
 
     /*
@@ -63,6 +64,26 @@ class GLOBAL_Controller extends CI_Controller
 		));
 
 		return $userByMac;
+	}
+
+	public function licenseCheck()
+	{
+		$userMac = $this->UserMAC()->row_array();
+		if ($userMac!== null){
+			$expireDate = strtotime($userMac['tanggal_tempo']);
+			$todayDate = strtotime(date('Y-m-d H:i:s'));
+
+			if ($todayDate > $expireDate){
+				$data['message'] = 'Masa Lisensi Anda Berakhir';
+				$this->authPage('credits/expire',$data);
+				exit();
+			}
+
+		}else{
+			$data['message'] = 'Anda Belum Memiliki Akun Untuk Mengelola Aplikasi';
+			$this->authPage('credits/expire',$data);
+			exit();
+		}
 	}
 
     /*
