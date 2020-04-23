@@ -6,7 +6,9 @@ class ComponentController extends GLOBAL_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		parent::licenseCheck();
+		if ($this->session->userdata('level') === 'admin'){
+			parent::licenseCheck();
+		}
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->model('ComponentModel','component');
 		$this->load->model('LoketModel','loket');
@@ -28,20 +30,22 @@ class ComponentController extends GLOBAL_Controller {
 		if ($this->session->userdata('username') === null){
 			redirect('layanan/registrasi');
 		}else{
-			$data['title'] = 'Pengaturan Aplikasi';
-			$data['page_title'] = 'Pengaturan Aplikasi';
-			$data['settingsTitle'] = 'Pengaturan  Aplikasi';
-			$data['activeMenu'] = 'parent';
+			if ($this->session->userdata('level') === 'superAdmin'){
+				$data['title'] = 'Pengaturan Aplikasi';
+				$data['page_title'] = 'Pengaturan Aplikasi';
+				$data['settingsTitle'] = 'Pengaturan  Aplikasi';
+				$data['activeMenu'] = 'parent';
 
-			$query = array(
-				'app_id' => get_cookie('user_app')
-			);
+				$query = array(
+					'app_id' => get_cookie('user_app')
+				);
 
-			$data['component']  = parent::model('component')->get_user_app($query);
-			$data['container'] = json_decode($data['component']['app_container'],true);
+				$data['component']  = parent::model('component')->get_user_app($query);
+				$data['container'] = json_decode($data['component']['app_container'],true);
 //		parent::cek_array($data['container']);
 
-			parent::settingsPages('components/parent',$data);
+				parent::settingsPages('components/parent',$data);
+			}
 		}
 	}
 
