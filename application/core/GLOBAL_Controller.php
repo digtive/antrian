@@ -17,7 +17,6 @@ class GLOBAL_Controller extends CI_Controller
             $this->userName = $this->session->userdata('sess_user');
             $this->userLevel = $this->session->userdata('sess_level');
         }
-        $this->licenseCheck();
     }
 
     /*
