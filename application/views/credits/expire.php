@@ -38,6 +38,7 @@
 			</div>
 			<div class="d-flex justify-content-center">
 				<h4>Silahkan hubungi admin </h4>
+				<h2>Atau melakukan <a href="<?php base_url('layanan/registrasi')?>">Login</a></h2>
 			</div>
 		</div>
 	</body>
