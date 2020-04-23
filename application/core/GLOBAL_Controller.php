@@ -68,21 +68,26 @@ class GLOBAL_Controller extends CI_Controller
 
 	public function licenseCheck()
 	{
-		$userMac = $this->UserMAC()->row_array();
-		if ($userMac!== null){
-			$expireDate = strtotime($userMac['tanggal_tempo']);
-			$todayDate = strtotime(date('Y-m-d H:i:s'));
+		$_IP_SERVER = $_SERVER['SERVER_ADDR'];
+		$_IP_ADDRESS = $_SERVER['REMOTE_ADDR'];
+		if($_IP_ADDRESS == $_IP_SERVER){
+			$userMac = $this->UserMAC()->row_array();
+			if ($userMac!== null){
+				$expireDate = strtotime($userMac['tanggal_tempo']);
+				$todayDate = strtotime(date('Y-m-d H:i:s'));
 
-			if ($todayDate > $expireDate){
-				$data['message'] = 'Masa Lisensi Anda Berakhir';
+				if ($todayDate > $expireDate){
+					$data['message'] = 'Masa Lisensi Anda Berakhir';
+					$this->authPage('credits/expire',$data);
+					exit();
+				}
+
+			}else{
+				$data['message'] = 'Anda Belum Memiliki Akun Untuk Mengelola Aplikasi';
 				$this->authPage('credits/expire',$data);
 				exit();
 			}
 
-		}else{
-			$data['message'] = 'Anda Belum Memiliki Akun Untuk Mengelola Aplikasi';
-			$this->authPage('credits/expire',$data);
-			exit();
 		}
 	}
 
