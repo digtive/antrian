@@ -14,13 +14,14 @@
 		"php": ">=5.3.7",
 		"ext-json": "*",
 		"mike42/escpos-php": "^3.0",
-		"ext-mcrypt": "*"
+		"romainrg/ratchet_client": "^1.0",
+		"nacmartin/phpexecjs": "^3.0"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},
 	"require-dev": {
-		"mikey179/vfsStream": "1.1.*",
+		"mikey179/vfsstream": "1.1.*",
 		"phpunit/phpunit": "4.* || 5.*"
 	}
 }
