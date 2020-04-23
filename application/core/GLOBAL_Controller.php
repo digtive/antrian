@@ -12,13 +12,9 @@ class GLOBAL_Controller extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+		date_default_timezone_set("Asia/Jakarta");
         $this->load->model('AuthModel','auth');
 		$this->set_app_encryption();
-
-		$ragilEnc = $this->a20A('2020-4-1');
-		$ragilDec = $this->b20B($ragilEnc);
-		echo $ragilEnc.'<br>';
-		echo $ragilDec;exit();
     }
 
     /*
