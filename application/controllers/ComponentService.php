@@ -8,7 +8,6 @@ class ComponentService extends GLOBAL_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		parent::licenseCheck();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->userAppID = get_cookie('user_app');
 		$this->load->model('ComponentModel', 'component');
@@ -581,7 +580,7 @@ class ComponentService extends GLOBAL_Controller
 		if (isset($_POST)){
 			$loginData = array(
 				'username' => parent::post('username'),
-				'password' => md5(parent::post('password')),
+				'password' => parent::a20A(parent::post('password')),
 				'level' => 'admin',
 				'mac' => parent::post('mac')
 			);
@@ -613,7 +612,7 @@ class ComponentService extends GLOBAL_Controller
 		if (isset($_POST)){
 			$loginData = array(
 				'username' => parent::post('username'),
-				'password' => md5(parent::post('password')),
+				'password' => parent::a20A(parent::post('password')),
 			);
 
 			$licenseData = array(
@@ -628,15 +627,10 @@ class ComponentService extends GLOBAL_Controller
 			))->row_array();
 			$licenseMac = parent::UserMAC()->row_array();
 			$editUser = parent::model('auth')->edit_user($mac['id_auth'],$loginData);
-			if ($editUser > 0){
-				$editLicense = parent::model('auth')->edit_license($licenseMac['id_lisensi'],$licenseData);
-				if ($editLicense > 0){
-					parent::alert('alert','edit');
-					redirect('settings/users');
-				}
-			}else{
-				redirect('settings/users');
-			}
+			$editLicense = parent::model('auth')->edit_license($licenseMac['id_lisensi'],$licenseData);
+			parent::alert('alert','edit');
+			redirect('settings/users');
+
 		}else{
 			show_404();
 		}
