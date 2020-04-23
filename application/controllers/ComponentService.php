@@ -8,6 +8,7 @@ class ComponentService extends GLOBAL_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		parent::licenseCheck();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->userAppID = get_cookie('user_app');
 		$this->load->model('ComponentModel', 'component');

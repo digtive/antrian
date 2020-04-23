@@ -6,6 +6,7 @@
 		public function __construct()
 		{
 			parent::__construct();
+			parent::licenseCheck();
 			$this->load->model('AuthModel','auth');
 			$this->load->model('ComponentModel','component');
 			$this->load->model('AntrianModel','antrian');

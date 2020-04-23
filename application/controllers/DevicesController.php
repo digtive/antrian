@@ -4,6 +4,7 @@
 		public function __construct()
 		{
 			parent::__construct();
+			parent::licenseCheck();
 			date_default_timezone_set("Asia/Jakarta");
 			$this->load->model('AntrianModel','antrian');
 			$this->load->model('LoketModel', 'loket');
