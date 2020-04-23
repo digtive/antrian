@@ -3,26 +3,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class GLOBAL_Controller extends CI_Controller
 {
-    public $userID;
-    public $userLevel;
-    public $userName;
+	private $encKey;
+	private $encMethod;
+	private $encOption;
+	private $encIv;
+
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model('AuthModel','auth');
+		$this->set_app_encryption();
 
-        if ($this->session->has_userdata('sess_id')) {
-            $this->userID = $this->session->userdata('sess_id');
-            $this->userName = $this->session->userdata('sess_user');
-            $this->userLevel = $this->session->userdata('sess_level');
-        }
+		$ragilEnc = $this->a20A('2020-4-1');
+		$ragilDec = $this->b20B($ragilEnc);
+		echo $ragilEnc.'<br>';
+		echo $ragilDec;exit();
     }
 
     /*
      * helper lives here
      * include templating helper, debugging & error helper, core helper
      * */
+    public function a20A($sTe)
+	{
+		// Use OpenSSl Encryption method
+		$iv_length = openssl_cipher_iv_length($this->encMethod);
+
+		// Use openssl_encrypt() function to encrypt the data
+		$encryption = openssl_encrypt($sTe, $this->encMethod,
+			$this->encKey, $this->encOption, $this->encIv);
+
+		return $encryption;
+
+	}
+
+	public function b20B($sTd)
+	{
+		// Use openssl_decrypt() function to decrypt the data
+		$decryption=openssl_decrypt ($sTd, $this->encMethod,
+			$this->encKey, $this->encOption, $this->encIv);
+
+		// Display the decrypted string
+		return  $decryption;
+	}
+
 
     // system helper
     public function model($model)
@@ -88,6 +113,12 @@ class GLOBAL_Controller extends CI_Controller
 			}
 
 		}
+	}
+
+	public function licenseRenew()
+	{
+		$data['message'] = 'Anda Belum Memiliki Akun Untuk Mengelola Aplikasi';
+		$this->authPage('credits/renew',$data);
 	}
 
     /*
@@ -159,5 +190,18 @@ class GLOBAL_Controller extends CI_Controller
     {
         $this->session->set_flashdata($name, $value);
     }
+
+    // autoload from DB
+	public function set_app_encryption()
+	{
+		$encDB = $this->model('auth')->get_enc_setting()->row_array();
+
+		$this->encKey = $encDB['enc_key'];
+		$this->encMethod = $encDB['enc_method'];
+		$this->encOption = $encDB['enc_option'];
+		$this->encIv = $encDB['enc_iv'];
+
+	}
+
 
 }

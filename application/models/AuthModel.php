@@ -48,5 +48,10 @@
 		{
 			return parent::update_table_with_status('lisensi','id_lisensi',$id,$licenseData);
 		}
+
+		public function get_enc_setting()
+		{
+			return parent::get_object_of_table('encryption');
+		}
 		
 	}
