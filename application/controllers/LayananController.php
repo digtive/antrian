@@ -33,7 +33,7 @@
 
 				$query = array(
 					'username' => $username,
-					'password'  => md5($password)
+					'password'  => parent::a20A($password)
 				);
 
 				$user = parent::model('antrian')->get_user($query);
