@@ -144,33 +144,12 @@
 	<!--		<script src="--><?//= base_url('assets/node_modules/howler/dist/howler.spatial.min.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
 	<!-- howler js untuk suara -->
 
-	<!-- swap queue component-->
-	<script src="<?= base_url('assets/js/components/swapsies.js?v=1.0.0&&load='.time())?>"></script>
-	<script src="<?= base_url('assets/js/components/componentSwap.js?v=1.0.0&&load='.time())?>"></script>
-	<!-- swap queue component-->
-
 
 	<!-- JS inject for playing audio  -->
 	<script src="<?= base_url('assets/js/audio/Services.js?v=1.0.0&&load='.time()) ?>"></script>
 	<script src="<?= base_url('assets/js/audio/AudioHelper.js?v=1.0.0&&load='.time()) ?>"></script>
 	<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
 	<!-- end inject -->
-
-	<!-- swap queue component-->
-	<script src="<?= base_url('assets/js/components/swapsies.js?v=1.0.0&&load='.time())?>"></script>
-	<script src="<?= base_url('assets/js/components/componentSwap.js?v=1.0.0&&load='.time())?>"></script>
-	<!-- swap queue component-->
-
-	<!-- JS inject for media -->
-	<script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?>"></script>
-	<script src="<?= base_url('assets/js/media/Slider.js')?>"></script>
-	<script src="<?= base_url('assets/js/node_modules/video.js/dist/video.min.js')?>"></script>
-	<script src="<?= base_url('assets/js/node_modules/videojs-playlist/dist/videojs-playlist.min.js')?>"></script>
-	<!-- JS inject for media -->
-
-	<script>
-
-	</script>
 
 </body>
 

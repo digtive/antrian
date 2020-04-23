@@ -15,7 +15,8 @@
 		"ext-json": "*",
 		"mike42/escpos-php": "^3.0",
 		"romainrg/ratchet_client": "^1.0",
-		"nacmartin/phpexecjs": "^3.0"
+		"nacmartin/phpexecjs": "^3.0",
+		"ext-openssl": "*"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
