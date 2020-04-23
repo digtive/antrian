@@ -139,7 +139,7 @@ $config['subclass_prefix'] = 'GLOBAL_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = FCPATH.'vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
