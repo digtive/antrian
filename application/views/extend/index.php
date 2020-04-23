@@ -65,14 +65,13 @@
 
 			<?php endif?>
 			<!-- ---- HEADER SECTION ---- -->
-			<div id="header-card" >
+			<div id="header-card" style='background-image: url("<?= base_url('assets/images/doodle/diamond.png')?>");
+				background-repeat: no-repeat;background-position: center;background-size: initial;background-color: <?= $header['background-paralelogram']?>;'>
 				<div class="row">
-					<div class="col-9">
+					<div class="col-8">
 						<!-- ---- TAG LINE AND BRAND SECTION -->
 						<div id="tagline-head">
 							<div class="tagline-wrapper">
-								<div class="parallelogram" style="background: <?= $header['background-paralelogram']?>;">
-								</div>
 								<div class="brand-wrapper" >
 									<img src="<?= base_url().$logo ?>" alt="" width="100%" height="100%">
 								</div>
@@ -81,7 +80,7 @@
 						<!-- ---- END BRAND AND TAG LINE SECTION -->
 
 					</div>
-					<div class="col-3">
+					<div class="col-4">
 						<div id="date-time-indicator" >
 							<div id="date-time-wrapper" style="background-color: <?= $header['background-timer']?>">
 								<div class="time-indicator d-flex justify-content-center">
@@ -102,7 +101,7 @@
 
 
 			<!-- ---- CONTENT SECTION ---- -->
-			<div id="content-card">
+			<div id="content-card" style="padding-top: 0px!important;">
 				<div class="row">
 					<div class="col-7">
 
@@ -133,37 +132,119 @@
 
 					<!-- service list -->
 					<div class="col-5" style="height: 400px;overflow: hidden">
-						<div id="queue-box-wrapper" class="grid-margin ">
-							<?php foreach ($dataLoket as $key => $v):?>
-								<div class="card card-shadow grid-margin bg-white card-service mix animated infinite active-queue-number"
-									 style="background-image: url('<?= base_url()?>assets/images/background/servicecard-bg-4.png	')" data-panggilan="" data-loket="<?= $v['loket_id']?>" id="loket-<?= $v['loket_id']?>">
-									<div class="card-body p-2">
-										<div class="row" style="height: 70px;max-height: 80px">
-											<div class="col-7 ">
-												<h3 style="color: #1d70b7;font-family: titilliumweb-bold" class="ml-1"><?= $v['loket_alias']?></h3>
+
+						<div class="card card-shadow" style="background-image: url('<?= base_url()?>assets/images/background/servicecard-bg-4.png');
+							background-size: initial;background-position: left;margin-bottom: 26px">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-12">
+										<h1 style="font-family: titilliumweb-bold;font-size: 48px;color: #3a3f51" class="text-center">
+											NOMOR ANTRIAN
+										</h1>
+									</div>
+									<div class="col-12">
+										<h1 style="font-family: titilliumweb-bold;font-size: 132px;color: #212529" class="text-center">
+											A-300
+										</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card card-shadow" style="background-image: url('<?= base_url()?>assets/images/background/servicecard-bg-4.png');
+							margin-bottom: 20px">
+							<div class="card-body p-1">
+								<div class="row">
+									<div class="col-12" >
+										<h1 style="font-family: titilliumweb-bold;font-size: 54px;color: #3a3f51" class="text-center">
+											LOKET PGU-1
+										</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- service list -->
+					
+					<!-- waiting queue list-->
+					<div class="col-12" style="margin-top: 20px">
+						<div class="row">
+
+							<div class="col-3">
+								<div class="card card-shadow waiting-queue-card">
+									<div class="card-body" style="padding: 12px">
+										<div class="row">
+											<div class="col-12">
+												<h1 class="text-center" style="font-family: titilliumweb-bold;font-size: 68px">B-102</h1>
 											</div>
-											<div class="col-5">
-												<h1 style="font-size: 42px;color: white;font-family: titilliumweb-bold" class="mt-2 ml-4 active-queue animated infinite active-queue-number"></h1>
+											<div class="col-12" style="border-top: 1.2px black solid">
 											</div>
-										</div>
-										<div class="row" style="padding: 4px 8px;height: auto">
-											<div class="col-12 d-flex justify-content-end">
-												<h5 class="m-0 text-white bg-facebook p-1" id="service-info" style="font-family: titilliumweb-bold;font-weight: lighter">Petugas : <?= $v['loket_petugas']?></h5>
+											<div class="col-12">
+												<h2 class="text-center" style="font-family: titilliumweb-bold;color: #3a3f51">PGU-1</h2>
 											</div>
 										</div>
 									</div>
 								</div>
-							<?php endforeach;?>
+							</div>
+
+							<div class="col-3">
+								<div class="card card-shadow waiting-queue-card">
+									<div class="card-body" style="padding: 12px">
+										<div class="row">
+											<div class="col-12">
+												<h1 class="text-center" style="font-family: titilliumweb-bold;font-size: 68px">B-102</h1>
+											</div>
+											<div class="col-12" style="border-top: 1.2px black solid">
+											</div>
+											<div class="col-12">
+												<h2 class="text-center" style="font-family: titilliumweb-bold;color: #3a3f51">PGU-1</h2>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="card card-shadow waiting-queue-card">
+									<div class="card-body" style="padding: 12px">
+										<div class="row">
+											<div class="col-12">
+												<h1 class="text-center" style="font-family: titilliumweb-bold;font-size: 68px">B-102</h1>
+											</div>
+											<div class="col-12" style="border-top: 1.2px black solid">
+											</div>
+											<div class="col-12">
+												<h2 class="text-center" style="font-family: titilliumweb-bold;color: #3a3f51">PGU-1</h2>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="card card-shadow waiting-queue-card">
+									<div class="card-body" style="padding: 12px">
+										<div class="row">
+											<div class="col-12">
+												<h1 class="text-center" style="font-family: titilliumweb-bold;font-size: 68px">B-102</h1>
+											</div>
+											<div class="col-12" style="border-top: 1.2px black solid">
+											</div>
+											<div class="col-12">
+												<h2 class="text-center" style="font-family: titilliumweb-bold;color: #3a3f51">PGU-1</h2>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
 						</div>
 					</div>
-					<!-- service list -->
+					<!-- waiting queue list-->
 				</div>
 			</div>
 			<!-- ---- END CONTENT SECTION ---- -->
 
 			<!-- ---- FOOTER SECTION ---- -->
 			<div id="footer-card" style="background-color:  <?= $footer['background-footer']?>;">
-				<marquee behavior="scroll" direction="left" id="running-text" style="font-size: 22px;color: <?= $footer['color-footer']?>;font-family: <?= $footer['font-family-footer']?>"><?= $footer['footer-text']?></marquee>
+				<marquee behavior="scroll" direction="left" id="running-text" style="font-size: 19px;color: <?= $footer['color-footer']?>;font-family: <?= $footer['font-family-footer']?>"><?= $footer['footer-text']?></marquee>
 			</div>
 			<!-- ---- END FOOTER SECTION ---- -->
 
@@ -244,6 +325,20 @@
 	<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 	<!--			<script type="text/javascript" src="--><?//= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 	<!-- custom JS for entire app -->
+
+	<script>
+        var conn = new WebSocket('ws://localhost:8282');
+
+        conn.onopen = function(e) {
+            console.log(e);
+        };
+
+        conn.onmessage = function(e) {
+            let jsonData = JSON.parse(e.data);
+            console.log(jsonData);
+        };
+
+	</script>
 </body>
 
 </html>

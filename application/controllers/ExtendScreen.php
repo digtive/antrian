@@ -1,4 +1,7 @@
 <?php
+	require __DIR__ . '/../../vendor/autoload.php';
+
+	use Nacmartin\PhpExecJs\PhpExecJs;
 	class ExtendScreen extends GLOBAL_Controller{
 
 		public function __construct()
@@ -38,5 +41,18 @@
 			parent::authPage('extend/index',$data);
 		}
 
+		public function testing()
+		{
+			echo '<script type="text/javascript">
+					let conn = new WebSocket("ws://localhost:8282");
+					 
+					conn.onopen = function(e){
+					    conn.send("from testing function");
+					}
+					conn.onmessage = function(e) {
+						console.log(e.data);
+					};
+				</script>';
+		}
 
 	}
