@@ -12,6 +12,7 @@
 			// perform call API
 			$.get(con.BASE_URL+'Services/call/'+locket,function (response) {
 				if (response.data.length !== 0){
+					broadCast(response);
 					$('input[name="nomor"]').val(response.data.antrian_nomor);
 					$('input[name="text"]').val(response.data.layanan_awalan+'-'+response.antrian);
 					recallBtn.data('type',response.data.antrian_jenis_panggilan);
@@ -48,5 +49,14 @@
 				console.log(response);
 			},'JSON');
 		});
+
+		function broadCast(data) {
+			let socket = new WebSocket('ws://localhost:8282');
+
+			socket.onopen = function (e) {
+				console.log(e);
+				socket.send(JSON.stringify(data));
+			}
+		}
 
 	});
