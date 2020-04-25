@@ -301,7 +301,7 @@
 	<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
 	<!-- generate component from js for activate queue component -->
 	<script src="<?= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?>"></script>
-<!--	<script src="--><?//= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
+	<script src="<?= base_url('assets/js/events/EventReceiver.js?v=1.0.0&&load='.time()) ?>"></script>
 	<!-- end inject for playing audio-->
 
 	<!-- JS inject for media -->
@@ -326,19 +326,6 @@
 	<!--			<script type="text/javascript" src="--><?//= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 	<!-- custom JS for entire app -->
 
-	<script>
-        var conn = new WebSocket('ws://localhost:8282');
-
-        conn.onopen = function(e) {
-            console.log(e);
-        };
-
-        conn.onmessage = function(e) {
-            let jsonData = JSON.parse(e.data);
-            console.log(jsonData);
-        };
-
-	</script>
 </body>
 
 </html>

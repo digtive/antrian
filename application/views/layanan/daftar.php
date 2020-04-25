@@ -121,7 +121,7 @@
 			<div class="row">
 				<div class="col-12 d-flex justify-content-end">
 					<div class="col-2 grid-margin">
-						<a href="javascript:history.back()">
+						<a href="<?= base_url('layanan')?>">
 							<div class="card bg-warning card-shadow">
 								<div class="card-body p-2">
 									<div class="d-flex flex-row align-items-top" style="padding-top: 6px">

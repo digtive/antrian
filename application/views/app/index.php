@@ -245,19 +245,6 @@
 	<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 <!--			<script type="text/javascript" src="--><?//= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 		<!-- custom JS for entire app -->
-		<script>
-            var conn = new WebSocket('ws://localhost:8282');
-
-            conn.onopen = function(e) {
-                console.log(e);
-            };
-
-            conn.onmessage = function(e) {
-               let jsonData = JSON.parse(e.data);
-               console.log(jsonData);
-            };
-
-		</script>
 	</body>
 
 </html>

@@ -101,6 +101,26 @@
 				</div>
 			</div>
 		</div>
+		<div id="layanan-footer">
+			<div class="row">
+				<div class="col-12 d-flex justify-content-end">
+					<div class="col-2 grid-margin">
+						<a href="<?= base_url('layanan')?>">
+							<div class="card bg-warning card-shadow">
+								<div class="card-body p-2">
+									<div class="d-flex flex-row align-items-top" style="padding-top: 6px">
+										<i class="icon-arrow-left text-white "></i>
+										<div class="ml-3">
+											<h4 class="text-facebook text-white">KEMBALI</h4>
+										</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- plugins:js -->

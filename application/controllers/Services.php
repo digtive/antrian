@@ -622,10 +622,7 @@
 
 		public function setActiveQueueOutput($activeQueue,$locketId)
 		{
-			$ajaxRequest = 0;
-			if ($this->input->is_ajax_request()){
-				$ajaxRequest = 1;
-			}
+
 			if ($activeQueue['antrian_jenis_panggilan'] === 'terusan'){
 				$format = ucwords($activeQueue['layanan_awalan']).'-'.str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT);
 			}else{
@@ -667,46 +664,13 @@
 
 				// update tabel panggilan realtime
 				parent::model('service')->update_panggilan(1,$dataPanggilan);
-
-				if ($ajaxRequest===1){
-					echo json_encode(array(
-						'status' => '200',
-						'antrian' => str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-						'data' => $activeQueue,
-						'ajax' => $ajaxRequest,
-						'message' => 'menampilkan antrian yang sedang dipanggil'
-					));
-				}else{
-					$encodedData = json_encode(array(
-						'status' => '200',
-						'antrian' => str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-						'data' => $activeQueue,
-						'message' => 'menampilkan antrian yang sedang dipanggil'
-					));
-					echo json_encode(array(
-						'status' => '200',
-						'antrian' => str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-						'data' => $activeQueue,
-						'ajax' => $ajaxRequest,
-						'message' => 'menampilkan antrian yang sedang dipanggil'
-					));
-
-					echo "<script type='text/javascript'>
-							let conn = new WebSocket('ws://localhost:8282');
-							let data  = ".$encodedData.";
-	
-							conn.onopen = function(e) {
-								console.log(e);
-								conn.send(JSON.stringify(data));
-							};
-	
-							conn.onmessage = function(e) {
-								console.log(e.data);
-							};
-						</script>";
-
-				}
-
+				echo json_encode(array(
+					'status' => '200',
+					'antrian' => str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
+					'data' => $activeQueue,
+					'ajax' => $ajaxRequest,
+					'message' => 'menampilkan antrian yang sedang dipanggil'
+				));
 
 			}
 		}

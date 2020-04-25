@@ -30,22 +30,21 @@ class ComponentController extends GLOBAL_Controller {
 		if ($this->session->userdata('username') === null){
 			redirect('layanan/registrasi');
 		}else{
-			if ($this->session->userdata('level') === 'superAdmin'){
-				$data['title'] = 'Pengaturan Aplikasi';
-				$data['page_title'] = 'Pengaturan Aplikasi';
-				$data['settingsTitle'] = 'Pengaturan  Aplikasi';
-				$data['activeMenu'] = 'parent';
+			$data['title'] = 'Pengaturan Aplikasi';
+			$data['page_title'] = 'Pengaturan Aplikasi';
+			$data['settingsTitle'] = 'Pengaturan  Aplikasi';
+			$data['activeMenu'] = 'parent';
 
-				$query = array(
-					'app_id' => get_cookie('user_app')
-				);
+			$query = array(
+				'app_id' => get_cookie('user_app')
+			);
 
-				$data['component']  = parent::model('component')->get_user_app($query);
-				$data['container'] = json_decode($data['component']['app_container'],true);
+			$data['component']  = parent::model('component')->get_user_app($query);
+			$data['container'] = json_decode($data['component']['app_container'],true);
 //		parent::cek_array($data['container']);
 
-				parent::settingsPages('components/parent',$data);
-			}
+			parent::settingsPages('components/parent',$data);
+
 		}
 	}
 

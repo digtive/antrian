@@ -16,7 +16,14 @@
 		"mike42/escpos-php": "^3.0",
 		"romainrg/ratchet_client": "^1.0",
 		"nacmartin/phpexecjs": "^3.0",
-		"ext-openssl": "*"
+		"ext-openssl": "*",
+		"symfony/http-foundation": "~2.7 | ~3.0 | ~4.0",
+		"tonyhhyip/sse": "^2.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"AppEvent\\": "application/controllers/EventService/"
+		}
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

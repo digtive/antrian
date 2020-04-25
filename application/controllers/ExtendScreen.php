@@ -42,18 +42,4 @@
 			parent::authPage('extend/index',$data);
 		}
 
-		public function testing()
-		{
-			echo '<script type="text/javascript">
-					let conn = new WebSocket("ws://localhost:8282");
-					 
-					conn.onopen = function(e){
-					    conn.send("from testing function");
-					}
-					conn.onmessage = function(e) {
-						console.log(e.data);
-					};
-				</script>';
-		}
-
 	}
