@@ -3,7 +3,7 @@
 
 namespace Antrian\Service;
 
-use Antian\Helper\QueueHandler;
+use Antrian\helper\QueueHelper;
 
 class QueueService
 {
@@ -14,7 +14,7 @@ class QueueService
 
 	public function call($locketId)
 	{
-		$QH = new QueueHandler($locketId);
+		$QH = new QueueHelper($locketId);
 
 		return $QH->getActiveQueue();
 	}

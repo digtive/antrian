@@ -34,7 +34,7 @@
 		{
 			$data = new QueueService();
 
-			parent::cek_array($data->call(9));
+			parent::cek_type($data->call(9));
 		}
 
 		public function getCallUpdated()
