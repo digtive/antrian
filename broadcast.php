@@ -35,7 +35,7 @@
 
 		public function check(){
 			// Fetch data from the data instance
-			$this->data = json_decode($this->storage->get('name'));
+			$this->data = json_decode($this->storage->get('call'));
 
 			// And check if it's a new message by comparing its time
 			if($this->data->time !== $this->cache){

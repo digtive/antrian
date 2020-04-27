@@ -1,18 +1,28 @@
 <?php
 
-	require __DIR__ . '/../../vendor/autoload.php';
-
 	use Sse\SSE;
 	use Sse\Data;
 	use Sse\Event;
 	use AppEvent\CallEvent;
-	use AppEvent\EventFire;
+	use AppEvent\EventData;
+	use Antrian\models\Locket;
+	use Antrian\models\Queue;
+	use Antrian\Service\QueueService;
+	use Antrian\helper\Database;
 
 	class EventSender extends GLOBAL_Controller{
-
+		private $ed;
+		private $locket;
+		private $queue;
+		private $qs;
 		public function __construct()
 		{
 			parent::__construct();
+			$this->ed = new EventData();
+			$this->locket = new Locket();
+			$this->queue = new Queue();
+			$this->qs= new QueueService();
+
 			$this->load->model('AntrianModel','antrian');
 			$this->load->model('LoketModel', 'loket');
 			$this->load->model('LayananModel','layanan');
@@ -20,26 +30,11 @@
 			$this->load->model('ComponentModel','component');
 		}
 
-		public function update()
-		{
-			if (isset($_GET['name'])){
-				$path = __DIR__.'\data';
-				$data = new Data('file',array('path' => './data'));
-
-				$data->set('name',json_encode(array(
-					'name' => parent::get('name'),
-					'time' => time()
-				)));
-
-				echo 'berhasil';
-			}
-		}
-
 		public function broadcast()
 		{
-			$data = new Data('file',array('path' => './data'));
+			$data = new QueueService();
 
-			echo $data->get('name');
+			parent::cek_array($data->call(9));
 		}
 
 		public function getCallUpdated()

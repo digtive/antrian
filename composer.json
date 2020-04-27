@@ -22,7 +22,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"AppEvent\\": "application/controllers/EventService/"
+			"AppEvent\\": "application/controllers/EventService/",
+			"Antrian\\" : "src"
 		}
 	},
 	"suggest": {
