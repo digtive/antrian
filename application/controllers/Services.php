@@ -4,6 +4,7 @@
 	use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 	use Mike42\Escpos\EscposImage;
 	use AppEvent\EventData;
+	use Antrian\Service\QueueService;
 
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -172,7 +173,9 @@
 
 		public function callTo($locketId)
 		{
+			$queueService = new QueueService();
 
+			$queueService->call($locketId);
 		}
 
 		public function recall($locketId)

@@ -5,15 +5,23 @@ namespace Antrian\Service;
 
 use Antrian\helper\QueueHelper;
 use Antrian\models\Queue;
+use Antrian\models\Service;
+use AppEvent\EventData;
 
 class QueueService
 {
 
 	private $queue;
 
+	private $eventData;
+
+	private $service;
+
 	public function __construct()
 	{
 		$this->queue = new Queue();
+		$this->eventData = new EventData();
+		$this->service = new Service();
 	}
 
 	public function call($locketId)
@@ -31,8 +39,18 @@ class QueueService
 	public function onFirstQueueExist(QueueHelper $queueHelper)
 	{
 		$firstIn = $queueHelper->getFirstInQueue();
-		//change all active queue to complete
+		//change all active queue to complete (Call Process)
 		if ($this->queue->setFirstToComplete($queueHelper)){
+			// if call process is success, fire some event
+			$queueArray = $firstIn->makeRowArray();
+			$queueData = $this->queue->find($queueArray['antrian_id'])->makeRowArray();
+			$serviceData = $this->service->find($queueHelper->getServiceId())->makeRowArray();
+			$callData = array(
+				'audio' => $serviceData,
+				'data' => $queueData
+			);
+			$this->eventData->fire('call',$callData);
+
 			// next step is get firstIn queue in table after active queue has set to complete
 			$this->queue->setFirstIn($queueHelper->getServiceId());
 

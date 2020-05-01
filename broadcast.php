@@ -2,7 +2,7 @@
 
 	require __DIR__.'/vendor/autoload.php';
 
-	use AppEvent\EventFire;
+	use AppEvent\EventData;
 	use Sse\Data;
 	use Sse\Event;
 	use Sse\SSE;
