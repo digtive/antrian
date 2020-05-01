@@ -33,8 +33,7 @@
 		public function broadcast()
 		{
 			$data = new QueueService();
-
-			parent::cek_type($data->call(9));
+			$data->call(11);
 		}
 
 		public function getCallUpdated()

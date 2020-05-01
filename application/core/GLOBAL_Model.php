@@ -50,8 +50,18 @@ class GLOBAL_Model extends CI_Model
         return $sql->row_array();
     }
 
-    public function get_object_of_row($table, $query)
+    public function get_object_of_row($table, $query,$order =array())
     {
+    	if (!empty($order)){
+//    		for ($i =0;$i< count($order);$i++){
+//				$this->db->order_by($order[$i]['column'],$order[$i]['order']);
+//			}
+    		foreach ($order as $item => $value){
+				$this->db->order_by($item,$value);
+			}
+			$sql = $this->db->get_where($table, $query);
+			return $sql;
+		}
         $sql = $this->db->get_where($table, $query);
         return $sql;
     }

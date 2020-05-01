@@ -5,89 +5,128 @@ namespace Antrian\helper;
 
 
 use Antrian\models\Locket;
+use Antrian\models\Queue;
+use Antrian\models\Service;
 
-class QueueHelper
+class QueueHelper extends \GLOBAL_Model
 {
-	private $queueId;
 
 	private $locketId;
 
 	private $serviceId;
 
+	private $locket;
+
+	private $queue;
+
+	private $service;
+
+	private $locketData;
+
 	private $queueData;
 
-	private $waitQueue;
+	private $serviceData;
 
-	private $nextQueue;
-
-	private $activeQueue;
-
-	private $completeQueue;
-
-	private $locket;
+	private $firstInQueue;
 
 	public function __construct($locketId)
 	{
+		parent::__construct();
 		$this->locketId = $locketId;
 		$this->locket = new Locket();
+		$this->queue = new Queue();
+		$this->service = new Service();
+
+		$this->setLocketData();
+		$this->setFirstInQueue();
 	}
 
-
-	/**
-	 * @return mixed
-	 */
-	public function getWaitQueue()
+	public function getLocketId()
 	{
-
-		return $this->waitQueue;
-	}
-
-	/**
-	 * @param mixed $waitQueue
-	 */
-	public function setWaitQueue($waitQueue)
-	{
-		$this->waitQueue = $waitQueue;
+		return $this->locketId;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getNextQueue()
+	public function getServiceData()
 	{
-		return $this->nextQueue;
+		return $this->serviceData;
 	}
 
 	/**
-	 * @param mixed $nextQueue
+	 * @param mixed $serviceData
 	 */
-	public function setNextQueue($nextQueue)
+	public function setServiceData()
 	{
-		$this->nextQueue = $nextQueue;
+		$this->serviceData = $this->service->find($this->serviceId);
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getActiveQueue()
+	public function getLocketData()
 	{
-		return $this->activeQueue;
+		return $this->locketData;
 	}
 
-	public function setActiveQueue()
+	public function setLocketData()
 	{
-		$this->activeQueue =$this->locket->join(array(
-			array('table' => 'tbl_layanan',
-				'relation' => 'tbl_layanan.layanan_id = tbl_loket.loket_layanan_id')
+		$this->locketData = $this->locket->get(array(
+			'loket_id' => $this->locketId
+		))->makeRowArray();
+		$this->setServiceId();
+		$this->setServiceData();
+	}
+
+	public function setServiceId()
+	{
+		$this->serviceId = $this->locketData['loket_layanan_id'];
+	}
+
+	public function getServiceId()
+	{
+		return $this->serviceId;
+	}
+
+	public function setFirstInQueue()
+	{
+		$this->firstInQueue = $this->queue->join(
+			array(
+				'tbl_layanan' => 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id'
+			),
+			array(
+				'antrian_layanan_id' => $this->serviceId,
+				'antrian_status !=' => 'selesai',
+				'date_format(antrian_date_created,"%Y-%m-%d")' =>  date('Y-m-d'),
+			),array(
+				'antrian_date_created' => 'ASC',
 		));
 	}
 
-	public function isQueueEmpty(Locket $obj)
+	public function getFirstInQueue()
+	{
+		return $this->firstInQueue;
+	}
+
+	public function isEmptyQueue(Database $obj)
 	{
 		if ($obj->makeNumRows() <=0 ){
 			return true;
 		}
 		return false;
+	}
+
+	public function jsonOutput($status,$message,$data = array(),$extra = array())
+	{
+		$data = array(
+			'status' => $status,
+			'message' => $message,
+			'data'  => $data
+		);
+		if (!empty($extra)){
+			foreach ($extra as $key => $value){
+				$data[$key]  = $value;
+			}
+		}
+		echo json_encode($data);
 	}
 
 }

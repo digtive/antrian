@@ -22,6 +22,11 @@ class Database extends \GLOBAL_Model
 		$this->table = $table;
 	}
 
+	public function setObject(Database $db)
+	{
+		$this->object = $db;
+	}
+
 	/**
 	 * @author bagussjm
 	 * @param $query
@@ -29,21 +34,24 @@ class Database extends \GLOBAL_Model
 	 * @version 1.0.0
 	 */
 
-	public function get($query = array())
+	public function get($query = array(),$order = array())
 	{
 		if (!empty($query)){
-			$this->object =  parent::get_object_of_row($this->table,$query);
+			$this->object =  parent::get_object_of_row($this->table,$query,$order);
 			return $this;
 		}
 		$this->object =  parent::get_object_of_table($this->table);
 		return $this;
 	}
 
-	public function join($join,$query = array())
+	public function join($join,$query = array(),$order = array())
 	{
-		if (!empty($query)){
-			foreach ($join as $item):
-				$this->db->join($item['table'],$item['relation']);
+		if (!empty($query) || !empty($order)){
+			foreach ($join as $item => $value):
+				$this->db->join($item,$value);
+			endforeach;
+			foreach ($order as $item => $value):
+				$this->db->order_by($item,$value);
 			endforeach;
 			$this->object =  $this->db->get_where($this->table,$query);
 			return $this;
@@ -69,6 +77,14 @@ class Database extends \GLOBAL_Model
 		return $this;
 	}
 
+	public function update($query,$update)
+	{
+		foreach ($query as $item => $value){
+			$this->db->where($item,$value);
+		}
+		$this->db->update($this->table,$update);
+		return $this->db->affected_rows();
+	}
 
 	public function makeResultArray()
 	{
@@ -83,6 +99,11 @@ class Database extends \GLOBAL_Model
 	public function makeNumRows()
 	{
 		return $this->object->num_rows();
+	}
+
+	public function status()
+	{
+		return $this->object->affected_rows();
 	}
 
 }
