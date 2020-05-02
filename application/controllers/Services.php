@@ -773,4 +773,14 @@
 			));
 		}
 
+		public function getLastCall()
+		{
+			if ($this->input->is_ajax_request()){
+				$data = $this->ED->get('call');
+				echo $data;
+			}else{
+				echo 'access forbidden';
+			}
+		}
+
 	}

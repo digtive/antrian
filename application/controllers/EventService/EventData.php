@@ -23,7 +23,7 @@
 
 		public function get($key)
 		{
-			print_r($this->data->get($key));
+			return $this->data->get($key);
 		}
 
 	}

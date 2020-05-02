@@ -50,6 +50,11 @@
 		public function setFirstToComplete(QueueHelper $queueHelper)
 		{
 			$queue = $queueHelper->getFirstInQueue()->makeRowArray();
+			if ($queue['antrian_jenis_panggilan'] === 'alihan'){
+				$activeNumber = $queue['antrian_nomor_alihan'];
+			}else{
+				$activeNumber =  $queue['layanan_awalan'].'-'.str_pad($queue['antrian_nomor'], 3, '0', STR_PAD_LEFT);
+			}
 			$this->locket->update(array(
 				'loket_id' => $queueHelper->getLocketId()
 			),array(
@@ -59,7 +64,7 @@
 				'antrian_id' => $queue['antrian_id']
 			), array(
 				'antrian_loket_id' => $queueHelper->getLocketId(),
-				'antrian_nomor_aktif' => $queue['layanan_awalan'].'-'.str_pad($queue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
+				'antrian_nomor_aktif' => $activeNumber,
 				'antrian_status' => 'selesai'
 			));
 		}
