@@ -13,6 +13,8 @@
 
 		private $firstIn;
 
+		private $locket;
+
 		private $property = array(
 			'id' => 'antrian_id',
 			'date_create' => 'antrian_date_created'
@@ -21,6 +23,7 @@
 		public function __construct()
 		{
 			parent::__construct($this->table, $this->property);
+			$this->locket = new Locket();
 		}
 
 		public function getFirstIn()
@@ -47,6 +50,11 @@
 		public function setFirstToComplete(QueueHelper $queueHelper)
 		{
 			$queue = $queueHelper->getFirstInQueue()->makeRowArray();
+			$this->locket->update(array(
+				'loket_id' => $queueHelper->getLocketId()
+			),array(
+				'loket_waktu_panggilan' => date('Y-m-d H:i:s')
+			));
 			return parent::update(array(
 				'antrian_id' => $queue['antrian_id']
 			), array(
