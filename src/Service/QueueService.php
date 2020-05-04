@@ -47,6 +47,7 @@ class QueueService
 			$serviceData = $this->service->find($queueHelper->getServiceId())->makeRowArray();
 			$callData = array(
 				'audio' => $serviceData,
+				'locket' => $queueHelper->getLocketData(),
 				'data' => $queueData
 			);
 			$this->eventData->fire('call',$callData);

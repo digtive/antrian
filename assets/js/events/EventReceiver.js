@@ -1,12 +1,20 @@
 $(document).ready(function(){
 	let con = new Connection();
 	let service = new Services();
+	let serviceComponent = new ServiceComponent();
+	let ev = new ExtendView();
+
 	let sse = new EventSource(con.BASE_URL+'broadcast.php');
 	let cache = 0;
+
 	let lastCallData = service.getData('Services/getLastCall');
 	cache = lastCallData.time;
 
 	const BASE_URL = con.BASE_URL;
+
+	if (window.location.href.indexOf("extend") < 0) {
+		serviceComponent.serviceComponent();
+	}
 
 	let audioMap = {
 		'in': BASE_URL+'assets/audios/in.wav',
@@ -37,6 +45,14 @@ $(document).ready(function(){
 	const  main = new LocketAudio();
 
 	sse.addEventListener('call',function (e) {
+		if (e.data === 'null'){
+			onResponseEmpty();
+		}else {
+			onResponseExists(e);
+		}
+	});
+
+	function onResponseExists(e) {
 		let response = JSON.parse(e.data);
 		if (response.time !== cache ){
 			let locketId = response.data.antrian_loket_id;
@@ -52,10 +68,19 @@ $(document).ready(function(){
 				speak(queueNumber,locketId,false);
 			}
 
+			if (window.location.href.indexOf("extend") > -1) {
+				ev.refresh();
+			}else{
+				serviceComponent.refresh(locketId);
+			}
 			cache = response.time;
 		}
-	});
 
+	}
+
+	function onResponseEmpty() {
+		window.location.reload();
+	}
 
 	function play(num,duration) {
 		main.playAudio(num,duration);

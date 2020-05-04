@@ -221,7 +221,9 @@
 		<script src="<?= base_url('assets/js/audio/MainAntrian.js?v=1.0.0&&load='.time()) ?>"></script>
 		<!-- generate component from js for activate queue component -->
 		<script src="<?= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?>"></script>
-		<script src="<?= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?>"></script>
+<!--		<script src="--><?//= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
+		<script src="<?= base_url('assets/js/events/EventReceiver.js?v=1.0.0&&load='.time()) ?>"></script>
+		<script src="<?= base_url('assets/js/extend/ExtendView.js?v=1.0.0&&load='.time()) ?>"></script>
 		<!-- end inject for playing audio-->
 
 		<!-- JS inject for media -->

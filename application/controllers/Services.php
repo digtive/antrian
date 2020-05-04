@@ -5,16 +5,21 @@
 	use Mike42\Escpos\EscposImage;
 	use AppEvent\EventData;
 	use Antrian\Service\QueueService;
+	use Antrian\models\Event as EventModel;
 
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
 	class Services extends GLOBAL_Controller
 	{
 		private $ED;
+
+		private $EM;
+
 		public function __construct()
 		{
 			parent::__construct();
 			$this->ED = new EventData();
+			$this->EM = new EventModel();
 			parent::licenseCheck();
 			date_default_timezone_set("Asia/Jakarta");
 			$this->load->model('AntrianModel','antrian');
@@ -775,12 +780,22 @@
 
 		public function getLastCall()
 		{
-			if ($this->input->is_ajax_request()){
-				$data = $this->ED->get('call');
+			$data = $this->ED->get('call');
+			if ($data!==null){
 				echo $data;
 			}else{
-				echo 'access forbidden';
+				$callData = $this->EM->get(array(
+					'name' => 'call'
+				))->makeRowArray();
+				$this->ED->set('call',json_decode($callData['data'],true));
+				$data =  $this->ED->get('call');
+				echo $data;
 			}
+//			if ($this->input->is_ajax_request()){
+//
+//			}else{
+//				echo 'access forbidden';
+//			}
 		}
 
 	}

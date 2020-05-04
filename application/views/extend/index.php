@@ -143,8 +143,8 @@
 										</h1>
 									</div>
 									<div class="col-12">
-										<h1 style="font-family: titilliumweb-bold;font-size: 132px;color: #212529" class="text-center">
-											A-300
+										<h1 style="font-family: titilliumweb-bold;font-size: 132px;color: #212529" class="text-center animated flash infinite active-queue-number" id="activeQueue">
+											A-000
 										</h1>
 									</div>
 								</div>
@@ -155,8 +155,8 @@
 							<div class="card-body p-1">
 								<div class="row">
 									<div class="col-12" >
-										<h1 style="font-family: titilliumweb-bold;font-size: 54px;color: #3a3f51" class="text-center">
-											LOKET PGU-1
+										<h1 style="font-family: titilliumweb-bold;font-size: 54px;color: #3a3f51" class="text-center animated slideInUp" id="activeLocket">
+											LOKET 01
 										</h1>
 									</div>
 								</div>
@@ -302,6 +302,7 @@
 	<!-- generate component from js for activate queue component -->
 	<script src="<?= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?>"></script>
 	<script src="<?= base_url('assets/js/events/EventReceiver.js?v=1.0.0&&load='.time()) ?>"></script>
+	<script src="<?= base_url('assets/js/extend/ExtendView.js?v=1.0.0&&load='.time()) ?>"></script>
 	<!-- end inject for playing audio-->
 
 	<!-- JS inject for media -->
