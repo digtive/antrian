@@ -29,6 +29,8 @@ class QueueHelper extends \GLOBAL_Model
 
 	private $firstInQueue;
 
+	private $lastOutQueue;
+
 	public function __construct($locketId)
 	{
 		parent::__construct();
@@ -105,6 +107,29 @@ class QueueHelper extends \GLOBAL_Model
 	{
 		return $this->firstInQueue;
 	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getLastOutQueue()
+	{
+		return $this->lastOutQueue;
+	}
+
+	/**
+	 * @param mixed $lastOutQueue
+	 */
+	public function setLastOutQueue()
+	{
+		$this->lastOutQueue = $this->queue->get(array(
+			'antrian_loket_id' => $this->getLocketId(),
+			'antrian_status' => 'selesai'
+		),array(
+			'antrian_date_created' => 'DESC'
+		));
+	}
+
+
 
 	public function isEmptyQueue(Database $obj)
 	{

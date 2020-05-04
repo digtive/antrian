@@ -2,7 +2,7 @@ $(document).ready(function(){
 	let con = new Connection();
 	let service = new Services();
 	let serviceComponent = new ServiceComponent();
-	let ev = new ExtendView();
+	let ev = null;
 
 	let cache = 0;
 	let lastCallData = service.getData('Services/getLastCall');
@@ -14,6 +14,8 @@ $(document).ready(function(){
 
 	if (window.location.href.indexOf("extend") < 0) {
 		serviceComponent.serviceComponent();
+	}else{
+		ev = new ExtendView();
 	}
 
 	let audioMap = {
@@ -86,7 +88,7 @@ $(document).ready(function(){
 	function play(num,duration) {
 		main.playAudio(num,duration);
 	}
-
+	speakLogic('13');
 	function LocketAudio() {
 		this.queue = [];
 		this.playAudio = function(num,duration) {
@@ -113,12 +115,96 @@ $(document).ready(function(){
 	}
 
 	function speak(queueId,queueNumber,locketId,isSwitch) {
-		var nomor = queueNumber;
-		var splitnomor = nomor.split("");
+		// var nomor = queueNumber;
+		// var splitnomor = nomor.split("");
 
 		play('in', 1);
 		play('antrian', 0);
 		play(queueId, 0);
+
+		speakLogic(queueNumber);
+		// if (splitnomor.length <= 1) {
+		// 	play(""+ splitnomor[0], 0); //Satuan
+		// }
+		// //
+		// else if (splitnomor.length === 2) {
+		// 	// if (splitnomor[0] === 1 && splitnomor[1] === 0) {
+		// 	//     play('10', 0); //sepuluh
+		// 	// }
+		// 	// else {
+		// 	if (nomor < 20) {
+		// 		if (nomor == '10'){
+		// 			play('10',0);
+		// 		}
+		// 		else if (nomor == '11'){
+		// 			play('11',0)
+		// 		}
+		// 		else{
+		// 			play(splitnomor[1],0);
+		// 			play('belas', 0);//belas
+		// 		}
+		//
+		// 	}
+		// 	else {
+		// 		play(splitnomor[0],0);
+		// 		play('puluh', 0);//puluh
+		// 		if (splitnomor[1]!='0'){
+		// 			play(splitnomor[1]);
+		// 		}
+		// 		// }
+		// 	}
+		// }
+		//
+		// else if (splitnomor.length === 3) {
+		// 	if (splitnomor[0] == '1'){
+		// 		play('100',0);
+		// 	}
+		// 	else {
+		// 		play(splitnomor[0],0);
+		// 		play('ratus',0);
+		// 	}
+		// 	if (splitnomor[1] == '0'){
+		// 		if (splitnomor[2] != '0'){
+		// 			play(splitnomor[2],0);
+		// 		}
+		// 	}else{
+		// 		var puluhan = ""+splitnomor[1]+""+splitnomor[2];
+		// 		if (puluhan < 20) {
+		// 			if (puluhan == '10'){
+		// 				play('10',0);
+		// 			}
+		// 			else if (puluhan == '11'){
+		// 				play('11',0)
+		// 			}
+		// 			else{
+		// 				play(splitnomor[2],0);
+		// 				play('belas', 0);//belas
+		// 			}
+		// 		}
+		// 		else {
+		// 			play(splitnomor[1],0);
+		// 			play('puluh', 0);//puluh
+		// 			if (splitnomor[2]!='0'){
+		// 				play(splitnomor[2]);
+		// 			}
+		// 			// }
+		// 		}
+		// 	}
+		// }
+
+		if (isSwitch===true){
+			play('menuju',0);
+			play('service',0);
+		}
+		play('loket',0);
+		speakLogic(locketId);
+
+		delete audioMap.queueId;
+	}
+
+	function speakLogic(number) {
+		let nomor = number;
+		let splitnomor = nomor.split("");
 
 		if (splitnomor.length <= 1) {
 			play(""+ splitnomor[0], 0); //Satuan
@@ -188,15 +274,6 @@ $(document).ready(function(){
 				}
 			}
 		}
-
-		if (isSwitch===true){
-			play('menuju',0);
-			play('service',0);
-		}
-		play('loket',0);
-		play(locketId,0);
-
-		delete audioMap.queueId;
 	}
 
 });
