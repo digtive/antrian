@@ -4,11 +4,11 @@ $(document).ready(function(){
 	let serviceComponent = new ServiceComponent();
 	let ev = new ExtendView();
 
-	let sse = new EventSource(con.BASE_URL+'broadcast.php');
 	let cache = 0;
-
 	let lastCallData = service.getData('Services/getLastCall');
 	cache = lastCallData.time;
+
+	let sse = new EventSource(con.BASE_URL+'broadcast.php');
 
 	const BASE_URL = con.BASE_URL;
 
@@ -57,15 +57,16 @@ $(document).ready(function(){
 		if (response.time !== cache ){
 			let locketId = response.data.antrian_loket_id;
 			let queueNumber =  response.data.antrian_nomor;
+			let queueId = response.data.antrian_id;
 			if (response.data.antrian_jenis_panggilan === 'alihan'){
 
-				audioMap.prefix = response.data.antrian_suara_alihan_prefix;
+				audioMap[queueId] = response.data.antrian_suara_alihan_prefix;
 				audioMap.service = response.audio.layanan_suara_nama;
 				speak(queueNumber,locketId,true);
 			}else{
 
-				audioMap.prefix = response.audio.layanan_suara_awalan;
-				speak(queueNumber,locketId,false);
+				audioMap[queueId] = response.audio.layanan_suara_awalan;
+				speak(queueId,queueNumber,locketId,false);
 			}
 
 			if (window.location.href.indexOf("extend") > -1) {
@@ -111,13 +112,13 @@ $(document).ready(function(){
 		}
 	}
 
-	function speak(queueNumber,locketId,isSwitch) {
+	function speak(queueId,queueNumber,locketId,isSwitch) {
 		var nomor = queueNumber;
 		var splitnomor = nomor.split("");
 
 		play('in', 1);
 		play('antrian', 0);
-		play('prefix', 0);
+		play(queueId, 0);
 
 		if (splitnomor.length <= 1) {
 			play(""+ splitnomor[0], 0); //Satuan
@@ -195,6 +196,7 @@ $(document).ready(function(){
 		play('loket',0);
 		play(locketId,0);
 
+		delete audioMap.queueId;
 	}
 
 });
