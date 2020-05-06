@@ -2,7 +2,7 @@ $(document).ready(function(){
 	let con = new Connection();
 	let service = new Services();
 	let serviceComponent = new ServiceComponent();
-	let ev = null;
+	let ev = new ExtendView();
 
 	let cache = 0;
 	let recallCache = 0;
@@ -19,7 +19,7 @@ $(document).ready(function(){
 	if (window.location.href.indexOf("extend") < 0) {
 		serviceComponent.serviceComponent();
 	}else{
-		ev = new ExtendView();
+		ev.startMixer();
 	}
 
 	let audioMap = {
@@ -69,7 +69,7 @@ $(document).ready(function(){
 	function onResponseExists(e) {
 		let response = JSON.parse(e.data);
 		if (response.time !== cache ){
-			let locketId = response.data.antrian_loket_id;
+			let locketId = response.locket.loket_nomor;
 			let queueNumber =  response.data.antrian_nomor;
 			let queueId = response.data.antrian_id;
 			if (response.data.antrian_jenis_panggilan === 'alihan'){

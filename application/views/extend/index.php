@@ -166,74 +166,31 @@
 					<!-- service list -->
 					
 					<!-- waiting queue list-->
-					<div class="col-12" style="margin-top: 20px">
-						<div class="row">
-
-							<div class="col-3">
-								<div class="card card-shadow waiting-queue-card">
-									<div class="card-body" style="padding: 12px">
-										<div class="row">
-											<div class="col-12">
-												<h1 class="text-center" style="font-family: titilliumweb-bold;font-size: 68px">B-102</h1>
-											</div>
-											<div class="col-12" style="border-top: 1.2px black solid">
-											</div>
-											<div class="col-12">
-												<h2 class="text-center" style="font-family: titilliumweb-bold;color: #3a3f51">PGU-1</h2>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-3">
-								<div class="card card-shadow waiting-queue-card">
-									<div class="card-body" style="padding: 12px">
-										<div class="row">
-											<div class="col-12">
-												<h1 class="text-center" style="font-family: titilliumweb-bold;font-size: 68px">B-102</h1>
-											</div>
-											<div class="col-12" style="border-top: 1.2px black solid">
-											</div>
-											<div class="col-12">
-												<h2 class="text-center" style="font-family: titilliumweb-bold;color: #3a3f51">PGU-1</h2>
+					<div class="col-12" style="margin-top: 14px">
+						<div class="row" style="height: 150px;overflow: hidden;" id="mixit-container">
+							<?php
+								foreach ($dataLoket as $key => $value):
+							?>
+								<div class="col-3 waiting-queue-card mb-5 extend-view"  id="<?= $value['loket_id']?>"
+									 data-locket="extend-locket-<?= $value['loket_id']?>" data-call="">
+									<div class="card card-shadow " >
+										<div class="card-body" style="padding: 12px">
+											<div class="row">
+												<div class="col-12">
+													<h1 class="text-center active-queue-number" style="font-family: titilliumweb-bold;font-size: 68px" >000</h1>
+												</div>
+												<div class="col-12" style="border-top: 1.2px black solid">
+												</div>
+												<div class="col-12">
+													<h2 class="text-center" style="font-family: titilliumweb-bold;color: #3a3f51"><?= $value['loket_alias']?></h2>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-3">
-								<div class="card card-shadow waiting-queue-card">
-									<div class="card-body" style="padding: 12px">
-										<div class="row">
-											<div class="col-12">
-												<h1 class="text-center" style="font-family: titilliumweb-bold;font-size: 68px">B-102</h1>
-											</div>
-											<div class="col-12" style="border-top: 1.2px black solid">
-											</div>
-											<div class="col-12">
-												<h2 class="text-center" style="font-family: titilliumweb-bold;color: #3a3f51">PGU-1</h2>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-3">
-								<div class="card card-shadow waiting-queue-card">
-									<div class="card-body" style="padding: 12px">
-										<div class="row">
-											<div class="col-12">
-												<h1 class="text-center" style="font-family: titilliumweb-bold;font-size: 68px">B-102</h1>
-											</div>
-											<div class="col-12" style="border-top: 1.2px black solid">
-											</div>
-											<div class="col-12">
-												<h2 class="text-center" style="font-family: titilliumweb-bold;color: #3a3f51">PGU-1</h2>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							<?php
+								endforeach;
+							?>
 
 						</div>
 					</div>

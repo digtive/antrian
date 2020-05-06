@@ -39,6 +39,7 @@
 			$data['dataGambar'] = $mediaGambar['data-gambar'];
 			$data['titleGambar'] = $mediaGambar['title-gambar'];
 			$data['durasi'] = $mediaGambar['durasi-slide'];
+
 			parent::authPage('extend/index',$data);
 		}
 
