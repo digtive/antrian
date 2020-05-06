@@ -47,12 +47,41 @@
 		}
 	};
 
+class Recall implements Event {
+	private $cache = 0;
+	private $data;
+	private $storage;
+
+	public function __construct($data) {
+		$this->storage = $data;
+	}
+
+	public function update(){
+		return json_encode($this->data);
+	}
+
+	public function check(){
+		// Fetch data from the data instance
+		$this->data = json_decode($this->storage->get('recall'));
+
+		// And check if it's a new message by comparing its time
+		if($this->data->time !== $this->cache){
+			$this->cache = $this->data->time;
+			return true;
+		}
+
+		return false;
+	}
+};
+
 	// A 30 second time limit can prevent running out of resources quickly.
 	$sse->exec_limit = 30;
 
 	// Add the event handlers, if an empty name is given as the event name,
 	// it means trigger the default message event on the client.
 	$sse->addEventListener('call', new Call($data));
+
+	$sse->addEventListener('recall',new Recall($data));
 
 	// Finally, start the loop.
 	$sse->start();

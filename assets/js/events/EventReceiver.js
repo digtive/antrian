@@ -5,7 +5,11 @@ $(document).ready(function(){
 	let ev = null;
 
 	let cache = 0;
+	let recallCache = 0;
+
 	let lastCallData = service.getData('Services/getLastCall');
+	let lastRecallData = service.getData('Services/getLastRecall');
+	recallCache = lastRecallData.time;
 	cache = lastCallData.time;
 
 	let sse = new EventSource(con.BASE_URL+'broadcast.php');
@@ -54,6 +58,14 @@ $(document).ready(function(){
 		}
 	});
 
+	sse.addEventListener('recall',function (e) {
+		if (e.data === 'null'){
+			onResponseEmpty();
+		}else{
+			onRecallExist(e);
+		}
+	});
+
 	function onResponseExists(e) {
 		let response = JSON.parse(e.data);
 		if (response.time !== cache ){
@@ -64,7 +76,7 @@ $(document).ready(function(){
 
 				audioMap[queueId] = response.data.antrian_suara_alihan_prefix;
 				audioMap.service = response.audio.layanan_suara_nama;
-				speak(queueNumber,locketId,true);
+				speak(queueId,queueNumber,locketId,true);
 			}else{
 
 				audioMap[queueId] = response.audio.layanan_suara_awalan;
@@ -85,10 +97,30 @@ $(document).ready(function(){
 		window.location.reload();
 	}
 
+	function onRecallExist(e) {
+		let response = JSON.parse(e.data);
+		if (response.time !== recallCache){
+			let locketId = response.locket.loket_nomor;
+			let queueNumber =  response.data.antrian_nomor;
+			let queueId = response.data.antrian_id;
+			if (response.data.antrian_jenis_panggilan === 'alihan'){
+				audioMap[queueId] = response.data.antrian_suara_alihan_prefix;
+				audioMap.service = response.audio.layanan_suara_nama;
+				speak(queueId,queueNumber,locketId,true);
+			}else{
+
+				audioMap[queueId] = response.audio.layanan_suara_awalan;
+				speak(queueId,queueNumber,locketId,false);
+			}
+
+			recallCache = response.time;
+		}
+	}
+
 	function play(num,duration) {
 		main.playAudio(num,duration);
 	}
-	speakLogic('13');
+
 	function LocketAudio() {
 		this.queue = [];
 		this.playAudio = function(num,duration) {
@@ -115,82 +147,12 @@ $(document).ready(function(){
 	}
 
 	function speak(queueId,queueNumber,locketId,isSwitch) {
-		// var nomor = queueNumber;
-		// var splitnomor = nomor.split("");
 
 		play('in', 1);
 		play('antrian', 0);
 		play(queueId, 0);
 
 		speakLogic(queueNumber);
-		// if (splitnomor.length <= 1) {
-		// 	play(""+ splitnomor[0], 0); //Satuan
-		// }
-		// //
-		// else if (splitnomor.length === 2) {
-		// 	// if (splitnomor[0] === 1 && splitnomor[1] === 0) {
-		// 	//     play('10', 0); //sepuluh
-		// 	// }
-		// 	// else {
-		// 	if (nomor < 20) {
-		// 		if (nomor == '10'){
-		// 			play('10',0);
-		// 		}
-		// 		else if (nomor == '11'){
-		// 			play('11',0)
-		// 		}
-		// 		else{
-		// 			play(splitnomor[1],0);
-		// 			play('belas', 0);//belas
-		// 		}
-		//
-		// 	}
-		// 	else {
-		// 		play(splitnomor[0],0);
-		// 		play('puluh', 0);//puluh
-		// 		if (splitnomor[1]!='0'){
-		// 			play(splitnomor[1]);
-		// 		}
-		// 		// }
-		// 	}
-		// }
-		//
-		// else if (splitnomor.length === 3) {
-		// 	if (splitnomor[0] == '1'){
-		// 		play('100',0);
-		// 	}
-		// 	else {
-		// 		play(splitnomor[0],0);
-		// 		play('ratus',0);
-		// 	}
-		// 	if (splitnomor[1] == '0'){
-		// 		if (splitnomor[2] != '0'){
-		// 			play(splitnomor[2],0);
-		// 		}
-		// 	}else{
-		// 		var puluhan = ""+splitnomor[1]+""+splitnomor[2];
-		// 		if (puluhan < 20) {
-		// 			if (puluhan == '10'){
-		// 				play('10',0);
-		// 			}
-		// 			else if (puluhan == '11'){
-		// 				play('11',0)
-		// 			}
-		// 			else{
-		// 				play(splitnomor[2],0);
-		// 				play('belas', 0);//belas
-		// 			}
-		// 		}
-		// 		else {
-		// 			play(splitnomor[1],0);
-		// 			play('puluh', 0);//puluh
-		// 			if (splitnomor[2]!='0'){
-		// 				play(splitnomor[2]);
-		// 			}
-		// 			// }
-		// 		}
-		// 	}
-		// }
 
 		if (isSwitch===true){
 			play('menuju',0);

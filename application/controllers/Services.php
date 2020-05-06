@@ -288,72 +288,8 @@
 
 		public function recallTo($locketId)
 		{
-			$queue = parent::model('service')->get_queue_by_locket($locketId);
-			if ($queue->num_rows() > 0){
-				$activeQueue = $this->currentQueue($locketId)->row_array();
-				if ($activeQueue!== null){
-					$antrianSelesai = parent::model('service')->get_complete_queue($locketId);
-					$recall = $antrianSelesai->row_array();
-					if ($antrianSelesai->num_rows() > 0){
-						$dataPanggilan = array(
-							'panggilan_jenis' => 'recall',
-							'recall_antrian' => $recall['antrian_nomor'],
-							'recall_loket' => $recall['loket_nomor'],
-							'panggilan_updated' => date('Y-m-d H:i:s')
-						);
-						$update = parent::model('service')->update_panggilan(1,$dataPanggilan);
-
-						echo json_encode(array(
-							'status' => '200',
-							'antrian' => str_pad($recall['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-							'data' => $recall,
-							'update' => $update,
-							'message' => 'menampilkan nomor recall yang terakhir kali dipanggil sebelum aktif '.$locketId
-						));
-					}else{
-						$dataPanggilan = array(
-							'panggilan_jenis' => 'recall',
-							'recall_antrian' => $activeQueue['antrian_nomor'],
-							'recall_loket' => $activeQueue['loket_nomor'],
-							'panggilan_updated' => date('Y-m-d H:i:s')
-						);
-						$update = parent::model('service')->update_panggilan(1,$dataPanggilan);
-						echo json_encode(array(
-							'status' => '200',
-							'antrian' => str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-							'data' => $activeQueue,
-							'update' => $update,
-							'message' => 'menampilkan recall untuk antrian pertama kali untuk loket '.$locketId
-						));
-					}
-				}else{
-					$antrianSelesai = parent::model('service')->get_complete_queue($locketId);
-					$recall = $antrianSelesai->row_array();
-					$dataPanggilan = array(
-						'panggilan_jenis' => 'recall',
-						'recall_antrian' => $recall['antrian_nomor'],
-						'recall_loket' => $recall['loket_nomor'],
-						'panggilan_updated' => date('Y-m-d H:i:s')
-					);
-					$update = parent::model('service')->update_panggilan(1,$dataPanggilan);
-					echo json_encode(array(
-						'status' => '200',
-						'antrian' => str_pad($recall['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-						'data' => $recall,
-						'update' => $update,
-						'message' => 'menampilkan nomor recall untuk loket '.$locketId
-					));
-				}
-			}else{
-				echo json_encode(array(
-					'status' => '200',
-					'antrian' => str_pad(0, 3, '0', STR_PAD_LEFT),
-					'data' => array(),
-					'update' => 0,
-					'message' => 'belum ada antrian pada loket '.$locketId
-				));
-			}
-
+			$queueService = new QueueService();
+			$queueService->recall($locketId);
 		}
 
 		/*
@@ -808,22 +744,40 @@
 
 		public function getLastCall()
 		{
-			$data = $this->ED->get('call');
-			if ($data!==null){
-				echo $data;
+			if ($this->input->is_ajax_request()){
+				$data = $this->ED->get('call');
+				if ($data!==null){
+					echo $data;
+				}else{
+					$callData = $this->EM->get(array(
+						'name' => 'call'
+					))->makeRowArray();
+					$this->ED->set('call',json_decode($callData['data'],true));
+					$data =  $this->ED->get('call');
+					echo $data;
+				}
 			}else{
-				$callData = $this->EM->get(array(
-					'name' => 'call'
-				))->makeRowArray();
-				$this->ED->set('call',json_decode($callData['data'],true));
-				$data =  $this->ED->get('call');
-				echo $data;
+				echo 'access forbidden';
 			}
-//			if ($this->input->is_ajax_request()){
-//
-//			}else{
-//				echo 'access forbidden';
-//			}
+		}
+
+		public function getLastRecall()
+		{
+			if ($this->input->is_ajax_request()){
+				$data = $this->ED->get('recall');
+				if ($data!== null){
+					echo $data;
+				}else{
+					$callData = $this->EM->get(array(
+						'name' => 'recall'
+					))->makeRowArray();
+					$this->ED->set('recall',json_decode($callData['data'],true));
+					$data =  $this->ED->get('recall');
+					echo $data;
+				}
+			}else{
+				echo 'access forbidden';
+			}
 		}
 
 	}

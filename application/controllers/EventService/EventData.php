@@ -24,7 +24,7 @@
 				$data['time'] = time();
 			}
 			$this->event->update(array(
-				'name' => 'call'
+				'name' => $event
 			),array(
 				'data' => json_encode($data)
 			));

@@ -121,11 +121,16 @@ class QueueHelper extends \GLOBAL_Model
 	 */
 	public function setLastOutQueue()
 	{
-		$this->lastOutQueue = $this->queue->get(array(
-			'antrian_loket_id' => $this->getLocketId(),
-			'antrian_status' => 'selesai'
-		),array(
-			'antrian_date_created' => 'DESC'
+		$this->lastOutQueue = $this->queue->join(
+			array(
+				'tbl_layanan' => 'tbl_layanan.layanan_id = tbl_antrian.antrian_layanan_id'
+			),
+			array(
+				'antrian_loket_id' => $this->locketId,
+				'antrian_status =' => 'selesai',
+				'date_format(antrian_date_created,"%Y-%m-%d")' =>  date('Y-m-d'),
+			),array(
+			'antrian_date_created' => 'DESC',
 		));
 	}
 

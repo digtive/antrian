@@ -36,6 +36,18 @@ class QueueService
 
 	}
 
+	public function recall($locketId)
+	{
+		$queueHelper = new QueueHelper($locketId);
+		$queueHelper->setLastOutQueue();
+		if ($queueHelper->isEmptyQueue($queueHelper->getLastOutQueue())){
+			$this->onLastQueueEmpty($queueHelper);
+		}else{
+			$this->onLastQueueExist($queueHelper);
+		}
+
+	}
+
 	public function onFirstQueueExist(QueueHelper $queueHelper)
 	{
 		$firstIn = $queueHelper->getFirstInQueue();
@@ -76,6 +88,31 @@ class QueueService
 	{
 		$qh->jsonOutput('404','belum ada antrian pada loket tersebut',array(),array(
 			'antrian' => '000'
+		));
+	}
+
+	public function onLastQueueExist(QueueHelper $queueHelper)
+	{
+		$queueArray = $queueHelper->getLastOutQueue()->makeRowArray();
+		$queueData = $this->queue->find($queueArray['antrian_id'])->makeRowArray();
+		$serviceData = $this->service->find($queueHelper->getServiceId())->makeRowArray();
+		$recallData = array(
+			'audio' => $serviceData,
+			'locket' => $queueHelper->getLocketData(),
+			'data' => $queueData
+		);
+		$this->eventData->fire('recall',$recallData);
+		$queueHelper->jsonOutput('200','menampilkan nomor recall yang terakhir kali dipanggil di loket',$queueArray,array(
+			'antrian' => ucwords($queueArray['layanan_awalan']).'-'.str_pad($queueArray['antrian_nomor'], 3, '0', STR_PAD_LEFT),
+			'update'  => 1
+		));
+	}
+
+	public function onLastQueueEmpty(QueueHelper $queueHelper)
+	{
+		$queueHelper->jsonOutput('404','belum ada antrian pada loket',array(),array(
+			'antrian' => str_pad(0, 3, '0', STR_PAD_LEFT),
+			'update' => 0
 		));
 	}
 }
