@@ -7,6 +7,7 @@
 	use Antrian\Service\QueueService;
 	use Antrian\models\Event as EventModel;
 	use Antrian\helper\QueueHelper;
+	use Antrian\models\Queue as QueueModel;
 
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -43,211 +44,16 @@
 
 		public function call($locketId)
 		{
-			$locketData = parent::model('loket')->getOne(array(
-				'loket_id' => $locketId
-			));
-			$serviceId = $locketData['loket_layanan_id'];
-			$activeQueueObj = parent::model('antrian')
-				->get_join_where(array(
-					'tbl_antrian.antrian_layanan_id'=>$serviceId,
-					'antrian_status' => 'aktif'
-				));
-
-			$switchedQueue  = parent::model('antrian')
-				->get_switched_queue(array(
-					'antrian_jenis_panggilan' => 'alihan',
-					'antrian_layanan_id' => $serviceId,
-					'antrian_status' => 'menunggu'
-				),'antrian_date_created','asc')->row_array();
-
-			$activeQueue = $activeQueueObj->row_array();
-
-			if ($activeQueue !== null){
-				// jika antrian aktif tidak kosong
-				if ($activeQueue['antrian_jenis_panggilan'] === 'terusan'){
-					$nextQueue = parent::model('antrian')->get_join_where(array(
-						'layanan_id' => $serviceId,
-						'antrian_nomor' => $activeQueue['antrian_nomor']+1,
-						'antrian_jenis_panggilan' => 'terusan'
-					))->row_array();
-				}else{
-					$completeQueueObj = parent::model('antrian')->get_join_where(array(
-						'layanan_id' => $serviceId,
-						'antrian_status' => 'selesai',
-						'antrian_jenis_panggilan' => 'terusan'
-					));
-
-					$lastCompleteQueue = $completeQueueObj->row_array();
-
-					$nextQueue = parent::model('antrian')->get_join_where(array(
-						'layanan_id' => $serviceId,
-						'antrian_nomor' => $lastCompleteQueue['antrian_nomor']+1,
-						'antrian_jenis_panggilan' => 'terusan'
-					))->row_array();
-				}
-
-				if ($nextQueue!==null){
-					if ($switchedQueue !== null){
-						$switchedQueueTime = strtotime($switchedQueue['antrian_date_created']);
-						$nextQueueTime = strtotime($nextQueue['antrian_date_created']);
-
-						if ($switchedQueueTime < $nextQueueTime){
-							parent::model('service')->edit_antrian($switchedQueue['antrian_id'],array(
-								'antrian_status' => 'aktif'
-							));
-						}else{
-							parent::model('service')->edit_antrian($nextQueue['antrian_id'],array(
-								'antrian_status' => 'aktif'
-							));
-						}
-					}else{
-						parent::model('service')->edit_antrian($nextQueue['antrian_id'],array(
-							'antrian_status' => 'aktif'
-						));
-					}
-
-				}else{
-					if ($switchedQueue!==null){
-						parent::model('service')->edit_antrian($switchedQueue['antrian_id'],array(
-							'antrian_status' => 'aktif'
-						));
-					}
-				}
-
-				$this->setActiveQueueOutput($activeQueue,$locketId);
-
-				$this->updateLocketTimeCalled($locketId);
-
-
-
-			}else{
-				// jika antrian aktif kosong
-				$waitQueueObj = parent::model('antrian')->get_join_where(array(
-					'layanan_id' => $serviceId,
-					'antrian_status' => 'menunggu'
-				));
-
-
-				if ($waitQueueObj->row_array() !== null){
-					// jika antrian menunggu tidak kosong
-					$completeQueueObj = parent::model('antrian')->get_join_where(array(
-						'layanan_id' => $serviceId,
-						'antrian_status' => 'selesai',
-						'antrian_jenis_panggilan' => 'terusan'
-					));
-
-					$lastCompleteQueue = $completeQueueObj->row_array();
-
-					$nextQueue = parent::model('antrian')->get_join_where(array(
-						'layanan_id' => $serviceId,
-						'antrian_nomor' => $lastCompleteQueue['antrian_nomor']+1,
-						'antrian_jenis_panggilan' => 'terusan'
-					))->row_array();
-
-					$activeData = array();
-					if ($nextQueue!==null && $switchedQueue!==null){
-						$switchedQueueTime = strtotime($switchedQueue['antrian_date_created']);
-						$nextQueueTime = strtotime($nextQueue['antrian_date_created']);
-						if ($switchedQueueTime < $nextQueueTime){
-							$activeData = $switchedQueue;
-						}else{
-							$activeData = $nextQueue;
-						}
-					}elseif ($nextQueue !==null){
-						$activeData = $nextQueue;
-					}elseif ($switchedQueue!== null){
-						$activeData = $switchedQueue;
-					}
-
-					$this->setActiveQueueOutput($activeData,$locketId);
-
-					$this->updateLocketTimeCalled($locketId);
-
-
-				}else{
-					// jika antrian menunggu kosong
-					echo json_encode(array(
-						'status' => '404',
-						'antrian' => '000',
-						'message'=>'belum ada antrian pada loket tersebut',
-						'data' => array()
-					));
-				}
-			}
-
-		}
-
-		public function callTo($locketId)
-		{
 			$queueService = new QueueService();
 
 			$queueService->call($locketId);
+
 		}
 
 		public function recall($locketId)
 		{
-			$locketData = parent::model('loket')->getOne(array(
-				'loket_id' => $locketId
-			));
-			$serviceId = $locketData['loket_layanan_id'];
-//			$completeQueueObj = parent::model('antrian')
-//				->get_join_where(array(
-//					'tbl_antrian.antrian_layanan_id'=>$serviceId,
-//					'tbl_antrian.antrian_loket_id' => $locketId,
-//					'antrian_status' => 'selesai'
-//				));
-
-			$completeQueueObj  = parent::model('antrian')
-				->get_switched_queue(array(
-					'tbl_antrian.antrian_layanan_id'=>$serviceId,
-					'tbl_antrian.antrian_loket_id' => $locketId,
-					'antrian_status' => 'selesai'
-				),'antrian_date_created','desc');
-
-			if ($completeQueueObj->num_rows() > 0)
-			{
-				$completeQueue = $completeQueueObj->row_array();
-				if ($completeQueue['antrian_jenis_panggilan'] === 'alihan'){
-					$dataPanggilan = array(
-						'panggilan_jenis' => 'switchRecall',
-						'recall_antrian' => $completeQueue['antrian_nomor'],
-						'recall_loket' => $locketData['loket_nomor'],
-						'switchcall_prefix' => $completeQueue['antrian_suara_alihan_prefix'],
-						'switchcall_path' => $completeQueue['layanan_suara_nama'],
-						'panggilan_updated' => date('Y-m-d H:i:s')
-					);
-				}else{
-					$dataPanggilan = array(
-						'panggilan_jenis' => 'recall',
-						'recall_antrian' => $completeQueue['antrian_nomor'],
-						'recall_loket' => $locketData['loket_nomor'],
-						'recall_prefix' => $completeQueue['layanan_awalan'],
-						'recall_path' => $completeQueue['layanan_suara_awalan'],
-						'panggilan_updated' => date('Y-m-d H:i:s')
-					);
-				}
-
-				$update = parent::model('service')->update_panggilan(1,$dataPanggilan);
-
-				if ($update>0){
-					echo json_encode(array(
-						'status' => '200',
-						'antrian' => ucwords($completeQueue['layanan_awalan']).'-'.str_pad($completeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-						'data' => $completeQueue,
-						'update' => $update,
-						'message' => 'menampilkan nomor recall yang terakhir kali dipanggil di loket '.$locketData['loket_nama']
-					));
-				}
-
-			}else{
-				echo json_encode(array(
-					'status' => '200',
-					'antrian' => str_pad(0, 3, '0', STR_PAD_LEFT),
-					'data' => array(),
-					'update' => 0,
-					'message' => 'belum ada antrian pada loket '.$locketData['loket_nama']
-				));
-			}
+			$queueService = new QueueService();
+			$queueService->recall($locketId);
 		}
 
 		/*-- API for switch to other service  --*/
@@ -286,24 +92,6 @@
 			}
 		}
 
-		public function recallTo($locketId)
-		{
-			$queueService = new QueueService();
-			$queueService->recall($locketId);
-		}
-
-		/*
-		 * mencari antrian yang sedang aktif
-		 * */
-		public function currentQueue($loketId)
-		{
-			$currentData = parent::model('service')->get_current_queue($loketId);
-			$data = $currentData->row_array();
-			$number = str_pad($data['antrian_nomor'], 3, '0', STR_PAD_LEFT);
-
-			return $currentData;
-		}
-
 		/*
 		 * get number active queue
 		 * */
@@ -336,42 +124,6 @@
 				));
 			}
 
-//			$locketData = parent::model('loket')->getOne(array(
-//				'loket_id' => $locketId
-//			));
-//
-//			$serviceId = $locketData['loket_layanan_id'];
-//			$serviceData = parent::model('layanan')->get_layanan_where(array(
-//				'layanan_id' => $serviceId
-//			))->row_array();
-//
-//			$completeQueue = parent::model('antrian')->get_join_where(array(
-//				'antrian_layanan_id' => $serviceId,
-//				'antrian_loket_id' => $locketId,
-//				'antrian_status' => 'selesai'
-//			));
-//			$switchedQueue  = parent::model('antrian')
-//				->get_switched_queue(array(
-//					'antrian_layanan_id' => $serviceId,
-//					'antrian_status' => 'selesai'
-//				),'antrian_date_created','desc');
-//
-//
-//			if ($switchedQueue->num_rows() > 0){
-//				$complete = $switchedQueue->row_array();
-//				echo json_encode(array(
-//					'status' => '200',
-//					'message' => 'antrian yang baru saja di panggil',
-//					'antrian' => $complete['antrian_nomor_aktif']
-//				));
-//			}else{
-//				echo json_encode(array(
-//					'status' => '200',
-//					'message' => 'belum ada antrian dipanggil',
-//					'antrian' => $serviceData['layanan_awalan'].'-000'
-//				));
-//			}
-
 		}
 
 		/*
@@ -379,48 +131,21 @@
 		 * */
 		public function leftQueue($locketId)
 		{
-			$locketData = parent::model('loket')->getOne(array(
-				'loket_id' => $locketId
-			));
-			$serviceId = $locketData['loket_layanan_id'];
-			$activeQueue = parent::model('antrian')->get_join_where(array(
-				'antrian_layanan_id' => $serviceId,
-				'antrian_status' => 'aktif'
-			));
+			$queueHelper  = new QueueHelper($locketId);
+			$queueModel = new QueueModel();
 
-			$leftQueue = parent::model('antrian')->get_join_where(array(
+			$serviceId = $queueHelper->getServiceId();
+			$leftQueue = $queueModel->get(array(
 				'antrian_layanan_id' => $serviceId,
-				'antrian_status' => 'menunggu'
-			));
-
-			if ($leftQueue->num_rows() > 0){
-				$sisaAntrian = $activeQueue->num_rows()+$leftQueue->num_rows();
-			}else{
-				$sisaAntrian = $activeQueue->num_rows();
-			}
+				'antrian_status !=' => 'selesai',
+				'date_format(antrian_date_created,"%Y-%m-%d")' =>  date('Y-m-d'),
+			))->makeNumRows();
 
 			echo json_encode(array(
 				'status' => '200',
-				'sisa_antrian' => $sisaAntrian,
+				'sisa_antrian' => $leftQueue,
 				'message' => 'menampilkan sisa antrian pada layanan'
 			));
-		}
-
-		public function activateNextQueue($antrianId,$antrianNomor,$loketId)
-		{
-			$nextQueue = $this->getNextQueue($antrianNomor,$loketId);
-
-			if ($nextQueue !== null){
-				$dataEditCurrent = array('antrian_status'=>'selesai');
-				$editCurrentQueue = parent::model('service')->edit_antrian($antrianId,$dataEditCurrent);
-				if($editCurrentQueue > 0){
-					return parent::model('service')->edit_antrian_by_number($antrianNomor,$loketId);
-				}
-			}else{
-				return 0;
-			}
-
-			return 0;
 		}
 
 
@@ -592,70 +317,6 @@
 			}
 		}
 
-		public function updateLocketTimeCalled($id)
-		{
-			$data = array(
-				'loket_waktu_panggilan' =>  date('Y-m-d H:i:s')
-			);
-			return parent::model('loket')->editloket($id,$data);
-		}
-
-		public function setActiveQueueOutput($activeQueue,$locketId)
-		{
-
-			if ($activeQueue['antrian_jenis_panggilan'] === 'terusan'){
-				$format = ucwords($activeQueue['layanan_awalan']).'-'.str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT);
-			}else{
-				$format = $activeQueue['antrian_nomor_alihan'];
-			}
-			$update = parent::model('service')->edit_antrian($activeQueue['antrian_id'],array(
-				'antrian_status' => 'selesai',
-				'antrian_loket_id' => $locketId,
-				'antrian_nomor_aktif' => $format
-			));
-
-			if ($activeQueue['antrian_jenis_panggilan'] === 'terusan'){
-				$jenis = 'call';
-			}else{
-				$jenis = 'switch';
-			}
-
-			if ($update > 0){
-
-				if ($activeQueue['antrian_jenis_panggilan'] === 'alihan'){
-					$dataPanggilan = array(
-						'panggilan_jenis' => $jenis,
-						'panggilan_antrian' => $activeQueue['antrian_nomor'],
-						'panggilan_loket' => $locketId,
-						'call_prefix' => $activeQueue['layanan_awalan'],
-						'switchcall_prefix' => $activeQueue['antrian_suara_alihan_prefix'],
-						'switchcall_path' => $activeQueue['antrian_suara_alihan'],
-						'panggilan_updated' => date('Y-m-d H:i:s')
-					);
-				}else{
-					$dataPanggilan = array(
-						'panggilan_jenis' => $jenis,
-						'panggilan_antrian' => $activeQueue['antrian_nomor'],
-						'panggilan_loket' => $locketId,
-						'call_prefix' => $activeQueue['layanan_awalan'],
-						'panggilan_updated' => date('Y-m-d H:i:s')
-					);
-				}
-				//set event
-				$this->ED->fire('call',$dataPanggilan);
-
-				// update tabel panggilan realtime
-				parent::model('service')->update_panggilan(1,$dataPanggilan);
-				echo json_encode(array(
-					'status' => '200',
-					'antrian' => str_pad($activeQueue['antrian_nomor'], 3, '0', STR_PAD_LEFT),
-					'data' => $activeQueue,
-					'message' => 'menampilkan antrian yang sedang dipanggil'
-				));
-
-			}
-		}
-
 		public function receiptPrint()
 		{
 			if (isset($_POST)){
@@ -685,7 +346,6 @@
 		/*
 		 * APIs
 		 * */
-
 		public function loket($locketId){
 			$param = array(
 				'loket_id' => $locketId
