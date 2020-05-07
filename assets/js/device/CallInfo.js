@@ -43,7 +43,6 @@
 
 		$(document).on('click','#alternatifBtn',function () {
 			let locket = alternatifBtn.data('locket');
-			console.log(locket);
 			$.get(con.BASE_URL+'Services/call/'+locket,function (response) {
 				console.log(response);
 			},'JSON');

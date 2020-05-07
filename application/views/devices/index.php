@@ -34,6 +34,11 @@
 	<body style="background-color: #f6f8fa;height: 768px;max-height: 768px;overflow: hidden">
 		<div class="container" style="padding-top: 80px">
 			<div class="row">
+				<div class="col-12">
+					<div class="alert alert-warning animated bounceIn " id="escape-alert">
+						Tekan tombol <b><code>ESC</code></b>  untuk keluar
+					</div>
+				</div>
 				<div class="col-12" id="alertContainer">
 
 				</div>
@@ -159,6 +164,24 @@
 		<script src="<?= base_url('assets/js/device/CallInfo.js?v=1.0.0&&load=' . time()) ?>"></script>
 		<script src="<?= base_url('assets/js/device/SwitchControll.js?v=1.0.0&&load=' . time()) ?>"></script>
 		<!-- JS for this page-->
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+			    let con = new Connection();
+                $(document).keydown(function (e) {
+                    let key = e.key;
+                    if (key === 'Escape'){
+                        e.preventDefault();
+                        window.location.href = con.BASE_URL+'devices/registration';
+                    }
+                });
+
+                setTimeout(function () {
+					$('#escape-alert').fadeOut();
+                },5000);
+
+			});
+		</script>
 	</body>
 
 </html>

@@ -2,7 +2,7 @@ $(document).ready(function(){
 	let con = new Connection();
 	let service = new Services();
 	let serviceComponent = new ServiceComponent();
-	let ev = new ExtendView();
+	let ev = null;
 
 	let cache = 0;
 	let recallCache = 0;
@@ -19,6 +19,7 @@ $(document).ready(function(){
 	if (window.location.href.indexOf("extend") < 0) {
 		serviceComponent.serviceComponent();
 	}else{
+		ev = new ExtendView();
 		ev.startMixer();
 	}
 
