@@ -107,28 +107,9 @@
 					<div class="col-8">
 
 						<div id="content-wrapper">
-							<?php
-								if ($media['media_aktif'] ==='gambar'):
-							?>
 
-								<ul class="horizontal-bxslider">
-									<?php for ($i = 0; $i < count($dataGambar); $i++):?>
-										<li>
-											<img src="<?= base_url().$dataGambar[$i]?>" alt="" height="510px"/>
-										</li>
-									<?php endfor; ?>
-								</ul>
-<!--							<div class="slider" style="height: 100%!important;">-->
-<!--								-->
-<!--							</div>-->
-							<?php else:?>
-							<video width="100%" height="100%"
-								   id="my-player"
-								   class="video-js" controls
-								   preload="auto" autoplay >
-							</video>
-							<?php endif;?>
 						</div>
+
 					</div>
 
 					<!-- service list -->
@@ -227,21 +208,24 @@
 		<!-- end inject for playing audio-->
 
 		<!-- JS inject for media -->
-		<script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?>"></script>
-		<script src="<?= base_url('assets/js/node_modules/video.js/dist/video.min.js')?>"></script>
-		<script src="<?= base_url('assets/js/node_modules/videojs-playlist/dist/videojs-playlist.min.js')?>"></script>
-		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/dist/vendor/jquery.easing.1.3.js')?>"></script>
-		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/dist/vendor/jquery.fitvids.js')?>"></script>
-		<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/dist/jquery.bxslider.js')?>"></script>
+<!--		<script src="--><?//= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?><!--"></script>-->
+<!--		<script src="--><?//= base_url('assets/js/node_modules/video.js/dist/video.min.js')?><!--"></script>-->
+<!--		<script src="--><?//= base_url('assets/js/node_modules/videojs-playlist/dist/videojs-playlist.min.js')?><!--"></script>-->
+<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/node_modules/bxslider/dist/vendor/jquery.easing.1.3.js')?><!--"></script>-->
+<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/node_modules/bxslider/dist/vendor/jquery.fitvids.js')?><!--"></script>-->
+<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/node_modules/bxslider/dist/jquery.bxslider.js')?><!--"></script>-->
+		<script type="text/javascript" src="<?= base_url('assets/js/app/service/MediaService.js')?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/app/main/mediaPlayer.js')?>"></script>
+
 		<!-- JS inject for media -->
 
 		<!-- custom JS for entire app-->
 			<?php
 				if ($media['media_aktif'] === 'gambar'):
 			?>
-			<script src="<?= base_url('assets/js/media/Slider.js?v=1.0.0&load='.time())?>"></script>
+<!--			<script src="--><?//= base_url('assets/js/media/Slider.js?v=1.0.0&load='.time())?><!--"></script>-->
 			<?php else:?>
-			<script src="<?= base_url('assets/js/media/VideoPlayer.js?v=1.0.0&load='.time())?>"></script>
+<!--			<script src="--><?//= base_url('assets/js/media/VideoPlayer.js?v=1.0.0&load='.time())?><!--"></script>-->
 			<?php endif;?>
 
 	<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?><!--"></script>-->

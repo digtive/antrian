@@ -381,3 +381,17 @@
 		border-right: 29px solid #eee;
 	}
 
+	.media-slider{
+		width: 100%;
+		height: 100%;
+	}
+	.media-slider video{
+		width: 100%;
+		height: 100%;
+	}
+
+	.media-slider img{
+		width: 100%;
+		height: 100%;
+	}
+

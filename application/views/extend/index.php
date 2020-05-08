@@ -105,28 +105,8 @@
 				<div class="row">
 					<div class="col-7">
 
-						<div id="content-wrapper">
-							<?php
-							if ($media['media_aktif'] ==='gambar'):
-								?>
+						<div id="content-wrapper" style="overflow: hidden">
 
-								<ul class="horizontal-bxslider">
-									<?php for ($i = 0; $i < count($dataGambar); $i++):?>
-										<li>
-											<img src="<?= base_url().$dataGambar[$i]?>" alt="" height="388px"/>
-										</li>
-									<?php endfor; ?>
-								</ul>
-								<!--							<div class="slider" style="height: 100%!important;">-->
-								<!--								-->
-								<!--							</div>-->
-							<?php else:?>
-								<video width="100%" height="100%"
-									   id="my-player"
-									   class="video-js" controls
-									   preload="auto" autoplay >
-								</video>
-							<?php endif;?>
 						</div>
 					</div>
 
@@ -263,12 +243,14 @@
 	<!-- end inject for playing audio-->
 
 	<!-- JS inject for media -->
-	<script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?>"></script>
-	<script src="<?= base_url('assets/js/node_modules/video.js/dist/video.min.js')?>"></script>
-	<script src="<?= base_url('assets/js/node_modules/videojs-playlist/dist/videojs-playlist.min.js')?>"></script>
-	<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/dist/vendor/jquery.easing.1.3.js')?>"></script>
-	<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/dist/vendor/jquery.fitvids.js')?>"></script>
-	<script type="text/javascript" src="<?= base_url('assets/js/node_modules/bxslider/dist/jquery.bxslider.js')?>"></script>
+<!--	<script type="text/javascript" src="--><?//= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js')?><!--"></script>-->
+<!--	<script type="text/javascript" src="--><?//= base_url('assets/js/node_modules/video.js/dist/video.min.js')?><!--"></script>-->
+<!--	<script type="text/javascript" src="--><?//= base_url('assets/js/node_modules/videojs-playlist/dist/videojs-playlist.min.js')?><!--"></script>-->
+<!--	<script type="text/javascript" src="--><?//= base_url('assets/js/node_modules/bxslider/dist/vendor/jquery.easing.1.3.js')?><!--"></script>-->
+<!--	<script type="text/javascript" src="--><?//= base_url('assets/js/node_modules/bxslider/dist/vendor/jquery.fitvids.js')?><!--"></script>-->
+<!--	<script type="text/javascript" src="--><?//= base_url('assets/js/node_modules/bxslider/dist/jquery.bxslider.js')?><!--"></script>-->
+	<script type="text/javascript" src="<?= base_url('assets/js/app/service/MediaService.js')?>"></script>
+	<script type="text/javascript" src="<?= base_url('assets/js/app/main/mediaPlayer.js')?>"></script>
 	<!-- JS inject for media -->
 
 	<!-- custom JS for entire app-->
