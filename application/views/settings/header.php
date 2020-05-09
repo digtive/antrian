@@ -69,6 +69,14 @@
 				</div>
 			<?php endif;?>
 
+			<?php if ($this->session->flashdata('alert') === 'error'):?>
+				<div class="col-12">
+					<div class="alert setting-alert alert-danger" role="alert" id="settings-alert">
+						Ada kesalahan saat menyimpan data
+					</div>
+				</div>
+			<?php endif;?>
+
 			<div class="col-3">
 
 				<div class="side-nav">

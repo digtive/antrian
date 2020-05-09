@@ -42,6 +42,7 @@ class MediaService extends Connection{
 	}
 
 	playImageContent(media){
+		let duration = parseInt(media.imageDuration);
 		let parent = this;
 		let content =  '<div class="image-slider media-slider animated slideInRight" id="image-content">' +
 							'<img src="'+(media.src)+'" alt="media image">'+
@@ -52,7 +53,7 @@ class MediaService extends Connection{
 			setTimeout(function () {
 				parent.changeMedia();
 			},1000);
-		},5000);
+		},(duration*1000));
 	}
 
 	playVideoContent(media){
@@ -83,13 +84,4 @@ class MediaService extends Connection{
 		this.data = data;
 	}
 
-	getActiveMedia(){
-
-		if (this.data[this.currentIndex] !== undefined){
-			if (this.data[this.currentIndex].type === 'video'){
-				return 'video-player'
-			}
-		}
-		return null;
-	}
 }

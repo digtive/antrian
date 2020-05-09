@@ -1,15 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Antrian\models\Media;
+
 class ComponentService extends GLOBAL_Controller
 {
 	private $userAppID;
+
+	private $media;
 
 	public function __construct()
 	{
 		parent::__construct();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->userAppID = get_cookie('user_app');
+
+		$this->media =  new Media();
+
 		$this->load->model('ComponentModel', 'component');
 		$this->load->model('LoketModel', 'loket');
 		$this->load->model('LayananModel', 'layanan');
@@ -295,60 +302,58 @@ class ComponentService extends GLOBAL_Controller
 		}
 	}
 
-	public function setVideo()
+	public function getMedia($id = null)
 	{
-		if (isset($_POST['unggahVideo'])) {
-			$userMedia = parent::model('component')->get_user_media($this->userAppID);
-			$mediaVideo = json_decode($userMedia['media_video'], true);
+		if ($id!==null){
+			$data = $this->media->find($id)->makeResultArray();
+			echo json_encode(array(
+				'status' => '200',
+				'data' => $data,
+				'message' => 'showing media result by id'
+			));
+		}
 
+		$data = $this->media->get(array(),array())->makeResultArray();
+		echo json_encode(array(
+			'status' => '200',
+			'data' => $data,
+			'message' => 'showing media result'
+		));
+	}
 
-			$config['upload_path'] = './assets/videos/';
-			$config['allowed_types'] = 'webm|avi|mp4|mpeg';
-			$config['max_size'] = 400000;
+	public function setMedia()
+	{
+		if (isset($_POST['simpan'])){
+			$config['upload_path'] = './assets/media/slides/';
+			$config['allowed_types'] = 'png|jpeg|jpg|mp4';
 			$this->load->library('upload', $config);
 			$this->upload->initialize($config);
 
-			if ($this->upload->do_upload('unggah-video')) {
-
+			if ($this->upload->do_upload('media-upload')){
 				$title = $this->upload->data('file_name');
-				$ext = $this->upload->data('file_ext');
+				$mediaType = $this->upload->data('file_type');
+				$type = 'video';
 
-				$data = array(
-					'sources' => array(
-						array(
-							'src' => 'assets/videos/' . $title,
-							'type' => 'video/' . str_replace('.', '', $ext)
-						)
-					),
-					'title' => $title
-				);
-
-				array_push($mediaVideo, $data);
-				$videoOption = parent::post('video-option');
-
-				if ($videoOption !== '') {
-					$dataEdit = array(
-						'media_video' => json_encode($mediaVideo),
-						'media_aktif' => 'video',
-						'media_date_edited' => date('Y-m-d H:i:s'),
-					);
-				} else {
-					$dataEdit = array(
-						'media_video' => json_encode($mediaVideo),
-						'media_aktif' => 'gambar',
-						'media_date_edited' => date('Y-m-d H:i:s')
-					);
+				if (strpos($mediaType, 'image') !== false){
+					$type = 'image';
 				}
 
-				parent::model('component')->edit_media($this->userAppID, $dataEdit);
+				$media = $this->media->insert(array(
+					'title' => $title,
+					'source' => 'assets/media/slides/'.$title,
+					'type' => $type,
+					'media_type' => $mediaType,
+					'image_duration' => parent::post('duration')
+				));
 
-				parent::alert('alert', 'edit');
+				if ($media > 0){
+					parent::alert('alert', 'edit');
+					redirect('settings/media');
+				}
+
+			}else{
 				redirect('settings/media');
-
 			}
-
-		} else {
-			show_404();
 		}
 	}
 

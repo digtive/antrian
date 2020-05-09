@@ -1,12 +1,19 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
+	use Antrian\models\Media;
+
 	class AppController extends GLOBAL_Controller {
+
+		private $media;
 		
 		public function __construct()
 		{
 			parent::__construct();
 			parent::licenseCheck();
+
+			$this->media = new Media();
+
 			$this->load->model('AuthModel','auth');
 			$this->load->model('ComponentModel','component');
 			$this->load->model('AntrianModel','antrian');
@@ -110,19 +117,20 @@
 			$data['settingsTitle'] = 'Pengaturan Media';
 			$data['activeMenu'] = 'media';
 
-			$query = array(
-				'app_id' => get_cookie('user_app')
-			);
+			$data['media'] = $this->media->get(array(),array(
+				'create_at' => 'DESC'
+			))->makeResultArray();
 
-			$data['media']  = parent::model('component')->get_user_media($query['app_id']);
-			$mediaGambar = json_decode($data['media']['media_gambar'],true);
-			$data['videos'] = json_decode($data['media']['media_video'],true);
-			$data['mediaAktif'] = $data['media']['media_aktif'];
-			$data['dataGambar'] = $mediaGambar['data-gambar'];
-			$data['titleGambar'] = $mediaGambar['title-gambar'];
-			$data['durasi'] = $mediaGambar['durasi-slide'];
+			$duration = $this->media->get(array(
+				'type' => 'image'
+			))->makeRowArray();
 
-//			parent::cek_array($data['videos']);
+			if ($duration!==null){
+				$data['duration'] = $duration['image_duration'];
+			}else{
+				$data['duration'] = 0;
+			}
+
 			parent::settingsPages('app/media',$data);
 		}
 

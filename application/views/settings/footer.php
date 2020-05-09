@@ -98,7 +98,6 @@
 
 <!-- JS inject for media -->
 <script src="<?= base_url('assets/js/node_modules/bare-bones-slider/js/jquery.bbslider.js') ?>"></script>
-<script src="<?= base_url('assets/js/media/MediaSettings.js') ?>"></script>
 <script src="<?= base_url('assets/js/media/customKeyboard.js') ?>"></script>
 <script src="<?= base_url('assets/js/layanan/LocketNumber.js') ?>"></script>
 <script src="<?= base_url('assets/js/components/AppLicense.js')?>"></script>

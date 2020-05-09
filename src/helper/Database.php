@@ -77,6 +77,11 @@ class Database extends \GLOBAL_Model
 		return $this;
 	}
 
+	public function insert($data)
+	{
+		return parent::insert_with_status($this->table,$data);
+	}
+
 	public function update($query,$update)
 	{
 		foreach ($query as $item => $value){

@@ -1,28 +1,23 @@
 $(document).ready(function(){
 	let media = new MediaService();
 	let connection = new Connection();
+	let service = new Services();
 
+	let result = service.getData('ComponentService/getMedia');
+	let mediaSource = result.data;
 
-	let data = [
-		{
-			src: connection.BASE_URL+'assets/videos/didi.mp4',
-			type: 'video'
-		},
-		{
-			src: connection.BASE_URL+'assets/videos/videoplayback.mp4',
-			type: 'video'
-		},
-		{
-			src: connection.BASE_URL+'assets/images/slides/bapenda.jpg',
-			type: 'image'
-		},
-		{
-			src: connection.BASE_URL+'assets/videos/sample-video.mp4',
-			type: 'video'
-		},
+	let mediaData = [];
 
-	];
-	media.setData(data);
-	media.play(data[0]);
+	for (let i = 0; i < mediaSource.length; i++) {
+		mediaData.push({
+			src: mediaSource[i].source,
+			type: mediaSource[i].type,
+			mediaType: mediaSource[i].media_type,
+			imageDuration: mediaSource[i].image_duration
+		});
+	}
+
+	media.setData(mediaData);
+	media.play(mediaData[0]);
 
 });
