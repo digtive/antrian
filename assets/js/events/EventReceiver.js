@@ -133,6 +133,10 @@ $(document).ready(function(){
 		};
 
 		this._call = function(duration) {
+			let vid = $('#video-player');
+			if (vid.length >0){
+				vid[0].volume = 0.3;
+			}
 			let self = this;
 			if (self.queue.length) {
 				setTimeout(() => {
@@ -141,8 +145,20 @@ $(document).ready(function(){
 					self.queue.shift();
 					audio.onended = function() {
 						self._call();
+						let vid = $('#video-player');
+						if (vid.length >0){
+							vid[0].volume = 0.3;
+						}
 					};
 				}, duration);
+			}else{
+				$(document).ready(function(){
+					let vid = $('#video-player');
+					if ( vid.length >0){
+						vid[0].volume = 1;
+						vid.attr('volume',1);
+					}
+				});
 			}
 		}
 	}

@@ -12,27 +12,14 @@ class MediaService extends Connection{
 
 	currentIndex;
 
+	activeMedia;
+
 	constructor(){
 		super();
 
 		this.service = new Services();
 		this.mediaContainer = $('#content-wrapper');
 
-		this.data =[
-			{
-				src: this.BASE_URL+'assets/videos/sample-video.mp4',
-				type: 'video'
-			},
-			{
-				src: this.BASE_URL+'assets/images/slides/bapenda.jpg',
-				type: 'image'
-			},
-			{
-				src: this.BASE_URL+'assets/videos/videoplayback.mp4',
-				type: 'video'
-			}
-		];
-		this.play(this.data[0]);
 		this.currentIndex = 1;
 	}
 
@@ -85,7 +72,24 @@ class MediaService extends Connection{
 				},300);
 			});
 		},500);
+	}
 
 
+	getData(){
+		return this.data;
+	}
+
+	setData(data){
+		this.data = data;
+	}
+
+	getActiveMedia(){
+
+		if (this.data[this.currentIndex] !== undefined){
+			if (this.data[this.currentIndex].type === 'video'){
+				return 'video-player'
+			}
+		}
+		return null;
 	}
 }
