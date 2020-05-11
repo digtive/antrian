@@ -124,29 +124,29 @@
 				</div>
 
 				<!-- position setting -->
-				<div class="row mt-2">
-					<div class="col-12">
-						<h3 style="font-family: titilliumweb-bold" class="border-bottom">Logo</h3>
-					</div>
-					<label for="gaya-huruf-waktu" class="col-6 col-form-label font-weight-medium">Posisi Logo</label>
-					<div class="col-6">
-						<div class="form-group">
-							<div class="form-radio">
-								<label class="form-check-label">
-									<input type="radio" class="form-check-input" name="logo-position" id="left-to-right" value="left-to-right" checked="">
-									Kiri
-									<i class="input-helper"></i>
-								</label>
-							</div>
-							<div class="form-radio">
-								<label class="form-check-label">
-									<input type="radio" class="form-check-input" name="logo-position" id="right-to-left" value="right-to-left">
-									Kanan
-									<i class="input-helper"></i></label>
-							</div>
-						</div>
-					</div>
-				</div>
+<!--				<div class="row mt-2">-->
+<!--					<div class="col-12">-->
+<!--						<h3 style="font-family: titilliumweb-bold" class="border-bottom">Logo</h3>-->
+<!--					</div>-->
+<!--					<label for="gaya-huruf-waktu" class="col-6 col-form-label font-weight-medium">Posisi Logo</label>-->
+<!--					<div class="col-6">-->
+<!--						<div class="form-group">-->
+<!--							<div class="form-radio">-->
+<!--								<label class="form-check-label">-->
+<!--									<input type="radio" class="form-check-input" name="logo-position" id="left-to-right" value="left-to-right" checked="">-->
+<!--									Kiri-->
+<!--									<i class="input-helper"></i>-->
+<!--								</label>-->
+<!--							</div>-->
+<!--							<div class="form-radio">-->
+<!--								<label class="form-check-label">-->
+<!--									<input type="radio" class="form-check-input" name="logo-position" id="right-to-left" value="right-to-left">-->
+<!--									Kanan-->
+<!--									<i class="input-helper"></i></label>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
 
 			</div>
 

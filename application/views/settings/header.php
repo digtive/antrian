@@ -173,12 +173,12 @@
 									Loket
 								</a>
 							</li>
-							<li>
-								<a href="<?= base_url('settings/tombol')?>" class="<?php echo $tombol;?>">
-									<i class="icon-drawer"></i>
-									Tombol
-								</a>
-							</li>
+<!--							<li>-->
+<!--								<a href="--><?//= base_url('settings/tombol')?><!--" class="--><?php //echo $tombol;?><!--">-->
+<!--									<i class="icon-drawer"></i>-->
+<!--									Tombol-->
+<!--								</a>-->
+<!--							</li>-->
 							<li>
 								<a href="<?= base_url('settings/media') ?>" class="<?= $media; ?>">
 									<i class="icon-picture"></i>
