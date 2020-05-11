@@ -219,15 +219,6 @@
 
 		<!-- JS inject for media -->
 
-		<!-- custom JS for entire app-->
-			<?php
-				if ($media['media_aktif'] === 'gambar'):
-			?>
-<!--			<script src="--><?//= base_url('assets/js/media/Slider.js?v=1.0.0&load='.time())?><!--"></script>-->
-			<?php else:?>
-<!--			<script src="--><?//= base_url('assets/js/media/VideoPlayer.js?v=1.0.0&load='.time())?><!--"></script>-->
-			<?php endif;?>
-
 	<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 <!--			<script type="text/javascript" src="--><?//= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 		<!-- custom JS for entire app -->
