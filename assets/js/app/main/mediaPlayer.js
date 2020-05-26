@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 	for (let i = 0; i < mediaSource.length; i++) {
 		mediaData.push({
-			src: mediaSource[i].source,
+			src: connection.BASE_URL+mediaSource[i].source,
 			type: mediaSource[i].type,
 			mediaType: mediaSource[i].media_type,
 			imageDuration: mediaSource[i].image_duration

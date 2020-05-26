@@ -222,6 +222,19 @@
 	<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 <!--			<script type="text/javascript" src="--><?//= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 		<!-- custom JS for entire app -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+			    let conn = new Connection();
+
+				$(document).on('keydown',function (e) {
+				    keyEvent(e);
+					if (e.key === 's'){
+					    window.location.href = conn.BASE_URL+'layanan';
+					}
+                });
+
+			});
+		</script>
 	</body>
 
 </html>

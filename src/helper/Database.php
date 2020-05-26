@@ -91,6 +91,13 @@ class Database extends \GLOBAL_Model
 		return $this->db->affected_rows();
 	}
 
+	public function delete($id)
+	{
+		return parent::delete_row_with_status($this->table,array(
+			'id' => $id
+		));
+	}
+
 	public function makeResultArray()
 	{
 		return $this->object->result_array();

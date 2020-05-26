@@ -357,6 +357,19 @@ class ComponentService extends GLOBAL_Controller
 		}
 	}
 
+	public function deleteMedia($id)
+	{
+		$delete =  $this->media->delete($id);
+
+		if ($delete){
+			parent::alert('alert', 'edit');
+			redirect('settings/media');
+		}else{
+			parent::alert('alert', 'error');
+			redirect('settings/media');
+		}
+	}
+
 	public function deleteGambar($index)
 	{
 		$userMedia = parent::model('component')->get_user_media($this->userAppID);

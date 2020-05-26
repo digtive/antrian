@@ -33,10 +33,8 @@
 			$data['page_title'] = 'Aplikasi Antrian';
 
 			$query = array(
-				'app_id' => get_cookie('user_app')
+				'app_id' => 1
 			);
-
-
 
 			$data['dataLoket'] = parent::model('antrian')->get_loket()->result_array();
 

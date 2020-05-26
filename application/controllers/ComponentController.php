@@ -36,7 +36,7 @@ class ComponentController extends GLOBAL_Controller {
 			$data['activeMenu'] = 'parent';
 
 			$query = array(
-				'app_id' => get_cookie('user_app')
+				'app_id' => 1
 			);
 
 			$data['component']  = parent::model('component')->get_user_app($query);
@@ -58,11 +58,9 @@ class ComponentController extends GLOBAL_Controller {
 			$data['settingsTitle'] = 'Pengaturan Header Aplikasi';
 			$data['activeMenu'] = 'header';
 
-			$query = array(
-				'app_id' => get_cookie('user_app')
-			);
-
-			$data['component']  = parent::model('component')->get_user_app($query);
+			$data['component']  = parent::model('component')->get_user_app(array(
+				'app_id' => 1
+			));
 			$data['headerComponent'] = json_decode($data['component']['app_header'],true);
 			$data['logo'] = json_decode($data['component']['app_logo'],true);
 
@@ -81,7 +79,7 @@ class ComponentController extends GLOBAL_Controller {
 			$data['activeMenu'] = 'footer';
 
 			$query = array(
-				'app_id' => get_cookie('user_app')
+				'app_id' => 1
 			);
 
 			$data['component']  = parent::model('component')->get_user_app($query);
@@ -103,7 +101,7 @@ class ComponentController extends GLOBAL_Controller {
 			$data['activeMenu'] = 'loket';
 
 			$query = array(
-				'app_id' => get_cookie('user_app')
+				'app_id' => 1
 			);
 			$data['component']  = parent::model('component')->get_user_app($query);
 			$data['serviceComponent'] = json_decode($data['component']['app_service'],true);
@@ -126,7 +124,7 @@ class ComponentController extends GLOBAL_Controller {
 			$data['activeMenu'] = 'tombol';
 
 			$query = array(
-				'app_id' => get_cookie('user_app')
+				'app_id' => 1
 			);
 			$data['keyboard']  = parent::model('component')->get_keyboard_setting($query);
 			$data['dataLoket'] = parent::model('loket')->getJoinLoket()->result_array();
@@ -140,25 +138,28 @@ class ComponentController extends GLOBAL_Controller {
 		if ($this->session->userdata('username') === null){
 			redirect('layanan/registrasi');
 		}else{
-			$data['title'] = 'Pengaturan Aplikasi';
-			$data['page_title'] = 'Pengaturan Pengguna Aplikasi';
-			$data['settingsTitle'] = 'Pengaturan Pengguna Aplikasi';
-			$data['activeMenu'] = 'users';
-			$data['macUser'] = parent::UserMAC()->row_array();
-			$data['licensedUser'] = parent::model('auth')->get_pengguna_where(array(
-				'mac' => parent::_clientMAC()
-			))->row_array();
-//			parent::cek_array($data['licensedUser']);
+			if ($this->session->userdata('level') === 'superAdmin'){
+				$data['title'] = 'Pengaturan Aplikasi';
+				$data['page_title'] = 'Pengaturan Pengguna Aplikasi';
+				$data['settingsTitle'] = 'Pengaturan Pengguna Aplikasi';
+				$data['activeMenu'] = 'users';
+				$data['macUser'] = parent::UserMAC()->row_array();
+				$data['licensedUser'] = parent::model('auth')->get_pengguna_where(array(
+					'mac' => parent::_clientMAC()
+				))->row_array();
 
-			$query = array(
-				'app_id' => get_cookie('user_app')
-			);
-			$data['keyboard']  = parent::model('component')->get_keyboard_setting($query);
-			$data['dataLoket'] = parent::model('loket')->getJoinLoket()->result_array();
-			$data['keyList'] = json_decode($data['keyboard']['setting_tombol'],true);
-			$data['mac'] = parent::_clientMAC();
+				$query = array(
+					'app_id' => 1
+				);
+				$data['keyboard']  = parent::model('component')->get_keyboard_setting($query);
+				$data['dataLoket'] = parent::model('loket')->getJoinLoket()->result_array();
+				$data['keyList'] = json_decode($data['keyboard']['setting_tombol'],true);
+				$data['mac'] = parent::_clientMAC();
 
-			parent::settingsPages('components/users',$data);
+				parent::settingsPages('components/users',$data);
+			}else{
+				show_404();
+			}
 		}
 	}
 
@@ -168,7 +169,7 @@ class ComponentController extends GLOBAL_Controller {
 		$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
 		$data['activeMenu'] = 'loket';
 		$query = array(
-			'app_id' => get_cookie('user_app')
+			'app_id' => 1
 		);
 		$data['component']  = parent::model('component')->get_user_app($query);
 		$data['serviceComponent'] = json_decode($data['component']['app_service'],true);

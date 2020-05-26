@@ -14,7 +14,7 @@
 			<div class="form-group col-12">
 				<div class="row">
 					<label for="username" class="col-4 col-form-label">username</label>
-					<input type="text" class="form-control form-control-lg col-8" id="username" name="username" placeholder="username"
+					<input type="text" class="form-control form-control-lg col-8" id="username"  name="username" placeholder="username"
 						<?php if ($licensedUser !== null):?>
 							value="<?= $licensedUser['username']; ?>"
 					    <?php endif;?>
@@ -36,7 +36,7 @@
 			<div class="form-group col-12">
 				<div class="row">
 					<label for="app_username" class="col-4 col-form-label">Nama Pengguna</label>
-					<input type="text" class="form-control form-control-lg col-8" id="app_username" name="app_username"
+					<input type="text" class="form-control form-control-lg col-8" id="app_username" name="app_username" required
 						   placeholder="instansi/perorangan"
 							<?php if ($macUser!==null):?>
 								value="<?= $macUser['nama_pengguna']?>"
