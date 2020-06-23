@@ -16,7 +16,7 @@
 										</div>
 										<div class="form-group col-11">
 											<h5 style="font-family: titilliumweb-bold">Durasi Slide Gambar (detik)</h5>
-											<input type="number" class="form-control" name="duration" value="<?= $duration?>">
+											<input type="number" class="form-control" name="duration" value="<?= $duration?>" required>
 										</div>
 									</div>
 								</div>

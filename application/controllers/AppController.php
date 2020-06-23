@@ -22,30 +22,19 @@
 		
 		public function index()
 		{
-			if ($_COOKIE['user_app']  === ''){
-				setcookie('user_app','1',time()+(86400*30),'/');
-			}
-
-			if (!isset($_COOKIE['user_app'])){
-				setcookie('user_app','1',time()+(86400*30),'/');
-			}
 			$data['title'] = 'Aplikasi Antrian';
 			$data['page_title'] = 'Aplikasi Antrian';
 
-			$query = array(
-				'app_id' => 1
-			);
-
 			$data['dataLoket'] = parent::model('antrian')->get_loket()->result_array();
 
-			$data['component']  = parent::model('component')->get_user_app($query);
+			$data['component']  = parent::model('component')->get_user_app(array('app_id' => 1));
 			$data['container'] = json_decode($data['component']['app_container'],true);
 			$data['header'] = json_decode($data['component']['app_header'],true);
 			$data['loket'] = json_decode($data['component']['app_service'],true);
 			$data['footer'] = json_decode($data['component']['app_footer'],true);
 			$data['logo'] = json_decode($data['component']['app_logo'],true);
 
-			$data['media']  = parent::model('component')->get_user_media($query['app_id']);
+			$data['media']  = parent::model('component')->get_user_media(1);
 			$mediaGambar = json_decode($data['media']['media_gambar'],true);
 			$data['dataGambar'] = $mediaGambar['data-gambar'];
 			$data['titleGambar'] = $mediaGambar['title-gambar'];

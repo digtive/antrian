@@ -8,6 +8,7 @@
 	use Antrian\models\Event as EventModel;
 	use Antrian\helper\QueueHelper;
 	use Antrian\models\Queue as QueueModel;
+	use Antrian\models\Keyboard as KeyboardModel;
 
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -437,6 +438,42 @@
 				}
 			}else{
 				echo 'access forbidden';
+			}
+		}
+
+		public function saveKeyboard()
+		{
+			if (isset($_GET)){
+				$code = parent::get('id');
+				$info = parent::get('info');
+				
+				$keyboard = new KeyboardModel();
+
+				$existKeyboard = $keyboard->get(
+					array('code' => $code)
+				)->makeRowArray();
+
+				if ($existKeyboard !== null){
+					echo 'keyboard sudah terdaftar';
+				}else{
+					$keyboard->insert(array(
+						'code' => $code,
+						'manufacture' => $info
+					));
+
+					echo 'berhasil menambahkan keyboard';
+				}
+
+			}else{
+				show_404();
+			}
+		}
+		public function keyboardCall()
+		{
+			if (isset($_GET)){
+				$replace = str_replace('{','',$_GET['key']);
+				$secondReplace = str_replace('}','',$replace);
+				echo parent::get('path').' dan nomor = '.parent::get('key');
 			}
 		}
 

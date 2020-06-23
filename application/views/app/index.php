@@ -227,7 +227,6 @@
 			    let conn = new Connection();
 
 				$(document).on('keydown',function (e) {
-				    keyEvent(e);
 					if (e.key === 's'){
 					    window.location.href = conn.BASE_URL+'layanan';
 					}

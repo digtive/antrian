@@ -34,44 +34,10 @@
 
 			<div class="col-4">
 				<h4 style="font-family: titilliumweb-bold " class="mb-4">Panggilan</h4>
-
-				<?php
-					$i =1;
-					foreach ($dataLoket as $key => $val):
-				?>
-				<div class="form-group  row">
-					<label for="background-paralelogram" class="col-7 col-form-label font-weight-medium"><?= 'Loket Nomor '.$val['loket_id']?></label>
-					<div class="col-4">
-						<input type="text" name="loket-<?= $val['loket_id'] ?>" maxlength="1" class="form-control bt-max-length" placeholder="key" style="font-size: 18px!important;text-transform: uppercase" value="<?= $keyList['loket-'.$val['loket_id']]['key'] ?>">
-						<input type="text" name="loket-<?= $val['loket_id']?>-url" value="<?= 'Services/callTo/'.$val['loket_id']?>" hidden>
-					</div>
-				</div>
-				<?php
-					$i++;
-					endforeach;
-				?>
-
 			</div>
 
 			<div class="col-4">
 				<h4 style="font-family: titilliumweb-bold " class="mb-4">Recall</h4>
-
-				<?php
-				$i =1;
-				foreach ($dataLoket as $key => $val):
-					?>
-					<div class="form-group  row">
-						<label for="background-paralelogram" class="col-7 col-form-label font-weight-medium"><?= 'Loket Nomor '.$val['loket_id']?></label>
-						<div class="col-4">
-							<input type="text" name="recall-loket-<?= $val['loket_id'] ?>" maxlength="1" class="form-control bt-max-length" placeholder="key" style="font-size: 18px!important;text-transform: uppercase" value="<?= $keyList['recall-loket-'.$val['loket_id']]['key'] ?>">
-							<input type="text" name="recall-loket-<?= $val['loket_id']?>-url" value="<?= 'Services/recallTo/'.$val['loket_id']?>" hidden>
-						</div>
-					</div>
-					<?php
-					$i++;
-				endforeach;
-				?>
-
 			</div>
 
 			<!-- text setting -->
