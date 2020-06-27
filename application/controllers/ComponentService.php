@@ -2,12 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Antrian\models\Media;
+use Antrian\models\KeyEvent;
 
 class ComponentService extends GLOBAL_Controller
 {
 	private $userAppID;
 
 	private $media;
+
+	private $keyEvent;
 
 	public function __construct()
 	{
@@ -16,6 +19,7 @@ class ComponentService extends GLOBAL_Controller
 		$this->userAppID = get_cookie('user_app');
 
 		$this->media =  new Media();
+		$this->keyEvent = new KeyEvent();
 
 		$this->load->model('ComponentModel', 'component');
 		$this->load->model('LoketModel', 'loket');
@@ -545,51 +549,75 @@ class ComponentService extends GLOBAL_Controller
 	public function editTombol()
 	{
 		if (isset($_POST['simpan'])){
-			$loket = parent::model('loket')->getJoinLoket()->result_array();
-			$dataTombol = array(
-				'settings' => array(
-					'key' => parent::post('settings'),
-					'url' => parent::post('settings-url'),
-					'type' => 'redirect'
-				),
-				'utama' => array(
-					'key' => parent::post('utama'),
-					'url' => parent::post('utama-url'),
-					'type' => 'redirect'
-				),
-				 'layanan' => array(
-				 	'key' => parent::post('layanan'),
-				    'url' => parent::post('layanan-url'),
-				    'type' => 'redirect'
-				 )
-			);
-
-			foreach ($loket as $key => $value){
-				$dataTombol['loket-'.$value['loket_id']] = array(
-					'key' => parent::post('loket-'.$value['loket_id']),
-					'url' => parent::post('loket-'.$value['loket_id'].'-url'),
-					'type' => 'service'
-				);
-			}
-
-			foreach ($loket as $key => $value) {
-				$dataTombol['recall-loket-'.$value['loket_id']] = array(
-					'key' => parent::post('recall-loket-'.$value['loket_id']),
-					'url' => parent::post('recall-loket-'.$value['loket_id'].'-url'),
-					'type' => 'service'
-				);
-			}
 
 
-			$dataEdit = array(
-				'app_id' => $this->userAppID,
-				'setting_tombol' => json_encode($dataTombol),
-			);
-
-			parent::model('layanan')->edit_setting_tombol(1,$dataEdit);
+			parent::model('layanan')->edit_setting_tombol(1,);
 
 			parent::alert('alert','edit');
 			redirect('settings/tombol');
+		}
+	}
+
+	public function addKeyEvent()
+	{
+		if (isset($_POST)){
+			$loket = parent::post('loket');
+			$keyboard = parent::post('keyboard');
+			$call = parent::post('call');
+			$callCode = parent::post('call-code');
+			$recall = parent::post('recall');
+			$recallCode = parent::post('recall-code');
+
+			$callInsert = $this->keyEvent->insert(array(
+				'loket_id' => $loket,
+				'keyboard' => $keyboard,
+				'numpad' => $call,
+				'code' => $callCode,
+				'type' => 'call'
+			));
+
+			if ($callInsert > 0){
+				$recallInsert = $this->keyEvent->insert(array(
+					'loket_id' => $loket,
+					'keyboard' => $keyboard,
+					'numpad' => $recall,
+					'code' => $recallCode,
+					'type' => 'recall'
+				));
+
+				if ($recallInsert > 0){
+					parent::alert('alert','edit');
+					redirect('settings/tombol');
+				}
+			}
+		}
+	}
+
+	public function codeExistCheck()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			if (isset($_POST)){
+				$keyboard = parent::post('keyboard');
+				$code = parent::post('code');
+
+				$checkResult = $this->keyEvent->get(array(
+					'keyboard' => $keyboard,
+					'code' => $code
+				))->makeNumRows();
+
+				echo json_encode($checkResult);
+ 			}
+		}
+	}
+
+	public function checkLocketExists($locketId)
+	{
+		if ($this->input->is_ajax_request()){
+			$locketOnKeyEvent = $this->keyEvent->get(array(
+				'loket_id'=> $locketId
+			))->makeNumRows();
+			echo json_encode($locketOnKeyEvent);
 		}
 	}
 

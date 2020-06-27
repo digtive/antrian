@@ -53,7 +53,7 @@
 
 		</div>
 
-		<form action="<?= base_url('ComponentService/unggahLogo')?>" class="form-row" method="post" enctype="multipart/form-data">
+		<form action="#" class="form-row" method="post" enctype="multipart/form-data">
 			<div class="form-group col-12">
 				<h4 class="border-bottom" style="font-family: titilliumweb-bold">
 					Pengaturan Text

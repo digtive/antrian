@@ -9,6 +9,7 @@
 	use Antrian\helper\QueueHelper;
 	use Antrian\models\Queue as QueueModel;
 	use Antrian\models\Keyboard as KeyboardModel;
+	use Antrian\models\KeyEvent as KeyEvent;
 
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -471,9 +472,34 @@
 		public function keyboardCall()
 		{
 			if (isset($_GET)){
+				$KE = new KeyEvent();
+
 				$replace = str_replace('{','',$_GET['key']);
 				$secondReplace = str_replace('}','',$replace);
-				echo parent::get('path').' dan nomor = '.parent::get('key');
+
+				$keyboardArray = explode(',',$secondReplace);
+
+				if ($keyboardArray[1] === 'Down'){
+
+					$keyExists = $KE->get(array(
+						'keyboard' => parent::get('path'),
+						'code' => $keyboardArray[0]
+					));
+					if ($keyExists->makeNumRows() > 0){
+						$keyEventRow = $keyExists->makeRowArray();
+
+						$locketID = $keyEventRow['loket_id'];
+						$type = $keyEventRow['type'];
+
+						if ($type === 'call'){
+							$queueService = new QueueService();
+							$queueService->call($locketID);
+						}else{
+							$queueService = new QueueService();
+							$queueService->recall($locketID);
+						}
+					}
+				}
 			}
 		}
 

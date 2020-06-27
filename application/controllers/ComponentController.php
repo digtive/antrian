@@ -1,7 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Antrian\models\Keyboard as KeyboardModel;
+use Antrian\models\KeyEvent;
+use Antrian\models\Locket;
+
 class ComponentController extends GLOBAL_Controller {
+
+	private $KM;
+
+	private $KE;
+
+	private $LM;
 
 	public function __construct()
 	{
@@ -9,6 +19,10 @@ class ComponentController extends GLOBAL_Controller {
 		if ($this->session->userdata('level') === 'admin'){
 			parent::licenseCheck();
 		}
+		$this->KM  = new KeyboardModel();
+		$this->KE = new KeyEvent();
+		$this->LM = new Locket();
+
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->model('ComponentModel','component');
 		$this->load->model('LoketModel','loket');
@@ -123,12 +137,59 @@ class ComponentController extends GLOBAL_Controller {
 			$data['settingsTitle'] = 'Pengaturan Tombol Aplikasi';
 			$data['activeMenu'] = 'tombol';
 
+			$keyEventList = array();
+			$keyListId = array();
+
 			$query = array(
 				'app_id' => 1
 			);
 			$data['keyboard']  = parent::model('component')->get_keyboard_setting($query);
 			$data['dataLoket'] = parent::model('loket')->getJoinLoket()->result_array();
 			$data['keyList'] = json_decode($data['keyboard']['setting_tombol'],true);
+			$data['keyboard'] = $this->KM->get()->makeResultArray();
+
+			foreach ($this->KE->get()->makeResultArray() as $key => $val){
+					if (!in_array($val['loket_id'],$keyListId)){
+						array_push($keyListId,$val['loket_id']);
+					}
+			}
+
+			foreach ($keyListId as $key => $val){
+				$locket = $this->LM->find($val)->makeRowArray();
+
+				$callLocket = $this->KE->get(array(
+					'loket_id' => $val,
+					'type' => 'call'
+				))->makeRowArray();
+
+				$recallLocket = $this->KE->get(array(
+					'loket_id' => $val,
+					'type' => 'recall'
+				))->makeRowArray();
+
+				$keyboard = $this->KM->get(array(
+					'code' => $callLocket['keyboard']
+				))->makeRowArray();
+				$dateTime = new DateTime($keyboard['create_at']);
+
+				array_push($keyEventList,array(
+					'call_id' => $callLocket['id'],
+					'recall_id' => $recallLocket['id'],
+					'loket'=> $locket['loket_nama'],
+					'loket_id' => $callLocket['loket_id'],
+					'keyboard'=> $keyboard['manufacture'].' | '.$dateTime->format('m-d-Y'),
+					'keyboard_code' => $callLocket['keyboard'],
+					'call_code'=> $callLocket['code'],
+					'recall_code'=> $recallLocket['code'],
+					'call_numpad' => $callLocket['numpad'],
+					'recall_numpad' => $recallLocket['numpad'],
+					'create_at' => $keyboard['create_at']
+				));
+			}
+
+//			parent::cek_array($keyEventList);
+
+			$data['keyevent'] = $keyEventList;
 
 			parent::settingsPages('components/tombol',$data);
 		}
