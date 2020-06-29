@@ -72,7 +72,7 @@
 			<?php if ($this->session->flashdata('alert') === 'error'):?>
 				<div class="col-12">
 					<div class="alert setting-alert alert-danger" role="alert" id="settings-alert">
-						Ada kesalahan saat menyimpan data
+						Ada kesalahan saat operasi
 					</div>
 				</div>
 			<?php endif;?>

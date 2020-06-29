@@ -593,6 +593,26 @@ class ComponentService extends GLOBAL_Controller
 		}
 	}
 
+	public function deleteKeyEvent()
+	{
+		if (isset($_GET)){
+			$callID = parent::get('call');
+			$recallID = parent::get('recall');
+			$callDelete = $this->keyEvent->delete($callID);
+			if ($callDelete > 0){
+				$recallDelete = $this->keyEvent->delete($recallID);
+				if ($recallDelete > 0){
+					parent::alert('alert','edit');
+					redirect('settings/tombol');
+				}
+			}else{
+				parent::cek_type($callDelete);
+				parent::alert('alert','error');
+				redirect('settings/tombol');
+			}
+		}
+	}
+
 	public function codeExistCheck()
 	{
 		if ($this->input->is_ajax_request())

@@ -30,24 +30,32 @@
 				</div>
 			</div>
 
-			<div class="col-2">
-				<h4 style="font-family: titilliumweb-bold " class="mb-4">Call</h4>
+			<div class="col-3">
+				<div class="row">
+					<div class="col-6">
+						<h4 style="font-family: titilliumweb-bold " class="mb-4">Call</h4>
 
-				<div class="form-group  row">
-					<div class="col-12">
-						<input type="text" name="settings"  maxlength="1" class="form-control bt-max-length"  placeholder="key"  value="<?= $val['call_numpad']?>" readonly>
+						<div class="form-group  row">
+							<div class="col-12">
+								<input type="text" name="settings"  maxlength="1" class="form-control bt-max-length"  placeholder="key"  value="<?= $val['call_numpad']?>" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="col-6">
+						<h4 style="font-family: titilliumweb-bold " class="mb-4">Recall</h4>
+
+						<div class="form-group  row">
+							<div class="col-12">
+								<input type="text" name="settings"  maxlength="1" class="form-control bt-max-length"  placeholder="key" value="<?= $val['recall_numpad']?>" readonly>
+							</div>
+						</div>
 					</div>
 				</div>
+
 			</div>
 
-			<div class="col-2">
-				<h4 style="font-family: titilliumweb-bold " class="mb-4">Recall</h4>
-
-				<div class="form-group  row">
-					<div class="col-12">
-						<input type="text" name="settings"  maxlength="1" class="form-control bt-max-length"  placeholder="key" value="<?= $val['recall_numpad']?>" readonly>
-					</div>
-				</div>
+			<div class="col-1 " style="padding-top: 44px">
+				<a href="<?= base_url('ComponentService/deleteKeyEvent?call='.$val['call_id'].'&recall='.$val['recall_id'])?>" class="btn btn-danger p-2" onclick="return confirm('Hapus Item ?')"><i class="icon-trash"></i></a>
 			</div>
 		<?php endforeach;?>
 		</form>
@@ -64,7 +72,7 @@
 					</div>
 
 					<div class="modal-body pt-0 pb-2">
-						<form action="http://localhost/antrian/ComponentService/addKeyEvent" class=" pt-4 border-top row" method="post" id="keyboardData">
+						<form action="<?= base_url('ComponentService/addKeyEvent')?>" class=" pt-4 border-top row" method="post" id="keyboardData">
 
 							<div class="col-4">
 								<h4 style="font-family: titilliumweb-bold" class="mb-4">Loket</h4>
