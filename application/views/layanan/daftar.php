@@ -245,13 +245,16 @@
 	<!-- JS inject for media -->
 
 	<!-- JS for print-->
-	<script src="<?= base_url('assets/js/plugins/printThis/printThis.js')?>"></script>
+<!--	<script src="--><?//= base_url('assets/js/plugins/printThis/printThis.js')?><!--"></script>-->
 <!--	<script src="--><?//= base_url('assets/js/print/recta.min.js')?><!--" type="text/javascript"></script>-->
 	<script src="https://cdn.jsdelivr.net/npm/recta/dist/recta.js" type="text/javascript"></script>
 	<!-- JS for print-->
 
 	<!-- JS Inject for service / take queue-->
+	<!-- if touchscreen active -->
 	<script src="<?= base_url('assets/js/layanan/MainLayanan.js?v=1.0.0&&load='.time())?>"></script>
+	<!-- else -->
+	<script src="<?= base_url('assets/js/layanan/KeyboardListener.js?v=1.0.0&&load='.time())?>"></script>
 <!--	<script type="text/javascript" src="--><?//= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 	<!-- JS Inject for service / take queue-->
 

@@ -5,6 +5,7 @@ use Antrian\models\Keyboard as KeyboardModel;
 use Antrian\models\KeyEvent;
 use Antrian\models\Locket;
 use Antrian\models\Shortcut;
+use Antrian\models\Service as Service;
 
 class ComponentController extends GLOBAL_Controller {
 
@@ -16,6 +17,8 @@ class ComponentController extends GLOBAL_Controller {
 
 	private $SM;
 
+	private $SRCM;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -26,6 +29,7 @@ class ComponentController extends GLOBAL_Controller {
 		$this->KE = new KeyEvent();
 		$this->LM = new Locket();
 		$this->SM = new Shortcut();
+		$this->SRCM = new Service();
 
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->model('ComponentModel','component');
@@ -207,19 +211,20 @@ class ComponentController extends GLOBAL_Controller {
 		$data['activeMenu'] = 'shortcut';
 
 		$data['dataLoket'] = parent::model('loket')->getJoinLoket()->result_array();
+		$data['servicesList'] = $this->SRCM->get()->makeResultArray();
 		$shortcutData = $this->SM->get()->makeResultArray();
 		$locketShortcut = array();
 		foreach ($shortcutData as $key => $value){
 			$locketId = substr($value['url'],19,2);
-			$locket = $this->LM->find($locketId)->makeRowArray();
-			$locketName = $locket['loket_nama'];
+			$service = $this->SRCM->find($locketId)->makeRowArray();
+			$serviceName = $service['layanan_nama'];
 
 			array_push($locketShortcut,array(
 				'id' => $value['id'],
 				'type' => $value['type'],
 				'url' => $value['url'],
 				'numpad' => $value['numpad'],
-				'loket' => $locketName,
+				'loket' => $serviceName,
 				'create_at' => $value['create_at']
 			));
 		}

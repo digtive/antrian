@@ -10,6 +10,7 @@
 	use Antrian\models\Queue as QueueModel;
 	use Antrian\models\Keyboard as KeyboardModel;
 	use Antrian\models\KeyEvent as KeyEvent;
+	use Antrian\models\Shortcut as Shortcut;
 
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -292,31 +293,13 @@
 		}
 
 		public function execKeyboard($key){
-			$query = array(
-				'app_id' => get_cookie('user_app')
-			);
-			$data['keyboard']  = parent::model('component')->get_keyboard_setting($query);
-			$keylist = json_decode($data['keyboard']['setting_tombol'],true);
-			$shortCut = array();
+			$shortcut = new Shortcut();
 
-			foreach ($keylist as $item => $v) {
-				if ($keylist[$item]['key']===$key){
-						$shortCut['type'] = $keylist[$item]['type'];
-						$shortCut['key'] = $keylist[$item]['key'];
-						$shortCut['url'] = base_url().$keylist[$item]['url'];
-						$shortCut['status'] = '200';
-						$shortCut['message'] = 'berhasil menemukan shortcut';
-				}
-			}
+			$data = $shortcut->get(array(
+				'numpad' => $key
+			))->makeRowArray();
 
-			if (!empty($shortCut) && $shortCut !== null){
-				echo json_encode($shortCut);
-			}else{
-				echo json_encode(array(
-					'status' => '404',
-					'message' => 'tidak dapat menemukan shortcut'
-				));
-			}
+			echo json_encode($data);
 		}
 
 		public function receiptPrint()

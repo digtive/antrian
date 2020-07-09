@@ -3,7 +3,7 @@
 	<div class="card-body" style="overflow: hidden">
 		<h4 class="card-title pb-3 mb-3"><?= $settingsTitle;?></h4>
 		<button href="#" type="button" data-toggle="modal" data-target="#exampleModal" name="tambah"
-				class="btn btn-primary  mb-1" id="serviceSubmitBtn"><i class="icon-plus"></i>TAMBAH SHORTCUT LOKET
+				class="btn btn-primary  mb-1" id="serviceSubmitBtn"><i class="icon-plus"></i>TAMBAH SHORTCUT
 		</button>
 		<div class="table-responsive-sm border-top mt-3">
 			<table class="table">
@@ -12,7 +12,7 @@
 					<th>No</th>
 					<th>Fungsi</th>
 					<th>Numpad</th>
-					<th>Loket</th>
+					<th>Layanan</th>
 					<th style="width: 100px" class="text-center"><i class="icon-settings"></i></th>
 				</tr>
 				</thead>
@@ -26,7 +26,9 @@
 						<td>Cetak Karcis</td>
 						<td><code><?= $value['numpad']?></code></td>
 						<td><?= $value['loket']?></td>
-						<td class="text-center">aksi</td>
+						<td class="text-center">
+							<a href="<?= base_url('ComponentService/deleteShortcut/'.$value['id'])?>" class="btn btn-danger p-2" onclick="return confirm('Hapus Item ?')"><i class="icon-trash"></i></a>
+						</td>
 					</tr>
 				<?php endforeach;$number++;?>
 				</tbody>
@@ -53,17 +55,16 @@
 							<div class="row mt-2">
 								<label for="font-family-footer" class="col-4 col-form-label font-weight-medium">Cetak Karcis </label>
 								<div class="col-4">
-									<select class="form-control" name="url" required >
-										<option selected="" disabled="">PILIH LOKET</option>
-										<?php foreach ($dataLoket as $key => $val):?>
-											<option value="Services/takeQueue/<?= $val['loket_id']?>"><?= $val['loket_nama']?></option>
+									<select class="form-control" name="url" required>
+										<option selected="" disabled="" value="">PILIH LAYANAN</option>
+										<?php foreach ($servicesList as $key => $val):?>
+											<option value="Services/takeQueue/<?= $val['layanan_id']?>"><?= $val['layanan_nama']?></option>
 										<?php endforeach;?>
 									</select>
-									<span class="badge badge-danger" id="locket-alert" style="display: none">loket telah memiliki data keyboard</span>
 								</div>
 								<div class="col-4">
 									<input type="text" hidden name="type" value="locket">
-									<input type="number" name="numpad" maxlength="1" class="form-control bt-max-length" placeholder="NUMPAD" style="font-size: 18px!important;text-transform: uppercase" value="" required>
+									<input type="number" name="numpad" maxlength="1" class="form-control bt-max-length" placeholder="NUMPAD" style="font-size: 18px!important;text-transform: uppercase" value="" required max="9">
 								</div>
 							</div>
 						</div>

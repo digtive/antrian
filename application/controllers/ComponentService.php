@@ -641,6 +641,13 @@ class ComponentService extends GLOBAL_Controller
 		}
 	}
 
+	public function deleteShortcut($id)
+	{
+		$this->shortcut->delete($id);
+		parent::alert('alert','edit');
+		redirect('settings/shortcut');
+	}
+
 	public function codeExistCheck()
 	{
 		if ($this->input->is_ajax_request())
