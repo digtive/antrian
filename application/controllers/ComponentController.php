@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use Antrian\models\Keyboard as KeyboardModel;
 use Antrian\models\KeyEvent;
 use Antrian\models\Locket;
+use Antrian\models\Shortcut;
 
 class ComponentController extends GLOBAL_Controller {
 
@@ -12,6 +13,8 @@ class ComponentController extends GLOBAL_Controller {
 	private $KE;
 
 	private $LM;
+
+	private $SM;
 
 	public function __construct()
 	{
@@ -22,6 +25,7 @@ class ComponentController extends GLOBAL_Controller {
 		$this->KM  = new KeyboardModel();
 		$this->KE = new KeyEvent();
 		$this->LM = new Locket();
+		$this->SM = new Shortcut();
 
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->model('ComponentModel','component');
@@ -194,6 +198,36 @@ class ComponentController extends GLOBAL_Controller {
 			parent::settingsPages('components/tombol',$data);
 		}
 	}
+
+	public function shortcut()
+	{
+		$data['title'] = 'Pengaturan Aplikasi';
+		$data['page_title'] = 'Pengaturan Tombol Aplikasi';
+		$data['settingsTitle'] = 'Pengaturan Tombol Aplikasi';
+		$data['activeMenu'] = 'shortcut';
+
+		$data['dataLoket'] = parent::model('loket')->getJoinLoket()->result_array();
+		$shortcutData = $this->SM->get()->makeResultArray();
+		$locketShortcut = array();
+		foreach ($shortcutData as $key => $value){
+			$locketId = substr($value['url'],19,2);
+			$locket = $this->LM->find($locketId)->makeRowArray();
+			$locketName = $locket['loket_nama'];
+
+			array_push($locketShortcut,array(
+				'id' => $value['id'],
+				'type' => $value['type'],
+				'url' => $value['url'],
+				'numpad' => $value['numpad'],
+				'loket' => $locketName,
+				'create_at' => $value['create_at']
+			));
+		}
+		$data['locketShortcuts'] =$locketShortcut;
+
+		parent::settingsPages('components/shortcut',$data);
+	}
+
 	public function users()
 	{
 		if ($this->session->userdata('username') === null){

@@ -112,6 +112,7 @@
 								$parent = '';
 								$tombol = '';
 								$users = '';
+								$shortcut = '';
 
 								switch ($activeMenu){
 									case 'umum':
@@ -138,6 +139,8 @@
 										$tombol = $active;break;
 									case 'users':
 										$users = $active;break;
+									case 'shortcut':
+										$shortcut = $active;break;
 								}
 
 							?>
@@ -177,6 +180,12 @@
 								<a href="<?= base_url('settings/tombol')?>" class="<?php echo $tombol;?>">
 									<i class="icon-grid"></i>
 									Keyboard
+								</a>
+							</li>
+							<li>
+								<a href="<?= base_url('settings/shortcut')?>" class="<?php echo $shortcut;?>">
+									<i class="icon-share-alt"></i>
+									Shortcut
 								</a>
 							</li>
 							<li>

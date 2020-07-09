@@ -32,6 +32,7 @@ $route['settings/media'] = 'AppController/media';
 $route['settings/print'] = 'AppController/prints';
 $route['settings/header'] = 'ComponentController/header';
 $route['settings/tombol'] = 'ComponentController/tombol';
+$route['settings/shortcut'] = 'ComponentController/shortcut';
 
 $route['api/queue/layanan'] = 'ApiController/layanan';
 $route['api/queue/loket'] = 'ApiController/loket';

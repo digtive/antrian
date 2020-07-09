@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Antrian\models\Media;
 use Antrian\models\KeyEvent;
+use Antrian\models\Shortcut;
 
 class ComponentService extends GLOBAL_Controller
 {
@@ -11,6 +12,8 @@ class ComponentService extends GLOBAL_Controller
 	private $media;
 
 	private $keyEvent;
+	
+	private $shortcut;
 
 	public function __construct()
 	{
@@ -20,6 +23,7 @@ class ComponentService extends GLOBAL_Controller
 
 		$this->media =  new Media();
 		$this->keyEvent = new KeyEvent();
+		$this->shortcut = new Shortcut();
 
 		$this->load->model('ComponentModel', 'component');
 		$this->load->model('LoketModel', 'loket');
@@ -610,6 +614,30 @@ class ComponentService extends GLOBAL_Controller
 				parent::alert('alert','error');
 				redirect('settings/tombol');
 			}
+		}
+	}
+
+	public function addShortcut()
+	{
+		if (isset($_POST)){
+			$type = parent::post('type');
+			$url = parent::post('url');
+			$numpad = parent::post('numpad');
+			$shortcutInsert = $this->shortcut->insert(array(
+				'type' => $type,
+				'url' => $url,
+				'numpad' => $numpad
+			));
+
+			if ($shortcutInsert>0){
+				parent::alert('alert','edit');
+				redirect('settings/shortcut');
+			}else{
+				parent::alert('alert','error');
+				redirect('settings/shortcut');
+			}
+		}else{
+			show_404();
 		}
 	}
 
