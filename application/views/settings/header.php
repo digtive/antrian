@@ -176,18 +176,23 @@
 									Loket
 								</a>
 							</li>
+							<?php if ($this->session->userdata('tipe_aplikasi') === 'TIPE-1' || $this->session->userdata('tipe_aplikasi') === 'TIPE-2'):?>
+
 							<li>
 								<a href="<?= base_url('settings/tombol')?>" class="<?php echo $tombol;?>">
 									<i class="icon-grid"></i>
 									Keyboard
 								</a>
 							</li>
+							<?php endif;?>
+							<?php if ($this->session->userdata('tipe_aplikasi') === 'TIPE-1' || $this->session->userdata('tipe_aplikasi') === 'TIPE-3'):?>
 							<li>
 								<a href="<?= base_url('settings/shortcut')?>" class="<?php echo $shortcut;?>">
 									<i class="icon-share-alt"></i>
 									Shortcut
 								</a>
 							</li>
+							<?php endif?>
 							<li>
 								<a href="<?= base_url('settings/media') ?>" class="<?= $media; ?>">
 									<i class="icon-picture"></i>

@@ -1,4 +1,5 @@
 <?php
+use Antrian\models\Lisensi as LicenseModel;
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class GLOBAL_Controller extends CI_Controller

@@ -6,6 +6,7 @@ use Antrian\models\KeyEvent;
 use Antrian\models\Locket;
 use Antrian\models\Shortcut;
 use Antrian\models\Service as Service;
+use Antrian\models\Lisensi;
 
 class ComponentController extends GLOBAL_Controller {
 
@@ -57,11 +58,7 @@ class ComponentController extends GLOBAL_Controller {
 			$data['settingsTitle'] = 'Pengaturan  Aplikasi';
 			$data['activeMenu'] = 'parent';
 
-			$query = array(
-				'app_id' => 1
-			);
-
-			$data['component']  = parent::model('component')->get_user_app($query);
+			$data['component']  = parent::model('component')->get_user_app(array('app_id' => 1));
 			$data['container'] = json_decode($data['component']['app_container'],true);
 //		parent::cek_array($data['container']);
 
@@ -239,6 +236,7 @@ class ComponentController extends GLOBAL_Controller {
 			redirect('layanan/registrasi');
 		}else{
 			if ($this->session->userdata('level') === 'superAdmin'){
+				$licenseModel = new Lisensi();
 				$data['title'] = 'Pengaturan Aplikasi';
 				$data['page_title'] = 'Pengaturan Pengguna Aplikasi';
 				$data['settingsTitle'] = 'Pengaturan Pengguna Aplikasi';
@@ -248,13 +246,13 @@ class ComponentController extends GLOBAL_Controller {
 					'mac' => parent::_clientMAC()
 				))->row_array();
 
-				$query = array(
-					'app_id' => 1
-				);
-				$data['keyboard']  = parent::model('component')->get_keyboard_setting($query);
+				$data['keyboard']  = parent::model('component')->get_keyboard_setting(array('app_id' => 1));
 				$data['dataLoket'] = parent::model('loket')->getJoinLoket()->result_array();
 				$data['keyList'] = json_decode($data['keyboard']['setting_tombol'],true);
 				$data['mac'] = parent::_clientMAC();
+				$data['licenseData'] = $licenseModel->get(array(
+					'mac_pengguna' => parent::_clientMAC()
+				))->makeRowArray();
 
 				parent::settingsPages('components/users',$data);
 			}else{

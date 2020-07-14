@@ -1,5 +1,7 @@
 <?php
 
+	use Antrian\models\Lisensi as LicenseModel;
+
 	class LayananController extends GLOBAL_Controller{
 
 
@@ -8,6 +10,7 @@
 		public function __construct()
 		{
 			parent::__construct();
+			$this->appTypeCheck();
 			date_default_timezone_set("Asia/Jakarta");
 			$this->userAppID = get_cookie('user_app');
 			$this->load->model('ComponentModel', 'component');
@@ -72,6 +75,19 @@
 		{
 			$this->session->sess_destroy();
 			redirect('layanan');
+		}
+
+		public function appTypeCheck()
+		{
+			$licenseModel = new LicenseModel();
+			$sessionData = $licenseModel->get(array(
+				'mac_pengguna' => parent::_clientMAC()
+			))->makeRowArray();
+
+			if ($sessionData !== null){
+				$this->session->set_userdata($sessionData);
+			}
+
 		}
 
 		public function loketApi($id = null)

@@ -691,6 +691,7 @@ class ComponentService extends GLOBAL_Controller
 				'mac_pengguna' => parent::post('mac'),
 				'tanggal_aktivasi' => parent::post('activate_at'),
 				'durasi_aktivasi' => parent::post('activation_duration'),
+				'tipe_aplikasi' => parent::post('type'),
 				'tanggal_tempo' => parent::post('expire_at')
 			);
 
@@ -721,6 +722,7 @@ class ComponentService extends GLOBAL_Controller
 				'mac_pengguna' => parent::post('mac'),
 				'tanggal_aktivasi' => parent::post('activate_at'),
 				'durasi_aktivasi' => parent::post('activation_duration'),
+				'tipe_aplikasi' => parent::post('type'),
 				'tanggal_tempo' => parent::post('expire_at')
 			);
 			$mac =parent::model('auth')->get_pengguna_where(array(

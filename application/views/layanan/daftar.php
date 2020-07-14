@@ -252,9 +252,16 @@
 
 	<!-- JS Inject for service / take queue-->
 	<!-- if touchscreen active -->
-	<script src="<?= base_url('assets/js/layanan/MainLayanan.js?v=1.0.0&&load='.time())?>"></script>
-	<!-- else -->
-	<script src="<?= base_url('assets/js/layanan/KeyboardListener.js?v=1.0.0&&load='.time())?>"></script>
+	<?php
+		if ($this->session->userdata('mac_pengguna') !== ''):
+	?>
+		<?php if ($this->session->userdata('tipe_aplikasi') === 'TIPE-1' || $this->session->userdata('tipe_aplikasi') === 'TIPE-3'):?>
+			<script src="<?= base_url('assets/js/layanan/KeyboardListener.js?v=1.0.0&&load='.time())?>"></script>
+		<?php else:?>
+			<!-- else -->
+			<script src="<?= base_url('assets/js/layanan/MainLayanan.js?v=1.0.0&&load='.time())?>"></script>
+		<?php endif;?>
+	<?php endif;?>
 <!--	<script type="text/javascript" src="--><?//= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 	<!-- JS Inject for service / take queue-->
 

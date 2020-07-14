@@ -54,6 +54,20 @@
 
 			<div class="form-group col-12">
 				<div class="row">
+					<label for="type" class="col-4 col-form-label">Tipe Software</label>
+					<select name="type" id="type" class="form-control form-control-lg col-8">
+						<option value="<?= $licenseData['tipe_aplikasi']?>" selected disabled><?= $licenseData['tipe_aplikasi']?></option>
+						<option value="TIPE-1"> TIPE 1</option>
+						<option value="TIPE-2"> TIPE 2</option>
+						<option value="TIPE-3"> TIPE 3</option>
+						<option value="TIPE-4"> TIPE 4</option>
+						<option value="TIPE-5"> TIPE 5</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group col-12">
+				<div class="row">
 					<label for="activate_at" class="col-4 col-form-label">Tanggal Aktivasi</label>
 					<input type="date" class="form-control form-control-lg col-8"
 						   id="activate_at" name="activate_at"
