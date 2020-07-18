@@ -425,6 +425,25 @@
 			}
 		}
 
+		public function getLastRefresh()
+		{
+			if ($this->input->is_ajax_request()){
+				$data = $this->ED->get('refresh');
+				if ($data!== null){
+					echo $data;
+				}else{
+					$callData = $this->EM->get(array(
+						'name' => 'refresh'
+					))->makeRowArray();
+					$this->ED->set('refresh',json_decode($callData['data'],true));
+					$data =  $this->ED->get('refresh');
+					echo $data;
+				}
+			}else{
+				echo 'access forbidden';
+			}
+		}
+
 		public function saveKeyboard()
 		{
 			if (isset($_GET)){

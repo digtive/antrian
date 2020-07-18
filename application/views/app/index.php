@@ -204,6 +204,7 @@
 		<script src="<?= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?>"></script>
 <!--		<script src="--><?//= base_url('assets/js/audio/player.js?v=1.0.0&&load='.time()) ?><!--"></script>-->
 		<script src="<?= base_url('assets/js/events/EventReceiver.js?v=1.0.0&&load='.time()) ?>"></script>
+		<script src="<?= base_url('assets/js/events/EventHandler.js?v=1.0.0&&load='.time()) ?>"></script>
 		<script src="<?= base_url('assets/js/extend/ExtendView.js?v=1.0.0&&load='.time()) ?>"></script>
 		<!-- end inject for playing audio-->
 

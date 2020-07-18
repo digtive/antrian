@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use Antrian\models\Media;
 use Antrian\models\KeyEvent;
 use Antrian\models\Shortcut;
+use AppEvent\EventData;
 
 class ComponentService extends GLOBAL_Controller
 {
@@ -15,6 +16,8 @@ class ComponentService extends GLOBAL_Controller
 	
 	private $shortcut;
 
+	private $eventData;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -24,6 +27,7 @@ class ComponentService extends GLOBAL_Controller
 		$this->media =  new Media();
 		$this->keyEvent = new KeyEvent();
 		$this->shortcut = new Shortcut();
+		$this->eventData = new EventData();
 
 		$this->load->model('ComponentModel', 'component');
 		$this->load->model('LoketModel', 'loket');
@@ -82,6 +86,9 @@ class ComponentService extends GLOBAL_Controller
 			);
 
 			parent::model('component')->edit_component($this->userAppID, $dataEdit);
+			$this->eventData->fire('refresh',array(
+				'data' => 'header'
+			));
 
 			echo json_encode(array(
 				'data' => null,
@@ -116,7 +123,9 @@ class ComponentService extends GLOBAL_Controller
 			);
 
 			parent::model('component')->edit_component($this->userAppID, $dataEdit);
-
+			$this->eventData->fire('refresh',array(
+				'data' => 'footer'
+			));
 			echo json_encode(array(
 				'data' => null,
 				'message' => 'berhasil menyimpan data',
@@ -224,7 +233,9 @@ class ComponentService extends GLOBAL_Controller
 				parent::model('component')->edit_component($this->userAppID, $dataEdit);
 			}
 
-
+			$this->eventData->fire('refresh',array(
+				'data' => 'background'
+			));
 			parent::alert('alert', 'edit');
 			redirect('settings/parent');
 
@@ -250,7 +261,9 @@ class ComponentService extends GLOBAL_Controller
 			);
 
 			parent::model('component')->edit_component($this->userAppID, $dataEdit);
-
+			$this->eventData->fire('refresh',array(
+				'data' => 'logo'
+			));
 			parent::alert('alert', 'edit');
 			redirect('settings/header');
 
@@ -355,6 +368,9 @@ class ComponentService extends GLOBAL_Controller
 				));
 
 				if ($media > 0){
+					$this->eventData->fire('refresh',array(
+						'data' => 'media'
+					));
 					parent::alert('alert', 'edit');
 					redirect('settings/media');
 				}
