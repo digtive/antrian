@@ -71,10 +71,10 @@
 						<!-- ---- TAG LINE AND BRAND SECTION -->
 						<div id="tagline-head">
 							<div class="tagline-wrapper">
-								<div class="parallelogram" style="background: <?= $header['background-paralelogram']?>;">
+								<div class="parallelogram" style="background: <?= $header['background-paralelogram']?>;" id="bg-paralelogram">
 								</div>
 								<div class="brand-wrapper" style='background-image: url("<?= base_url('assets/images/doodle/diamond.png')?>");background-repeat: no-repeat;background-position: right;background-size: inherit;'>
-									<img src="<?= base_url().$logo ?>" alt="" width="100%" height="100%">
+									<img src="<?= base_url().$logo ?>" alt="" width="100%" height="100%" id="brand-content">
 								</div>
 							</div>
 						</div>
@@ -219,6 +219,13 @@
 		<script type="text/javascript" src="<?= base_url('assets/js/app/main/mediaPlayer.js')?>"></script>
 
 		<!-- JS inject for media -->
+
+		<!-- JS inject for realtime refresh -->
+		<script type="text/javascript" src="<?= base_url('assets/js/events/Footer.js?v=1.0.0&&load='.time())?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/events/Background.js?v=1.0.0&&load='.time())?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/events/Logo.js?v=1.0.0&&load='.time())?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/events/Header.js?v=1.0.0&&load='.time())?>"></script>
+		<!-- JS inject for realtime refresh -->
 
 	<!--		<script type="text/javascript" src="--><?//= base_url('assets/js/components/componentRefresher.js?v=1.0.0&&load='.time().'')?><!--"></script>-->
 <!--			<script type="text/javascript" src="--><?//= base_url('assets/js/audio/MainKeyboard.js?v=1.0.0&&load='.time().'')?><!--"></script>-->

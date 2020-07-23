@@ -12,7 +12,7 @@
 						<div class="parallelogram" style="background: <?=$headerComponent['background-paralelogram']?>;" id="bg-paralelogram-simulator">
 						</div>
 						<div class="brand-wrapper" style='background-image: url("<?= base_url('assets/images/doodle/diamond.png')?>");background-repeat: no-repeat;background-position: right;background-size: inherit;'>
-							<img src="<?= $logo ?>" alt="" width="100%" height="90%">
+							<img src="<?= base_url($logo) ?>" alt="" width="100%" height="90%">
 						</div>
 					</div>
 				</div>

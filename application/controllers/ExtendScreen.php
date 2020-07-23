@@ -23,11 +23,8 @@
 			$data['page_title'] = 'Aplikasi Antrian';
 
 			$data['dataLoket'] = parent::model('antrian')->get_loket()->result_array();
-			$query = array(
-				'app_id' => get_cookie('user_app')
-			);
 
-			$data['component']  = parent::model('component')->get_user_app($query);
+			$data['component']  = parent::model('component')->get_user_app(array('app_id' => 1));
 			$data['container'] = json_decode($data['component']['app_container'],true);
 			$data['header'] = json_decode($data['component']['app_header'],true);
 			$data['loket'] = json_decode($data['component']['app_service'],true);

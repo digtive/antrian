@@ -6,6 +6,8 @@
  * Time: 22:10
  */
 
+use Antrian\models\App;
+
 class ApiController extends CI_Controller
 {
     public function __construct()
@@ -98,5 +100,27 @@ class ApiController extends CI_Controller
 	}
 	public function alihan(){
 		
+	}
+
+	public function app($id = null)
+	{
+		$appModel = new App();
+		if ($id!== null){
+			$apps = $appModel->find($id)->makeRowArray();
+		}elseif (isset($_GET)){
+			$query  = array();
+			foreach ($_GET as $key => $v){
+				$query[$key] = $v;
+			}
+			$apps = $appModel->get($query)->makeResultArray();
+		}else{
+			$apps = $appModel->get()->makeResultArray();
+		}
+
+		echo json_encode(array(
+			'status' => '200',
+			'message' => 'menampilkan hasil request',
+			'data' => $apps
+		));
 	}
 }

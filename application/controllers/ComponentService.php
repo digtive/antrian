@@ -22,7 +22,7 @@ class ComponentService extends GLOBAL_Controller
 	{
 		parent::__construct();
 		date_default_timezone_set("Asia/Jakarta");
-		$this->userAppID = get_cookie('user_app');
+		$this->userAppID = 1;
 
 		$this->media =  new Media();
 		$this->keyEvent = new KeyEvent();
@@ -188,7 +188,7 @@ class ComponentService extends GLOBAL_Controller
 		if (isset($_POST['unggah'])) {
 			$backgroundImages = parent::post('background-image');
 			$query = array(
-				'app_id' => get_cookie('user_app')
+				'app_id' => 1
 			);
 
 			$data['component'] = parent::model('component')->get_user_app($query);
