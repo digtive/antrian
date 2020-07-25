@@ -73,7 +73,7 @@
 						<div id="tagline-head">
 							<div class="tagline-wrapper">
 								<div class="brand-wrapper" >
-									<img src="<?= base_url().$logo ?>" alt="" width="100%" height="100%">
+									<img src="<?= base_url().$logo ?>" alt="" width="100%" height="100%" id="brand-content">
 								</div>
 							</div>
 						</div>
@@ -240,6 +240,8 @@
 	<script src="<?= base_url('assets/js/audio/ServiceComponent.js?v=1.0.0&&load='.time()) ?>"></script>
 	<script src="<?= base_url('assets/js/events/EventReceiver.js?v=1.0.0&&load='.time()) ?>"></script>
 	<script src="<?= base_url('assets/js/extend/ExtendView.js?v=1.0.0&&load='.time()) ?>"></script>
+	<script src="<?= base_url('assets/js/events/EventHandler.js?v=1.0.0&&load='.time()) ?>"></script>
+
 	<!-- end inject for playing audio-->
 
 	<!-- JS inject for media -->
@@ -252,6 +254,14 @@
 	<script type="text/javascript" src="<?= base_url('assets/js/app/service/MediaService.js')?>"></script>
 	<script type="text/javascript" src="<?= base_url('assets/js/app/main/mediaPlayer.js')?>"></script>
 	<!-- JS inject for media -->
+
+	<!-- JS inject for realtime refresh -->
+	<script type="text/javascript" src="<?= base_url('assets/js/events/Footer.js?v=1.0.0&&load='.time())?>"></script>
+	<script type="text/javascript" src="<?= base_url('assets/js/events/Background.js?v=1.0.0&&load='.time())?>"></script>
+	<script type="text/javascript" src="<?= base_url('assets/js/events/Logo.js?v=1.0.0&&load='.time())?>"></script>
+	<script type="text/javascript" src="<?= base_url('assets/js/events/Header.js?v=1.0.0&&load='.time())?>"></script>
+	<!-- JS inject for realtime refresh -->
+
 
 	<!-- custom JS for entire app-->
 

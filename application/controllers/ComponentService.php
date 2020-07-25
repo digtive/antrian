@@ -369,7 +369,7 @@ class ComponentService extends GLOBAL_Controller
 
 				if ($media > 0){
 					$this->eventData->fire('refresh',array(
-						'data' => 'media'
+						'data' => 'add-media'
 					));
 					parent::alert('alert', 'edit');
 					redirect('settings/media');
@@ -383,11 +383,23 @@ class ComponentService extends GLOBAL_Controller
 
 	public function deleteMedia($id)
 	{
+		$thisMedia = $this->media->find($id)->makeRowArray();
 		$delete =  $this->media->delete($id);
 
 		if ($delete){
-			parent::alert('alert', 'edit');
-			redirect('settings/media');
+			$fileDelete = unlink($thisMedia['source']);
+			if ($fileDelete){
+				parent::alert('alert', 'edit');
+				$this->eventData->fire('refresh',array(
+					'data' => 'delete-media'
+				));
+				;
+				redirect('settings/media');
+			}else{
+				parent::alert('alert', 'error');
+				redirect('settings/media');
+			}
+
 		}else{
 			parent::alert('alert', 'error');
 			redirect('settings/media');

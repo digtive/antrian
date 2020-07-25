@@ -29,7 +29,7 @@
 													<a href="<?= base_url($val['source'])?>" target="_blank" title="lihat gambar">
 														<?= $val['title']?>
 													</a>
-													<a href="<?= base_url('ComponentService/deleteMedia/'.$val['id'])?>" class="delete mdi mdi-close-circle-outline" ></a>
+													<a href="<?= base_url('ComponentService/deleteMedia/'.$val['id'])?>" class="delete mdi mdi-close-circle-outline" onclick="return confirm('Hapus Item ?')"></a>
 												</li>
 											<?php endforeach;?>
 										</ul>

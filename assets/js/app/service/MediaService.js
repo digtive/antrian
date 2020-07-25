@@ -84,4 +84,9 @@ class MediaService extends Connection{
 		this.data = data;
 	}
 
+	pushData(data)
+	{
+		this.data.push(data);
+	}
+
 }
