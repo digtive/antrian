@@ -4,7 +4,26 @@
 		<h4 class="card-title pb-3 border-bottom mb-3"><?= $settingsTitle;?></h4>
 
 		<h3>Preview</h3>
-		<div class="row mb-3" id="bg-header-simulator" style="background-color: <?=$headerComponent['background-header']?>;overflow: hidden" >
+		<form action="<?= base_url('ComponentService/unggahLogo')?>" class="form-row" method="post" enctype="multipart/form-data">
+			<div class="form-group col-12">
+				<h4 class="border-bottom" style="font-family: titilliumweb-bold">
+					Gambar Logo
+				</h4>
+				<input type="file" class="dropify" data-height="126"
+					   name="logo-img" data-default-file="<?= base_url().$logo?>"
+					   data-allowed-file-extensions="jpg png jpeg"
+					   data-min-width="600"
+					   data-min-height="120"
+					   required>
+			</div>
+
+			<button type="submit" class="btn btn-primary col-12" name="unggah">
+				unggah
+			</button>
+		</form>
+
+
+		<div class="row mb-3 mt-3" id="bg-header-simulator" style="background-color: <?=$headerComponent['background-header']?>;overflow: hidden" >
 			<div class="col-8">
 				<!-- ---- TAG LINE AND BRAND SECTION -->
 				<div id="tagline-head">
@@ -35,23 +54,6 @@
 			</div>
 		</div>
 
-		<form action="<?= base_url('ComponentService/unggahLogo')?>" class="form-row" method="post" enctype="multipart/form-data">
-			<div class="form-group col-12">
-				<h4 class="border-bottom" style="font-family: titilliumweb-bold">
-					Gambar Logo
-				</h4>
-				<input type="file" class="dropify" data-height="126"
-					   name="logo-img" data-default-file="<?= base_url().$logo?>"
-					   data-allowed-file-extensions="jpg png jpeg"
-					   data-min-width="600"
-					   data-min-height="120"
-					   required>
-			</div>
-
-			<button type="submit" class="btn btn-primary col-12" name="unggah">
-				unggah
-			</button>
-		</form>
 		<form action="#" class="row pt-4 border-top" method="post" id="headerComponentData">
 			<div class="col-6">
 				<div class="row mt-2">

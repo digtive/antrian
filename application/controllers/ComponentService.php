@@ -5,6 +5,7 @@ use Antrian\models\Media;
 use Antrian\models\KeyEvent;
 use Antrian\models\Shortcut;
 use AppEvent\EventData;
+use Antrian\models\App;
 
 class ComponentService extends GLOBAL_Controller
 {
@@ -18,6 +19,8 @@ class ComponentService extends GLOBAL_Controller
 
 	private $eventData;
 
+	private $app;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -28,6 +31,7 @@ class ComponentService extends GLOBAL_Controller
 		$this->keyEvent = new KeyEvent();
 		$this->shortcut = new Shortcut();
 		$this->eventData = new EventData();
+		$this->app = new App();
 
 		$this->load->model('ComponentModel', 'component');
 		$this->load->model('LoketModel', 'loket');
@@ -247,6 +251,12 @@ class ComponentService extends GLOBAL_Controller
 	public function unggahLogo()
 	{
 		if (isset($_POST['unggah'])) {
+			$appData = $this->app->find(1)->makeRowArray();
+			$clear = str_replace('\\','',$appData['app_logo']);
+			$endClear = str_replace('"','',$clear);
+			if (file_exists($endClear)){
+				unlink($endClear);
+			}
 			$config['upload_path'] = './assets/images/logo/';
 			$config['allowed_types'] = 'png|jpeg|jpg';
 			$this->load->library('upload', $config);
@@ -266,7 +276,6 @@ class ComponentService extends GLOBAL_Controller
 			));
 			parent::alert('alert', 'edit');
 			redirect('settings/header');
-
 		} else {
 			show_404();
 		}
