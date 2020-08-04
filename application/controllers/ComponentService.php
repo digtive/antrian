@@ -190,6 +190,9 @@ class ComponentService extends GLOBAL_Controller
 	public function unggahLatar()
 	{
 		if (isset($_POST['unggah'])) {
+			$app = $this->app->find(1)->makeRowArray();
+			$appContainer = json_decode($app['app_container'],true);
+
 			$backgroundImages = parent::post('background-image');
 			$query = array(
 				'app_id' => 1
@@ -202,6 +205,9 @@ class ComponentService extends GLOBAL_Controller
 
 
 			if ($backgroundImages === 'true') {
+				if (file_exists($appContainer['background-image-src'])){
+					unlink($appContainer['background-image-src']);
+				}
 				$config['upload_path'] = './assets/images/background/';
 				$config['allowed_types'] = 'png|jpeg|jpg';
 				$this->load->library('upload', $config);
@@ -396,18 +402,14 @@ class ComponentService extends GLOBAL_Controller
 		$delete =  $this->media->delete($id);
 
 		if ($delete){
-			$fileDelete = unlink($thisMedia['source']);
-			if ($fileDelete){
-				parent::alert('alert', 'edit');
-				$this->eventData->fire('refresh',array(
-					'data' => 'delete-media'
-				));
-				;
-				redirect('settings/media');
-			}else{
-				parent::alert('alert', 'error');
-				redirect('settings/media');
+			if (file_exists($thisMedia['source'])){
+				unlink($thisMedia['source']);
 			}
+			parent::alert('alert', 'edit');
+			$this->eventData->fire('refresh',array(
+				'data' => 'delete-media'
+			));
+			redirect('settings/media');
 
 		}else{
 			parent::alert('alert', 'error');
