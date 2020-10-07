@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\WINDOWS DEV\\rawinput-sharp-master\\RawInput.Sharp\\RawInput.Sharp.csproj": {}
+  },
+  "projects": {
+    "D:\\WINDOWS DEV\\rawinput-sharp-master\\RawInput.Sharp\\RawInput.Sharp.csproj": {
+      "version": "0.0.3",
+      "restore": {
+        "projectUniqueName": "D:\\WINDOWS DEV\\rawinput-sharp-master\\RawInput.Sharp\\RawInput.Sharp.csproj",
+        "projectName": "RawInput.Sharp",
+        "projectPath": "D:\\WINDOWS DEV\\rawinput-sharp-master\\RawInput.Sharp\\RawInput.Sharp.csproj",
+        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+        "outputPath": "D:\\WINDOWS DEV\\rawinput-sharp-master\\RawInput.Sharp\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard1.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard1.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard1.1": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "target": "Package",
+              "version": "[1.6.1, )",
+              "autoReferenced": true
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

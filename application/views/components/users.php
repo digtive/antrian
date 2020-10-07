@@ -56,7 +56,11 @@
 				<div class="row">
 					<label for="type" class="col-4 col-form-label">Tipe Software</label>
 					<select name="type" id="type" class="form-control form-control-lg col-8">
+						<?php
+							if ($licenseData !==null):
+						?>
 						<option value="<?= $licenseData['tipe_aplikasi']?>" selected disabled><?= $licenseData['tipe_aplikasi']?></option>
+						<?php endif;?>
 						<option value="TIPE-1"> TIPE 1</option>
 						<option value="TIPE-2"> TIPE 2</option>
 						<option value="TIPE-3"> TIPE 3</option>

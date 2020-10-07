@@ -26,11 +26,11 @@
 							<tr>
 								<th>No</th>
 								<th>Nama Loket</th>
-								<th>Nama Alias</th>
+								<th >Nama Alias</th>
 								<th>Petugas</th>
-								<th>Nomor Loket</th>
+								<th >Nomor Loket</th>
 								<th>Layanan</th>
-								<th style="width: 100px" class="text-center"><i class="icon-settings"></i></th>
+								<th style="width: 200px" class="text-center"><i class="icon-settings"></i></th>
 							</tr>
 							</thead>
 							<tbody>
@@ -47,14 +47,14 @@
 									<td><?= $l->layanan_nama ?></td>
 									<td>
 										<div class="row">
-											<div class="col-6">
+											<div class="col-6 text-center">
 												<a href="<?= base_url("ComponentService/editLoket/" . $l->loket_id) ?>"
-												   class="btn btn-warning p-1"><i class="fa fa-pencil"></i></a>
+												   class="btn btn-warning p-1">EDIT <i class="fa fa-pencil"></i></a>
 											</div>
-											<div class="col-6">
+											<div class="col-6 text-center">
 												<a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
 												   href="<?= base_url("ComponentService/deleteLocket/" . $l->loket_id) ?>"
-												   class="btn btn-danger p-1"><i class="fa fa-trash"></i></a>
+												   class="btn btn-danger p-1">HAPUS <i class="fa fa-trash"></i></a>
 											</div>
 										</div>
 									</td>
@@ -76,9 +76,9 @@
 						<table class="table">
 							<thead class="thead-dark">
 							<tr>
-								<th>No</th>
-								<th>Nama Layanan</th>
-								<th>Awalan</th>
+								<th style="width: 20px">No</th>
+								<th style="width: 50px">Nama Layanan</th>
+								<th style="width: 20px">Awalan</th>
 								<th style="width: 100px" class="text-center"><i class="icon-settings"></i></th>
 							</tr>
 							</thead>
@@ -93,14 +93,14 @@
 									<td><?= ucwords($v['layanan_awalan']) ?></td>
 									<td>
 										<div class="row">
-											<div class="col-6">
+											<div class="col-6 text-center">
 												<a href="<?= base_url("ComponentService/editLayanan/" . $v['layanan_id']) ?>"
-												   class="btn btn-warning p-1"><i class="fa fa-pencil"></i></a>
+												   class="btn btn-warning p-1 ">EDIT <i class="fa fa-pencil"></i></a>
 											</div>
-											<div class="col-6">
+											<div class="col-6 text-center">
 												<a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
 												   href="<?= base_url("ComponentService/deleteLayanan/" . $v['layanan_id']) ?>"
-												   class="btn btn-danger p-1"><i class="fa fa-trash"></i></a>
+												   class="btn btn-danger p-1 ">HAPUS <i class="fa fa-trash"></i></a>
 											</div>
 										</div>
 									</td>

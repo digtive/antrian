@@ -45,7 +45,7 @@ class ComponentService extends GLOBAL_Controller
 	public function userApp()
 	{
 		$query = array(
-			'app_id' => get_cookie('user_app')
+			'app_id' => 1
 		);
 		$userApp = parent::model('component')->get_user_app($query);
 
@@ -511,12 +511,8 @@ class ComponentService extends GLOBAL_Controller
 			$data['page_title'] = 'Pengaturan Loket Aplikasi';
 			$data['settingsTitle'] = 'Pengaturan Loket Aplikasi';
 			$data['activeMenu'] = 'loket';
-			$query = array(
-				'app_id' => get_cookie('user_app')
-			);
+
 			$data['currentData'] = parent::model('loket')->getOne(array("loket_id" => $index));
-			$data['component'] = parent::model('component')->get_user_app($query);
-			$data['serviceComponent'] = json_decode($data['component']['app_service'], true);
 			$data['loket'] = parent::model('loket')->getJoinLoket();
 			$data['layanan'] = parent::model('layanan')->get_layanan();
 			parent::settingsPages('components/loket_edit', $data);

@@ -1,0 +1,9 @@
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp\bin\Debug\netstandard1.1\RawInput.Sharp.deps.json
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp\bin\Debug\netstandard1.1\RawInput.Sharp.dll
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp\bin\Debug\netstandard1.1\RawInput.Sharp.pdb
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp\obj\Debug\netstandard1.1\RawInput.Sharp.csprojAssemblyReference.cache
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp\obj\Debug\netstandard1.1\RawInput.Sharp.csproj.CoreCompileInputs.cache
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp\obj\Debug\netstandard1.1\RawInput.Sharp.AssemblyInfoInputs.cache
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp\obj\Debug\netstandard1.1\RawInput.Sharp.AssemblyInfo.cs
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp\obj\Debug\netstandard1.1\RawInput.Sharp.dll
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp\obj\Debug\netstandard1.1\RawInput.Sharp.pdb

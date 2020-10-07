@@ -45,7 +45,7 @@
 					   name="background-image-src" data-default-file="<?= base_url().$container['background-image-src']?>"
 					   data-allowed-file-extensions="jpg png jpeg"
 					   data-min-width="920"
-					   data-min-height="540" >
+					   data-min-height="540" required>
 			</div>
 
 			<div class="form-group col-12 ">

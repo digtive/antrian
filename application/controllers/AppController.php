@@ -34,11 +34,11 @@
 			$data['footer'] = json_decode($data['component']['app_footer'],true);
 			$data['logo'] = json_decode($data['component']['app_logo'],true);
 
-			$data['media']  = parent::model('component')->get_user_media(1);
-			$mediaGambar = json_decode($data['media']['media_gambar'],true);
-			$data['dataGambar'] = $mediaGambar['data-gambar'];
-			$data['titleGambar'] = $mediaGambar['title-gambar'];
-			$data['durasi'] = $mediaGambar['durasi-slide'];
+//			$data['media']  = parent::model('component')->get_user_media(1);
+//			$mediaGambar = json_decode($data['media']['media_gambar'],true);
+//			$data['dataGambar'] = $mediaGambar['data-gambar'];
+//			$data['titleGambar'] = $mediaGambar['title-gambar'];
+//			$data['durasi'] = $mediaGambar['durasi-slide'];
 			parent::authPage('app/index',$data);
 		}
 

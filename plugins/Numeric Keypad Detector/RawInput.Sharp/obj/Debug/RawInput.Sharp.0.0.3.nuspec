@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>RawInput.Sharp</id>
+    <version>0.0.3</version>
+    <authors>mfakane</authors>
+    <owners>mfakane</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">Zlib</license>
+    <licenseUrl>https://licenses.nuget.org/Zlib</licenseUrl>
+    <description>A simple wrapper library for Raw Input.</description>
+    <copyright>Copyright (c) 2019 mfakane</copyright>
+    <tags>Windows RawInput</tags>
+    <repository url="https://github.com/mfakane/rawinput-sharp" />
+    <dependencies>
+      <group targetFramework=".NETStandard1.1">
+        <dependency id="NETStandard.Library" version="1.6.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp\bin\Debug\netstandard1.1\RawInput.Sharp.dll" target="lib\netstandard1.1\RawInput.Sharp.dll" />
+  </files>
+</package>

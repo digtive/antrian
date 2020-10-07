@@ -1,0 +1,12 @@
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\bin\Debug\RawInput.Sharp.SimpleExample.exe.config
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\bin\Debug\RawInput.Sharp.SimpleExample.exe
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\bin\Debug\RawInput.Sharp.SimpleExample.pdb
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\bin\Debug\RawInput.Sharp.dll
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\bin\Debug\RawInput.Sharp.pdb
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\obj\Debug\RawInput.Sharp.SimpleExample.csprojAssemblyReference.cache
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\obj\Debug\RawInput.Sharp.SimpleExample.csproj.CoreCompileInputs.cache
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\obj\Debug\RawInput.Sharp.SimpleExample.csproj.CopyComplete
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\obj\Debug\RawInput.Sharp.SimpleExample.exe
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\obj\Debug\RawInput.Sharp.SimpleExample.pdb
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\bin\Debug\Newtonsoft.Json.dll
+D:\WINDOWS DEV\rawinput-sharp-master\RawInput.Sharp.SimpleExample\bin\Debug\Newtonsoft.Json.xml

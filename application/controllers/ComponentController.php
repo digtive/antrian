@@ -250,9 +250,14 @@ class ComponentController extends GLOBAL_Controller {
 				$data['dataLoket'] = parent::model('loket')->getJoinLoket()->result_array();
 				$data['keyList'] = json_decode($data['keyboard']['setting_tombol'],true);
 				$data['mac'] = parent::_clientMAC();
-				$data['licenseData'] = $licenseModel->get(array(
+				$dataLicense = $licenseModel->get(array(
 					'mac_pengguna' => parent::_clientMAC()
 				))->makeRowArray();
+				if ($dataLicense !== null){
+					$data['licenseData'] = $dataLicense;
+				}else{
+					$data['licenseData'] = null;
+				}
 
 				parent::settingsPages('components/users',$data);
 			}else{
